@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI xmi.version="1.2" timestamp="2023-04-04T11:19:37" verified="false" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
+<XMI xmi.version="1.2" timestamp="2023-04-04T11:40:31" verified="false" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller 2.32.3 http://umbrello.kde.org</XMI.exporter>
@@ -88,7 +88,7 @@
         <UML:Attribute isSpecification="false" xmi.id="u0WbSbkl0GxdM" name="name" visibility="private" type="uc4nnnCjBtN8r"/>
         <UML:Attribute isSpecification="false" xmi.id="uUX8NxRAltK2C" name="damageBoost" visibility="private" type="uUNdXsCR2jCRa"/>
         <UML:Attribute isSpecification="false" xmi.id="uDt04RvKIqVjr" name="offenseBoost" visibility="private" type="uUNdXsCR2jCRa"/>
-        <UML:Attribute isSpecification="false" xmi.id="unhLCdftk4dYC" name="defenceBoost" visibility="private" type="uUNdXsCR2jCRa"/>
+        <UML:Attribute isSpecification="false" xmi.id="unhLCdftk4dYC" name="defenseBoost" visibility="private" type="uUNdXsCR2jCRa"/>
         <UML:Attribute isSpecification="false" xmi.id="uYdphvxRn1DZK" name="price" visibility="private" type="uUNdXsCR2jCRa"/>
         <UML:Attribute isSpecification="false" xmi.id="uqAeuu81Llqiq" name="priceChangeWeekly" visibility="private" type="un6yZ8lhXGPc8"/>
        </UML:Classifier.feature>
@@ -157,7 +157,7 @@
      </UML:Namespace.ownedElement>
      <XMI.extension xmi.extender="umbrello">
       <diagrams resolution="96">
-       <diagram xmi.id="uDP0qRhEIGKvc" name="class diagram" type="1" documentation="" backgroundcolor="#ffffff" fillcolor="#feffca" font="Ubuntu,10,-1,5,50,0,0,0,0,0,Regular" griddotcolor="#ffffff" linecolor="#ff0000" linewidth="0" textcolor="#000000" usefillcolor="1" showattribassocs="1" showatts="1" showattsig="1" showops="1" showopsig="1" showpackage="1" showpubliconly="0" showscope="1" showstereotype="2" localid="-1" showgrid="1" snapgrid="1" snapcsgrid="1" snapx="25" snapy="25" zoom="65.0284" canvasheight="850" canvaswidth="1250" isopen="1">
+       <diagram xmi.id="uDP0qRhEIGKvc" name="class diagram" type="1" documentation="" backgroundcolor="#ffffff" fillcolor="#feffca" font="Ubuntu,10,-1,5,50,0,0,0,0,0,Regular" griddotcolor="#ffffff" linecolor="#ff0000" linewidth="0" textcolor="#000000" usefillcolor="1" showattribassocs="1" showatts="1" showattsig="1" showops="1" showopsig="1" showpackage="1" showpubliconly="0" showscope="1" showstereotype="2" localid="-1" showgrid="1" snapgrid="1" snapcsgrid="1" snapx="25" snapy="25" zoom="74.7826" canvasheight="850" canvaswidth="1250" isopen="1">
         <widgets>
          <classwidget xmi.id="uC5A8eL3ect54" localid="urBI2EUQH9Ad3" textcolor="#000000" linecolor="#ff0000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#feffca" font="Ubuntu,10,-1,5,50,0,0,0,0,0,Regular" autoresize="0" x="-10900" y="3625" width="375" height="125" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601" showstereotype="2"/>
          <classwidget xmi.id="uR8rOI3RkqUOC" localid="urofV13GQtUeF" textcolor="#000000" linecolor="#ff0000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#feffca" font="Ubuntu,10,-1,5,50,0,0,0,0,0,Regular" autoresize="0" x="-11100" y="2900" width="225" height="175" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601" showstereotype="2"/>
