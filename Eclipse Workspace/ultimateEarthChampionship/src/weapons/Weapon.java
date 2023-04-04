@@ -34,6 +34,18 @@ public abstract class Weapon {
      */
     private float priceChangeWeekly;
     
+    /**
+     * Constructors
+     */
+    
+    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, int price, float priceChangeWeekly) {
+    	this.name = name;
+    	this.damageBoost = damageBoost;
+    	this.offenseBoost = offenseBoost;
+    	this.defenseBoost = defenseBoost;
+    	this.price = price;
+    	this.priceChangeWeekly = priceChangeWeekly;
+    }
     
 	/**
 	 * Methods
