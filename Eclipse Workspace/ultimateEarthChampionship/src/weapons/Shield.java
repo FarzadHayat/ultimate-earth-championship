@@ -1,11 +1,11 @@
 package weapons;
 
-public class Shield extends Weapon {
+import javax.swing.ImageIcon;
 
-	private static final String IMG_PATH = "src/images/shield.png";
+public class Shield extends Weapon {
 	
 	public Shield() {
-		super("Shield", 1, 1, 4, 10, 0.9F, IMG_PATH);
+		super("Shield", 1, 1, 4, 10, 0.9F, "/images/shield.png");
 	}
 	
 }

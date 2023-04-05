@@ -56,11 +56,7 @@ public abstract class Weapon {
     	this.defenseBoost = defenseBoost;
     	this.price = price;
     	this.priceChangeWeekly = priceChangeWeekly;
-    	try {
-			this.setImage(new ImageIcon(ImageIO.read(new File(imagePath))));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    	this.image = new ImageIcon(Weapon.class.getResource(imagePath));
     }
     
 	/**
