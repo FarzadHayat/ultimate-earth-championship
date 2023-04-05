@@ -1,5 +1,12 @@
 package weapons;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 /**
  * Class Weapon
  */
@@ -33,18 +40,27 @@ public abstract class Weapon {
      * The value to multiply the price by on a weekly basis
      */
     private float priceChangeWeekly;
+    /**
+     * The image of the weapon to display
+     */
+    private ImageIcon image;
     
     /**
      * Constructors
      */
     
-    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, int price, float priceChangeWeekly) {
+    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, int price, float priceChangeWeekly, String imagePath) {
     	this.name = name;
     	this.damageBoost = damageBoost;
     	this.offenseBoost = offenseBoost;
     	this.defenseBoost = defenseBoost;
     	this.price = price;
     	this.priceChangeWeekly = priceChangeWeekly;
+    	try {
+			this.setImage(new ImageIcon(ImageIO.read(new File(imagePath))));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
 	/**
@@ -150,6 +166,22 @@ public abstract class Weapon {
     public float getPriceChangeWeekly () {
     	return priceChangeWeekly;
     }
+
+    /**
+	 * Set the value of image
+	 * @param newImage the new value of image
+	 */	
+	public void setImage(ImageIcon newImage) {
+		image = newImage;
+	}
+	
+	/**
+	 * Get the value of image
+	 * @return the value of image
+	 */
+	public ImageIcon getImage() {
+		return image;
+	}
 
 	/**
 	 * Other methods
