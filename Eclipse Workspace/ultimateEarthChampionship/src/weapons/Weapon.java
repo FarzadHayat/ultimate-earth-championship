@@ -1,10 +1,5 @@
 package weapons;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
@@ -182,5 +177,14 @@ public abstract class Weapon {
 	/**
 	 * Other methods
 	 */
+	
+	@Override
+	public String toString() {
+		String text = "<< Name: %s | Damage boost: %s | Offense boost: %s "
+				+ "| Defense boost: %s | Price: %s | Price change weekly: %s >>";
+		return String.format(text, name, String.valueOf(damageBoost),
+				String.valueOf(offenseBoost), String.valueOf(defenseBoost),
+				String.valueOf(price), String.valueOf(priceChangeWeekly));
+	}
 
 }

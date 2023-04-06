@@ -1,7 +1,5 @@
 package weapons;
 
-import javax.swing.ImageIcon;
-
 public class Shield extends Weapon {
 	
 	public Shield() {

@@ -1,7 +1,5 @@
 package views;
 
-import java.util.ArrayList;
-
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -12,16 +10,15 @@ public class TabbedView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public TabbedView(ArrayList<JPanel> tabs) {
+	public TabbedView() {
 		setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 450, 300);
 		add(tabbedPane);
 		
-		for (JPanel tab : tabs) {
-			tabbedPane.addTab(tab.getName(), null, tab, null);
-		}
+		TeamView teamView = new TeamView();
+		tabbedPane.addTab(teamView.getName(), null, teamView, null);
 
 	}
 

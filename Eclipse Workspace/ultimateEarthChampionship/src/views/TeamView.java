@@ -17,7 +17,7 @@ public class TeamView extends JPanel {
 		
 		Weapon weapon = new Shield();
 		setLayout(null);
-		JPanel weaponView = new WeaponView(weapon);
+		JPanel weaponView = new WeaponPanel(weapon);
 		weaponView.setBounds(0, 0, 300, 300);
 		add(weaponView);
 	}
