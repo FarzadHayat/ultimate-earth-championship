@@ -51,7 +51,12 @@ public abstract class Weapon {
     	this.defenseBoost = defenseBoost;
     	this.price = price;
     	this.priceChangeWeekly = priceChangeWeekly;
-    	this.image = new ImageIcon(Weapon.class.getResource(imagePath));
+    	try {
+    		this.image = new ImageIcon(Weapon.class.getResource(imagePath));
+    	}
+    	catch (NullPointerException e) {
+    		System.out.println(e.getMessage());
+    	}
     }
     
 	/**
