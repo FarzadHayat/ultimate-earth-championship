@@ -97,7 +97,7 @@ public abstract class Champion {
 	 */
 	public void changeMaxHealth(float healthChange)
 	{
-		health += healthChange;
+		maxHealth += healthChange;
 	}
 	
 	// Stamina:
@@ -305,11 +305,6 @@ public abstract class Champion {
 	}
 	// ---------
 	
-	
-	
-
-	
-	
 	// Weapon
 	
 	/**
@@ -347,25 +342,29 @@ public abstract class Champion {
 	/**
 	 * Constructor for champion Class
 	 * @param name The name of the champion
-	 * @param maxHealth The maximum health of the champion
-	 * @param maxStamina The maximum stamina of the champion
-	 * @param offense The offense stat of the champion
-	 * @param defense The defense stat of the champion
+	 * @param healthBoost Stat which modifies the maximum health of the champion
+	 * @param maxStamina Stat which modifies the maximum stamina of the champion
+	 * @param offense Modifies the offense stat of the champion
+	 * @param defense Modifies the defense stat of the champion
 	 * @param price The champions price
 	 * @param priceChangeWeekly The amount at which the champion's price changes each week once purchased
 	 */
-	public Champion (String name, float maxHealth, float maxStamina, int offense, int defense, float price, float priceChangeWeekly )
+	public Champion (String name, int healthBoost, int staminaBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly )
 	{
 		this.name = name;
 		
-		this.maxHealth = maxHealth;
+		System.out.println("TODO: Setup Default stat values, and value increments as global variables and implement them into classes");
+		
+		// TODO: This should be:
+		// this.maxHealth = MAX_HEALTH_DEFAULT * (HEALTH_STAT_INCREMENT * healthBoost);
+		this.maxHealth = 100 + (10 * healthBoost);
 		this.health = this.maxHealth;
 		
-		this.maxStamina = maxStamina;
+		this.maxStamina = 30 + (5 * staminaBoost);
 		this.stamina = this.maxStamina;
 		
-		this.offense = offense;
-		this.defense = defense;
+		this.offense = 1 + (1 * offenseBoost);
+		this.defense = 1 + (1 * defenseBoost);
 		
 		this.price = price;
 		this.priceChangeWeekly = priceChangeWeekly;
