@@ -1,5 +1,7 @@
 package champion;
 
+import main.Configuration;
+
 /**
 *
 *@author Oliver Coates
@@ -9,7 +11,7 @@ package champion;
 */
 public abstract class Champion {
 
-	
+	Configuration config = Configuration.getInstance();
 	
 	// Name:
 	
@@ -260,8 +262,7 @@ public abstract class Champion {
 		level++;
 		currentXP -= maxXP;
 		
-		// TODO: Add global XP increase modifier
-		maxXP = maxXP * 1.20f;
+		maxXP = maxXP * config.XP_INCREMENT_MODIFIER;
 		
 		System.out.println("TODO: Finish Level up Function");
 		
@@ -352,19 +353,15 @@ public abstract class Champion {
 	public Champion (String name, int healthBoost, int staminaBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly )
 	{
 		this.name = name;
-		
-		System.out.println("TODO: Setup Default stat values, and value increments as global variables and implement them into classes");
-		
-		// TODO: This should be:
-		// this.maxHealth = MAX_HEALTH_DEFAULT * (HEALTH_STAT_INCREMENT * healthBoost);
-		this.maxHealth = 100 + (10 * healthBoost);
+				
+		this.maxHealth = config.MAX_HEALTH_DEFAULT + (config.SKILL_HEALTH_INCREMENT * healthBoost);
 		this.health = this.maxHealth;
 		
-		this.maxStamina = 30 + (5 * staminaBoost);
+		this.maxStamina = config.MAX_STAMINA_DEFAULT + (config.SKILL_STAMINA_INCREMENT * staminaBoost);
 		this.stamina = this.maxStamina;
 		
-		this.offense = 1 + (1 * offenseBoost);
-		this.defense = 1 + (1 * defenseBoost);
+		this.offense = config.SKILL_DEFAULT_OFFENSE + (1 * offenseBoost);
+		this.defense = config.SKILL_DEFAULT_OFFENSE + (1 * defenseBoost);
 		
 		this.price = price;
 		this.priceChangeWeekly = priceChangeWeekly;
@@ -374,8 +371,7 @@ public abstract class Champion {
 		level = 1;
 		currentXP = 0f;
 		
-		System.out.println("TODO: Add global maxXP modifier");
-		maxXP = 100f;
+		maxXP = config.XP_DEFAULT_MAX;
 	}
 
 }
