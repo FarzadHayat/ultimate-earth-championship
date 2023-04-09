@@ -78,8 +78,25 @@ public class Configuration {
 	 */
 	public final int SKILL_DEFAULT_DEFENSE = 1;
 	
+	/**
+	 *  Global modifier for price for champions
+	 */
+	public final float CHAMPION_PRICE_MODIFIER = 1f;
+
+	/**
+	 *  Global modifier for weekly change of champions price;
+	 */
+	public final float CHAMPION_PRICE_WEEKLY_CHANGE_MODIFIER = 1f;
 	
+	/**
+	 *  Global Modifier for price for weapons
+	 */
+	public final float WEAPON_PRICE_MODIFIER = 1f;
 	
+	/**
+	 *  Global modifier for weekly change in price of weapons
+	 */
+	public final float WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER = 1f;
 	
 	
 	public float getDifficulty()

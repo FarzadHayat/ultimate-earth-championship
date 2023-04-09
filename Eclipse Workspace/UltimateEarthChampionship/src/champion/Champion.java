@@ -11,7 +11,7 @@ import main.Configuration;
 */
 public abstract class Champion {
 
-	Configuration config = Configuration.getInstance();
+	private Configuration config = Configuration.getInstance();
 	
 	// Name:
 	
@@ -363,8 +363,8 @@ public abstract class Champion {
 		this.offense = config.SKILL_DEFAULT_OFFENSE + (1 * offenseBoost);
 		this.defense = config.SKILL_DEFAULT_OFFENSE + (1 * defenseBoost);
 		
-		this.price = price;
-		this.priceChangeWeekly = priceChangeWeekly;
+		this.price = price * config.CHAMPION_PRICE_MODIFIER;
+		this.priceChangeWeekly = priceChangeWeekly * config.CHAMPION_PRICE_WEEKLY_CHANGE_MODIFIER;
 		
 		this.weapon = false; // Created champions should start with the weapon status of null
 		
