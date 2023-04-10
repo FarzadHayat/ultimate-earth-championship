@@ -1,11 +1,6 @@
 package views;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import weapons.Chainsaw;
-import weapons.Pickaxe;
-import weapons.Shield;
 
 public class CommandLineView
 {
