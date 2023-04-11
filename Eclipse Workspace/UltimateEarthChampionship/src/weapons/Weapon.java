@@ -1,5 +1,7 @@
 package weapons;
 
+import java.awt.image.BufferedImage;
+
 import javax.swing.ImageIcon;
 
 import main.Purchasable;
@@ -13,6 +15,11 @@ public abstract class Weapon implements Purchasable {
 	 * Fields
 	 */
 
+	/**
+	 * The folder location where the weapon images are stored
+	 */
+	private static final String IMAGE_FOLDER_PATH = "src/images/";
+	
 	/**
 	 * The name of the weapon
 	 */
@@ -46,7 +53,7 @@ public abstract class Weapon implements Purchasable {
      * Constructors
      */
     
-    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly, String imagePath) {
+    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly, String imageFileName) {
     	this.name = name;
     	this.damageBoost = damageBoost;
     	this.offenseBoost = offenseBoost;
@@ -54,7 +61,7 @@ public abstract class Weapon implements Purchasable {
     	this.price = price;
     	this.priceChangeWeekly = priceChangeWeekly;
     	try {
-    		this.image = new ImageIcon(Weapon.class.getResource(imagePath));
+    		this.image = new ImageIcon(IMAGE_FOLDER_PATH + imageFileName);
     	}
     	catch (NullPointerException e) {
     		System.out.println(e.getMessage());

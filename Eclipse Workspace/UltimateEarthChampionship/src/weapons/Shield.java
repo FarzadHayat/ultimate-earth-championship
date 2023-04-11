@@ -15,7 +15,7 @@ public class Shield extends Weapon {
 	private static float priceChangeWeekly = 0.9f;
 	
 	// Image
-	private static String imagePath = "/images/shield.png";
+	private static String imagePath = "shield.png";
 	
 	public Shield() {
 		super(name, damageBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imagePath);

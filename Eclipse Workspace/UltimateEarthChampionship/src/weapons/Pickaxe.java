@@ -15,10 +15,10 @@ public class Pickaxe extends Weapon {
 	private static float priceChangeWeekly = 0.9f;
 	
 	// Image
-	private static String imagePath = "";
+	private static String imageFileName = "";
 	
 	public Pickaxe() {
-		super(name, damageBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imagePath);
+		super(name, damageBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
 	}
 	
 }

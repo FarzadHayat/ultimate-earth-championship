@@ -2,6 +2,7 @@ package views;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import java.awt.GridLayout;
 
 public class TabbedView extends JPanel {
 
@@ -11,10 +12,9 @@ public class TabbedView extends JPanel {
 	 * Create the panel.
 	 */
 	public TabbedView() {
-		setLayout(null);
+		setLayout(new GridLayout(1, 1, 0, 0));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 450, 300);
 		add(tabbedPane);
 		
 		TeamView teamView = new TeamView();

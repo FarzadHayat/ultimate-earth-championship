@@ -15,10 +15,10 @@ public class GolfClub extends Weapon {
 	private static float priceChangeWeekly = 0.9f;
 	
 	// Image
-	private static String imagePath = "";
+	private static String imageFileName = "";
 	
 	public GolfClub() {
-		super(name, damageBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imagePath);
+		super(name, damageBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
 	}
 	
 }

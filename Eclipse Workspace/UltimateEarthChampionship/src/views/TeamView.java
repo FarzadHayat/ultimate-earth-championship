@@ -2,8 +2,9 @@ package views;
 
 import javax.swing.JPanel;
 
-import weapons.Shield;
-import weapons.Weapon;
+import weapons.*;
+import javax.swing.BoxLayout;
+import java.awt.FlowLayout;
 
 public class TeamView extends JPanel {
 
@@ -14,12 +15,17 @@ public class TeamView extends JPanel {
 	 */
 	public TeamView() {
 		setName("Team");
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		Weapon weapon = new Shield();
-		setLayout(null);
-		JPanel weaponView = new WeaponPanel(weapon);
-		weaponView.setBounds(0, 0, 300, 300);
-		add(weaponView);
+		JPanel teamPanel= new JPanel();
+		teamPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		add(teamPanel);
+		
+		JPanel weaponPanel_1 = new WeaponPanel(new Shield(), true);
+		teamPanel.add(weaponPanel_1);
+		
+		JPanel weaponPanel_2 = new WeaponPanel(new Chainsaw());
+		teamPanel.add(weaponPanel_2);
 	}
 
 }
