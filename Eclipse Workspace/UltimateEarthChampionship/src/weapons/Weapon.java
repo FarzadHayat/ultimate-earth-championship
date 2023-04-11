@@ -2,10 +2,12 @@ package weapons;
 
 import javax.swing.ImageIcon;
 
+import main.Purchasable;
+
 /**
  * Class Weapon
  */
-public abstract class Weapon {
+public abstract class Weapon implements Purchasable {
 
 	/**
 	 * Fields
@@ -30,7 +32,7 @@ public abstract class Weapon {
     /**
      * The current price of the weapon
      */
-    private int price;
+    private float price;
     /**
      * The value to multiply the price by on a weekly basis
      */
@@ -44,7 +46,7 @@ public abstract class Weapon {
      * Constructors
      */
     
-    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, int price, float priceChangeWeekly, String imagePath) {
+    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly, String imagePath) {
     	this.name = name;
     	this.damageBoost = damageBoost;
     	this.offenseBoost = offenseBoost;
@@ -135,7 +137,7 @@ public abstract class Weapon {
 	 * Set the value of price
 	 * @param newPrice the new value of price
 	 */
-    public void setPrice (int newPrice) {
+    public void setPrice (float newPrice) {
     	price = newPrice;
     }
 
@@ -143,7 +145,7 @@ public abstract class Weapon {
 	 * Get the value of price
 	 * @return the value of price
 	 */
-    public int getPrice () {
+    public float getPrice () {
     	return price;
     }
 
@@ -183,10 +185,13 @@ public abstract class Weapon {
 	 * Other methods
 	 */
 	
+	/**
+	 * Return a string representation of the weapon
+	 */
 	@Override
 	public String toString() {
-		String text = "<< Name: %s | Damage boost: %s | Offense boost: %s "
-				+ "| Defense boost: %s | Price: %s | Price change weekly: %s >>";
+		String text = "Weapon [Name: %s | Damage boost: %s | Offense boost: %s "
+				+ "| Defense boost: %s | Price: %s | Price change weekly: %s]";
 		return String.format(text, name, String.valueOf(damageBoost),
 				String.valueOf(offenseBoost), String.valueOf(defenseBoost),
 				String.valueOf(price), String.valueOf(priceChangeWeekly));

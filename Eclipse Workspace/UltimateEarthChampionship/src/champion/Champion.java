@@ -1,5 +1,7 @@
 package champion;
 
+import main.Purchasable;
+
 /**
 *
 *@author Oliver Coates
@@ -7,7 +9,7 @@ package champion;
 *Champion Class, responsible for data and functionality related to each individual champion competing.
 *
 */
-public abstract class Champion {
+public abstract class Champion implements Purchasable {
 
 	
 	
