@@ -54,6 +54,20 @@ public class WeaponPanel extends JPanel {
 			JButton sellWeaponButton = new JButton("Sell for $" + weapon.getPrice());
 			add(sellWeaponButton, BorderLayout.SOUTH);
 		}
+	}
+	
+	/**
+	 * Create the panel with buy button to be used for weapons that are in the shop.
+	 * @param weapon the weapon to display
+	 * @param isOwned true if the weapon is owned by the player
+	 * @param isInShop true if the weapon is available in the shop to be purchased
+	 */
+	public WeaponPanel(Weapon weapon, boolean isOwned, boolean isInShop) {
+		this(weapon, isOwned);
 		
+		if (isInShop) {
+			JButton buyWeaponButton = new JButton("Buy for $" + weapon.getPrice());
+			add(buyWeaponButton, BorderLayout.SOUTH);
+		}
 	}
 }

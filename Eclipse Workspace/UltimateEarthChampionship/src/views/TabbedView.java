@@ -20,6 +20,8 @@ public class TabbedView extends JPanel {
 		TeamView teamView = new TeamView();
 		tabbedPane.addTab(teamView.getName(), null, teamView, null);
 
+		ShopView shopView = new ShopView();
+		tabbedPane.addTab(shopView.getName(), null, shopView, null);
 	}
 
 }
