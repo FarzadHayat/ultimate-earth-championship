@@ -5,15 +5,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import main.Purchasable;
 import weapons.Weapon;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JButton;
 
-public class WeaponPanel extends JPanel {
+public class PurchasablePanel extends JPanel {
 
 	private static final long serialVersionUID = 5339330332731208144L;
 	
@@ -28,17 +30,24 @@ public class WeaponPanel extends JPanel {
 	 * * @param weapon the weapon to display
 	 * @wbp.parser.constructor
 	 */
-	public WeaponPanel(Weapon weapon) {
+	public PurchasablePanel(Purchasable purchasable) {
 		setBackground(Color.ORANGE);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(new BorderLayout(0, 0));
 		
-		JLabel weaponNameLabel = new JLabel(weapon.getName());
+		JLabel weaponNameLabel = new JLabel(purchasable.getName());
 		weaponNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(weaponNameLabel, BorderLayout.NORTH);
 		
-		ImageIcon imageIcon = new ImageIcon(weapon.getImage().getImage().getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_SMOOTH));
-		JLabel weaponImageLabel = new JLabel(imageIcon);
+		ImageIcon icon = purchasable.getImage();
+		ImageIcon resizedIcon;
+		if (icon != null) {
+			resizedIcon = new ImageIcon(icon.getImage().getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_SMOOTH));
+		}
+		else {
+			resizedIcon = new ImageIcon(new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_ARGB));
+		}
+		JLabel weaponImageLabel = new JLabel(resizedIcon);
 		add(weaponImageLabel, BorderLayout.CENTER);
 		}
 	
@@ -47,11 +56,11 @@ public class WeaponPanel extends JPanel {
 	 * @param weapon the weapon to display
 	 * @param isOwned true if the weapon is owned by the player
 	 */
-	public WeaponPanel(Weapon weapon, boolean isOwned) {
-		this(weapon);
+	public PurchasablePanel(Purchasable purchasable, boolean isOwned) {
+		this(purchasable);
 		
 		if (isOwned) {
-			JButton sellWeaponButton = new JButton("Sell for $" + weapon.getPrice());
+			JButton sellWeaponButton = new JButton("Sell for $" + purchasable.getPrice());
 			add(sellWeaponButton, BorderLayout.SOUTH);
 		}
 	}
@@ -62,11 +71,11 @@ public class WeaponPanel extends JPanel {
 	 * @param isOwned true if the weapon is owned by the player
 	 * @param isInShop true if the weapon is available in the shop to be purchased
 	 */
-	public WeaponPanel(Weapon weapon, boolean isOwned, boolean isInShop) {
-		this(weapon, isOwned);
+	public PurchasablePanel(Purchasable purchasable, boolean isOwned, boolean isInShop) {
+		this(purchasable, isOwned);
 		
 		if (isInShop) {
-			JButton buyWeaponButton = new JButton("Buy for $" + weapon.getPrice());
+			JButton buyWeaponButton = new JButton("Buy for $" + purchasable.getPrice());
 			add(buyWeaponButton, BorderLayout.SOUTH);
 		}
 	}

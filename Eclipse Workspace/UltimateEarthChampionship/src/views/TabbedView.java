@@ -2,6 +2,9 @@ package views;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import main.Shop;
+
 import java.awt.GridLayout;
 
 public class TabbedView extends JPanel {
@@ -20,7 +23,9 @@ public class TabbedView extends JPanel {
 		TeamView teamView = new TeamView();
 		tabbedPane.addTab(teamView.getName(), null, teamView, null);
 
-		ShopView shopView = new ShopView();
+		Shop shop = new Shop();
+		shop.generateCatalogue();
+		ShopView shopView = new ShopView(shop);
 		tabbedPane.addTab(shopView.getName(), null, shopView, null);
 	}
 

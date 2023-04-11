@@ -17,15 +17,15 @@ public class TeamView extends JPanel {
 		setName("Team");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		JPanel weaponPanel= new JPanel();
-		weaponPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		add(weaponPanel);
+		JPanel weaponsPanel= new JPanel();
+		weaponsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		add(weaponsPanel);
 		
-		JPanel weapon_1 = new WeaponPanel(new Shield(), true);
-		weaponPanel.add(weapon_1);
+		JPanel weaponPanel_1 = new PurchasablePanel(new Shield(), true);
+		weaponsPanel.add(weaponPanel_1);
 		
-		JPanel weapon_2 = new WeaponPanel(new Chainsaw());
-		weaponPanel.add(weapon_2);
+		JPanel weaponPanel_2 = new PurchasablePanel(new Chainsaw());
+		weaponsPanel.add(weaponPanel_2);
 	}
 
 }
