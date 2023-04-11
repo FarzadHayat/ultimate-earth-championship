@@ -6,8 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import main.Purchasable;
-import weapons.Weapon;
-
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.image.BufferedImage;

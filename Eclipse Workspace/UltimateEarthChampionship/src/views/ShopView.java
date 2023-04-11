@@ -1,15 +1,12 @@
 package views;
 
-import java.awt.FlowLayout;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import champion.Champion;
 import main.Purchasable;
 import main.Shop;
-import weapons.Weapon;
 
 public class ShopView extends JPanel {
 
@@ -24,12 +21,12 @@ public class ShopView extends JPanel {
 		
 		@SuppressWarnings("unchecked")
 		ArrayList<Purchasable> availableChampions = (ArrayList<Purchasable>) (ArrayList<?>) shop.getAvailableChampions(); 
-		PurchasableListPanel championListPanel = new PurchasableListPanel(availableChampions, false, true);
+		PurchasableListPanel championListPanel = new PurchasableListPanel(availableChampions, true, false);
 		add(championListPanel);
 		
 		@SuppressWarnings("unchecked")
 		ArrayList<Purchasable> availableWeapons = (ArrayList<Purchasable>) (ArrayList<?>) shop.getAvailableWeapons(); 
-		PurchasableListPanel weaponListPanel = new PurchasableListPanel(availableWeapons, false, true);
+		PurchasableListPanel weaponListPanel = new PurchasableListPanel(availableWeapons, true, false);
 		add(weaponListPanel);
 	}
 
