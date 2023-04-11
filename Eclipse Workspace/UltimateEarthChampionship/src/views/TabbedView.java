@@ -21,12 +21,12 @@ public class TabbedView extends JPanel {
 		add(tabbedPane);
 		
 		TeamView teamView = new TeamView();
-		tabbedPane.addTab(teamView.getName(), null, teamView, null);
+		tabbedPane.addTab(teamView.getName(), null, teamView, "View and change your current champions and weapons");
 
 		Shop shop = new Shop();
 		shop.generateCatalogue();
 		ShopView shopView = new ShopView(shop);
-		tabbedPane.addTab(shopView.getName(), null, shopView, null);
+		tabbedPane.addTab(shopView.getName(), null, shopView, "Buy new champion and weapons");
 	}
 
 }

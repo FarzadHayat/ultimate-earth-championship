@@ -1,10 +1,13 @@
 package views;
 
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import champion.Champion;
+import main.Purchasable;
 import main.Shop;
 import weapons.Weapon;
 
@@ -18,24 +21,16 @@ public class ShopView extends JPanel {
 	public ShopView(Shop shop) {
 		setName("Shop");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-		JPanel championsPanel = new JPanel();
-		championsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		add(championsPanel);
 		
-		for (Champion champion : shop.getAvailableChampions()) {
-			JPanel championPanel = new PurchasablePanel(champion, false, true);
-			championsPanel.add(championPanel);
-		}
+		@SuppressWarnings("unchecked")
+		ArrayList<Purchasable> availableChampions = (ArrayList<Purchasable>) (ArrayList<?>) shop.getAvailableChampions(); 
+		PurchasableListPanel championListPanel = new PurchasableListPanel(availableChampions, false, true);
+		add(championListPanel);
 		
-		JPanel weaponsPanel = new JPanel();
-		weaponsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		add(weaponsPanel);
-		
-		for (Weapon weapon : shop.getAvailableWeapons()) {
-			JPanel weaponPanel = new PurchasablePanel(weapon, false, true);
-			weaponsPanel.add(weaponPanel);
-		}
+		@SuppressWarnings("unchecked")
+		ArrayList<Purchasable> availableWeapons = (ArrayList<Purchasable>) (ArrayList<?>) shop.getAvailableWeapons(); 
+		PurchasableListPanel weaponListPanel = new PurchasableListPanel(availableWeapons, false, true);
+		add(weaponListPanel);
 	}
 
 }

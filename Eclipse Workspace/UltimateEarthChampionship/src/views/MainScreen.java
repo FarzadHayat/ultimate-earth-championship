@@ -23,6 +23,7 @@ public class MainScreen
 	private void initialize()
 	{
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setFont(new Font("Ubuntu", Font.PLAIN, 12));
 		frame.setTitle("Ultimate Earth Championship");
 		frame.setBounds(100, 100, 1280, 720);

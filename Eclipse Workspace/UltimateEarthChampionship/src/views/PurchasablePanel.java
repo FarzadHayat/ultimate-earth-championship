@@ -27,7 +27,7 @@ public class PurchasablePanel extends JPanel {
 
 	/**
 	 * Create the panel.
-	 * * @param weapon the weapon to display
+	 * * @param purchasable the purchasable to display
 	 * @wbp.parser.constructor
 	 */
 	public PurchasablePanel(Purchasable purchasable) {
@@ -52,31 +52,22 @@ public class PurchasablePanel extends JPanel {
 		}
 	
 	/**
-	 * Create the panel with sell button to be used for weapons that are owned by the player.
-	 * @param weapon the weapon to display
-	 * @param isOwned true if the weapon is owned by the player
+	 * Create the panel with optional buy and sell buttons.
+	 * @param purchasable the purchasable to display
+	 * @param canBuy true if the player should be able to buy the purchasable
+	 * @param canSell true if the player should be able to sell the purchasable
 	 */
-	public PurchasablePanel(Purchasable purchasable, boolean isOwned) {
+	public PurchasablePanel(Purchasable purchasable, boolean canBuy, boolean canSell) {
 		this(purchasable);
 		
-		if (isOwned) {
+		if (canBuy) {
+			JButton buyWeaponButton = new JButton("Buy for $" + purchasable.getPrice());
+			add(buyWeaponButton, BorderLayout.SOUTH);
+		}
+		if (canSell) {
 			JButton sellWeaponButton = new JButton("Sell for $" + purchasable.getPrice());
 			add(sellWeaponButton, BorderLayout.SOUTH);
 		}
 	}
-	
-	/**
-	 * Create the panel with buy button to be used for weapons that are in the shop.
-	 * @param weapon the weapon to display
-	 * @param isOwned true if the weapon is owned by the player
-	 * @param isInShop true if the weapon is available in the shop to be purchased
-	 */
-	public PurchasablePanel(Purchasable purchasable, boolean isOwned, boolean isInShop) {
-		this(purchasable, isOwned);
-		
-		if (isInShop) {
-			JButton buyWeaponButton = new JButton("Buy for $" + purchasable.getPrice());
-			add(buyWeaponButton, BorderLayout.SOUTH);
-		}
-	}
+
 }
