@@ -1,6 +1,7 @@
 package views;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import champion.Champion;
@@ -12,7 +13,13 @@ public class CommandLineView
 	private static final String FILLER = "=";
 	private static final int LINE_WIDTH = 108;
 	
-	public static void printView(String title, ArrayList<String> content, ArrayList<String> options) {
+	private Scanner scanner;
+	
+	public CommandLineView() {
+		scanner = new Scanner(System.in);
+	}
+	
+	private static void printView(String title, ArrayList<String> content, ArrayList<String> options) {
 		printLine();
 		printTitle(title);
 		printLine();
@@ -21,7 +28,15 @@ public class CommandLineView
 		printOptions(options);
 	}
 	
-	public static void printTitle(String title) {
+	private static void printLine() {
+		String text = "";
+		for (int i = 0; i < LINE_WIDTH; i++) {
+			text += FILLER;
+		}
+		System.out.println(text);
+	}
+	
+	private static void printTitle(String title) {
 		int numberOfFillers = Integer.max((int) ((LINE_WIDTH - title.length() - 2) / 2), 0);
 		String text = "";
 		for (int i = 0; i < numberOfFillers; i++) {
@@ -35,24 +50,25 @@ public class CommandLineView
 		}
 	}
 	
-	public static void printLine() {
-		String text = "";
-		for (int i = 0; i < LINE_WIDTH; i++) {
-			text += FILLER;
-		}
-		System.out.println(text);
-	}
-	
-	public static void printContent(ArrayList<String> content) {
+	private static void printContent(ArrayList<String> content) {
 		for (String line : content) {
 			System.out.println(line);
 		}
 	}
 	
-	public static void printOptions(ArrayList<String> options) {
+	private static void printOptions(ArrayList<String> options) {
 		for (int i = 0; i < options.size(); i++) {
 			System.out.println(String.valueOf(i+1) + " " + options.get(i));
 		}
+	}
+	
+	private String promptForInput() {
+		System.out.print("> ");
+		return scanner.nextLine();
+	}
+	
+	public void closeScanner() {
+		scanner.close();
 	}
 	
 	public void displayShop(Shop shop) {
@@ -71,7 +87,8 @@ public class CommandLineView
 		options.addAll(getChampionOptions(shop.getAvailableChampions(), CardType.CAN_BUY));
 		options.addAll(getWeaponOptions(shop.getAvailableWeapons(), CardType.CAN_BUY));
 		
-		printView("My title", content, options);
+		printView("Shop", content, options);
+		System.out.println(promptForInput());
 	}
 	
 	private ArrayList<String> getChampionStrings(ArrayList<Champion> champions) {

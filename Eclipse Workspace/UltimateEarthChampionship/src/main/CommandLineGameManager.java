@@ -13,5 +13,6 @@ public class CommandLineGameManager extends GameManager
 		commandLineView = new CommandLineView();
 		getShop().generateCatalogue();
 		commandLineView.displayShop(getShop());
+		commandLineView.closeScanner();
 	}
 }
