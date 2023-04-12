@@ -29,11 +29,11 @@ public class MainScreen
 		frame.setTitle("Ultimate Earth Championship");
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
 	}
 	
 	public void displayView(Container view) {
 		frame.setContentPane(view);
+		frame.setVisible(true);
 	}
 
 
