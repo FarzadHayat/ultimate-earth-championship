@@ -121,6 +121,10 @@ public class Team {
 		// TODO: Setup config default money start value:
 		this.money = 100f;
 		
+		score = 0;
+		
+		reserveChampions = new ArrayList<Champion>();
+		
 		if (startingChampions.size() != 4)
 		{
 			System.out.println("WARNING: Starting champions size is not 4!");
@@ -201,10 +205,9 @@ public class Team {
 		
 		// Swap them
 		int indexChosen = chosenChampions.indexOf(championToReserve);
-		int indexRostered = chosenChampions.indexOf(championToRoster);
+		int indexRostered = reserveChampions.indexOf(championToRoster);
 		
 		chosenChampions.add(indexChosen, championToRoster);
-		
 		
 		reserveChampions.add(indexRostered, championToReserve);
 		
