@@ -1,8 +1,9 @@
 package views;
 
 import java.awt.Container;
-import javax.swing.JFrame;
 import java.awt.Font;
+
+import javax.swing.JFrame;
 
 public class MainScreen
 {

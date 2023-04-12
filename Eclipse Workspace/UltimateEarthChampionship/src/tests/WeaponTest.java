@@ -1,11 +1,12 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
 import main.Purchasable;
-import weapons.*;
+import weapons.Shield;
+import weapons.Weapon;
 
 class WeaponTest
 {

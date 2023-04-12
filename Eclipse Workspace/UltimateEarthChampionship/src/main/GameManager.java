@@ -2,7 +2,10 @@ package main;
 
 import java.util.ArrayList;
 
-import weapons.*;
+import weapons.Chainsaw;
+import weapons.Pickaxe;
+import weapons.Shield;
+import weapons.Weapon;
 
 public abstract class GameManager
 {

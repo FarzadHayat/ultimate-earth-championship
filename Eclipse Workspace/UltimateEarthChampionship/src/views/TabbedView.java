@@ -1,11 +1,11 @@
 package views;
 
+import java.awt.GridLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import main.Shop;
-
-import java.awt.GridLayout;
 
 public class TabbedView extends JPanel {
 

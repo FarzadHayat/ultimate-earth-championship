@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import champion.Champion;
 import main.Purchasable;
 import main.Shop;
+import weapons.Weapon;
 
 public class ShopView extends JPanel {
 
@@ -19,13 +21,18 @@ public class ShopView extends JPanel {
 		setName("Shop");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		@SuppressWarnings("unchecked")
-		ArrayList<Purchasable> availableChampions = (ArrayList<Purchasable>) (ArrayList<?>) shop.getAvailableChampions(); 
+		
+		ArrayList<Purchasable> availableChampions = new ArrayList<Purchasable>();
+		for (Champion champion : shop.getAvailableChampions()) {
+			availableChampions.add(champion);
+		}
 		PurchasableListPanel championListPanel = new PurchasableListPanel(availableChampions, true, false);
 		add(championListPanel);
 		
-		@SuppressWarnings("unchecked")
-		ArrayList<Purchasable> availableWeapons = (ArrayList<Purchasable>) (ArrayList<?>) shop.getAvailableWeapons(); 
+		ArrayList<Purchasable>availableWeapons = new ArrayList<Purchasable>();
+		for (Weapon weapon : shop.getAvailableWeapons()) {
+			availableWeapons.add(weapon);
+		}
 		PurchasableListPanel weaponListPanel = new PurchasableListPanel(availableWeapons, true, false);
 		add(weaponListPanel);
 	}

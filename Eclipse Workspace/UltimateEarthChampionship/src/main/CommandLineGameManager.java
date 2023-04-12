@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import views.CommandLineView;
-import weapons.*;
+import weapons.Weapon;
 
 public class CommandLineGameManager extends GameManager
 {

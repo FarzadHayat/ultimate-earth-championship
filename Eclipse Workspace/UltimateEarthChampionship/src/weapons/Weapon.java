@@ -1,7 +1,5 @@
 package weapons;
 
-import java.awt.image.BufferedImage;
-
 import javax.swing.ImageIcon;
 
 import main.Purchasable;

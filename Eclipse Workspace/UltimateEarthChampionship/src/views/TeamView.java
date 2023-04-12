@@ -1,11 +1,12 @@
 package views;
 
+import java.util.ArrayList;
+
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import champion.champions.Confucius;
 import main.Purchasable;
-import javax.swing.BoxLayout;
-import java.util.ArrayList;
 
 public class TeamView extends JPanel {
 
