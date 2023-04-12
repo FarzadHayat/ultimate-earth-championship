@@ -10,10 +10,12 @@ import weapons.Weapon;
 
 public abstract class GameManager
 {
+	private static GameManager instance;
+	
 	private ArrayList<Champion> allChampions = new ArrayList<Champion>(); 
 	private ArrayList<Weapon> allWeapons = new ArrayList<Weapon>();
 	
-	public GameManager() {
+	protected GameManager() {
 		initialize();
 		play();
 	}
@@ -40,6 +42,14 @@ public abstract class GameManager
 
 	public void setAllWeapons(ArrayList<Weapon> allWeapons) {
 		this.allWeapons = allWeapons;
+	}
+	
+	public static GameManager getInstance() {
+		return instance;
+	}
+	
+	protected static void setInstance(GameManager gameManager) {
+		instance = gameManager;
 	}
 
 }
