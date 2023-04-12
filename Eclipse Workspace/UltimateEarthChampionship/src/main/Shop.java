@@ -1,20 +1,9 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import champion.Champion;
-import champion.champions.AdamSmith;
-import champion.champions.BernardMontgomery;
-import champion.champions.CharlesDarwin;
-import champion.champions.Confucius;
-import champion.champions.GeorgeWashington;
-import weapons.Chainsaw;
-import weapons.GolfClub;
-import weapons.Pickaxe;
-import weapons.Shield;
-import weapons.Sledgehammer;
 import weapons.Weapon;
 
 public class Shop {
