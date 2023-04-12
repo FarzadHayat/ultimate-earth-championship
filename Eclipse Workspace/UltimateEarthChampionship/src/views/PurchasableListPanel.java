@@ -18,8 +18,8 @@ public class PurchasableListPanel extends JPanel {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		for (Purchasable purchasable : purchasableList) {
-			JPanel purchasablePanel = new PurchasablePanel(purchasable, canBuy, canSell);
-			add(purchasablePanel);
+			JPanel purchasableCard = new PurchasableCard(purchasable, canBuy, canSell);
+			add(purchasableCard);
 		}
 	}
 

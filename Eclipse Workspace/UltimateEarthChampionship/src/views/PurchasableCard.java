@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 
 import main.Purchasable;
 
-public class PurchasablePanel extends JPanel {
+public class PurchasableCard extends JPanel {
 
 	private static final long serialVersionUID = 5339330332731208144L;
 	
@@ -29,7 +29,7 @@ public class PurchasablePanel extends JPanel {
 	 * * @param purchasable the purchasable to display
 	 * @wbp.parser.constructor
 	 */
-	public PurchasablePanel(Purchasable purchasable) {
+	public PurchasableCard(Purchasable purchasable) {
 		setBackground(Color.ORANGE);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(new BorderLayout(0, 0));
@@ -56,7 +56,7 @@ public class PurchasablePanel extends JPanel {
 	 * @param canBuy true if the player should be able to buy the purchasable
 	 * @param canSell true if the player should be able to sell the purchasable
 	 */
-	public PurchasablePanel(Purchasable purchasable, boolean canBuy, boolean canSell) {
+	public PurchasableCard(Purchasable purchasable, boolean canBuy, boolean canSell) {
 		this(purchasable);
 		
 		if (canBuy) {
