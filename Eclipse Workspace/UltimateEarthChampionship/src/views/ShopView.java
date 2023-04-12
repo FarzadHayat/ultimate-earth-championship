@@ -25,14 +25,14 @@ public class ShopView extends JPanel {
 		for (Champion champion : shop.getAvailableChampions()) {
 			availableChampions.add(champion);
 		}
-		PurchasableListPanel championListPanel = new PurchasableListPanel(availableChampions, Card.CAN_BUY);
+		PurchasableListPanel championListPanel = new PurchasableListPanel(availableChampions, CardType.CAN_BUY);
 		add(championListPanel);
 		
 		ArrayList<Purchasable>availableWeapons = new ArrayList<Purchasable>();
 		for (Weapon weapon : shop.getAvailableWeapons()) {
 			availableWeapons.add(weapon);
 		}
-		PurchasableListPanel weaponListPanel = new PurchasableListPanel(availableWeapons, Card.CAN_BUY);
+		PurchasableListPanel weaponListPanel = new PurchasableListPanel(availableWeapons, CardType.CAN_BUY);
 		add(weaponListPanel);
 	}
 

@@ -1,6 +1,6 @@
 package views;
 
-public enum Card {
+public enum CardType {
 	STANDARD,
 	CAN_BUY,
 	CAN_SELL

@@ -14,7 +14,7 @@ public class PurchasableListPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PurchasableListPanel(ArrayList<Purchasable> purchasableList, Card type) {
+	public PurchasableListPanel(ArrayList<Purchasable> purchasableList, CardType type) {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		for (Purchasable purchasable : purchasableList) {

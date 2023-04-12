@@ -30,9 +30,9 @@ public class PurchasableCard extends JPanel {
 	/**
 	 * Create the panel.
 	 * @param purchasable the purchasable to display
-	 * @param type the type of the card according to the Card enum
+	 * @param type the type of the card according to the CardType enum
 	 */
-	public PurchasableCard(Purchasable purchasable, Card type) {
+	public PurchasableCard(Purchasable purchasable, CardType type) {
 		setBackground(Color.ORANGE);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(new BorderLayout(0, 0));
