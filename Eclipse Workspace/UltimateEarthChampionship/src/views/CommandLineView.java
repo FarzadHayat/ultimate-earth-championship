@@ -19,7 +19,7 @@ public class CommandLineView
 		scanner = new Scanner(System.in);
 	}
 	
-	private static void printView(String title, ArrayList<String> content, ArrayList<String> options) {
+	public static void printView(String title, ArrayList<String> content, ArrayList<String> options) {
 		printLine();
 		printTitle(title);
 		printLine();
@@ -28,7 +28,7 @@ public class CommandLineView
 		printOptions(options);
 	}
 	
-	private static void printLine() {
+	public static void printLine() {
 		String text = "";
 		for (int i = 0; i < LINE_WIDTH; i++) {
 			text += FILLER;
@@ -36,7 +36,7 @@ public class CommandLineView
 		System.out.println(text);
 	}
 	
-	private static void printTitle(String title) {
+	public static void printTitle(String title) {
 		int numberOfFillers = Integer.max((int) ((LINE_WIDTH - title.length() - 2) / 2), 0);
 		String text = "";
 		for (int i = 0; i < numberOfFillers; i++) {
@@ -50,13 +50,13 @@ public class CommandLineView
 		}
 	}
 	
-	private static void printContent(ArrayList<String> content) {
+	public static void printContent(ArrayList<String> content) {
 		for (String line : content) {
 			System.out.println(line);
 		}
 	}
 	
-	private static void printOptions(ArrayList<String> options) {
+	public static void printOptions(ArrayList<String> options) {
 		for (int i = 0; i < options.size(); i++) {
 			System.out.println(String.valueOf(i+1) + " " + options.get(i));
 		}
