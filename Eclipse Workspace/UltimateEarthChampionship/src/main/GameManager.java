@@ -1,29 +1,26 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import champion.Champion;
-import weapons.Chainsaw;
-import weapons.Pickaxe;
-import weapons.Shield;
-import weapons.Weapon;
+import champion.champions.*;
+import weapons.*;
 
 public abstract class GameManager
 {
 	private static GameManager instance;
 	
-	private ArrayList<Champion> allChampions = new ArrayList<Champion>(); 
-	private ArrayList<Weapon> allWeapons = new ArrayList<Weapon>();
+	private ArrayList<Champion> allChampions; 
+	private ArrayList<Weapon> allWeapons;
 	
 	protected GameManager() {
-		initialize();
-		play();
-	}
-	
-	public void initialize() {
-		getAllWeapons().add(new Shield());
-		getAllWeapons().add(new Pickaxe());
-		getAllWeapons().add(new Chainsaw());
+		allChampions = new ArrayList<Champion>(
+    			List.of(new AdamSmith(), new BernardMontgomery(), new CharlesDarwin(), new Confucius(), new GeorgeWashington())
+    			);
+    	allWeapons = new ArrayList<Weapon>(
+    			List.of(new Chainsaw(), new GolfClub(), new Pickaxe(), new Sledgehammer(), new Shield())
+    			);
 	}
 	
 	public abstract void play();

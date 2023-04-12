@@ -18,7 +18,9 @@ public class GraphicalGameManager extends GameManager
 
 	public static void main(String[] args)
 	{
-		setInstance(new GraphicalGameManager());
+		GameManager gameManager = new GraphicalGameManager();
+		setInstance(gameManager);
+		gameManager.play();
 	}
 
 }

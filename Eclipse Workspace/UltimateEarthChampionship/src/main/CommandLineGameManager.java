@@ -25,7 +25,9 @@ public class CommandLineGameManager extends GameManager
 
 	public static void main(String[] args)
 	{
-		setInstance(new CommandLineGameManager());
+		GameManager gameManager = new CommandLineGameManager();
+		setInstance(gameManager);
+		gameManager.play();
 	}
 
 }

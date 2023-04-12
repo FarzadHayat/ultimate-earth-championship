@@ -21,7 +21,6 @@ public class ShopView extends JPanel {
 		setName("Shop");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		
 		ArrayList<Purchasable> availableChampions = new ArrayList<Purchasable>();
 		for (Champion champion : shop.getAvailableChampions()) {
 			availableChampions.add(champion);
