@@ -16,11 +16,4 @@ public class GraphicalGameManager extends GameManager
 		mainScreen.displayView(tabbedView);
 	}
 
-	public static void main(String[] args)
-	{
-		GameManager gameManager = new GraphicalGameManager();
-		setInstance(gameManager);
-		gameManager.play();
-	}
-
 }

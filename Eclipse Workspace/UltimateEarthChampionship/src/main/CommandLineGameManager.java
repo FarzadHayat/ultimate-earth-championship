@@ -17,7 +17,6 @@ public class CommandLineGameManager extends GameManager
 	public void play()
 	{
 		commandLineView = new CommandLineView();
-		getShop().setGameManager();
 		getShop().generateCatalogue();
 		displayShop();
 	}
@@ -43,13 +42,6 @@ public class CommandLineGameManager extends GameManager
 				.map(Weapon::toString)
 				.collect(Collectors.toCollection(ArrayList::new));
 		return weaponStrings;
-	}
-
-	public static void main(String[] args)
-	{
-		GameManager gameManager = new CommandLineGameManager();
-		setInstance(gameManager);
-		gameManager.play();
 	}
 
 }

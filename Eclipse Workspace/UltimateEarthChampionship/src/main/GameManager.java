@@ -25,16 +25,25 @@ public abstract class GameManager
     	allWeapons = new ArrayList<Weapon>(
     			List.of(new Chainsaw(), new GolfClub(), new Pickaxe(), new Sledgehammer(), new Shield())
     			);
+    	
 	}
 	
 	public abstract void play();
 
 	public static GameManager getInstance() {
+		if (instance == null) {
+			switch (GameInitializer.TYPE) {
+			case GUI: {
+				instance = new GraphicalGameManager();
+				break;
+			}
+			case CLI: {
+				instance = new CommandLineGameManager();
+				break;
+			}
+			}
+		}
 		return instance;
-	}
-	
-	protected static void setInstance(GameManager gameManager) {
-		instance = gameManager;
 	}
 	
 	public Shop getShop() {

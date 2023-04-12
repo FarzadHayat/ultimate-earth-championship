@@ -30,16 +30,7 @@ public class Shop {
     // TODO: move numWeapons to config class.
     private int numWeapons = 4;
     private ArrayList<Weapon> availableWeapons;
-    
-    private GameManager gameManager;
-    
-    /**
-     * Constructors
-     */
-    public void setGameManager() {
-    	gameManager = GameManager.getInstance();
-    }
-    
+        
     /**
      * Accessor methods
      */
@@ -107,8 +98,8 @@ public class Shop {
 	 */
 	public Champion getRandomChampion() {
 		Random random = new Random();
-		int index = random.nextInt(gameManager.getAllChampions().size());
-		return gameManager.getAllChampions().get(index);
+		int index = random.nextInt(GameManager.getInstance().getAllChampions().size());
+		return GameManager.getInstance().getAllChampions().get(index);
 	}
     
 	/**
@@ -130,8 +121,8 @@ public class Shop {
 	 */
 	public Weapon getRandomWeapon() {
 		Random random = new Random();
-		int index = random.nextInt(gameManager.getAllWeapons().size());
-		return gameManager.getAllWeapons().get(index);
+		int index = random.nextInt(GameManager.getInstance().getAllWeapons().size());
+		return GameManager.getInstance().getAllWeapons().get(index);
 	}
 
 }
