@@ -31,7 +31,14 @@ public class Shop {
     private int numWeapons = 4;
     private ArrayList<Weapon> availableWeapons;
     
-    private GameManager gameManager = GameManager.getInstance();
+    private GameManager gameManager;
+    
+    /**
+     * Constructors
+     */
+    public void setGameManager() {
+    	gameManager = GameManager.getInstance();
+    }
     
     /**
      * Accessor methods

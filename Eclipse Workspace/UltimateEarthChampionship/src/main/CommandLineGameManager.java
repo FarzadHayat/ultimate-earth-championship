@@ -2,7 +2,9 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import champion.Champion;
 import views.CommandLineView;
 import weapons.Weapon;
 
@@ -15,12 +17,32 @@ public class CommandLineGameManager extends GameManager
 	public void play()
 	{
 		commandLineView = new CommandLineView();
-		ArrayList<String> weaponsStrings = new ArrayList<String>();
-		for (Weapon weapon : getAllWeapons()) {
-			weaponsStrings.add(weapon.toString());
-		}
-		ArrayList<String> options = new ArrayList<String>(List.of("One", "Two", "Three")); 
-		commandLineView.printView("My title", weaponsStrings, options);
+		getShop().setGameManager();
+		getShop().generateCatalogue();
+		displayShop();
+	}
+	
+	public void displayShop() {
+		ArrayList<String> championStrings = getChampionStrings(getShop().getAvailableChampions());
+		ArrayList<String> weaponStrings = getWeaponStrings(getShop().getAvailableWeapons());
+		ArrayList<String> content = new ArrayList<>(championStrings);
+		content.addAll(weaponStrings); 
+		ArrayList<String> options = new ArrayList<String>(List.of("One", "Two", "Three"));
+		commandLineView.printView("My title", content, options);
+	}
+	
+	private ArrayList<String> getChampionStrings(ArrayList<Champion> champions) {
+		ArrayList<String> championStrings = getShop().getAvailableChampions().stream()
+				.map(Champion::toString)
+				.collect(Collectors.toCollection(ArrayList::new));
+		return championStrings;
+	}
+	
+	private ArrayList<String> getWeaponStrings(ArrayList<Weapon> weapons) {
+		ArrayList<String> weaponStrings = getShop().getAvailableWeapons().stream()
+				.map(Weapon::toString)
+				.collect(Collectors.toCollection(ArrayList::new));
+		return weaponStrings;
 	}
 
 	public static void main(String[] args)

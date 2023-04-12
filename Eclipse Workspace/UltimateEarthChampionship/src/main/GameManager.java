@@ -11,10 +11,14 @@ public abstract class GameManager
 {
 	private static GameManager instance;
 	
+	private Shop shop;
+	
 	private ArrayList<Champion> allChampions; 
 	private ArrayList<Weapon> allWeapons;
 	
 	protected GameManager() {
+		shop = new Shop();
+		
 		allChampions = new ArrayList<Champion>(
     			List.of(new AdamSmith(), new BernardMontgomery(), new CharlesDarwin(), new Confucius(), new GeorgeWashington())
     			);
@@ -24,6 +28,22 @@ public abstract class GameManager
 	}
 	
 	public abstract void play();
+
+	public static GameManager getInstance() {
+		return instance;
+	}
+	
+	protected static void setInstance(GameManager gameManager) {
+		instance = gameManager;
+	}
+	
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
 
 	public ArrayList<Champion> getAllChampions() {
 		return allChampions;
@@ -39,14 +59,6 @@ public abstract class GameManager
 
 	public void setAllWeapons(ArrayList<Weapon> allWeapons) {
 		this.allWeapons = allWeapons;
-	}
-	
-	public static GameManager getInstance() {
-		return instance;
-	}
-	
-	protected static void setInstance(GameManager gameManager) {
-		instance = gameManager;
 	}
 
 }
