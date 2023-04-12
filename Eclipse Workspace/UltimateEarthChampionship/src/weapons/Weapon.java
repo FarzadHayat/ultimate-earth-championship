@@ -190,13 +190,24 @@ public abstract class Weapon implements Purchasable {
 	 * Other methods
 	 */
 	
-	/**
-	 * Return a string representation of the weapon
-	 */
-	@Override
+//	/**
+//	 * Return a string representation of the weapon
+//	 */
+//	@Override
+//	public String toString() {
+//		String text = "Weapon [Name: %s | Damage boost: %s | Offense boost: %s "
+//				+ "| Defense boost: %s | Price: %s | Price change weekly: %s]";
+//		return String.format(text, name, String.valueOf(damageBoost),
+//				String.valueOf(offenseBoost), String.valueOf(defenseBoost),
+//				String.valueOf(price), String.valueOf(priceChangeWeekly));
+//	}
+	
+	public static String toStringHeader() {
+		return "Weapon [ Name                 | Damage boost | Offense boost | Defense boost | Price | Price change weekly ]";
+	}
+	
 	public String toString() {
-		String text = "Weapon [Name: %s | Damage boost: %s | Offense boost: %s "
-				+ "| Defense boost: %s | Price: %s | Price change weekly: %s]";
+		String text = "       [ %-20s | %12s | %13s | %13s | %5s | %19s ]";
 		return String.format(text, name, String.valueOf(damageBoost),
 				String.valueOf(offenseBoost), String.valueOf(defenseBoost),
 				String.valueOf(price), String.valueOf(priceChangeWeekly));

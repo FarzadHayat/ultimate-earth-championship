@@ -22,11 +22,19 @@ public class CommandLineGameManager extends GameManager
 	}
 	
 	public void displayShop() {
+		ArrayList<String> content = new ArrayList<>();
+		
+//		content.add(Champion.toStringHeader());
 		ArrayList<String> championStrings = getChampionStrings(getShop().getAvailableChampions());
+		content.addAll(championStrings);
+		
+		content.add(Weapon.toStringHeader());
+		content.add("       [---------------------------------------------------------------------------------------------------]");
 		ArrayList<String> weaponStrings = getWeaponStrings(getShop().getAvailableWeapons());
-		ArrayList<String> content = new ArrayList<>(championStrings);
 		content.addAll(weaponStrings); 
+		
 		ArrayList<String> options = new ArrayList<String>(List.of("One", "Two", "Three"));
+		
 		commandLineView.printView("My title", content, options);
 	}
 	

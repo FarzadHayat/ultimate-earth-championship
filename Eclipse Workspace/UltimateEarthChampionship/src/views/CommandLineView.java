@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CommandLineView
 {
 	private final String filler = "=";
-	private final int lineWidth = 20;
+	private final int lineWidth = 108;
 	
 	public void printView(String title, ArrayList<String> content, ArrayList<String> options) {
 		printLine();
