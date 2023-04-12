@@ -24,15 +24,20 @@ public class PurchasableCard extends JPanel {
 	private static final int WIDTH = IMAGE_WIDTH;
 	private static final int HEIGHT = WIDTH + 50;
 
+	
+	private Purchasable purchasable;
+	
 	/**
 	 * Create the panel.
-	 * * @param purchasable the purchasable to display
-	 * @wbp.parser.constructor
+	 * @param purchasable the purchasable to display
+	 * @param type the type of the card according to the Card enum
 	 */
-	public PurchasableCard(Purchasable purchasable) {
+	public PurchasableCard(Purchasable purchasable, Card type) {
 		setBackground(Color.ORANGE);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(new BorderLayout(0, 0));
+		
+		this.purchasable = purchasable;
 		
 		JLabel weaponNameLabel = new JLabel(purchasable.getName());
 		weaponNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -48,25 +53,37 @@ public class PurchasableCard extends JPanel {
 		}
 		JLabel weaponImageLabel = new JLabel(resizedIcon);
 		add(weaponImageLabel, BorderLayout.CENTER);
-		}
-	
-	/**
-	 * Create the panel with optional buy and sell buttons.
-	 * @param purchasable the purchasable to display
-	 * @param canBuy true if the player should be able to buy the purchasable
-	 * @param canSell true if the player should be able to sell the purchasable
-	 */
-	public PurchasableCard(Purchasable purchasable, boolean canBuy, boolean canSell) {
-		this(purchasable);
 		
-		if (canBuy) {
-			JButton buyWeaponButton = new JButton("Buy for $" + purchasable.getPrice());
-			add(buyWeaponButton, BorderLayout.SOUTH);
+		switch (type) {
+		case STANDARD: {
+			addStatsLabel();
+			break;
 		}
-		if (canSell) {
-			JButton sellWeaponButton = new JButton("Sell for $" + purchasable.getPrice());
-			add(sellWeaponButton, BorderLayout.SOUTH);
+		case CAN_BUY: {
+			addStatsLabel();
+			addBuyButton();
+			break;
 		}
+		case CAN_SELL: {
+			addStatsLabel();
+			addSellButton();
+			break;
+		}
+		}
+	}
+	
+	public void addStatsLabel() {
+		;
+	}
+	
+	public void addBuyButton() {
+		JButton buyWeaponButton = new JButton("Buy for $" + purchasable.getPrice());
+		add(buyWeaponButton, BorderLayout.SOUTH);
+	}
+	
+	public void addSellButton() {
+		JButton sellWeaponButton = new JButton("Sell for $" + purchasable.getPrice());
+		add(sellWeaponButton, BorderLayout.SOUTH);
 	}
 
 }

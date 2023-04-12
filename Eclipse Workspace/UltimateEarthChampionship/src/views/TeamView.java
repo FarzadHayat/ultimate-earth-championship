@@ -25,7 +25,7 @@ public class TeamView extends JPanel {
 		selectedChampions.add(new Confucius());
 		selectedChampions.add(new Confucius());
 		selectedChampions.add(new Confucius());
-		PurchasableListPanel championListPanel = new PurchasableListPanel(selectedChampions, false, true);
+		PurchasableListPanel championListPanel = new PurchasableListPanel(selectedChampions, Card.CAN_SELL);
 		add(championListPanel);
 	}
 
