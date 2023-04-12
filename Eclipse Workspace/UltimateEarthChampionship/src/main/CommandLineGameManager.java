@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import champion.Champion;
+import views.CardType;
 import views.CommandLineView;
 import weapons.Weapon;
 
@@ -33,7 +34,9 @@ public class CommandLineGameManager extends GameManager
 		ArrayList<String> weaponStrings = getWeaponStrings(getShop().getAvailableWeapons());
 		content.addAll(weaponStrings); 
 		
-		ArrayList<String> options = new ArrayList<String>(List.of("One", "Two", "Three"));
+		ArrayList<String> options = new ArrayList<String>();
+		options.addAll(getChampionOptions(getShop().getAvailableChampions(), CardType.CAN_BUY));
+		options.addAll(getWeaponOptions(getShop().getAvailableWeapons(), CardType.CAN_BUY));
 		
 		commandLineView.printView("My title", content, options);
 	}
@@ -50,6 +53,54 @@ public class CommandLineGameManager extends GameManager
 				.map(Weapon::toString)
 				.collect(Collectors.toCollection(ArrayList::new));
 		return weaponStrings;
+	}
+	
+	private ArrayList<String> getChampionOptions(ArrayList<Champion> champions, CardType type) {
+		ArrayList<String> names = new ArrayList<String>();
+		for (Champion champion : champions) {
+			String text;
+			switch (type) {
+			case CAN_BUY: {
+				text = "BUY: ";
+				break;
+			}
+			case CAN_SELL: {
+				text = "SELL: ";
+				break;
+			}
+			default: {
+				text = "";
+				break;
+			}
+			}
+			text += champion.getName();
+			names.add(text);
+		}
+		return names;
+	}
+	
+	private ArrayList<String> getWeaponOptions(ArrayList<Weapon> weapons, CardType type) {
+		ArrayList<String> names = new ArrayList<String>();
+		for (Weapon weapon : weapons) {
+			String text;
+			switch (type) {
+			case CAN_BUY: {
+				text = "BUY: ";
+				break;
+			}
+			case CAN_SELL: {
+				text = "SELL: ";
+				break;
+			}
+			default: {
+				text = "";
+				break;
+			}
+			}
+			text += weapon.getName();
+			names.add(text);
+		}
+		return names;
 	}
 
 }
