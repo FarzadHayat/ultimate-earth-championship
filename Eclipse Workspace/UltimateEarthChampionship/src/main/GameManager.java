@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 
+import champion.Champion;
 import weapons.Chainsaw;
 import weapons.Pickaxe;
 import weapons.Shield;
@@ -9,7 +10,8 @@ import weapons.Weapon;
 
 public abstract class GameManager
 {
-	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+	private ArrayList<Champion> allChampions = new ArrayList<Champion>(); 
+	private ArrayList<Weapon> allWeapons = new ArrayList<Weapon>();
 	
 	public GameManager() {
 		initialize();
@@ -17,20 +19,27 @@ public abstract class GameManager
 	}
 	
 	public void initialize() {
-		getWeapons().add(new Shield());
-		getWeapons().add(new Pickaxe());
-		getWeapons().add(new Chainsaw());
+		getAllWeapons().add(new Shield());
+		getAllWeapons().add(new Pickaxe());
+		getAllWeapons().add(new Chainsaw());
 	}
 	
 	public abstract void play();
 
-	public ArrayList<Weapon> getWeapons()
-	{
-		return weapons;
+	public ArrayList<Champion> getAllChampions() {
+		return allChampions;
 	}
 
-	public void setWeapons(ArrayList<Weapon> weapons)
-	{
-		this.weapons = weapons;
+	public void setAllChampions(ArrayList<Champion> allChampions) {
+		this.allChampions = allChampions;
 	}
+
+	public ArrayList<Weapon> getAllWeapons() {
+		return allWeapons;
+	}
+
+	public void setAllWeapons(ArrayList<Weapon> allWeapons) {
+		this.allWeapons = allWeapons;
+	}
+
 }

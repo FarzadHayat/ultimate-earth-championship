@@ -16,7 +16,7 @@ public class CommandLineGameManager extends GameManager
 	{
 		commandLineView = new CommandLineView();
 		ArrayList<String> weaponsStrings = new ArrayList<String>();
-		for (Weapon weapon : getWeapons()) {
+		for (Weapon weapon : getAllWeapons()) {
 			weaponsStrings.add(weapon.toString());
 		}
 		ArrayList<String> options = new ArrayList<String>(List.of("One", "Two", "Three")); 
