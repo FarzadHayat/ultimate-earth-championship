@@ -21,6 +21,68 @@ public abstract class Champion {
 	private String name;
 	
 	/**
+	 * Health of the champion
+	 */
+	private float health;
+	
+	/**
+	 * The maximum health of the champion
+	 */
+	private float maxHealth;
+	
+	/**
+	 * The champions stamina
+	 */
+	private float stamina;
+	
+	/**
+	 * The champion's maximum stamina
+	 */
+	private float maxStamina;
+	
+	/**
+	 * The Offense stat
+	 */
+	private int offense;
+	
+	/**
+	 * The Defense stat
+	 */
+	private int defense;
+	
+	/**
+	 * The champions level
+	 */
+	private int level;
+	
+	/*
+	 * The champions current XP
+	 */
+	private float currentXP;
+	/*
+	 * The XP required for the champion to progress to the next level
+	 */
+	private float maxXP;
+	
+	/**
+	 * The buy/sell price of the champion
+	 */
+	private float price;
+	
+	/**
+	 * The amount that the price changes each week
+	 */
+	private float priceChangeWeekly;
+	
+	/**
+	 * The weapon currently assigned to the champion, fists if null
+	 */
+	private boolean weapon;
+	
+	
+	// GETTERS/SETTERS:
+	
+	/**
 	 * Gets name of champion
 	 * @return the name of the champion
 	 */
@@ -38,12 +100,6 @@ public abstract class Champion {
 		this.name = name;
 	}
 	
-	// Health:
-	
-	/**
-	 * Health of the champion
-	 */
-	private float health;
 	
 	/**
 	 * Gets the health of the champion
@@ -77,13 +133,6 @@ public abstract class Champion {
 		}
 	}
 	
-	// MaxHealth:
-	
-	/**
-	 * The maximum health of the champion
-	 */
-	private float maxHealth;
-	
 	/**
 	 * Gets the maximum health of the champion
 	 * @return the maximum health of the champion
@@ -101,13 +150,6 @@ public abstract class Champion {
 	{
 		maxHealth += healthChange;
 	}
-	
-	// Stamina:
-	
-	/**
-	 * the champions stamina
-	 */
-	private float stamina;
 	
 	/**
 	 * Gets the champions stamina
@@ -133,13 +175,6 @@ public abstract class Champion {
 		}
 	}
 	
-	// Max Stamina
-	
-	/**
-	 * The champion's maximum stamina
-	 */
-	private float maxStamina;
-	
 	/**
 	 * Gets the champions maximum stamina
 	 * @return The champions maximum stamina
@@ -157,13 +192,6 @@ public abstract class Champion {
 	{
 		maxStamina += maxStaminaChange;
 	}
-	
-	// Offense
-	
-	/**
-	 * The Offense stat
-	 */
-	private int offense;
 	
 	/**
 	 * Gets the offense stat
@@ -183,13 +211,6 @@ public abstract class Champion {
 		offense += change;
 	}
 	
-	// Defense
-	
-	/**
-	 * The Defense stat
-	 */
-	private int defense;
-	
 	/**
 	 * Gets the defense stat
 	 * @return the defense stat
@@ -207,22 +228,6 @@ public abstract class Champion {
 	{
 		defense += change;
 	}
-	
-	// Level and XP:
-	
-	/**
-	 * The champions level
-	 */
-	private int level;
-	
-	/*
-	 * The champions current XP
-	 */
-	private float currentXP;
-	/*
-	 * The XP required for the champion to progress to the next level
-	 */
-	private float maxXP;
 	
 	/**
 	 * Gets the champions current level
@@ -242,6 +247,49 @@ public abstract class Champion {
 		currentXP += amount;
 		checkForLevelUp();
 	}
+	
+	// CONSTRUCTOR:
+	
+	/**
+	 * Constructor for champion Class
+	 * @param name The name of the champion
+	 * @param healthBoost Stat which modifies the maximum health of the champion
+	 * @param maxStamina Stat which modifies the maximum stamina of the champion
+	 * @param offense Modifies the offense stat of the champion
+	 * @param defense Modifies the defense stat of the champion
+	 * @param price The champions price
+	 * @param priceChangeWeekly The amount at which the champion's price changes each week once purchased
+	 */
+	public Champion (String name, int healthBoost, int staminaBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly )
+	{
+		this.name = name;
+		
+		System.out.println("TODO: Setup Default stat values, and value increments as global variables and implement them into classes");
+		
+		// TODO: This should be:
+		// this.maxHealth = MAX_HEALTH_DEFAULT * (HEALTH_STAT_INCREMENT * healthBoost);
+		this.maxHealth = 100 + (10 * healthBoost);
+		this.health = this.maxHealth;
+		
+		this.maxStamina = 30 + (5 * staminaBoost);
+		this.stamina = this.maxStamina;
+		
+		this.offense = 1 + (1 * offenseBoost);
+		this.defense = 1 + (1 * defenseBoost);
+		
+		this.price = price;
+		this.priceChangeWeekly = priceChangeWeekly;
+		
+		this.weapon = false; // Created champions should start with the weapon status of null
+		
+		level = 1;
+		currentXP = 0f;
+		
+		System.out.println("TODO: Add global maxXP modifier");
+		maxXP = 100f;
+	}
+	
+	// METHODS:
 	
 	/**
 	 * Checks to see if currentXP > maxXP, if so, the champion levels up
@@ -271,18 +319,6 @@ public abstract class Champion {
 		checkForLevelUp(); 
 	}
 	
-	// Price & Weekly change
-	
-	/**
-	 * The buy/sell price of the champion
-	 */
-	private float price;
-	
-	/**
-	 * The amount that the price changes each week
-	 */
-	private float priceChangeWeekly;
-	
 	//TODO: Move the following functions to purchasable interface:
 	public float getPrice()
 	{
@@ -305,13 +341,6 @@ public abstract class Champion {
 		price = price * priceChangeWeekly;
 	}
 	// ---------
-	
-	// Weapon
-	
-	/**
-	 * The weapon currently assigned to the champion, fists if null
-	 */
-	private boolean weapon;
 	
 	/*
 	 * TODO: Add weapon functionality
