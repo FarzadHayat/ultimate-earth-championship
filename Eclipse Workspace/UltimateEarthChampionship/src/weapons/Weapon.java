@@ -12,45 +12,37 @@ public abstract class Weapon implements Purchasable {
 	/**
 	 * Fields
 	 */
-
-	/**
-	 * The folder location where the weapon images are stored
-	 */
-	private static final String IMAGE_FOLDER_PATH = "src/images/";
 	
-	/**
-	 * The name of the weapon
-	 */
+	// Name
     private String name;
-    /**
-     * The amount of damage bonus the weapon gives
-     */
+    
+    // Stat Boosts
     private int damageBoost;
-    /**
-     * The amount of offense bonus the weapon gives
-     */
     private int offenseBoost;
-    /**
-     * The amount of defense bonus the weapon gives
-     */
     private int defenseBoost;
-    /**
-     * The current price of the weapon
-     */
+    
+    // Price
     private float price;
-    /**
-     * The value to multiply the price by on a weekly basis
-     */
     private float priceChangeWeekly;
-    /**
-     * The image of the weapon to display
-     */
+    
+    // Image
+    private static final String IMAGE_FOLDER_PATH = "src/images/";
     private ImageIcon image;
     
     /**
      * Constructors
      */
     
+    /**
+     * Creates a new Weapon object with the specified attributes.
+     * @param name the name of the weapon
+     * @param damageBoost the amount of damage boost the weapon provides
+     * @param offenseBoost the amount of offense boost the weapon provides
+     * @param defenseBoost the amount of defense boost the weapon provides
+     * @param price the base price of the weapon
+     * @param priceChangeWeekly the weekly price change of the weapon
+     * @param imageFileName the name of the file containing the image of the weapon
+     */
     public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly, String imageFileName) {
     	this.name = name;
     	this.damageBoost = damageBoost;
@@ -190,27 +182,26 @@ public abstract class Weapon implements Purchasable {
 	 * Other methods
 	 */
 	
-//	/**
-//	 * Return a string representation of the weapon
-//	 */
-//	@Override
-//	public String toString() {
-//		String text = "Weapon [Name: %s | Damage boost: %s | Offense boost: %s "
-//				+ "| Defense boost: %s | Price: %s | Price change weekly: %s]";
-//		return String.format(text, name, String.valueOf(damageBoost),
-//				String.valueOf(offenseBoost), String.valueOf(defenseBoost),
-//				String.valueOf(price), String.valueOf(priceChangeWeekly));
-//	}
-	
-	public static String toStringHeader() {
-		return "Weapon [ Name                 | Damage boost | Offense boost | Defense boost | Price | Price change weekly ]";
-	}
-	
+	/**
+	 * Returns a string representation of the current Weapon object.
+	 * @return a string containing the current weapon's attribute values formatted to match the `toStringHeader` output
+	 *         with each attribute separated by vertical bars (`|`)
+	 *         and padded to a fixed width to align with the `toStringHeader` output
+	 */
 	public String toString() {
 		String text = "       [ %-20s | %12s | %13s | %13s | %5s | %19s ]";
 		return String.format(text, name, String.valueOf(damageBoost),
 				String.valueOf(offenseBoost), String.valueOf(defenseBoost),
 				String.valueOf(price), String.valueOf(priceChangeWeekly));
+	}
+	
+	/**
+	 * Returns a header string for the Weapon class that specifies the format of the `toString` method's output.
+	 * @return a string containing the names of each attribute separated by vertical bars (`|`)
+	 *         and padded to a fixed width to align with the `toString` method's output
+	 */
+	public static String toStringHeader() {
+		return "Weapon [ Name                 | Damage boost | Offense boost | Defense boost | Price | Price change weekly ]";
 	}
 
 }
