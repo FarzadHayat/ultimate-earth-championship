@@ -2,6 +2,8 @@ package weapons;
 
 import javax.swing.ImageIcon;
 
+import main.Configuration;
+
 /**
  * Class Weapon
  */
@@ -11,6 +13,8 @@ public abstract class Weapon {
 	 * Fields
 	 */
 
+	private Configuration config = Configuration.getInstance();
+	
 	/**
 	 * The name of the weapon
 	 */
@@ -30,7 +34,7 @@ public abstract class Weapon {
     /**
      * The current price of the weapon
      */
-    private int price;
+    private float price;
     /**
      * The value to multiply the price by on a weekly basis
      */
@@ -44,13 +48,13 @@ public abstract class Weapon {
      * Constructors
      */
     
-    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, int price, float priceChangeWeekly, String imagePath) {
+    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly, String imagePath) {
     	this.name = name;
     	this.damageBoost = damageBoost;
     	this.offenseBoost = offenseBoost;
     	this.defenseBoost = defenseBoost;
-    	this.price = price;
-    	this.priceChangeWeekly = priceChangeWeekly;
+    	this.price = price * config.WEAPON_PRICE_MODIFIER;
+    	this.priceChangeWeekly = priceChangeWeekly * config.WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER;
     	try {
     		this.image = new ImageIcon(Weapon.class.getResource(imagePath));
     	}
@@ -135,7 +139,7 @@ public abstract class Weapon {
 	 * Set the value of price
 	 * @param newPrice the new value of price
 	 */
-    public void setPrice (int newPrice) {
+    public void setPrice (float newPrice) {
     	price = newPrice;
     }
 
@@ -143,7 +147,7 @@ public abstract class Weapon {
 	 * Get the value of price
 	 * @return the value of price
 	 */
-    public int getPrice () {
+    public float getPrice () {
     	return price;
     }
 
