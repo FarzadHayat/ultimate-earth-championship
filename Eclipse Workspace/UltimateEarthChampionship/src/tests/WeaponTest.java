@@ -12,6 +12,6 @@ class WeaponTest
 	void testToString() {
 		Weapon shield = new Shield();
 		assertEquals("<< Name: Shield | Damage boost: 1 | Offense boost: 1 "
-				+ "| Defense boost: 4 | Price: 10 | Price change weekly: 0.9 >>", shield.toString());
+				+ "| Defense boost: 4 | Price: 10.0 | Price change weekly: 0.9 >>", shield.toString());
 	}
 }
