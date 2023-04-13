@@ -20,6 +20,6 @@ public abstract class RandomEvent {
 		chanceOfOccuring = chance;
 	}
 	
-	public abstract RandomEventGUIInfo runEvent(String team);
+	public abstract RandomEventInfo runEvent(String team);
 	
 }

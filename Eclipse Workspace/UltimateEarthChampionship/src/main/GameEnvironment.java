@@ -94,9 +94,9 @@ public class GameEnvironment {
 	 * it is added to the returned list.
 	 * @return
 	 */
-	private ArrayList<RandomEventGUIInfo> generateWeeklyEvents()
+	private ArrayList<RandomEventInfo> generateWeeklyEvents()
 	{
-		ArrayList<RandomEventGUIInfo> weeklyEvents = new ArrayList<RandomEventGUIInfo>();
+		ArrayList<RandomEventInfo> weeklyEvents = new ArrayList<RandomEventInfo>();
 		
 		for(RandomEvent event : events)
 		{
@@ -104,7 +104,7 @@ public class GameEnvironment {
 			{
 				// Event occurs:
 				String randomTeam = "Pick a random team";
-				RandomEventGUIInfo newEvent = event.runEvent(randomTeam);
+				RandomEventInfo newEvent = event.runEvent(randomTeam);
 				
 //				if (randomTeam.isPlayer)
 //				{

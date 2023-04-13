@@ -10,7 +10,7 @@ public class Donation extends RandomEvent {
 	}
 	
 	@Override
-	public RandomEventGUIInfo runEvent(String team) {
+	public RandomEventInfo runEvent(String team) {
 		// Effect Logic:
 		
 		//team.addMoney(10);
@@ -23,7 +23,7 @@ public class Donation extends RandomEvent {
 		
 		// Return it
 		
-		RandomEventGUIInfo out = new RandomEventGUIInfo(name, description, effectString);
+		RandomEventInfo out = new RandomEventInfo(name, description, effectString);
 		return out;
 	}
 

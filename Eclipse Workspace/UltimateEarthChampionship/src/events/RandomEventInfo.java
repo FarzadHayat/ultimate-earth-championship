@@ -7,7 +7,7 @@ package events;
  * @author Oliver Coates
  *
  */
-public class RandomEventGUIInfo {
+public class RandomEventInfo {
 	
 	/**
 	 *  The name of this event
@@ -30,7 +30,7 @@ public class RandomEventGUIInfo {
 	 * @param description Description of the event
 	 * @param effectString Description of this event's effects
 	 */
-	public RandomEventGUIInfo(String name, String description, String effectString) {
+	public RandomEventInfo(String name, String description, String effectString) {
 		this.name = name;
 		this.description = description;
 		this.effectString = effectString;
