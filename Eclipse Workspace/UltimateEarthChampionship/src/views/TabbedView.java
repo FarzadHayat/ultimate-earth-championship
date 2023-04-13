@@ -1,7 +1,11 @@
 package views;
 
+import java.awt.GridLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import main.Shop;
 
 public class TabbedView extends JPanel {
 
@@ -11,15 +15,18 @@ public class TabbedView extends JPanel {
 	 * Create the panel.
 	 */
 	public TabbedView() {
-		setLayout(null);
+		setLayout(new GridLayout(1, 1, 0, 0));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 450, 300);
 		add(tabbedPane);
 		
 		TeamView teamView = new TeamView();
-		tabbedPane.addTab(teamView.getName(), null, teamView, null);
+		tabbedPane.addTab(teamView.getName(), null, teamView, "View and change your current champions and weapons");
 
+		Shop shop = new Shop();
+		shop.generateCatalogue();
+		ShopView shopView = new ShopView(shop);
+		tabbedPane.addTab(shopView.getName(), null, shopView, "Buy new champion and weapons");
 	}
 
 }

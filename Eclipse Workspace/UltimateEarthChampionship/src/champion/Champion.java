@@ -1,5 +1,7 @@
 package champion;
 
+import javax.swing.ImageIcon;
+import main.Purchasable;
 import main.Configuration;
 
 /**
@@ -9,7 +11,7 @@ import main.Configuration;
 *Champion Class, responsible for data and functionality related to each individual champion competing.
 *
 */
-public abstract class Champion {
+public abstract class Champion implements Purchasable {
 
 	private Configuration config = Configuration.getInstance();
 	
@@ -365,6 +367,28 @@ public abstract class Champion {
 	public void addWeapon()
 	{
 		System.out.println("TODO: Weapon Functionality");
+	}
+	
+	
+	/**
+     * The image of the weapon to display
+     */
+    private ImageIcon image;
+    
+    /**
+	 * Set the value of image
+	 * @param newImage the new value of image
+	 */	
+	public void setImage(ImageIcon newImage) {
+		image = newImage;
+	}
+	
+	/**
+	 * Get the value of image
+	 * @return the value of image
+	 */
+	public ImageIcon getImage() {
+		return image;
 	}
 
 	

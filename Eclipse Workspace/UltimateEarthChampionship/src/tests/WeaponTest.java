@@ -1,17 +1,25 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import weapons.*;
+import main.Purchasable;
+import weapons.Shield;
+import weapons.Weapon;
 
 class WeaponTest
 {
 	@Test
+	void testGetPrice_asPurchasable() {
+		Purchasable purchasable = new Shield();
+		assertEquals(10, purchasable.getPrice());
+	}
+	
+	@Test
 	void testToString() {
 		Weapon shield = new Shield();
-		assertEquals("<< Name: Shield | Damage boost: 1 | Offense boost: 1 "
-				+ "| Defense boost: 4 | Price: 10.0 | Price change weekly: 0.9 >>", shield.toString());
+		assertEquals("Weapon [Name: Shield | Damage boost: 1 | Offense boost: -1 "
+				+ "| Defense boost: 3 | Price: 10.0 | Price change weekly: 0.9]", shield.toString());
 	}
 }

@@ -1,11 +1,13 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
 import champion.Champion;
-import champion.champions.*;
+import champion.champions.CharlesDarwin;
+import champion.champions.JohnDoe;
 
 class ChampionTest {
 

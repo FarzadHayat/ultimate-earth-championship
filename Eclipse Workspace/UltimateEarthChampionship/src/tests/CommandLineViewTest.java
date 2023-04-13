@@ -1,15 +1,17 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import views.CommandLineView;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import views.CommandLineView;
 
 class CommandLineViewTest
 {
@@ -50,7 +52,7 @@ class CommandLineViewTest
 		ArrayList<String> options = new ArrayList<String>(List.of("First option",
 				"Second option", "Third option"));
 		
-		view.printView(title, content, options);
+		CommandLineView.printView(title, content, options);
 		assertEquals(expected, outContent.toString());
 	}
 	
@@ -59,7 +61,7 @@ class CommandLineViewTest
 	{
 		String expected = "=========  =========\n";
 		
-		view.printTitle("");
+		CommandLineView.printTitle("");
 
 		assertEquals(expected, outContent.toString());
 	}
@@ -69,7 +71,7 @@ class CommandLineViewTest
 	{		
 		String expected = "==== Odd title =====\n";
 		
-		view.printTitle("Odd title");
+		CommandLineView.printTitle("Odd title");
 
 		assertEquals(expected, outContent.toString());
 	}
@@ -79,7 +81,7 @@ class CommandLineViewTest
 	{		
 		String expected = "==== Even title ====\n";
 		
-		view.printTitle("Even title");
+		CommandLineView.printTitle("Even title");
 
 		assertEquals(expected, outContent.toString());
 	}
@@ -89,7 +91,7 @@ class CommandLineViewTest
 	{		
 		String expected = " 123456789123456789 \n";
 		
-		view.printTitle("123456789123456789");
+		CommandLineView.printTitle("123456789123456789");
 
 		assertEquals(expected, outContent.toString());
 	}
@@ -99,7 +101,7 @@ class CommandLineViewTest
 	{		
 		String expected = " 012345678901234567890123456789 \n";
 		
-		view.printTitle("012345678901234567890123456789");
+		CommandLineView.printTitle("012345678901234567890123456789");
 
 		assertEquals(expected, outContent.toString());
 	}
@@ -107,7 +109,7 @@ class CommandLineViewTest
 	@Test
 	void testPrintLine() {
 		String expected = "====================\n";
-		view.printLine();
+		CommandLineView.printLine();
 		assertEquals(expected, outContent.toString());
 	}
 	
@@ -115,7 +117,7 @@ class CommandLineViewTest
 	void testPrintContent_emptyList() {
 		String expected = "";
 		ArrayList<String> content = new ArrayList<String>();  
-		view.printContent(content);
+		CommandLineView.printContent(content);
 		assertEquals(expected, outContent.toString());
 	}
 	
@@ -127,7 +129,7 @@ class CommandLineViewTest
 		expected += "Third line\n";
 		ArrayList<String> content = new ArrayList<String>(List.of("First line",
 				"Second line", "Third line"));  
-		view.printContent(content);
+		CommandLineView.printContent(content);
 		assertEquals(expected, outContent.toString());
 	}
 	
@@ -135,7 +137,7 @@ class CommandLineViewTest
 	void testPrintOptions_emptyList() {
 		String expected = "";
 		ArrayList<String> options = new ArrayList<String>();  
-		view.printOptions(options);
+		CommandLineView.printOptions(options);
 		assertEquals(expected, outContent.toString());
 	}
 	
@@ -147,7 +149,7 @@ class CommandLineViewTest
 		expected += "3 Third option\n";
 		ArrayList<String> options = new ArrayList<String>(List.of("First option",
 				"Second option", "Third option"));  
-		view.printOptions(options);
+		CommandLineView.printOptions(options);
 		assertEquals(expected, outContent.toString());
 	}
 }
