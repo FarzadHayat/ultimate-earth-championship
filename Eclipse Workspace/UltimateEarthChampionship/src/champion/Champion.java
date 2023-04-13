@@ -10,13 +10,74 @@ package champion;
 public abstract class Champion {
 
 	
-	
-	// Name:
+	// FIELDS:
 	
 	/**
 	 * Name of the champion
 	 */
 	private String name;
+	
+	/**
+	 * Health of the champion
+	 */
+	private float health;
+	
+	/**
+	 * The maximum health of the champion
+	 */
+	private float maxHealth;
+	
+	/**
+	 * The champions stamina
+	 */
+	private float stamina;
+	
+	/**
+	 * The champion's maximum stamina
+	 */
+	private float maxStamina;
+	
+	/**
+	 * The Offense stat
+	 */
+	private int offense;
+	
+	/**
+	 * The Defense stat
+	 */
+	private int defense;
+	
+	/**
+	 * The champions level
+	 */
+	private int level;
+	
+	/*
+	 * The champions current XP
+	 */
+	private float currentXP;
+	/*
+	 * The XP required for the champion to progress to the next level
+	 */
+	private float maxXP;
+	
+	/**
+	 * The buy/sell price of the champion
+	 */
+	private float price;
+	
+	/**
+	 * The amount that the price changes each week
+	 */
+	private float priceChangeWeekly;
+	
+	/**
+	 * The weapon currently assigned to the champion, fists if null
+	 */
+	private boolean weapon;
+	
+	
+	// GETTERS/SETTERS:
 	
 	/**
 	 * Gets name of champion
@@ -36,12 +97,6 @@ public abstract class Champion {
 		this.name = name;
 	}
 	
-	// Health:
-	
-	/**
-	 * Health of the champion
-	 */
-	private float health;
 	
 	/**
 	 * Gets the health of the champion
@@ -75,13 +130,6 @@ public abstract class Champion {
 		}
 	}
 	
-	// MaxHealth:
-	
-	/**
-	 * The maximum health of the champion
-	 */
-	private float maxHealth;
-	
 	/**
 	 * Gets the maximum health of the champion
 	 * @return the maximum health of the champion
@@ -99,13 +147,6 @@ public abstract class Champion {
 	{
 		maxHealth += healthChange;
 	}
-	
-	// Stamina:
-	
-	/**
-	 * the champions stamina
-	 */
-	private float stamina;
 	
 	/**
 	 * Gets the champions stamina
@@ -131,13 +172,6 @@ public abstract class Champion {
 		}
 	}
 	
-	// Max Stamina
-	
-	/**
-	 * The champion's maximum stamina
-	 */
-	private float maxStamina;
-	
 	/**
 	 * Gets the champions maximum stamina
 	 * @return The champions maximum stamina
@@ -155,13 +189,6 @@ public abstract class Champion {
 	{
 		maxStamina += maxStaminaChange;
 	}
-	
-	// Offense
-	
-	/**
-	 * The Offense stat
-	 */
-	private int offense;
 	
 	/**
 	 * Gets the offense stat
@@ -181,13 +208,6 @@ public abstract class Champion {
 		offense += change;
 	}
 	
-	// Defense
-	
-	/**
-	 * The Defense stat
-	 */
-	private int defense;
-	
 	/**
 	 * Gets the defense stat
 	 * @return the defense stat
@@ -205,22 +225,6 @@ public abstract class Champion {
 	{
 		defense += change;
 	}
-	
-	// Level and XP:
-	
-	/**
-	 * The champions level
-	 */
-	private int level;
-	
-	/*
-	 * The champions current XP
-	 */
-	private float currentXP;
-	/*
-	 * The XP required for the champion to progress to the next level
-	 */
-	private float maxXP;
 	
 	/**
 	 * Gets the champions current level
@@ -241,104 +245,8 @@ public abstract class Champion {
 		checkForLevelUp();
 	}
 	
-	/**
-	 * Checks to see if currentXP > maxXP, if so, the champion levels up
-	 */
-	private void checkForLevelUp()
-	{
-		if (currentXP > maxXP)
-		{
-			levelUp();
-		}
-	}
+	// CONSTRUCTOR:
 	
-	/**
-	 * Levels up the champion
-	 */
-	private void levelUp()
-	{
-		level++;
-		currentXP -= maxXP;
-		
-		// TODO: Add global XP increase modifier
-		maxXP = maxXP * 1.20f;
-		
-		System.out.println("TODO: Finish Level up Function");
-		
-		// Check for level up again.
-		// This is to prevent edge cases in which a champion gains enough XP to level up multiple times.
-		checkForLevelUp(); 
-	}
-	
-	// Price & Weekly change
-	
-	/**
-	 * The buy/sell price of the champion
-	 */
-	private float price;
-	
-	/**
-	 * The amount that the price changes each week
-	 */
-	private float priceChangeWeekly;
-	
-	//TODO: Move the following functions to purchasable interface:
-	public float getPrice()
-	{
-		return price;
-	}
-	public void changePrice(float newPrice)
-	{
-		price = newPrice;
-	}
-	public float getPriceChangeWeekly()
-	{
-		return priceChangeWeekly;
-	}	
-	public void setPriceChangeWeekly(float newWeeklyPrice)
-	{
-		priceChangeWeekly = newWeeklyPrice;
-	}
-	public void applyWeeklyPriceChange()
-	{
-		price = price * priceChangeWeekly;
-	}
-	// ---------
-	
-	// Weapon
-	
-	/**
-	 * The weapon currently assigned to the champion, fists if null
-	 */
-	private boolean weapon;
-	
-	/*
-	 * TODO: Add weapon functionality
-	 */
-	public void getWeapon()
-	{
-		weapon = false;
-		System.out.println("TODO: Weapon Functionality");
-	}
-	
-	/**
-	 * TODO: Add weapon functionality
-	 */
-	public void removeWeapon()
-	{
-		System.out.println("TODO: Weapon Functionality");
-	}
-	
-	
-	/**
-	 * TODO: Add weapon functionality
-	 */
-	public void addWeapon()
-	{
-		System.out.println("TODO: Weapon Functionality");
-	}
-
-	// Constructor:
 	/**
 	 * Constructor for champion Class
 	 * @param name The name of the champion
@@ -376,6 +284,86 @@ public abstract class Champion {
 		
 		System.out.println("TODO: Add global maxXP modifier");
 		maxXP = 100f;
+	}
+	
+	// METHODS:
+	
+	/**
+	 * Checks to see if currentXP > maxXP, if so, the champion levels up
+	 */
+	private void checkForLevelUp()
+	{
+		if (currentXP > maxXP)
+		{
+			levelUp();
+		}
+	}
+	
+	/**
+	 * Levels up the champion
+	 */
+	private void levelUp()
+	{
+		level++;
+		currentXP -= maxXP;
+		
+		// TODO: Add global XP increase modifier
+		maxXP = maxXP * 1.20f;
+		
+		System.out.println("TODO: Finish Level up Function");
+		
+		// Check for level up again.
+		// This is to prevent edge cases in which a champion gains enough XP to level up multiple times.
+		checkForLevelUp(); 
+	}
+	
+	//TODO: Move the following functions to purchasable interface:
+	public float getPrice()
+	{
+		return price;
+	}
+	public void changePrice(float newPrice)
+	{
+		price = newPrice;
+	}
+	public float getPriceChangeWeekly()
+	{
+		return priceChangeWeekly;
+	}	
+	public void setPriceChangeWeekly(float newWeeklyPrice)
+	{
+		priceChangeWeekly = newWeeklyPrice;
+	}
+	public void applyWeeklyPriceChange()
+	{
+		price = price * priceChangeWeekly;
+	}
+	// ---------
+	
+	/*
+	 * TODO: Add weapon functionality
+	 */
+	public void getWeapon()
+	{
+		weapon = false;
+		System.out.println("TODO: Weapon Functionality");
+	}
+	
+	/**
+	 * TODO: Add weapon functionality
+	 */
+	public void removeWeapon()
+	{
+		System.out.println("TODO: Weapon Functionality");
+	}
+	
+	
+	/**
+	 * TODO: Add weapon functionality
+	 */
+	public void addWeapon()
+	{
+		System.out.println("TODO: Weapon Functionality");
 	}
 
 }
