@@ -1,22 +1,28 @@
 package weapons;
 
+/**
+ * Represents a Chainsaw weapon.
+ */
 public class Chainsaw extends Weapon {
 	
 	// Name
-	public static String name = "Chainsaw";
+	private static final String name = "Chainsaw";
 	
 	// Stat Boosts
-	private static int damageBoost = 1;
-	private static int offenseBoost = 1;
-	private static int defenseBoost = 1;
+	private static final int damageBoost = 1;
+	private static final int offenseBoost = 1;
+	private static final int defenseBoost = 1;
 	
 	// Price
-	private static float startingPrice = 10f;
-	private static float priceChangeWeekly = 0.9f;
+	private static final float startingPrice = 10f;
+	private static final float priceChangeWeekly = 0.9f;
 	
 	// Image
-	private static String imageFileName = "";
+	private static final String imageFileName = "";
 	
+	/**
+     * Creates a new Chainsaw object with default attribute values.
+     */
 	public Chainsaw() {
 		super(name, damageBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
 	}

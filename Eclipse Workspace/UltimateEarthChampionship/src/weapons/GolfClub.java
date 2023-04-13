@@ -1,22 +1,28 @@
 package weapons;
 
+/**
+ * Represents a Golf Club weapon.
+ */
 public class GolfClub extends Weapon {
 	
 	// Name
-	public static String name = "Golf Club";
+	private static final String name = "Golf Club";
 	
 	// Stat Boosts
-	private static int damageBoost = 1;
-	private static int offenseBoost = 1;
-	private static int defenseBoost = 1;
+	private static final int damageBoost = 1;
+	private static final int offenseBoost = 1;
+	private static final int defenseBoost = 1;
 	
 	// Price
-	private static float startingPrice = 10f;
-	private static float priceChangeWeekly = 0.9f;
+	private static final float startingPrice = 10f;
+	private static final float priceChangeWeekly = 0.9f;
 	
 	// Image
-	private static String imageFileName = "";
+	private static final String imageFileName = "";
 	
+	/**
+     * Creates a new GolfClub object with default attribute values.
+     */
 	public GolfClub() {
 		super(name, damageBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
 	}

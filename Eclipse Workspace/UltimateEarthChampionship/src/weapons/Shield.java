@@ -1,22 +1,28 @@
 package weapons;
 
+/**
+ * Represents a Shield weapon.
+ */
 public class Shield extends Weapon {
 	
 	// Name
-	public static String name = "Shield";
+	private static final String name = "Shield";
 	
 	// Stat Boosts
-	private static int damageBoost = 1;
-	private static int offenseBoost = -1;
-	private static int defenseBoost = 3;
+	private static final int damageBoost = 1;
+	private static final int offenseBoost = -1;
+	private static final int defenseBoost = 3;
 	
 	// Price
-	private static float startingPrice = 10f;
-	private static float priceChangeWeekly = 0.9f;
+	private static final float startingPrice = 10f;
+	private static final float priceChangeWeekly = 0.9f;
 	
 	// Image
-	private static String imagePath = "shield.png";
+	private static final String imagePath = "shield.png";
 	
+	/**
+     * Creates a new Shield object with default attribute values.
+     */
 	public Shield() {
 		super(name, damageBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imagePath);
 	}
