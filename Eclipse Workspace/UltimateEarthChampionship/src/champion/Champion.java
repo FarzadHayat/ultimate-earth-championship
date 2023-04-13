@@ -1,8 +1,8 @@
 package champion;
 
 import javax.swing.ImageIcon;
-
 import main.Purchasable;
+import main.Configuration;
 
 /**
 *
@@ -13,14 +13,110 @@ import main.Purchasable;
 */
 public abstract class Champion implements Purchasable {
 
-	
-	
-	// Name:
+	private Configuration config = Configuration.getInstance();
 	
 	/**
 	 * Name of the champion
 	 */
 	private String name;
+	
+	/**
+	 * Health of the champion
+	 */
+	private float health;
+	
+	/**
+	 * The maximum health of the champion
+	 */
+	private float maxHealth;
+	
+	/**
+	 * The champions stamina
+	 */
+	private float stamina;
+	
+	/**
+	 * The champion's maximum stamina
+	 */
+	private float maxStamina;
+	
+	/**
+	 * The Offense stat
+	 */
+	private int offense;
+	
+	/**
+	 * The Defense stat
+	 */
+	private int defense;
+	
+	/**
+	 * The champions level
+	 */
+	private int level;
+	
+	/*
+	 * The champions current XP
+	 */
+	private float currentXP;
+	/*
+	 * The XP required for the champion to progress to the next level
+	 */
+	private float maxXP;
+	
+	/**
+	 * The buy/sell price of the champion
+	 */
+	private float price;
+	
+	/**
+	 * The amount that the price changes each week
+	 */
+	private float priceChangeWeekly;
+	
+	/**
+	 * The weapon currently assigned to the champion, fists if null
+	 */
+	private boolean weapon;
+	
+	// Constructor:
+	/**
+	 * Constructor for champion Class
+	 * @param name The name of the champion
+	 * @param healthBoost Stat which modifies the maximum health of the champion
+	 * @param maxStamina Stat which modifies the maximum stamina of the champion
+	 * @param offense Modifies the offense stat of the champion
+	 * @param defense Modifies the defense stat of the champion
+	 * @param price The champions price
+	 * @param priceChangeWeekly The amount at which the champion's price changes each week once purchased
+	 */
+	public Champion (String name, int healthBoost, int staminaBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly )
+	{
+		this.name = name;
+				
+		this.maxHealth = config.MAX_HEALTH_DEFAULT + (config.SKILL_HEALTH_INCREMENT * healthBoost);
+		this.health = this.maxHealth;
+		
+		this.maxStamina = config.MAX_STAMINA_DEFAULT + (config.SKILL_STAMINA_INCREMENT * staminaBoost);
+		this.stamina = this.maxStamina;
+		
+		this.offense = config.SKILL_DEFAULT_OFFENSE + (1 * offenseBoost);
+		this.defense = config.SKILL_DEFAULT_OFFENSE + (1 * defenseBoost);
+		
+		this.price = price * config.CHAMPION_PRICE_MODIFIER;
+		this.priceChangeWeekly = priceChangeWeekly * config.CHAMPION_PRICE_WEEKLY_CHANGE_MODIFIER;
+		
+		this.weapon = false; // Created champions should start with the weapon status of null
+		
+		level = 1;
+		currentXP = 0f;
+		
+		maxXP = config.XP_DEFAULT_MAX;
+	}
+
+	
+	
+	// GETTERS/SETTERS:
 	
 	/**
 	 * Gets name of champion
@@ -40,12 +136,6 @@ public abstract class Champion implements Purchasable {
 		this.name = name;
 	}
 	
-	// Health:
-	
-	/**
-	 * Health of the champion
-	 */
-	private float health;
 	
 	/**
 	 * Gets the health of the champion
@@ -79,13 +169,6 @@ public abstract class Champion implements Purchasable {
 		}
 	}
 	
-	// MaxHealth:
-	
-	/**
-	 * The maximum health of the champion
-	 */
-	private float maxHealth;
-	
 	/**
 	 * Gets the maximum health of the champion
 	 * @return the maximum health of the champion
@@ -103,13 +186,6 @@ public abstract class Champion implements Purchasable {
 	{
 		maxHealth += healthChange;
 	}
-	
-	// Stamina:
-	
-	/**
-	 * the champions stamina
-	 */
-	private float stamina;
 	
 	/**
 	 * Gets the champions stamina
@@ -135,18 +211,13 @@ public abstract class Champion implements Purchasable {
 		}
 	}
 	
-	// Max Stamina
-	
-	/**
-	 * The champion's maximum stamina
-	 */
-	private float maxStamina;
-	
 	/**
 	 * Gets the champions maximum stamina
 	 * @return The champions maximum stamina
 	 */
 	public float getMaxStamina()
+	
+
 	{
 		return maxStamina;
 	}
@@ -159,13 +230,6 @@ public abstract class Champion implements Purchasable {
 	{
 		maxStamina += maxStaminaChange;
 	}
-	
-	// Offense
-	
-	/**
-	 * The Offense stat
-	 */
-	private int offense;
 	
 	/**
 	 * Gets the offense stat
@@ -185,13 +249,6 @@ public abstract class Champion implements Purchasable {
 		offense += change;
 	}
 	
-	// Defense
-	
-	/**
-	 * The Defense stat
-	 */
-	private int defense;
-	
 	/**
 	 * Gets the defense stat
 	 * @return the defense stat
@@ -209,22 +266,6 @@ public abstract class Champion implements Purchasable {
 	{
 		defense += change;
 	}
-	
-	// Level and XP:
-	
-	/**
-	 * The champions level
-	 */
-	private int level;
-	
-	/*
-	 * The champions current XP
-	 */
-	private float currentXP;
-	/*
-	 * The XP required for the champion to progress to the next level
-	 */
-	private float maxXP;
 	
 	/**
 	 * Gets the champions current level
@@ -245,10 +286,16 @@ public abstract class Champion implements Purchasable {
 		checkForLevelUp();
 	}
 	
+	
+	
+	
+	
 	/**
 	 * Checks to see if currentXP > maxXP, if so, the champion levels up
 	 */
 	private void checkForLevelUp()
+	
+
 	{
 		if (currentXP > maxXP)
 		{
@@ -264,8 +311,7 @@ public abstract class Champion implements Purchasable {
 		level++;
 		currentXP -= maxXP;
 		
-		// TODO: Add global XP increase modifier
-		maxXP = maxXP * 1.20f;
+		maxXP = maxXP * config.XP_INCREMENT_MODIFIER;
 		
 		System.out.println("TODO: Finish Level up Function");
 		
@@ -273,18 +319,6 @@ public abstract class Champion implements Purchasable {
 		// This is to prevent edge cases in which a champion gains enough XP to level up multiple times.
 		checkForLevelUp(); 
 	}
-	
-	// Price & Weekly change
-	
-	/**
-	 * The buy/sell price of the champion
-	 */
-	private float price;
-	
-	/**
-	 * The amount that the price changes each week
-	 */
-	private float priceChangeWeekly;
 	
 	//TODO: Move the following functions to purchasable interface:
 	public float getPrice()
@@ -308,13 +342,6 @@ public abstract class Champion implements Purchasable {
 		price = price * priceChangeWeekly;
 	}
 	// ---------
-	
-	// Weapon
-	
-	/**
-	 * The weapon currently assigned to the champion, fists if null
-	 */
-	private boolean weapon;
 	
 	/*
 	 * TODO: Add weapon functionality
@@ -364,44 +391,5 @@ public abstract class Champion implements Purchasable {
 		return image;
 	}
 
-	// Constructor:
-	/**
-	 * Constructor for champion Class
-	 * @param name The name of the champion
-	 * @param healthBoost Stat which modifies the maximum health of the champion
-	 * @param maxStamina Stat which modifies the maximum stamina of the champion
-	 * @param offense Modifies the offense stat of the champion
-	 * @param defense Modifies the defense stat of the champion
-	 * @param price The champions price
-	 * @param priceChangeWeekly The amount at which the champion's price changes each week once purchased
-	 */
-	public Champion (String name, int healthBoost, int staminaBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly )
-	{
-		this.name = name;
-		
-		System.out.println("TODO: Setup Default stat values, and value increments as global variables and implement them into classes");
-		
-		// TODO: This should be:
-		// this.maxHealth = MAX_HEALTH_DEFAULT * (HEALTH_STAT_INCREMENT * healthBoost);
-		this.maxHealth = 100 + (10 * healthBoost);
-		this.health = this.maxHealth;
-		
-		this.maxStamina = 30 + (5 * staminaBoost);
-		this.stamina = this.maxStamina;
-		
-		this.offense = 1 + (1 * offenseBoost);
-		this.defense = 1 + (1 * defenseBoost);
-		
-		this.price = price;
-		this.priceChangeWeekly = priceChangeWeekly;
-		
-		this.weapon = false; // Created champions should start with the weapon status of null
-		
-		level = 1;
-		currentXP = 0f;
-		
-		System.out.println("TODO: Add global maxXP modifier");
-		maxXP = 100f;
-	}
-
+	
 }

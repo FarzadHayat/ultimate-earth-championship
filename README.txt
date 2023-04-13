@@ -3,7 +3,7 @@
 =================================
 
 Seng201 Project 2023 by:
-Fazard Hayatbakhsh - fha62
+Farzad Hayatbakhsh - fha62
 Oliver Coates - oco36
 
 Folder Index:

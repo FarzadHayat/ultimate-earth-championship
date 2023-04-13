@@ -3,6 +3,7 @@ package weapons;
 import javax.swing.ImageIcon;
 
 import main.Purchasable;
+import main.Configuration;
 
 /**
  * Class Weapon
@@ -12,17 +13,25 @@ public abstract class Weapon implements Purchasable {
 	/**
 	 * Fields
 	 */
+
+	private Configuration config = Configuration.getInstance();
 	
-	// Name
+	/**
+	 * The name of the weapon
+	 */
     private String name;
     
     // Stat Boosts
     private int damageBoost;
     private int offenseBoost;
     private int defenseBoost;
-    
-    // Price
+    /**
+     * The current price of the weapon
+     */
     private float price;
+    /**
+     * The value to multiply the price by on a weekly basis
+     */
     private float priceChangeWeekly;
     
     // Image
@@ -48,8 +57,8 @@ public abstract class Weapon implements Purchasable {
     	this.damageBoost = damageBoost;
     	this.offenseBoost = offenseBoost;
     	this.defenseBoost = defenseBoost;
-    	this.price = price;
-    	this.priceChangeWeekly = priceChangeWeekly;
+    	this.price = price * config.WEAPON_PRICE_MODIFIER;
+    	this.priceChangeWeekly = priceChangeWeekly * config.WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER;
     	try {
     		this.image = new ImageIcon(IMAGE_FOLDER_PATH + imageFileName);
     	}
