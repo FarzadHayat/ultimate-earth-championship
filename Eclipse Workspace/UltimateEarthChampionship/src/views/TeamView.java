@@ -10,7 +10,6 @@ import main.Purchasable;
 
 public class TeamView extends JPanel {
 
-	private static final long serialVersionUID = -8010724197066539267L;
 
 	/**
 	 * Create the panel.

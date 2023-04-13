@@ -6,6 +6,13 @@ import java.util.Random;
 import champion.Champion;
 import weapons.Weapon;
 
+
+/**
+ * The Shop class represents a store where players can purchase items for use in the game.
+ * The shop has a weekly catalog of available items that can be refreshed using the generateCatalogue method.
+ * The available items include champions and weapons that are randomly chosen from the GameManager's list of all
+ * champions and weapons.
+ */
 public class Shop {
 
 	/**
