@@ -82,28 +82,12 @@ public class Team {
 	
 	public ArrayList<Champion> getChosenChampions()
 	{
-		ArrayList<Champion> chosen = new ArrayList<Champion>();
-		
-		// Get all chosen
-		for (Champion champ : chosenChampions)
-		{
-			chosen.add(champ);
-		}
-		
-		return chosen;
+		return chosenChampions;
 	}
 	
 	public ArrayList<Champion> getReserveChampions()
 	{
-		ArrayList<Champion> reserve = new ArrayList<Champion>();
-		
-		// Get all in reserve
-		for (Champion champ : reserveChampions)
-		{
-			reserve.add(champ);
-		}
-		
-		return reserve;
+		return reserveChampions;
 	}
 	
 	
@@ -177,12 +161,17 @@ public class Team {
 		if (reserveChampions.size() == 5)
 		{
 			System.out.println("WARNING: Reached team max champion limit");
+			//TODO: Throw an exception
 		}
 		else
 		{
 			reserveChampions.add(newChampion);
 		}
 	}
+	
+	//TODO: 2 functions needed: Add to Reserve and Add to Roster (Should be called by addChampion)
+	
+	//TODO: RemoveChampion function
 	
 	/**
 	 * Swaps a champion in reserve with a champion currently rostered
