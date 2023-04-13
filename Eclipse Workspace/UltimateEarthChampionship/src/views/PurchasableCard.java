@@ -72,18 +72,27 @@ public class PurchasableCard extends JPanel {
 		}
 	}
 	
+	/**
+	 * Adds a label displaying the stats of the purchasable.
+	 */
 	public void addStatsLabel() {
-		;
+	    ;
 	}
-	
+
+	/**
+	 * Adds a button for buying the purchasable.
+	 */
 	public void addBuyButton() {
-		JButton buyWeaponButton = new JButton("Buy for $" + purchasable.getPrice());
-		add(buyWeaponButton, BorderLayout.SOUTH);
+	    JButton buyWeaponButton = new JButton("Buy for $" + purchasable.getPrice());
+	    add(buyWeaponButton, BorderLayout.SOUTH);
 	}
-	
+
+	/**
+	 * Adds a button for selling the purchasable.
+	 */
 	public void addSellButton() {
-		JButton sellWeaponButton = new JButton("Sell for $" + purchasable.getPrice());
-		add(sellWeaponButton, BorderLayout.SOUTH);
+	    JButton sellWeaponButton = new JButton("Sell for $" + purchasable.getPrice());
+	    add(sellWeaponButton, BorderLayout.SOUTH);
 	}
 
 }

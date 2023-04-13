@@ -31,6 +31,10 @@ public class MainScreen
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	/**
+	 * Sets the view to be displayed in the main application window.
+	 * @param view the view to be displayed
+	 */
 	public void displayView(Container view) {
 		frame.setContentPane(view);
 		frame.setVisible(true);
