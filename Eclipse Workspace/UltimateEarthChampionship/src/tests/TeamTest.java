@@ -9,10 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import main.Team;
 import champion.*;
-import champion.champions.CharlesDarwin;
-import champion.champions.Confucius;
-import champion.champions.QueenVictoria;
-import champion.champions.StevenHawking;
+import champion.champions.*;
 import champion.champions.SunTzu;
 
 class TeamTest {
@@ -29,7 +26,7 @@ class TeamTest {
 		champions.add(new CharlesDarwin());
 		champions.add(new SunTzu());
 		champions.add(new QueenVictoria());
-		champions.add(new StevenHawking());
+		champions.add(new StephenHawking());
 		
 		testTeam = new Team(false, champions);
 	}
