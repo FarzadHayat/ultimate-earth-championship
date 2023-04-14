@@ -106,7 +106,7 @@ public class Configuration {
 	/**
 	 * Number of teams, including player team
 	 */
-	public final int NUM_TEAMS = 7;
+	public final int NUM_TEAMS = 4;
 	
 	
 	public float getDifficulty()
