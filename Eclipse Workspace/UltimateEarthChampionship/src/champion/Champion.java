@@ -2,6 +2,7 @@ package champion;
 
 import javax.swing.ImageIcon;
 import main.Purchasable;
+import weapons.*;
 import main.Configuration;
 
 /**
@@ -77,7 +78,7 @@ public abstract class Champion implements Purchasable {
 	/**
 	 * The weapon currently assigned to the champion, fists if null
 	 */
-	private boolean weapon;
+	private Weapon weapon;
 	
 	// Constructor:
 	/**
@@ -106,7 +107,7 @@ public abstract class Champion implements Purchasable {
 		this.price = price * config.CHAMPION_PRICE_MODIFIER;
 		this.priceChangeWeekly = priceChangeWeekly * config.CHAMPION_PRICE_WEEKLY_CHANGE_MODIFIER;
 		
-		this.weapon = false; // Created champions should start with the weapon status of null
+		this.weapon = new Fists(); // Created champions should start with the fists weapon
 		
 		level = 1;
 		currentXP = 0f;
@@ -343,32 +344,31 @@ public abstract class Champion implements Purchasable {
 	}
 	// ---------
 	
-	/*
-	 * TODO: Add weapon functionality
+	/**
+	 * Returns the champions weapon
+	 * @return The champions weapon
 	 */
-	public void getWeapon()
+	public Weapon getWeapon()
 	{
-		weapon = false;
-		System.out.println("TODO: Weapon Functionality");
+		return weapon;
 	}
 	
 	/**
-	 * TODO: Add weapon functionality
+	 * Removes the champions weapon, replacing it with their fists
 	 */
 	public void removeWeapon()
 	{
-		System.out.println("TODO: Weapon Functionality");
+		weapon = new Fists();
 	}
-	
 	
 	/**
-	 * TODO: Add weapon functionality
+	 * Gives the champion a new weapon
+	 * @param newWeapon The weapon given to this champion
 	 */
-	public void addWeapon()
+	public void addWeapon(Weapon newWeapon)
 	{
-		System.out.println("TODO: Weapon Functionality");
+		weapon = newWeapon;
 	}
-	
 	
 	/**
      * The image of the weapon to display

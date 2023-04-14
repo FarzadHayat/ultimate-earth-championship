@@ -9,7 +9,7 @@ public class Sledgehammer extends Weapon {
     private static final String name = "Sledgehammer";
     
     // Stat Boosts
-    private static final int damageBoost = 1;
+    private static final int damageMultiplier = 1;
     private static final int offenseBoost = 1;
     private static final int defenseBoost = 1;
     
@@ -24,6 +24,6 @@ public class Sledgehammer extends Weapon {
      * Creates a new Sledgehammer object with default attribute values.
      */
     public Sledgehammer() {
-        super(name, damageBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
+        super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
     }
 }

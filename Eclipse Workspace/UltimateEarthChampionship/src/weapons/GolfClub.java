@@ -9,7 +9,7 @@ public class GolfClub extends Weapon {
 	private static final String name = "Golf Club";
 	
 	// Stat Boosts
-	private static final int damageBoost = 1;
+	private static final int damageMultiplier = 1;
 	private static final int offenseBoost = 1;
 	private static final int defenseBoost = 1;
 	
@@ -24,7 +24,7 @@ public class GolfClub extends Weapon {
      * Creates a new GolfClub object with default attribute values.
      */
 	public GolfClub() {
-		super(name, damageBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
+		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
 	}
 	
 }
