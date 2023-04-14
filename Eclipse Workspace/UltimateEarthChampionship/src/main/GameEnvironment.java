@@ -57,6 +57,7 @@ public class GameEnvironment {
 		
 		setDifficulty(gameDifficulty);
 		
+		events = new ArrayList<RandomEvent>();
 		getAllEvents();
 	}
 	
@@ -86,6 +87,14 @@ public class GameEnvironment {
 		}
 		
 		//TODO: Fuck with the config using this difficulty setting!
+	}
+	
+	/**
+	 * Returns the value of difficulty
+	 * @return difficulty the value of difficulty
+	 */
+	public float getDifficulty() {
+		return difficulty;
 	}
 
 	/**
