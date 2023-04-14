@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import champion.Champion;
 import main.Purchasable;
 import main.Shop;
-import weapons.Weapon;
+import weapon.Weapon;
 
 public class ShopView extends JPanel {
 
