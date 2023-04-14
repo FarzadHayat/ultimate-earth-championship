@@ -2,7 +2,7 @@ package champion.champions;
 
 import champion.Champion;
 
-public class StevenHawking extends Champion{
+public class StephenHawking extends Champion{
 
 	// Stat Boosts:
 	private static int healthBoost = 1;
@@ -14,7 +14,7 @@ public class StevenHawking extends Champion{
 	private static float startingPrice = 50f;
 	private static float priceChangeWeekly = 1.1f;
 	
-	public StevenHawking() {
-		super("Steven Hawking", healthBoost, staminaBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly);
+	public StephenHawking() {
+		super("Stephen Hawking", healthBoost, staminaBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly);
 	}
 }

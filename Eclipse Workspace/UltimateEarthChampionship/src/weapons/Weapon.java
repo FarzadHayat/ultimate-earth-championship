@@ -9,7 +9,7 @@ import main.Configuration;
  * Class Weapon
  */
 public abstract class Weapon implements Purchasable {
-
+	
 	/**
 	 * Fields
 	 */
@@ -22,7 +22,7 @@ public abstract class Weapon implements Purchasable {
     private String name;
     
     // Stat Boosts
-    private int damageBoost;
+    private int damageMultiplier;
     private int offenseBoost;
     private int defenseBoost;
     /**
@@ -35,17 +35,16 @@ public abstract class Weapon implements Purchasable {
     private float priceChangeWeekly;
     
     // Image
-    private static final String IMAGE_FOLDER_PATH = "src/images/";
     private ImageIcon image;
     
     /**
-     * Constructors
+     * Constructors	private int numChampions = 4;
      */
     
     /**
      * Creates a new Weapon object with the specified attributes.
      * @param name the name of the weapon
-     * @param damageBoost the amount of damage boost the weapon provides
+     * @param damageMultiplier the amount that damage dealt is multiplied by
      * @param offenseBoost the amount of offense boost the weapon provides
      * @param defenseBoost the amount of defense boost the weapon provides
      * @param price the base price of the weapon
@@ -54,13 +53,13 @@ public abstract class Weapon implements Purchasable {
      */
     public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly, String imageFileName) {
     	this.name = name;
-    	this.damageBoost = damageBoost;
+    	this.damageMultiplier = damageBoost;
     	this.offenseBoost = offenseBoost;
     	this.defenseBoost = defenseBoost;
     	this.price = price * config.WEAPON_PRICE_MODIFIER;
     	this.priceChangeWeekly = priceChangeWeekly * config.WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER;
     	try {
-    		this.image = new ImageIcon(IMAGE_FOLDER_PATH + imageFileName);
+    		this.image = new ImageIcon(config.WEAPON_IMAGE_FOLDER_PATH + imageFileName);
     	}
     	catch (NullPointerException e) {
     		System.out.println(e.getMessage());
@@ -92,19 +91,19 @@ public abstract class Weapon implements Purchasable {
     }
 
 	/**
-	 * Set the value of damageBoost
-	 * @param newDamageBoost the new value of damageBoost
+	 * Set the value of damageMultiplier
+	 * @param newDamageBoost the new value of damageMultiplier
 	 */
-    public void setDamageBoost (int newDamageBoost) {
-    	damageBoost = newDamageBoost;
+    public void setDamageMultiplier (int newDamageBoost) {
+    	damageMultiplier = newDamageBoost;
     }
 
 	/**
-	 * Get the value of damageBoost
-	 * @return the value of damageBoost
+	 * Get the value of damageMultiplier
+	 * @return the value of damageMultiplier
 	 */
-    public int getDamageBoost () {
-    	return damageBoost;
+    public int getDamageMultiplier () {
+    	return damageMultiplier;
     }
 
 	/**
@@ -199,7 +198,7 @@ public abstract class Weapon implements Purchasable {
 	 */
 	public String toString() {
 		String text = "       [ %-20s | %12s | %13s | %13s | %5s | %19s ]";
-		return String.format(text, name, String.valueOf(damageBoost),
+		return String.format(text, name, String.valueOf(damageMultiplier),
 				String.valueOf(offenseBoost), String.valueOf(defenseBoost),
 				String.valueOf(price), String.valueOf(priceChangeWeekly));
 	}

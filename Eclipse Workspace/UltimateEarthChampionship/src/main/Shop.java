@@ -19,12 +19,10 @@ public class Shop {
 	 * Fields
 	 */
 	
-	// TODO: move numChampions to config class.
-	private int numChampions = 4;
+	private Configuration config = Configuration.getInstance();
+	
     private ArrayList<Champion> availableChampions;
     
-    // TODO: move numWeapons to config class.
-    private int numWeapons = 4;
     private ArrayList<Weapon> availableWeapons;
         
     /**
@@ -80,7 +78,7 @@ public class Shop {
 	 */
 	public void generateChampions() {
         availableChampions = new ArrayList<Champion>();
-        while (availableChampions.size() < numChampions) {
+        while (availableChampions.size() < config.NUM_TEAMS) {
         	Champion champion = getRandomChampion();
         	if (!availableChampions.contains(champion)) {
         		availableChampions.add(champion);
@@ -103,7 +101,7 @@ public class Shop {
 	 */
 	public void generateWeapons() {
 		availableWeapons = new ArrayList<Weapon>();
-        while (availableWeapons.size() < numWeapons) {
+        while (availableWeapons.size() < config.NUM_TEAMS) {
         	Weapon weapon = getRandomWeapon();
         	if (!availableWeapons.contains(weapon)) {
         		availableWeapons.add(weapon);

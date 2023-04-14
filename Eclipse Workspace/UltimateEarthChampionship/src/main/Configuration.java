@@ -98,6 +98,16 @@ public class Configuration {
 	 */
 	public final float WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER = 1f;
 	
+	/**
+	 *  Path to folder containing weapon images
+	 */
+	public final String WEAPON_IMAGE_FOLDER_PATH = "src/images/";
+	
+	/**
+	 * Number of teams, including player team
+	 */
+	public final int NUM_TEAMS = 7;
+	
 	
 	public float getDifficulty()
 	{
