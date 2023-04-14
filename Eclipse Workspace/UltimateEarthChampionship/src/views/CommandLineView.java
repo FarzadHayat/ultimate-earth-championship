@@ -11,7 +11,7 @@ import weapon.Weapon;
 public class CommandLineView
 {
 	private static final String FILLER = "=";
-	private static final int LINE_WIDTH = 108;
+	private static final int LINE_WIDTH = 114;
 	
 	private Scanner scanner;
 	
@@ -107,24 +107,20 @@ public class CommandLineView
 	 * @param shop The shop to display.
 	 */
 	public void displayShop(Shop shop) {
-		printLine();
-		printTitle("Shop");
-		printLine();
-		
-//		ArrayList<String> content = new ArrayList<>();
+		ArrayList<String> content = new ArrayList<>();
 		
 //		content.add(Champion.toStringHeader());
-//		ArrayList<String> championStrings = getChampionStrings(shop.getAvailableChampions());
-//		content.addAll(championStrings);
+		ArrayList<String> championStrings = getChampionStrings(shop.getAvailableChampions());
+		content.addAll(championStrings);
 		
-		displayWeaponList(shop.getAvailableWeapons());
+		content.addAll(getWeaponStrings(shop.getAvailableWeapons()));
 		
-//		ArrayList<String> options = new ArrayList<String>();
-//		options.addAll(getChampionOptions(shop.getAvailableChampions(), CardType.CAN_BUY));
-//		options.addAll(getWeaponOptions(shop.getAvailableWeapons(), CardType.CAN_BUY));
-//		
-//		printView("Shop", content, options);
-//		System.out.println(promptForInput());
+		ArrayList<String> options = new ArrayList<String>();
+		options.addAll(getChampionOptions(shop.getAvailableChampions(), CardType.CAN_BUY));
+		options.addAll(getWeaponOptions(shop.getAvailableWeapons(), CardType.CAN_BUY));
+		
+		printView("Shop", content, options);
+		System.out.println(promptForInput());
 	}
 	
 	/**
@@ -132,23 +128,11 @@ public class CommandLineView
 	 * @param champions the ArrayList of Champion objects to convert to strings
 	 * @return an ArrayList of String representations of the given list of Champion objects
 	 */
-	private ArrayList<String> getChampionStrings(ArrayList<Champion> champions) {
+	private static ArrayList<String> getChampionStrings(ArrayList<Champion> champions) {
 		ArrayList<String> championStrings = champions.stream()
 				.map(Champion::toString)
 				.collect(Collectors.toCollection(ArrayList::new));
 		return championStrings;
-	}
-
-	/**
-	 * Returns an ArrayList of String representations of the given list of Weapon objects.
-	 * @param weapons the ArrayList of Weapon objects to convert to strings
-	 * @return an ArrayList of String representations of the given list of Weapon objects
-	 */
-	private ArrayList<String> getWeaponStrings(ArrayList<Weapon> weapons) {
-		ArrayList<String> weaponStrings = weapons.stream()
-				.map(Weapon::toString)
-				.collect(Collectors.toCollection(ArrayList::new));
-		return weaponStrings;
 	}
 
 	/**
@@ -157,7 +141,7 @@ public class CommandLineView
 	 * @param type the CardType to use to generate the options
 	 * @return an ArrayList of String options for the given list of Champion objects and CardType
 	 */
-	private ArrayList<String> getChampionOptions(ArrayList<Champion> champions, CardType type) {
+	private static ArrayList<String> getChampionOptions(ArrayList<Champion> champions, CardType type) {
 		ArrayList<String> names = new ArrayList<String>();
 		for (Champion champion : champions) {
 			String text;
@@ -187,7 +171,7 @@ public class CommandLineView
 	 * @param type the CardType to use to generate the options
 	 * @return an ArrayList of String options for the given list of Weapon objects and CardType
 	 */
-	private ArrayList<String> getWeaponOptions(ArrayList<Weapon> weapons, CardType type) {
+	private static ArrayList<String> getWeaponOptions(ArrayList<Weapon> weapons, CardType type) {
 		ArrayList<String> names = new ArrayList<String>();
 		for (Weapon weapon : weapons) {
 			String text;
@@ -212,39 +196,41 @@ public class CommandLineView
 	}
 	
 	/**
-	 * Prints a table containing representing the list of weapons.
-	 * The header contains labels for the weapon stats.
-	 * The body contains one line for each weapon in the given list.
+	 * Returns a string list representing the list of weapons.
+	 * The first element in the list is a header for the weapon labels.
+	 * The second element is a divider line.
+	 * The rest of the elements are the weapons with just the stats for each.
 	 */
-	public void displayWeaponList(ArrayList<Weapon> weaponList) {
-		displayWeaponHeader();
-		displayTableDivider();
+	public static ArrayList<String> getWeaponStrings(ArrayList<Weapon> weaponList) {
+		ArrayList<String> stringList = new ArrayList<String>();
+		stringList.add(getWeaponHeaderString());
+		stringList.add(getDividerString());
 		for (Weapon weapon : weaponList) {
-			displayWeapon(weapon);
+			stringList.add(getWeaponString(weapon));
 		}
+		return stringList;
 	}
 	
 	/**
-	 * Print a line to divide the table header from the table body.
+	 * Returns a line to divide the table header from the table body.
 	 */
-	public void displayTableDivider() {
-		System.out.println("       [---------------------------------------------------------------------------------------------------]");
+	public static String getDividerString() {
+		return "       [--------------------------------------------------------------------------------------------------------]";
 	}
 	
 	/**
-	 * Prints a string representation of the given Weapon's stats without labels.
+	 * Returns a string representation of the given Weapon's stats without labels.
 	 */
-	public void displayWeapon(Weapon weapon) {
-		String text = "       [ %-20s | %12s | %13s | %13s | %5s | %19s ]";
-		System.out.println(String.format(text, weapon.getName(), weapon.getDamageMultiplier(), weapon.getOffenseBoost(),
-				weapon.getDefenseBoost(), weapon.getPrice(), weapon.getPriceChangeWeekly()));
+	public static String getWeaponString(Weapon weapon) {
+		return String.format("       [ %-20s | %17s | %13s | %13s | %5s | %19s ]", weapon.getName(), weapon.getDamageMultiplier(),
+				weapon.getOffenseBoost(), weapon.getDefenseBoost(), weapon.getPrice(), weapon.getPriceChangeWeekly());
 	}
 	
 	/**
-	 * Prints a header string for the Weapon class that specifies the format of the `displayWeapon` method's output.
+	 * Returns a header string for the Weapon class that specifies the format of the `displayWeapon` method's output.
 	 */
-	public static void displayWeaponHeader() {
-		System.out.println("Weapon [ Name                 | Damage boost | Offense boost | Defense boost | Price | Price change weekly ]");
+	public static String getWeaponHeaderString() {
+		return "Weapon [ Name                 | Damage multiplier | Offense boost | Defense boost | Price | Price change weekly ]";
 	}
 	
 }
