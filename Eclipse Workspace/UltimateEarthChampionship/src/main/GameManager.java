@@ -5,7 +5,12 @@ import java.util.List;
 
 import champion.Champion;
 import champion.champions.*;
-import weapons.*;
+import weapon.*;
+import weapon.weapons.Chainsaw;
+import weapon.weapons.GolfClub;
+import weapon.weapons.Pickaxe;
+import weapon.weapons.Shield;
+import weapon.weapons.Sledgehammer;
 
 /**
  * The GameManager class is an abstract class that defines the basic functionality of a game manager.

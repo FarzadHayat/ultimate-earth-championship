@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import champion.Champion;
 import main.Shop;
-import weapons.Weapon;
+import weapon.Weapon;
 
 public class CommandLineView
 {
