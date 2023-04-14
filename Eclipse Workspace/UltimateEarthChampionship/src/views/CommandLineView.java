@@ -107,23 +107,24 @@ public class CommandLineView
 	 * @param shop The shop to display.
 	 */
 	public void displayShop(Shop shop) {
-		ArrayList<String> content = new ArrayList<>();
+		printLine();
+		printTitle("Shop");
+		printLine();
+		
+//		ArrayList<String> content = new ArrayList<>();
 		
 //		content.add(Champion.toStringHeader());
-		ArrayList<String> championStrings = getChampionStrings(shop.getAvailableChampions());
-		content.addAll(championStrings);
+//		ArrayList<String> championStrings = getChampionStrings(shop.getAvailableChampions());
+//		content.addAll(championStrings);
 		
-		content.add(Weapon.toStringHeader());
-		content.add("       [---------------------------------------------------------------------------------------------------]");
-		ArrayList<String> weaponStrings = getWeaponStrings(shop.getAvailableWeapons());
-		content.addAll(weaponStrings); 
+		displayWeaponList(shop.getAvailableWeapons());
 		
-		ArrayList<String> options = new ArrayList<String>();
-		options.addAll(getChampionOptions(shop.getAvailableChampions(), CardType.CAN_BUY));
-		options.addAll(getWeaponOptions(shop.getAvailableWeapons(), CardType.CAN_BUY));
-		
-		printView("Shop", content, options);
-		System.out.println(promptForInput());
+//		ArrayList<String> options = new ArrayList<String>();
+//		options.addAll(getChampionOptions(shop.getAvailableChampions(), CardType.CAN_BUY));
+//		options.addAll(getWeaponOptions(shop.getAvailableWeapons(), CardType.CAN_BUY));
+//		
+//		printView("Shop", content, options);
+//		System.out.println(promptForInput());
 	}
 	
 	/**
@@ -209,5 +210,41 @@ public class CommandLineView
 		}
 		return names;
 	}
-
+	
+	/**
+	 * Prints a table containing representing the list of weapons.
+	 * The header contains labels for the weapon stats.
+	 * The body contains one line for each weapon in the given list.
+	 */
+	public void displayWeaponList(ArrayList<Weapon> weaponList) {
+		displayWeaponHeader();
+		displayTableDivider();
+		for (Weapon weapon : weaponList) {
+			displayWeapon(weapon);
+		}
+	}
+	
+	/**
+	 * Print a line to divide the table header from the table body.
+	 */
+	public void displayTableDivider() {
+		System.out.println("       [---------------------------------------------------------------------------------------------------]");
+	}
+	
+	/**
+	 * Prints a string representation of the given Weapon's stats without labels.
+	 */
+	public void displayWeapon(Weapon weapon) {
+		String text = "       [ %-20s | %12s | %13s | %13s | %5s | %19s ]";
+		System.out.println(String.format(text, weapon.getName(), weapon.getDamageMultiplier(), weapon.getOffenseBoost(),
+				weapon.getDefenseBoost(), weapon.getPrice(), weapon.getPriceChangeWeekly()));
+	}
+	
+	/**
+	 * Prints a header string for the Weapon class that specifies the format of the `displayWeapon` method's output.
+	 */
+	public static void displayWeaponHeader() {
+		System.out.println("Weapon [ Name                 | Damage boost | Offense boost | Defense boost | Price | Price change weekly ]");
+	}
+	
 }
