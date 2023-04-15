@@ -34,6 +34,11 @@ public abstract class Weapon implements Purchasable {
      */
     private float priceChangeWeekly;
     
+    /**
+     * Is this a default weapon?
+     */
+    private boolean isDefaultWeapon;
+    
     // Image
     private ImageIcon image;
     
@@ -51,11 +56,12 @@ public abstract class Weapon implements Purchasable {
      * @param priceChangeWeekly the weekly price change of the weapon
      * @param imageFileName the name of the file containing the image of the weapon
      */
-    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly, String imageFileName) {
+    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly, String imageFileName, boolean isDefault) {
     	this.name = name;
     	this.damageMultiplier = damageBoost;
     	this.offenseBoost = offenseBoost;
     	this.defenseBoost = defenseBoost;
+    	this.isDefaultWeapon = isDefault;
     	this.price = price * config.WEAPON_PRICE_MODIFIER;
     	this.priceChangeWeekly = priceChangeWeekly * config.WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER;
     	try {
@@ -201,6 +207,11 @@ public abstract class Weapon implements Purchasable {
 		return String.format(text, name, String.valueOf(damageMultiplier),
 				String.valueOf(offenseBoost), String.valueOf(defenseBoost),
 				String.valueOf(price), String.valueOf(priceChangeWeekly));
+	}
+	
+	public boolean isDefault()
+	{
+		return isDefaultWeapon;
 	}
 	
 	/**

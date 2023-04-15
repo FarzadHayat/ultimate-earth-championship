@@ -9,7 +9,7 @@ public class Chainsaw extends Weapon {
 	private static final String name = "Chainsaw";
 	
 	// Stat Boosts
-	private static final int damageBoost = 1;
+	private static final int damageMultiplier = 1;
 	private static final int offenseBoost = 1;
 	private static final int defenseBoost = 1;
 	
@@ -24,7 +24,7 @@ public class Chainsaw extends Weapon {
      * Creates a new Chainsaw object with default attribute values.
      */
 	public Chainsaw() {
-		super(name, damageBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
+		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, false);
 	}
 	
 }
