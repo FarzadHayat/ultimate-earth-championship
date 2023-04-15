@@ -24,7 +24,7 @@ public class GolfClub extends Weapon {
      * Creates a new GolfClub object with default attribute values.
      */
 	public GolfClub() {
-		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
+		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, false);
 	}
 	
 }

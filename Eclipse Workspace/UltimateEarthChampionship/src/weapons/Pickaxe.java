@@ -24,7 +24,7 @@ public class Pickaxe extends Weapon {
      * Creates a new Shield object with default attribute values.
      */
 	public Pickaxe() {
-		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
+		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, false);
 	}
 	
 }

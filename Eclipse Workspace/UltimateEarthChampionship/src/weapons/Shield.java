@@ -24,7 +24,7 @@ public class Shield extends Weapon {
      * Creates a new Shield object with default attribute values.
      */
 	public Shield() {
-		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imagePath);
+		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imagePath, false);
 	}
 	
 }

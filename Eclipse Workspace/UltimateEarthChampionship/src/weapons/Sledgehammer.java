@@ -24,6 +24,6 @@ public class Sledgehammer extends Weapon {
      * Creates a new Sledgehammer object with default attribute values.
      */
     public Sledgehammer() {
-        super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
+        super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, false);
     }
 }

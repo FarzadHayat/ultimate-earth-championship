@@ -24,7 +24,7 @@ public class Chainsaw extends Weapon {
      * Creates a new Chainsaw object with default attribute values.
      */
 	public Chainsaw() {
-		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
+		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, false);
 	}
 	
 }

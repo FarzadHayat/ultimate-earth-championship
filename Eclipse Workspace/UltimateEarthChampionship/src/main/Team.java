@@ -23,9 +23,9 @@ public class Team {
 	private ArrayList<Champion> reserveChampions;
 	
 	/**
-	 * ArrayList of all weapons that this team owns
+	 * ArrayList of all weapons that this team has in reserve, use getAllWeapons() to get all weapons
 	 */
-	private ArrayList<Weapon> weapons;
+	private ArrayList<Weapon> reserveWeapons;
 	
 	/**
 	 * The teams money
@@ -111,7 +111,9 @@ public class Team {
 		
 		if (startingChampions.size() != 4)
 		{
-			System.out.println("WARNING: Starting champions size is not 4!");
+			System.out.println("EXCEPTION: Starting champions size is not 4!");
+			//TODO: Throw an exception
+			return;
 		}
 		chosenChampions = startingChampions;
 		
@@ -152,26 +154,80 @@ public class Team {
 	}
 	
 	/**
-	 * Add a champion to the teams reserve
+	 * Add a champion to the team. Will add to the roster first, and then to the reserve if the roster is full
 	 * @param newChampion the new champion to be added
 	 */
 	public void addChampion(Champion newChampion)
 	{
-		// TODO: Setup Config for max size
-		if (reserveChampions.size() == 5)
+		if (chosenChampions.size() < 4)
 		{
-			System.out.println("WARNING: Reached team max champion limit");
-			//TODO: Throw an exception
+			// Add to roster first
+			addToRoster(newChampion);
 		}
 		else
 		{
-			reserveChampions.add(newChampion);
+			// Add to reserve if roster is first
+			addToReserve(newChampion);
 		}
+		
 	}
 	
-	//TODO: 2 functions needed: Add to Reserve and Add to Roster (Should be called by addChampion)
+	//TODO: 2 functions needed: Add to Reserve and Add to roster (Should be called by addChampion)
 	
-	//TODO: RemoveChampion function
+	/**
+	 * Adds a champion to roster
+	 * @param toRoster Champion to be added to chosenChampion
+	 */
+	private void addToRoster(Champion toRoster)
+	{
+		if (chosenChampions.size() == 4)
+		{
+			System.out.println("EXCEPTION: Reached team max champion limit");
+			//TODO: Throw an exception
+			return;
+		}
+		
+		chosenChampions.add(toRoster);
+	}
+	
+	/**
+	 * Adds a champion to Reserve
+	 * @param toReserve Champion to be added to reserve
+	 */
+	private void addToReserve(Champion toReserve)
+	{
+		// TODO: Setup Config for max size
+		if (reserveChampions.size() == 5)
+		{
+			System.out.println("EXCEPTION: Reached team max champion limit");
+			//TODO: Throw an exception
+			return;
+		}
+	
+		reserveChampions.add(toReserve);
+	}
+
+	
+	/**
+	 * Removes a champion from the team, will check both rostered and reserve champions
+	 * @param toRemove
+	 */
+	public void removeChampion(Champion toRemove)
+	{
+		if (chosenChampions.contains(toRemove))
+		{
+			chosenChampions.remove(toRemove);
+		}
+		else if (reserveChampions.contains(toRemove))
+		{
+			reserveChampions.remove(toRemove);
+		}
+		else {
+			System.out.println("EXCEPTION: Champion to remove not in team!");
+			//TODO: Throw an exception
+			return;
+		}
+	}
 	
 	/**
 	 * Swaps a champion in reserve with a champion currently rostered
@@ -182,13 +238,15 @@ public class Team {
 	{
 		if (!reserveChampions.contains(championToRoster))
 		{
-			System.out.println("WARNING: Champion not in team reserve!");
+			System.out.println("EXCEPTION: Champion not in team reserve!");
+			//TODO: Throw an exception
 			return;
 		}
 		
 		if (!chosenChampions.contains(championToReserve))
 		{
-			System.out.println("WARNING: Champion not in team roster!");
+			System.out.println("EXCEPTION: Champion not in team roster!");
+			//TODO: Throw an exception
 			return;
 		}
 		
@@ -200,6 +258,48 @@ public class Team {
 		
 		reserveChampions.add(indexRostered, championToReserve);
 		
+	}
+	
+	/**
+	 * Returns all reserve weapons
+	 * @return all weapons in reserve
+	 */
+	public ArrayList<Weapon> getReserveWeapons()
+	{
+		return reserveWeapons;
+	}
+	
+	/**
+	 * Returns all weapons currently assigned to a champion
+	 * @return All weapons assigned to a champion
+	 */
+	public ArrayList<Weapon> getChampionsWeapons()
+	{
+		ArrayList<Weapon> out = new ArrayList<Weapon>();
+		
+		for(Champion champ : getAllChampions())
+		{
+			Weapon w = champ.getWeapon();
+			
+			// Check that it isn't a default weapon
+			if (w.isDefault() == false)
+			{
+				out.add(w);
+			}
+		}
+		
+		return out;
+	}
+	
+	/**
+	 * Gets all weapons
+	 * @return All weapons in the team, both in reserve and in champions
+	 */
+	public ArrayList<Weapon> getAllWeapons()
+	{
+		ArrayList<Weapon> out = getChampionsWeapons();
+		out.addAll(reserveWeapons);
+		return out;
 	}
 	
 }

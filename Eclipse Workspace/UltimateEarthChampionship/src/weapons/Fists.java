@@ -24,7 +24,7 @@ public class Fists extends Weapon {
      * Creates a new Fist object with default attribute values.
      */
 	public Fists() {
-		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName);
+		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, true);
 	}
 	
 }
