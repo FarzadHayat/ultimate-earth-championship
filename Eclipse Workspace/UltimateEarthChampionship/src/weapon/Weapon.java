@@ -1,4 +1,4 @@
-package weapons;
+package weapon;
 
 import javax.swing.ImageIcon;
 
@@ -197,30 +197,23 @@ public abstract class Weapon implements Purchasable {
 	 */
 	
 	/**
-	 * Returns a string representation of the current Weapon object.
-	 * @return a string containing the current weapon's attribute values formatted to match the `toStringHeader` output
-	 *         with each attribute separated by vertical bars (`|`)
-	 *         and padded to a fixed width to align with the `toStringHeader` output
+	 * returns true if this is the default weapon that all champions should equip on creation.
+	 * @return true if this is the default weapon for champions on creation
 	 */
-	public String toString() {
-		String text = "       [ %-20s | %12s | %13s | %13s | %5s | %19s ]";
-		return String.format(text, name, String.valueOf(damageMultiplier),
-				String.valueOf(offenseBoost), String.valueOf(defenseBoost),
-				String.valueOf(price), String.valueOf(priceChangeWeekly));
-	}
-	
 	public boolean isDefault()
 	{
 		return isDefaultWeapon;
 	}
 	
 	/**
-	 * Returns a header string for the Weapon class that specifies the format of the `toString` method's output.
-	 * @return a string containing the names of each attribute separated by vertical bars (`|`)
-	 *         and padded to a fixed width to align with the `toString` method's output
+	 * Returns a string representation of the Weapon.
+	 * @return a string containing the weapon attributes
 	 */
-	public static String toStringHeader() {
-		return "Weapon [ Name                 | Damage boost | Offense boost | Defense boost | Price | Price change weekly ]";
+	@Override
+	public String toString() {
+		return String.format(
+				"Weapon [name=%s, damageMultiplier=%s, offenseBoost=%s, defenseBoost=%s, price=%s, priceChangeWeekly=%s]",
+				name, damageMultiplier, offenseBoost, defenseBoost, price, priceChangeWeekly);
 	}
 
 }

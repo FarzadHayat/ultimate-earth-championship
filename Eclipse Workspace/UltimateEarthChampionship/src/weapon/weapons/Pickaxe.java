@@ -1,12 +1,14 @@
-package weapons;
+package weapon.weapons;
+
+import weapon.Weapon;
 
 /**
- * Represents a Chainsaw weapon.
+ * Represents a Shield weapon.
  */
-public class Chainsaw extends Weapon {
+public class Pickaxe extends Weapon {
 	
 	// Name
-	private static final String name = "Chainsaw";
+	private static final String name = "Pickaxe";
 	
 	// Stat Boosts
 	private static final int damageMultiplier = 1;
@@ -21,9 +23,9 @@ public class Chainsaw extends Weapon {
 	private static final String imageFileName = "";
 	
 	/**
-     * Creates a new Chainsaw object with default attribute values.
+     * Creates a new Shield object with default attribute values.
      */
-	public Chainsaw() {
+	public Pickaxe() {
 		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, false);
 	}
 	

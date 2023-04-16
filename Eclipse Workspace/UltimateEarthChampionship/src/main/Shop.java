@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import champion.Champion;
-import weapons.Weapon;
+import weapon.Weapon;
 
 
 /**

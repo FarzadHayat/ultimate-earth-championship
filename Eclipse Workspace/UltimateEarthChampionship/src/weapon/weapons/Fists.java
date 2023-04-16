@@ -1,4 +1,6 @@
-package weapons;
+package weapon.weapons;
+
+import weapon.Weapon;
 
 /**
  * Fists are the default weapon for all champions

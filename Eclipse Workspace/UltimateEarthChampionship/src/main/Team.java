@@ -3,7 +3,7 @@ package main;
 import java.util.ArrayList;
 
 import champion.Champion;
-import weapons.Weapon;
+import weapon.Weapon;
 
 public class Team {
 

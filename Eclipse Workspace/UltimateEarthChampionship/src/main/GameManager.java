@@ -5,7 +5,13 @@ import java.util.List;
 
 import champion.Champion;
 import champion.champions.*;
-import weapons.*;
+import views.TeamView;
+import weapon.*;
+import weapon.weapons.Chainsaw;
+import weapon.weapons.GolfClub;
+import weapon.weapons.Pickaxe;
+import weapon.weapons.Shield;
+import weapon.weapons.Sledgehammer;
 
 /**
  * The GameManager class is an abstract class that defines the basic functionality of a game manager.
@@ -14,6 +20,11 @@ import weapons.*;
 public abstract class GameManager
 {
 	private static GameManager instance;
+	
+	/**
+	 * The GameEnvironment instance for this GameManager.
+	 */
+	private GameEnvironment gameEnvironment;
 	
 	/**
 	 * The Shop instance for this GameManager.
@@ -35,6 +46,7 @@ public abstract class GameManager
 	 */
 	protected GameManager() {
 		shop = new Shop();
+		gameEnvironment = new GameEnvironment(1);
 		
 		allChampions = new ArrayList<Champion>(
     			List.of(new AdamSmith(), new BernardMontgomery(), new CharlesDarwin(), new Confucius(), new GeorgeWashington())
@@ -71,6 +83,20 @@ public abstract class GameManager
 		return instance;
 	}
 	
+	/**
+	 * @return the gameEnvironment
+	 */
+	public GameEnvironment getGameEnvironment() {
+		return gameEnvironment;
+	}
+
+	/**
+	 * @param gameEnvironment the gameEnvironment to set
+	 */
+	public void setGameEnvironment(GameEnvironment gameEnvironment) {
+		this.gameEnvironment = gameEnvironment;
+	}
+
 	/**
 	 * Gets the Shop instance.
 	 * @return the Shop instance.

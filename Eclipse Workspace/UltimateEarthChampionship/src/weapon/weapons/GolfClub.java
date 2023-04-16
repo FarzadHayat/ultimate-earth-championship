@@ -1,4 +1,6 @@
-package weapons;
+package weapon.weapons;
+
+import weapon.Weapon;
 
 /**
  * Represents a Golf Club weapon.
