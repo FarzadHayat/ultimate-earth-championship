@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import champion.Champion;
 import weapons.Weapon;
@@ -300,6 +301,17 @@ public class Team {
 		ArrayList<Weapon> out = getChampionsWeapons();
 		out.addAll(reserveWeapons);
 		return out;
+	}
+	
+	/**
+	 * Gets a random champion from the team
+	 * @return a random champion
+	 */
+	public Champion getRandomChampion()
+	{
+		Random random = new Random();
+		int champInt = random.nextInt(getAllChampions().size());
+		return getAllChampions().get(champInt);
 	}
 	
 }

@@ -1,19 +1,23 @@
 package events;
 
-import champion.Champion;
+import main.Team;
 
-public class Donation extends RandomEvent {
+public class TVShowEvent extends RandomEvent {
 
+	/**
+	 * Percentage chance of this event happening every week
+	 */
+	private static int occurrenceChance = 6; 
 	
-	public Donation() {
-		super(1); // <-- Percentage chance of occurrence
+	public TVShowEvent() {
+		super(occurrenceChance);
 	}
 	
 	@Override
-	public RandomEventInfo runEvent(String team) {
+	public RandomEventInfo runEvent(Team team) {
 		// Effect Logic:
 		
-		//team.addMoney(10);
+		team.addMoney(10);
 		
 		// Generate GUI Info:
 		
@@ -26,6 +30,6 @@ public class Donation extends RandomEvent {
 		RandomEventInfo out = new RandomEventInfo(name, description, effectString);
 		return out;
 	}
-
+ 
 	
 }

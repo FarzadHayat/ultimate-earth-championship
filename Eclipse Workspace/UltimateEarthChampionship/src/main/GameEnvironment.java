@@ -2,10 +2,13 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 import events.*;
 
 public class GameEnvironment {
+	
+	private Configuration config = Configuration.getInstance();
 	
 	/**
 	 * The current week, starting from 1
@@ -26,7 +29,11 @@ public class GameEnvironment {
 	 * List of all random events in the game
 	 */
 	private ArrayList<RandomEvent> events;
-	
+		
+	/**
+	 *  All the teams in the game, including the player team
+	 */
+	private ArrayList<Team> teams;
 	
 	public int getCurrentWeek()
 	{
@@ -65,8 +72,12 @@ public class GameEnvironment {
 	 */
 	private void getAllEvents()
 	{
+		events = new ArrayList<RandomEvent>();
 		// For now: Just manually add them :(
-		events.add(new Donation());
+		events.add(new DonationEvent());
+		events.add(new TVShowEvent());
+		events.add(new RadiationPoisoningEvent());
+		events.add(new RampagingAnimalEvent());
 	}
 	
 	/**
@@ -91,7 +102,7 @@ public class GameEnvironment {
 	/**
 	 * Goes through each event and checks for its chance of occurring,
 	 * If so the event if run and if the event occurs on the player team,
-	 * it is added to the returned list.
+	 * it is added to the returned list which can then be passed onto the GUI.
 	 * @return
 	 */
 	private ArrayList<RandomEventInfo> generateWeeklyEvents()
@@ -103,15 +114,16 @@ public class GameEnvironment {
 			if (chanceCheck(event.getChanceOfOccuring()))
 			{
 				// Event occurs:
-				String randomTeam = "Pick a random team";
+				Team randomTeam = getRandomTeam();
 				RandomEventInfo newEvent = event.runEvent(randomTeam);
+				// We run the event to cause the logic to occur
 				
-//				if (randomTeam.isPlayer)
-//				{
-//					// If this event happens to the player team...
-//					// Note it down
-//					weeklyEvents.add(newEvent);
-//				}
+				if (randomTeam.isPlayerTeam())
+				{
+					// If this event happens to the player team...
+					// Note it down
+					weeklyEvents.add(newEvent);
+				}
 			}
 			else 
 			{
@@ -120,6 +132,17 @@ public class GameEnvironment {
 		}
 		
 		return weeklyEvents;
+	}
+	
+	/**
+	 * Gets a random team 
+	 * @return a random team
+	 */
+	public Team getRandomTeam()
+	{
+		Random random = new Random();
+		int teamInt = random.nextInt(config.NUM_TEAMS);
+		return teams.get(teamInt);
 	}
 	
 	/**
@@ -133,6 +156,8 @@ public class GameEnvironment {
 		
 		return (chance >= random);
 	}
+	
+
 	
 
 }
