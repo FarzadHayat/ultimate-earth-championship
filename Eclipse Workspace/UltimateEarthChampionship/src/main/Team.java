@@ -8,6 +8,11 @@ import weapon.Weapon;
 public class Team {
 
 	/**
+	 * the name of the team.
+	 */
+	private String name;
+	
+	/**
 	 *  Is true if this team is the player team
 	 */
 	private boolean isPlayer;
@@ -39,6 +44,22 @@ public class Team {
 	
 	
 	
+	/**
+	 * Gets the team name
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Sets the team name to the given name.
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	/**
 	 * Returns whether this team is the player team
 	 * @return true if this is the player team.

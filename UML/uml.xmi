@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI xmi.version="1.2" timestamp="2023-04-17T15:41:31" verified="false" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
+<XMI xmi.version="1.2" timestamp="2023-04-17T16:01:31" verified="false" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller 2.32.3 http://umbrello.kde.org</XMI.exporter>
@@ -331,6 +331,7 @@
       </UML:Class>
       <UML:Class isSpecification="false" isLeaf="false" isRoot="false" isAbstract="false" xmi.id="ulyFEfjdk41ZK" name="Team" namespace="Logical_View" visibility="public">
        <UML:Classifier.feature>
+        <UML:Attribute isSpecification="false" xmi.id="u6cZTB0b2XedP" name="name" visibility="private" type="uc4nnnCjBtN8r"/>
         <UML:Attribute isSpecification="false" xmi.id="uJuwcHxx1vmn8" name="isPlayer" visibility="private" type="utK9CgfumMlm9"/>
         <UML:Attribute isSpecification="false" xmi.id="uSTbefqXXQ8Mx" name="chosenChampions" visibility="private" type="uHnHDOsrEm2cb"/>
         <UML:Attribute isSpecification="false" xmi.id="uJG9NBXKh9msL" name="reserveChampions" visibility="private" type="uXR1YDIykRp9s"/>
@@ -380,7 +381,7 @@
      </UML:Namespace.ownedElement>
      <XMI.extension xmi.extender="umbrello">
       <diagrams resolution="96">
-       <diagram xmi.id="uDP0qRhEIGKvc" name="class diagram" type="1" documentation="" backgroundcolor="#ffffff" fillcolor="#ffffc0" font="Ubuntu,14,-1,5,50,0,0,0,0,0,Regular" griddotcolor="#f7f7f7" linecolor="#ff0000" linewidth="0" textcolor="#000000" usefillcolor="1" showattribassocs="1" showatts="1" showattsig="1" showops="1" showopsig="1" showpackage="1" showpubliconly="0" showscope="1" showstereotype="2" localid="-1" showgrid="1" snapgrid="1" snapcsgrid="1" snapx="25" snapy="25" zoom="79.0907" canvasheight="1300" canvaswidth="4625" isopen="1">
+       <diagram xmi.id="uDP0qRhEIGKvc" name="class diagram" type="1" documentation="" backgroundcolor="#ffffff" fillcolor="#ffffc0" font="Ubuntu,14,-1,5,50,0,0,0,0,0,Regular" griddotcolor="#f7f7f7" linecolor="#ff0000" linewidth="0" textcolor="#000000" usefillcolor="1" showattribassocs="1" showatts="1" showattsig="1" showops="1" showopsig="1" showpackage="1" showpubliconly="0" showscope="1" showstereotype="2" localid="-1" showgrid="1" snapgrid="1" snapcsgrid="1" snapx="25" snapy="25" zoom="59.8039" canvasheight="1300" canvaswidth="4625" isopen="1">
         <widgets>
          <classwidget xmi.id="uPsR2I1vVOocv" localid="uuijKX7mEtizu" textcolor="#000000" linecolor="#ff0000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#feffca" font="Ubuntu,10,-1,5,50,0,0,0,0,0,Regular" autoresize="1" x="-6075" y="1150" width="200" height="50" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601" showstereotype="2"/>
          <classwidget xmi.id="ufN1GWkVcESUn" localid="uylZG8ift5M3l" textcolor="#000000" linecolor="#ff0000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#feffca" font="Ubuntu,10,-1,5,50,0,0,0,0,0,Regular" autoresize="1" x="-6100" y="1750" width="75" height="50" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601" showstereotype="2"/>
@@ -954,7 +955,7 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello">
-  <docsettings viewid="uDP0qRhEIGKvc" documentation="" uniqueid="unyTWeilpsErc"/>
+  <docsettings viewid="uDP0qRhEIGKvc" documentation="" uniqueid="u6cZTB0b2XedP"/>
   <listview>
    <listitem id="Views" type="800" open="1">
     <listitem id="Component_View" type="821" open="1"/>
@@ -1110,11 +1111,12 @@
       <listitem id="uc1a6rqp0m6dV" type="814" open="0"/>
       <listitem id="urTucXHi9vIrq" type="814" open="0"/>
      </listitem>
-     <listitem id="ulyFEfjdk41ZK" type="813" open="0">
+     <listitem id="ulyFEfjdk41ZK" type="813" open="1">
       <listitem id="uSTbefqXXQ8Mx" type="814" open="0"/>
       <listitem id="uJ2LCMe0XhGNf" type="815" open="0"/>
       <listitem id="uJuwcHxx1vmn8" type="814" open="0"/>
       <listitem id="uYqRKQkKGBgyS" type="814" open="0"/>
+      <listitem id="u6cZTB0b2XedP" type="814" open="0"/>
       <listitem id="uJG9NBXKh9msL" type="814" open="0"/>
       <listitem id="uiHsHjRNCEGZn" type="814" open="0"/>
       <listitem id="uxc3N775BkGdu" type="814" open="0"/>
