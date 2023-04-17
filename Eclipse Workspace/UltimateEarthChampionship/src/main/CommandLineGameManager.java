@@ -1,6 +1,6 @@
 package main;
 
-import views.CommandLineDisplay;
+import display.CommandLineDisplay;
 
 /**
  * A subclass of GameManager that represents the command line version of the game.

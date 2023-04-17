@@ -1,4 +1,4 @@
-package views;
+package display;
 
 import java.awt.Container;
 import java.awt.Font;
@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import main.DisplayStrategy;
 import main.GameEnvironment;
 import main.Match;
 import main.Shop;

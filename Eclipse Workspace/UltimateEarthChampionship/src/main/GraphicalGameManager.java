@@ -1,6 +1,6 @@
 package main;
 
-import views.GraphicalDisplay;
+import display.GraphicalDisplay;
 import views.TabbedView;
 
 /**

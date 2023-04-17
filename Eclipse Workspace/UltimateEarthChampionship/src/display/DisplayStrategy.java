@@ -1,6 +1,11 @@
-package main;
+package display;
 
 import java.util.ArrayList;
+
+import main.GameEnvironment;
+import main.Match;
+import main.Shop;
+import main.Team;
 
 public interface DisplayStrategy {
 	public void displayStory(String text);

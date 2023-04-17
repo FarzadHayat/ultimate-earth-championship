@@ -1,15 +1,15 @@
-package views;
+package display;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import champion.Champion;
-import main.DisplayStrategy;
 import main.GameEnvironment;
 import main.Match;
 import main.Shop;
 import main.Team;
+import views.CardType;
 import weapon.Weapon;
 
 public class CommandLineDisplay implements DisplayStrategy {
