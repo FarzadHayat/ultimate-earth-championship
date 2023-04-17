@@ -1,6 +1,6 @@
 package main;
 
-import views.CommandLineView;
+import views.CommandLineDisplay;
 
 /**
  * A subclass of GameManager that represents the command line version of the game.
@@ -8,17 +8,17 @@ import views.CommandLineView;
 public class CommandLineGameManager extends GameManager
 {
 
-	private CommandLineView commandLineView;
+	private CommandLineDisplay commandLineDisplay;
 	
 	/**
-	 * Starts the game by initializing the CommandLineView.
+	 * Starts the game by initializing the CommandLineDisplay.
 	 */
 	@Override
 	public void play()
 	{
-		commandLineView = new CommandLineView();
+		commandLineDisplay = new CommandLineDisplay();
 		getShop().generateCatalogue();
-		commandLineView.displayShop(getShop());
-		commandLineView.closeScanner();
+		commandLineDisplay.displayShop(getShop());
+		commandLineDisplay.closeScanner();
 	}
 }
