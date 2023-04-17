@@ -40,6 +40,10 @@ public abstract class GameManager
 	 * The list of all available weapons.
 	 */
 	private ArrayList<Weapon> allWeapons;
+	/**
+	 * The player's team for ease of access.
+	 */
+	private Team playerTeam;
 	
 	/**
 	 * Constructs a new GameManager instance.
@@ -47,6 +51,7 @@ public abstract class GameManager
 	protected GameManager() {
 		shop = new Shop();
 		gameEnvironment = new GameEnvironment(1);
+		playerTeam = new Team(true, new ArrayList<Champion>());
 		
 		allChampions = new ArrayList<Champion>(
     			List.of(new AdamSmith(), new BernardMontgomery(), new CharlesDarwin(), new Confucius(), new GeorgeWashington())
@@ -143,6 +148,22 @@ public abstract class GameManager
 	 */
 	public void setAllWeapons(ArrayList<Weapon> allWeapons) {
 		this.allWeapons = allWeapons;
+	}
+
+	/**
+	 * gets the player's team.
+	 * @return the playerTeam
+	 */
+	public Team getPlayerTeam() {
+		return playerTeam;
+	}
+
+	/**
+	 * Sets the player's team to the given team.
+	 * @param playerTeam the playerTeam to set
+	 */
+	public void setPlayerTeam(Team playerTeam) {
+		this.playerTeam = playerTeam;
 	}
 
 }

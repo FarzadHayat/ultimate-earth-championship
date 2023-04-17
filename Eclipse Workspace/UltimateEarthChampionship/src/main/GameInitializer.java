@@ -6,7 +6,7 @@ package main;
  */
 public class GameInitializer {
 
-	public static final DisplayType TYPE = DisplayType.CLI;
+	public static final DisplayType TYPE = DisplayType.GUI;
 
 	/**
 	 * The main method that initializes and starts the game.
