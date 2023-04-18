@@ -98,7 +98,7 @@ public class ChampionCard extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					gameManager.getShop().buyChampion(champion, gameManager.getPlayerTeam());
+					gameManager.getPlayerTeam().buyChampion(champion);
 					GraphicalDisplay graphicalDisplay = gameManager.getGraphicalDisplay();
 					graphicalDisplay.displayShop();
 				} catch (InsufficientFundsException | FullTeamException e) {
@@ -119,7 +119,7 @@ public class ChampionCard extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					gameManager.getShop().sellChampion(champion, gameManager.getPlayerTeam());
+					gameManager.getPlayerTeam().sellChampion(champion);
 					GraphicalDisplay graphicalDisplay = gameManager.getGraphicalDisplay();
 					graphicalDisplay.displayTeam();
 				} catch (IncompleteTeamException e) {
