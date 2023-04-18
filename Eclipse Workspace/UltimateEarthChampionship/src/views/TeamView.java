@@ -1,16 +1,15 @@
 package views;
 
-import java.util.ArrayList;
-
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import champion.Champion;
-import champion.champions.Confucius;
+import main.GameManager;
 
 public class TeamView extends JPanel {
 
 	private static final long serialVersionUID = -8010724197066539267L;
+	
+	private GameManager gameManager = GameManager.getInstance();
 
 	/**
 	 * Create the panel.
@@ -19,14 +18,11 @@ public class TeamView extends JPanel {
 		setName("Team");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		ArrayList<Champion> selectedChampions = new ArrayList<Champion>();
-		selectedChampions.add(new Confucius());
-		selectedChampions.add(new Confucius());
-		selectedChampions.add(new Confucius());
-		selectedChampions.add(new Confucius());
-		selectedChampions.add(new Confucius());
-		ChampionsPanel championsPanel = new ChampionsPanel(selectedChampions, CardType.CAN_SELL);
-		add(championsPanel);
+		ChampionsPanel chosenChampionsPanel = new ChampionsPanel(gameManager.getPlayerTeam().getChosenChampions(), CardType.CAN_SELL);
+		add(chosenChampionsPanel);
+		
+		ChampionsPanel reserveChampionsPanel = new ChampionsPanel(gameManager.getPlayerTeam().getReserveChampions(), CardType.CAN_SELL);
+		add(reserveChampionsPanel);
 	}
 
 }

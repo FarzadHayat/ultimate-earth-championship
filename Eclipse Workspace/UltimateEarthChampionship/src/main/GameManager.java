@@ -51,7 +51,9 @@ public abstract class GameManager
 	protected GameManager() {
 		shop = new Shop();
 		gameEnvironment = new GameEnvironment(1);
-		playerTeam = new Team(true, new ArrayList<Champion>());
+		playerTeam = new Team(true, new ArrayList<Champion>(
+				List.of(new Confucius(), new Confucius(), new Confucius(), new Confucius())
+				));
 		
 		allChampions = new ArrayList<Champion>(
     			List.of(new AdamSmith(), new BernardMontgomery(), new CharlesDarwin(), new Confucius(), new GeorgeWashington())

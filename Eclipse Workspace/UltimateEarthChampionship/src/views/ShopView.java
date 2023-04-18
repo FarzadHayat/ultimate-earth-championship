@@ -18,8 +18,8 @@ public class ShopView extends JPanel {
 		setName("Shop");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		ChampionsPanel championListPanel = new ChampionsPanel(gameManager.getShop().getAvailableChampions(), CardType.CAN_BUY);
-		add(championListPanel);
+		ChampionsPanel championsPanel = new ChampionsPanel(gameManager.getShop().getAvailableChampions(), CardType.CAN_BUY);
+		add(championsPanel);
 		
 		WeaponsPanel WeaponsPanel = new WeaponsPanel(gameManager.getShop().getAvailableWeapons(), CardType.CAN_BUY);
 		add(WeaponsPanel);
