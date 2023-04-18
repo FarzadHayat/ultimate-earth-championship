@@ -7,14 +7,15 @@ package main;
 public class GameInitializer {
 
 	public static final DisplayType TYPE = DisplayType.GUI;
+	private static final GameManager gameManager = GameManager.getInstance();
 
 	/**
 	 * The main method that initializes and starts the game.
-	 * It calls the play() method on the GameManager instance.
 	 * @param args the command line arguments (not used)
 	 */
 	public static void main(String[] args) {
-		GameManager.getInstance().play();
+		gameManager.initialize();
+		gameManager.play();
 	}
 
 }

@@ -18,7 +18,6 @@ public class GraphicalGameManager extends GameManager
 	public void play()
 	{
 		graphicalDisplay = new GraphicalDisplay();
-		getShop().generateCatalogue();
 		TabbedView tabbedView = new TabbedView();
 		graphicalDisplay.displayView(tabbedView);
 	}

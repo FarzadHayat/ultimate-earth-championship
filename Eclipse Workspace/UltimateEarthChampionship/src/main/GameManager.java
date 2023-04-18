@@ -46,9 +46,9 @@ public abstract class GameManager
 	private Team playerTeam;
 	
 	/**
-	 * Constructs a new GameManager instance.
+	 * Initialize the necessary starting objects for the game.
 	 */
-	protected GameManager() {
+	public void initialize() {
 		shop = new Shop();
 		gameEnvironment = new GameEnvironment(1);
 		playerTeam = new Team(true, new ArrayList<Champion>(
@@ -62,10 +62,11 @@ public abstract class GameManager
     			List.of(new Chainsaw(), new GolfClub(), new Pickaxe(), new Sledgehammer(), new Shield())
     			);
     	
+    	getShop().generateCatalogue();
 	}
 	
 	/**
-	 * Starts the game.
+	 * Starts the game. Handles individually by the GameManager subclasses.
 	 */
 	public abstract void play();
 

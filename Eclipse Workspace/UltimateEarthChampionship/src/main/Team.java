@@ -47,6 +47,8 @@ public class Team {
 	 */
 	private int score;
 	
+	private GameManager gameManager = GameManager.getInstance();
+	
 	/**
 	 * Gets the team name
 	 * @return the name
@@ -358,7 +360,7 @@ public class Team {
 			addMoney(weapon.getPrice());
 			throw new FullTeamException(e.getMessage());
 		}
-		GameManager.getInstance().getShop().getAvailableWeapons().remove(weapon);
+		gameManager.getShop().getAvailableWeapons().remove(weapon);
 	}
 	
 	/**
@@ -385,7 +387,7 @@ public class Team {
 			addMoney(champion.getPrice());
 			throw new FullTeamException(e.getMessage());
 		}
-		GameManager.getInstance().getShop().getAvailableChampions().remove(champion);
+		gameManager.getShop().getAvailableChampions().remove(champion);
 	}
 	
 	/**
