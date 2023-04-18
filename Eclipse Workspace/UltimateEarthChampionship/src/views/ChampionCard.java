@@ -17,7 +17,8 @@ import javax.swing.SwingConstants;
 import champion.Champion;
 import display.GraphicalDisplay;
 import exception.InsufficientFundsException;
-import exception.TeamFullException;
+import exception.FullTeamException;
+import exception.IncompleteTeamException;
 import main.GameManager;
 import main.GraphicalGameManager;
 
@@ -100,7 +101,7 @@ public class ChampionCard extends JPanel {
 					gameManager.getShop().buyChampion(champion, gameManager.getPlayerTeam());
 					GraphicalDisplay graphicalDisplay = gameManager.getGraphicalDisplay();
 					graphicalDisplay.displayShop();
-				} catch (InsufficientFundsException | TeamFullException e) {
+				} catch (InsufficientFundsException | FullTeamException e) {
 					JOptionPane.showMessageDialog(buyButton, e.getMessage());
 				}
 			}
@@ -113,6 +114,19 @@ public class ChampionCard extends JPanel {
 	 */
 	public void addSellButton() {
 	    JButton sellButton = new JButton("Sell for $" + champion.getPrice());
+	    sellButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					gameManager.getShop().sellChampion(champion, gameManager.getPlayerTeam());
+					GraphicalDisplay graphicalDisplay = gameManager.getGraphicalDisplay();
+					graphicalDisplay.displayTeam();
+				} catch (IncompleteTeamException e) {
+					JOptionPane.showMessageDialog(sellButton, e.getMessage());
+				}
+			}
+		});
 	    add(sellButton, BorderLayout.SOUTH);
 	}
 

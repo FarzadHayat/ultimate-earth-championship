@@ -5,7 +5,8 @@ import java.util.Random;
 
 import champion.Champion;
 import exception.InsufficientFundsException;
-import exception.TeamFullException;
+import exception.FullTeamException;
+import exception.IncompleteTeamException;
 import weapon.Weapon;
 
 
@@ -127,9 +128,9 @@ public class Shop {
 	 * 2. Adds the weapon to the team's reserve weapons
 	 * 3. Removes the weapon from the shop.
 	 * @throws InsufficientFundsException if team cannot afford to purchase the weapon
-	 * @throws TeamFullException if team reserve weapons is already full
+	 * @throws FullTeamException if team reserve weapons is already full
 	 */
-	public void buyWeapon(Weapon weapon, Team team) throws InsufficientFundsException, TeamFullException {
+	public void buyWeapon(Weapon weapon, Team team) throws InsufficientFundsException, FullTeamException {
 //		check the team has enough money
 		if (!team.hasMoney(weapon.getPrice())) {
 			throw new InsufficientFundsException("You do not have enough money to purchase this weapon!");
@@ -141,9 +142,9 @@ public class Shop {
 			team.addReserveWeapon(weapon);
 		}
 //		undo the money reduction if we encounter a team full exception
-		catch (TeamFullException e) {
+		catch (FullTeamException e) {
 			team.addMoney(weapon.getPrice());
-			throw new TeamFullException(e.getMessage());
+			throw new FullTeamException(e.getMessage());
 		}
 		availableWeapons.remove(weapon);
 	}
@@ -154,9 +155,9 @@ public class Shop {
 	 * 2. Adds the champion to the team's reserve champions
 	 * 3. Removes the champion from the shop.
 	 * @throws InsufficientFundsException if team cannot afford to purchase the champion
-	 * @throws TeamFullException if team chosen champions and reserve champions are both already full
+	 * @throws FullTeamException if team chosen champions and reserve champions are both already full
 	 */
-	public void buyChampion(Champion champion, Team team) throws InsufficientFundsException, TeamFullException {
+	public void buyChampion(Champion champion, Team team) throws InsufficientFundsException, FullTeamException {
 //		check the team has enough money
 		if (!team.hasMoney(champion.getPrice())) {
 			throw new InsufficientFundsException("You do not have enough money to purchase this champion!");
@@ -168,11 +169,22 @@ public class Shop {
 			team.addChampion(champion);
 		}
 //		undo the money reduction if we encounter a team full exception
-		catch (TeamFullException e) {
+		catch (FullTeamException e) {
 			team.addMoney(champion.getPrice());
-			throw new TeamFullException(e.getMessage());
+			throw new FullTeamException(e.getMessage());
 		}
 		availableChampions.remove(champion);
+	}
+	
+	/**
+	 * Sells the champion back to the shop.
+	 * 1. Removes the champion from the team's champions
+	 * 2. Adds the champion price to the team's money.
+	 * @throws IncompleteTeamException if the team is already at the minimum number of champions allowed
+	 */
+	public void sellChampion(Champion champion, Team team) throws IncompleteTeamException {
+		team.removeChampion(champion);
+		team.addMoney(champion.getPrice());
 	}
 
 }

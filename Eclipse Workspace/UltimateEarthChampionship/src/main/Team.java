@@ -3,7 +3,8 @@ package main;
 import java.util.ArrayList;
 
 import champion.Champion;
-import exception.TeamFullException;
+import exception.FullTeamException;
+import exception.IncompleteTeamException;
 import weapon.Weapon;
 
 public class Team {
@@ -177,9 +178,9 @@ public class Team {
 	/**
 	 * Add a champion to the team. Will add to the roster first, and then to the reserve if the roster is full
 	 * @param newChampion the new champion to be added
-	 * @throws TeamFullException if team champions lists are already full
+	 * @throws FullTeamException if team champions lists are already full
 	 */
-	public void addChampion(Champion newChampion) throws TeamFullException
+	public void addChampion(Champion newChampion) throws FullTeamException
 	{
 		if (chosenChampions.size() < 4)
 		{
@@ -197,13 +198,13 @@ public class Team {
 	/**
 	 * Adds a champion to roster
 	 * @param toRoster Champion to be added to chosenChampion
-	 * @throws TeamFullException if the chosen champions list is already full
+	 * @throws FullTeamException if the chosen champions list is already full
 	 */
-	private void addToRoster(Champion toRoster) throws TeamFullException
+	private void addToRoster(Champion toRoster) throws FullTeamException
 	{
 		if (chosenChampions.size() == config.NUM_CHOSEN_CHAMPIONS)
 		{
-			throw new TeamFullException("EXCEPTION: Reached team max champion limit");
+			throw new FullTeamException("EXCEPTION: Reached team max champion limit");
 		}
 		
 		chosenChampions.add(toRoster);
@@ -212,13 +213,13 @@ public class Team {
 	/**
 	 * Adds a champion to Reserve
 	 * @param toReserve Champion to be added to reserve
-	 * @throws TeamFullException if the reserve champions list is already full
+	 * @throws FullTeamException if the reserve champions list is already full
 	 */
-	private void addToReserve(Champion toReserve) throws TeamFullException
+	private void addToReserve(Champion toReserve) throws FullTeamException
 	{
 		if (reserveChampions.size() == config.NUM_RESERVE_CHAMPIONS)
 		{
-			throw new TeamFullException("EXCEPTION: Reached team max champion limit");
+			throw new FullTeamException("EXCEPTION: Reached team max champion limit");
 		}
 		reserveChampions.add(toReserve);
 	}
@@ -227,9 +228,13 @@ public class Team {
 	/**
 	 * Removes a champion from the team, will check both rostered and reserve champions
 	 * @param toRemove
+	 * @throws IncompleteTeamException if the team is already at the minimum number of champions allowed
 	 */
-	public void removeChampion(Champion toRemove)
+	public void removeChampion(Champion toRemove) throws IncompleteTeamException
 	{
+		if (chosenChampions.size() + reserveChampions.size() <= config.NUM_CHOSEN_CHAMPIONS) {
+			throw new IncompleteTeamException("Must have at least " + config.NUM_CHOSEN_CHAMPIONS + " champions in your team!");
+		}
 		if (chosenChampions.contains(toRemove))
 		{
 			chosenChampions.remove(toRemove);
@@ -309,11 +314,11 @@ public class Team {
 	
 	/**
 	 * Adds a weapon to reserve weapons
-	 * @throws TeamFullException if reserve weapons list is already full
+	 * @throws FullTeamException if reserve weapons list is already full
 	 */
-	public void addReserveWeapon(Weapon weapon) throws TeamFullException {
+	public void addReserveWeapon(Weapon weapon) throws FullTeamException {
 		if (reserveWeapons.size() == config.NUM_RESERVE_WEAPONS) {
-			throw new TeamFullException("Reached team max reserve weapon limit!");
+			throw new FullTeamException("Reached team max reserve weapon limit!");
 		}
 		reserveWeapons.add(weapon);
 	}

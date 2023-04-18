@@ -1,14 +1,14 @@
 package exception;
 
-public class TeamFullException extends Exception {
+public class FullTeamException extends Exception {
 	
 	private static final long serialVersionUID = 2220557606077685904L;
 
-	public TeamFullException() {
+	public FullTeamException() {
 		super();
 	}
 	
-	public TeamFullException(String message) {
+	public FullTeamException(String message) {
 		super(message);
 	} 
 }

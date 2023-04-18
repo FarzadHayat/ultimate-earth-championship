@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 
 import display.GraphicalDisplay;
 import exception.InsufficientFundsException;
-import exception.TeamFullException;
+import exception.FullTeamException;
 import main.GameManager;
 import main.GraphicalGameManager;
 import weapon.Weapon;
@@ -100,7 +100,7 @@ public class WeaponCard extends JPanel {
 					gameManager.getShop().buyWeapon(weapon, gameManager.getPlayerTeam());
 					GraphicalDisplay graphicalDisplay = gameManager.getGraphicalDisplay();
 					graphicalDisplay.displayShop();
-				} catch (InsufficientFundsException | TeamFullException e) {
+				} catch (InsufficientFundsException | FullTeamException e) {
 					JOptionPane.showMessageDialog(buyButton, e.getMessage());
 				}
 			}

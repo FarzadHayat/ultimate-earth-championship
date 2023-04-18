@@ -11,7 +11,7 @@ import main.Team;
 import champion.*;
 import champion.champions.*;
 import champion.champions.SunTzu;
-import exception.TeamFullException;
+import exception.FullTeamException;
 
 class TeamTest {
 
@@ -80,7 +80,7 @@ class TeamTest {
 		try {
 			testTeam.addChampion(new Confucius());
 		}
-		catch (TeamFullException e) {
+		catch (FullTeamException e) {
 			e.printStackTrace();
 		}
 		
@@ -94,7 +94,7 @@ class TeamTest {
 		try {
 			testTeam.addChampion(new Confucius());
 		}
-		catch (TeamFullException e) {
+		catch (FullTeamException e) {
 			e.printStackTrace();
 		}
 		
@@ -107,7 +107,7 @@ class TeamTest {
 		try {
 			testTeam.addChampion(new Confucius());
 		}
-		catch (TeamFullException e) {
+		catch (FullTeamException e) {
 			e.printStackTrace();
 		}
 	
