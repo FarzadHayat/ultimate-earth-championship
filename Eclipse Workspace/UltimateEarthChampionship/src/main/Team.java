@@ -81,15 +81,24 @@ public class Team {
 	
 	/**
 	 * Adds amount to total money
+	 * @param amount the amount of money to add
 	 */
 	public void addMoney(float amount)
 	{
 		money += amount;
-		
-		if (money < 0)
+	}
+	
+	/**
+	 * Removes amount from total money
+	 * @param amount the amount of money to remove
+	 * @throws InsufficientFundsException if team has less money than the given amount
+	 */
+	public void removeMoney(float amount) throws InsufficientFundsException {
+		if (money < amount)
 		{
-			System.out.println("WARNING: Money should never fall below 0!");
+			throw new InsufficientFundsException("You do not have enough money to perform this action!");
 		}
+		money -= amount;
 	}
 	
 	public int getScore()
@@ -345,12 +354,8 @@ public class Team {
 	 * @throws FullTeamException if team reserve weapons is already full
 	 */
 	public void buyWeapon(Weapon weapon) throws InsufficientFundsException, FullTeamException {
-//		check the team has enough money
-		if (!hasMoney(weapon.getPrice())) {
-			throw new InsufficientFundsException("You do not have enough money to purchase this weapon!");
-		}
 //		charge the team for the weapon price
-		addMoney(-weapon.getPrice());
+		removeMoney(weapon.getPrice());
 //		try to add the weapon to the team reserve weapons
 		try {
 			addReserveWeapon(weapon);
@@ -372,12 +377,8 @@ public class Team {
 	 * @throws FullTeamException if team chosen champions and reserve champions are both already full
 	 */
 	public void buyChampion(Champion champion) throws InsufficientFundsException, FullTeamException {
-//		check the team has enough money
-		if (!hasMoney(champion.getPrice())) {
-			throw new InsufficientFundsException("You do not have enough money to purchase this champion!");
-		}
 //		charge the team for the champion price
-		addMoney(-champion.getPrice());
+		removeMoney(champion.getPrice());
 //		try to add the weapon to the team champions
 		try {
 			addChampion(champion);
