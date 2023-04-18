@@ -194,9 +194,7 @@ public class Team {
 		}
 		
 	}
-	
-	//TODO: 2 functions needed: Add to Reserve and Add to roster (Should be called by addChampion)
-	
+		
 	/**
 	 * Adds a champion to roster
 	 * @param toRoster Champion to be added to chosenChampion
@@ -219,7 +217,6 @@ public class Team {
 	 */
 	private void addToReserve(Champion toReserve)
 	{
-		// TODO: Setup Config for max size
 		if (reserveChampions.size() == config.NUM_RESERVE_CHAMPIONS)
 		{
 			System.out.println("EXCEPTION: Reached team max champion limit");
