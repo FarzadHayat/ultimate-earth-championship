@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import champion.Champion;
+import exception.InsufficientFundsException;
+import exception.TeamFullException;
 import weapon.Weapon;
 
 
@@ -117,6 +119,33 @@ public class Shop {
 		Random random = new Random();
 		int index = random.nextInt(GameManager.getInstance().getAllWeapons().size());
 		return GameManager.getInstance().getAllWeapons().get(index);
+	}
+	
+	/**
+	 * Buys the weapon from the shop for the team.
+	 * 1. Removes the weapon price from the team's money.
+	 * 2. Adds the weapon to the team's reserve weapons
+	 * 3. Removes the weapon from the shop.
+	 * @throws InsufficientFundsException if team cannot afford to purchase the weapon
+	 * @throws TeamFullException if team reserve weapons is already full
+	 */
+	public void buyWeapon(Weapon weapon, Team team) throws InsufficientFundsException, TeamFullException {
+//		check the team has enough money
+		if (!team.hasMoney(weapon.getPrice())) {
+			throw new InsufficientFundsException("You do not have enough money to purchase this item!");
+		}
+//		charge the team for the weapon price
+		team.addMoney(-weapon.getPrice());
+//		try to add the weapon to the team reserve weapons
+		try {
+			team.addReserveWeapon(weapon);
+		}
+//		undo the money reduction if we encounter a team full exception
+		catch (TeamFullException e) {
+			team.addMoney(weapon.getPrice());
+			throw new TeamFullException(e.getMessage());
+		}
+		availableWeapons.remove(weapon);
 	}
 
 }

@@ -3,10 +3,13 @@ package main;
 import java.util.ArrayList;
 
 import champion.Champion;
+import exception.TeamFullException;
 import weapon.Weapon;
 
 public class Team {
 
+	private Configuration config = Configuration.getInstance();
+	
 	/**
 	 * the name of the team.
 	 */
@@ -30,7 +33,7 @@ public class Team {
 	/**
 	 * ArrayList of all weapons that this team has in reserve, use getAllWeapons() to get all weapons
 	 */
-	private ArrayList<Weapon> reserveWeapons;
+	private ArrayList<Weapon> reserveWeapons = new ArrayList<Weapon>();
 	
 	/**
 	 * The teams money
@@ -123,8 +126,7 @@ public class Team {
 	{
 		this.isPlayer = isPlayer;
 		
-		// TODO: Setup config default money start value:
-		this.money = 100f;
+		this.money = config.STARTING_MONEY;
 		
 		score = 0;
 		
@@ -201,7 +203,7 @@ public class Team {
 	 */
 	private void addToRoster(Champion toRoster)
 	{
-		if (chosenChampions.size() == 4)
+		if (chosenChampions.size() == config.NUM_CHOSEN_CHAMPIONS)
 		{
 			System.out.println("EXCEPTION: Reached team max champion limit");
 			//TODO: Throw an exception
@@ -218,7 +220,7 @@ public class Team {
 	private void addToReserve(Champion toReserve)
 	{
 		// TODO: Setup Config for max size
-		if (reserveChampions.size() == 5)
+		if (reserveChampions.size() == config.NUM_RESERVE_CHAMPIONS)
 		{
 			System.out.println("EXCEPTION: Reached team max champion limit");
 			//TODO: Throw an exception
@@ -310,6 +312,17 @@ public class Team {
 		}
 		
 		return out;
+	}
+	
+	/**
+	 * Adds a weapon to reserve weapons
+	 * @throws TeamFullException if team reserve weapons is already full
+	 */
+	public void addReserveWeapon(Weapon weapon) throws TeamFullException {
+		if (reserveWeapons.size() == config.NUM_RESERVE_WEAPONS) {
+			throw new TeamFullException("Reached team max reserve weapon limit!");
+		}
+		reserveWeapons.add(weapon);
 	}
 	
 	/**

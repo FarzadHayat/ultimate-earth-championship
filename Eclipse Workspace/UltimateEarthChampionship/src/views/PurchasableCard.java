@@ -4,15 +4,24 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import display.GraphicalDisplay;
+import exception.InsufficientFundsException;
+import exception.TeamFullException;
+import main.GameManager;
+import main.GraphicalGameManager;
 import main.Purchasable;
+import weapon.Weapon;
 
 public class PurchasableCard extends JPanel {
 
@@ -23,9 +32,10 @@ public class PurchasableCard extends JPanel {
 	
 	private static final int WIDTH = IMAGE_WIDTH;
 	private static final int HEIGHT = WIDTH + 50;
-
 	
 	private Purchasable purchasable;
+	
+	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 	
 	/**
 	 * Create the panel.
@@ -84,6 +94,17 @@ public class PurchasableCard extends JPanel {
 	 */
 	public void addBuyButton() {
 	    JButton buyWeaponButton = new JButton("Buy for $" + purchasable.getPrice());
+	    buyWeaponButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					gameManager.getShop().buyWeapon((Weapon) purchasable, gameManager.getPlayerTeam());
+				} catch (InsufficientFundsException | TeamFullException e) {
+					JOptionPane.showMessageDialog(buyWeaponButton, e.getMessage());
+				}
+			}
+		});
 	    add(buyWeaponButton, BorderLayout.SOUTH);
 	}
 
