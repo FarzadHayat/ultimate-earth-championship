@@ -22,5 +22,9 @@ public class GraphicalGameManager extends GameManager
 		TabbedView tabbedView = new TabbedView();
 		graphicalDisplay.displayView(tabbedView);
 	}
+	
+	public GraphicalDisplay getGraphicalDisplay() {
+		return graphicalDisplay;
+	}
 
 }

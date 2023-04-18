@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ import exception.TeamFullException;
 import main.GameManager;
 import main.GraphicalGameManager;
 import main.Purchasable;
+import main.Shop;
 import weapon.Weapon;
 
 public class PurchasableCard extends JPanel {
@@ -36,7 +38,7 @@ public class PurchasableCard extends JPanel {
 	private Purchasable purchasable;
 	
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
-	
+		
 	/**
 	 * Create the panel.
 	 * @param purchasable the purchasable to display
@@ -100,6 +102,8 @@ public class PurchasableCard extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					gameManager.getShop().buyWeapon((Weapon) purchasable, gameManager.getPlayerTeam());
+					GraphicalDisplay graphicalDisplay = gameManager.getGraphicalDisplay();
+					graphicalDisplay.displayShop();
 				} catch (InsufficientFundsException | TeamFullException e) {
 					JOptionPane.showMessageDialog(buyWeaponButton, e.getMessage());
 				}

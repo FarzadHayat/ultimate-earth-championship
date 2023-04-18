@@ -5,11 +5,13 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.text.View;
 
 import main.GameEnvironment;
 import main.Match;
 import main.Shop;
 import main.Team;
+import views.TabbedView;
 
 public class GraphicalDisplay implements DisplayStrategy {
 
@@ -70,9 +72,11 @@ public class GraphicalDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayShop(Shop shop) {
-		// TODO Auto-generated method stub
-		
+	public void displayShop() {
+		TabbedView tabbedView = new TabbedView();
+		displayView(tabbedView);
+		tabbedView.getTabbedPane().setSelectedIndex(1);
+	
 	}
 
 	@Override
