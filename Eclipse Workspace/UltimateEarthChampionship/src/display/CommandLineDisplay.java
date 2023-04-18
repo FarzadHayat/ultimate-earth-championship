@@ -254,19 +254,19 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayHome(GameEnvironment gameEnvironment) {
+	public void displayHome() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void displayTeam(Team team) {
+	public void displayTeam() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void displayMatches(ArrayList<Match> matches) {
+	public void displayMatches() {
 		// TODO Auto-generated method stub
 		
 	}

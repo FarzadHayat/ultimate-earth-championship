@@ -10,6 +10,10 @@ public class TabbedView extends JPanel {
 	
 	private JTabbedPane tabbedPane;
 
+	private TeamView teamView;
+
+	private ShopView shopView;
+
 	/**
 	 * Create the panel.
 	 */
@@ -22,15 +26,19 @@ public class TabbedView extends JPanel {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		add(tabbedPane);
 		
-		TeamView teamView = new TeamView();
-		tabbedPane.addTab(teamView.getName(), null, teamView, "View and change your current champions and weapons");
+		teamView = new TeamView();
+		tabbedPane.addTab(teamView.getName(), null, teamView, "View and modify your champions and weapons");
 
-		ShopView shopView = new ShopView();
+		shopView = new ShopView();
 		tabbedPane.addTab(shopView.getName(), null, shopView, "Buy new champion and weapons");
 	}
 	
-	public JTabbedPane getTabbedPane() { 
-		return tabbedPane;
+	public void showTeamView() {
+		tabbedPane.setSelectedComponent(teamView);
+	}
+	
+	public void showShopView() {
+		tabbedPane.setSelectedComponent(shopView);
 	}
 
 }
