@@ -126,7 +126,7 @@ public class Configuration {
 	/**
 	 * The starting money for each team.
 	 */
-	public final float STARTING_MONEY = 20f;
+	public final float STARTING_MONEY = 100f;
 	
 	
 	public float getDifficulty()

@@ -122,7 +122,7 @@ public class Shop {
 	}
 	
 	/**
-	 * Buys the weapon from the shop for the team.
+	 * Buys the weapon for the team.
 	 * 1. Removes the weapon price from the team's money.
 	 * 2. Adds the weapon to the team's reserve weapons
 	 * 3. Removes the weapon from the shop.
@@ -132,7 +132,7 @@ public class Shop {
 	public void buyWeapon(Weapon weapon, Team team) throws InsufficientFundsException, TeamFullException {
 //		check the team has enough money
 		if (!team.hasMoney(weapon.getPrice())) {
-			throw new InsufficientFundsException("You do not have enough money to purchase this item!");
+			throw new InsufficientFundsException("You do not have enough money to purchase this weapon!");
 		}
 //		charge the team for the weapon price
 		team.addMoney(-weapon.getPrice());
@@ -146,6 +146,33 @@ public class Shop {
 			throw new TeamFullException(e.getMessage());
 		}
 		availableWeapons.remove(weapon);
+	}
+	
+	/**
+	 * Buys the champion for the team.
+	 * 1. Removes the champion price from the team's money.
+	 * 2. Adds the champion to the team's reserve champions
+	 * 3. Removes the champion from the shop.
+	 * @throws InsufficientFundsException if team cannot afford to purchase the champion
+	 * @throws TeamFullException if team chosen champions and reserve champions are both already full
+	 */
+	public void buyChampion(Champion champion, Team team) throws InsufficientFundsException, TeamFullException {
+//		check the team has enough money
+		if (!team.hasMoney(champion.getPrice())) {
+			throw new InsufficientFundsException("You do not have enough money to purchase this champion!");
+		}
+//		charge the team for the champion price
+		team.addMoney(-champion.getPrice());
+//		try to add the weapon to the team champions
+		try {
+			team.addChampion(champion);
+		}
+//		undo the money reduction if we encounter a team full exception
+		catch (TeamFullException e) {
+			team.addMoney(champion.getPrice());
+			throw new TeamFullException(e.getMessage());
+		}
+		availableChampions.remove(champion);
 	}
 
 }

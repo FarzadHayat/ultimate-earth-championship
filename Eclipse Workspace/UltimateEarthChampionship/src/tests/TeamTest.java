@@ -11,6 +11,7 @@ import main.Team;
 import champion.*;
 import champion.champions.*;
 import champion.champions.SunTzu;
+import exception.TeamFullException;
 
 class TeamTest {
 
@@ -76,7 +77,12 @@ class TeamTest {
 	void testGetAllChampions() {
 		assertEquals(testTeam.getAllChampions().size(), 4);
 		
-		testTeam.addChampion(new Confucius());
+		try {
+			testTeam.addChampion(new Confucius());
+		}
+		catch (TeamFullException e) {
+			e.printStackTrace();
+		}
 		
 		assertEquals(testTeam.getAllChampions().size(), 5);
 	}
@@ -85,7 +91,12 @@ class TeamTest {
 	void testAddChampion() {
 		assertEquals(testTeam.getReserveChampions().size(), 0);
 		
-		testTeam.addChampion(new Confucius());
+		try {
+			testTeam.addChampion(new Confucius());
+		}
+		catch (TeamFullException e) {
+			e.printStackTrace();
+		}
 		
 		assertEquals(testTeam.getReserveChampions().size(), 1);
 	}
@@ -93,7 +104,12 @@ class TeamTest {
 	@Test
 	void testSwapChampion() {
 		
-		testTeam.addChampion(new Confucius());
+		try {
+			testTeam.addChampion(new Confucius());
+		}
+		catch (TeamFullException e) {
+			e.printStackTrace();
+		}
 	
 		Champion confucius = testTeam.getReserveChampions().get(0);
 		

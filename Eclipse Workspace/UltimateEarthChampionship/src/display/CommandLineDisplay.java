@@ -9,7 +9,6 @@ import main.GameEnvironment;
 import main.GameManager;
 import main.Match;
 import main.Shop;
-import main.Team;
 import views.CardType;
 import weapon.Weapon;
 

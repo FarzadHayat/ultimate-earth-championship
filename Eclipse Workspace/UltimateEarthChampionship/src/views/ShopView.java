@@ -7,8 +7,6 @@ import javax.swing.JPanel;
 
 import champion.Champion;
 import main.GameManager;
-import main.Purchasable;
-import main.Shop;
 import weapon.Weapon;
 
 public class ShopView extends JPanel {
@@ -24,19 +22,19 @@ public class ShopView extends JPanel {
 		setName("Shop");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		ArrayList<Purchasable> availableChampions = new ArrayList<Purchasable>();
+		ArrayList<Champion> availableChampions = new ArrayList<Champion>();
 		for (Champion champion : gameManager.getShop().getAvailableChampions()) {
 			availableChampions.add(champion);
 		}
-		PurchasableListPanel championListPanel = new PurchasableListPanel(availableChampions, CardType.CAN_BUY);
+		ChampionsPanel championListPanel = new ChampionsPanel(availableChampions, CardType.CAN_BUY);
 		add(championListPanel);
 		
-		ArrayList<Purchasable>availableWeapons = new ArrayList<Purchasable>();
+		ArrayList<Weapon>availableWeapons = new ArrayList<Weapon>();
 		for (Weapon weapon : gameManager.getShop().getAvailableWeapons()) {
 			availableWeapons.add(weapon);
 		}
-		PurchasableListPanel weaponListPanel = new PurchasableListPanel(availableWeapons, CardType.CAN_BUY);
-		add(weaponListPanel);
+		WeaponsPanel WeaponsPanel = new WeaponsPanel(availableWeapons, CardType.CAN_BUY);
+		add(WeaponsPanel);
 	}
 
 }
