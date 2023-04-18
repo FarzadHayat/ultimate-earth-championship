@@ -108,6 +108,26 @@ public class Configuration {
 	 */
 	public final int NUM_TEAMS = 4;
 	
+	/**
+	 * Number of champions a team can hold as chosen.
+	 */
+	public final int NUM_CHOSEN_CHAMPIONS = 4;
+	
+	/**
+	 * Number of champions a team can hold as reserve.
+	 */
+	public final int NUM_RESERVE_CHAMPIONS = 5;
+	
+	/**
+	 * Number of weapons a team can hold as reserve.
+	 */
+	public final int NUM_RESERVE_WEAPONS = 4;
+	
+	/**
+	 * The starting money for each team.
+	 */
+	public final float STARTING_MONEY = 20f;
+	
 	
 	public float getDifficulty()
 	{
