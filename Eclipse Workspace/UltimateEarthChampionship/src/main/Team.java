@@ -344,62 +344,71 @@ public class Team {
 		return out;
 	}
 	
+	/**
+	 * Removes a weapon from the team
+	 * @param toRemove the weapon to remove from the team
+	 */
+	public void removeWeapon(Weapon toRemove)
+	{		
+		for(Champion champion : getAllChampions())
+		{
+			if (champion.getWeapon() == toRemove)
+			{
+				champion.removeWeapon();
+			}
+		}
+		if (reserveWeapons.contains(toRemove))
+		{
+			reserveWeapons.remove(toRemove);
+		}
+		else {
+			System.out.println("EXCEPTION: Weapon to remove not in team!");
+			//TODO: Throw an exception
+			return;
+		}
+	}
+	
 
 	/**
-	 * Buys the weapon for the team.
-	 * 1. Removes the weapon price from the team's money.
-	 * 2. Adds the weapon to the team's reserve weapons
-	 * 3. Removes the weapon from the shop.
-	 * @throws InsufficientFundsException if team cannot afford to purchase the weapon
-	 * @throws FullTeamException if team reserve weapons is already full
+	 * Buys the purchasable for the team.
+	 * 1. Removes the purchasable price from the team's money.
+	 * 2. Adds the weapon to the team.
+	 * 3. Removes the purchasable from the shop.
+	 * @throws InsufficientFundsException if team cannot afford this purchasable
+	 * @throws FullTeamException if team is already full
 	 */
-	public void buyWeapon(Weapon weapon) throws InsufficientFundsException, FullTeamException {
-//		charge the team for the weapon price
-		removeMoney(weapon.getPrice());
-//		try to add the weapon to the team reserve weapons
+	public void buy(Purchasable purchasable) throws InsufficientFundsException, FullTeamException {
+		removeMoney(purchasable.getPrice());
 		try {
-			addReserveWeapon(weapon);
+			if (purchasable.getClass().getSuperclass() == Champion.class) {
+				addChampion((Champion) purchasable);
+				gameManager.getShop().getAvailableChampions().remove(purchasable);
+			}
+			if (purchasable.getClass().getSuperclass() == Weapon.class) {
+				addReserveWeapon((Weapon) purchasable);
+				gameManager.getShop().getAvailableWeapons().remove(purchasable);
+			}
 		}
-//		undo the money reduction if we encounter a team full exception
 		catch (FullTeamException e) {
-			addMoney(weapon.getPrice());
+			addMoney(purchasable.getPrice());
 			throw new FullTeamException(e.getMessage());
 		}
-		gameManager.getShop().getAvailableWeapons().remove(weapon);
 	}
 	
 	/**
-	 * Buys the champion for the team.
-	 * 1. Removes the champion price from the team's money.
-	 * 2. Adds the champion to the team's reserve champions
-	 * 3. Removes the champion from the shop.
-	 * @throws InsufficientFundsException if team cannot afford to purchase the champion
-	 * @throws FullTeamException if team chosen champions and reserve champions are both already full
-	 */
-	public void buyChampion(Champion champion) throws InsufficientFundsException, FullTeamException {
-//		charge the team for the champion price
-		removeMoney(champion.getPrice());
-//		try to add the weapon to the team champions
-		try {
-			addChampion(champion);
-		}
-//		undo the money reduction if we encounter a team full exception
-		catch (FullTeamException e) {
-			addMoney(champion.getPrice());
-			throw new FullTeamException(e.getMessage());
-		}
-		gameManager.getShop().getAvailableChampions().remove(champion);
-	}
-	
-	/**
-	 * Sells the champion and refunds the price.
-	 * 1. Removes the champion from the team's champions
-	 * 2. Adds the champion price to the team's money.
+	 * Sells the purchasable and refunds the price.
+	 * 1. Removes the purchasable from the team
+	 * 2. Adds the purchasable price to the team's money.
 	 * @throws IncompleteTeamException if the team is already at the minimum number of champions allowed
 	 */
-	public void sellChampion(Champion champion) throws IncompleteTeamException {
-		removeChampion(champion);
-		addMoney(champion.getPrice());
+	public void sell(Purchasable purchasable) throws IncompleteTeamException {
+		if (purchasable.getClass().getSuperclass() == Champion.class) {
+			removeChampion((Champion) purchasable);
+		}
+		if (purchasable.getClass().getSuperclass() == Weapon.class) {
+			removeWeapon((Weapon) purchasable);
+		}
+		addMoney(purchasable.getPrice());
 	}
 	
 }

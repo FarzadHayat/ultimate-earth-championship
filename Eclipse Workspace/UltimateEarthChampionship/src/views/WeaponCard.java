@@ -97,7 +97,7 @@ public class WeaponCard extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					gameManager.getPlayerTeam().buyWeapon(weapon);
+					gameManager.getPlayerTeam().buy(weapon);
 					GraphicalDisplay graphicalDisplay = gameManager.getGraphicalDisplay();
 					graphicalDisplay.displayShop();
 				} catch (InsufficientFundsException | FullTeamException e) {
