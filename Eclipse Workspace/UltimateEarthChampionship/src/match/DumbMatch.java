@@ -55,7 +55,7 @@ public class DumbMatch extends Match {
 			else
 			{
 				// team 2 wins round
-				team2Score += 2;
+				team2Score += 1;
 			}
 		}
 		
