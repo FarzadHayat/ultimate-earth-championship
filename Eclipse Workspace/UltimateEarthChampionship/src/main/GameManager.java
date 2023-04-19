@@ -40,10 +40,16 @@ public abstract class GameManager
 	 * The list of all available weapons.
 	 */
 	private ArrayList<Weapon> allWeapons;
+	
 	/**
 	 * The player's team for ease of access.
 	 */
 	private Team playerTeam;
+	
+	/**
+	 * All the teams including the player team.
+	 */
+	private ArrayList<Team> teams; 
 	
 	/**
 	 * Initialize the necessary starting objects for the game.
@@ -51,16 +57,17 @@ public abstract class GameManager
 	public void initialize() {
 		shop = new Shop();
 		gameEnvironment = new GameEnvironment(1);
-		playerTeam = new Team(true, new ArrayList<Champion>(
-				List.of(new Confucius(), new Confucius(), new Confucius(), new Confucius())
-				));
+		teams = new ArrayList<Team>();
 		
 		allChampions = new ArrayList<Champion>(
-    			List.of(new AdamSmith(), new BernardMontgomery(), new CharlesDarwin(), new Confucius(), new GeorgeWashington())
+    			List.of(new AdamSmith(), new BernardMontgomery(), new CharlesDarwin(), new Confucius(), new GeorgeWashington(),
+    					new JohnDoe(), new JohnFKennedy(), new JohnMKeynes(), new JosefStalin(), new KingGeorge())
     			);
     	allWeapons = new ArrayList<Weapon>(
     			List.of(new Chainsaw(), new GolfClub(), new Pickaxe(), new Sledgehammer(), new Shield())
     			);
+    	playerTeam = new Team(true, new ArrayList<Champion>(allChampions.subList(0, 4)));
+    	teams.add(playerTeam);
     	
     	getShop().generateCatalogue();
 	}
@@ -167,6 +174,22 @@ public abstract class GameManager
 	 */
 	public void setPlayerTeam(Team playerTeam) {
 		this.playerTeam = playerTeam;
+	}
+
+	/**
+	 * Get list of all the teams in the game.
+	 * @return teams the list of teams
+	 */
+	public ArrayList<Team> getTeams() {
+		return teams;
+	}
+
+	/**
+	 * set  list of all the teams in the game.
+	 * @param teams the list of teams to set
+	 */
+	public void setTeams(ArrayList<Team> teams) {
+		this.teams = teams;
 	}
 
 }
