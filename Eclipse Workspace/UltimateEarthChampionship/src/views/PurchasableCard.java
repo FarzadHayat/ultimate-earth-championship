@@ -14,14 +14,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import champion.Champion;
 import display.GraphicalDisplay;
 import exception.InsufficientFundsException;
 import exception.FullTeamException;
+import exception.IncompleteTeamException;
 import main.GameManager;
 import main.GraphicalGameManager;
-import weapon.Weapon;
+import main.Purchasable;
 
-public class WeaponCard extends JPanel {
+public class PurchasableCard extends JPanel {
 
 	private static final long serialVersionUID = 5339330332731208144L;
 	
@@ -31,27 +33,27 @@ public class WeaponCard extends JPanel {
 	private static final int WIDTH = IMAGE_WIDTH;
 	private static final int HEIGHT = WIDTH + 50;
 	
-	private Weapon weapon;
+	private Purchasable purchasable;
 	
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 		
 	/**
 	 * Create the panel.
-	 * @param weapon the weapon to display
+	 * @param purchasable the purchasable to display
 	 * @param type the type of the card according to the CardType enum
 	 */
-	public WeaponCard(Weapon weapon, CardType type) {
+	public PurchasableCard(Purchasable purchasable, CardType type) {
 		setBackground(Color.ORANGE);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(new BorderLayout(0, 0));
 		
-		this.weapon = weapon;
+		this.purchasable = purchasable;
 		
-		JLabel weaponNameLabel = new JLabel(weapon.getName());
-		weaponNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		add(weaponNameLabel, BorderLayout.NORTH);
+		JLabel nameLabel = new JLabel(purchasable.getName());
+		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		add(nameLabel, BorderLayout.NORTH);
 		
-		ImageIcon icon = weapon.getImage();
+		ImageIcon icon = purchasable.getImage();
 		ImageIcon resizedIcon;
 		if (icon != null) {
 			resizedIcon = new ImageIcon(icon.getImage().getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_SMOOTH));
@@ -59,8 +61,8 @@ public class WeaponCard extends JPanel {
 		else {
 			resizedIcon = new ImageIcon(new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_ARGB));
 		}
-		JLabel weaponImageLabel = new JLabel(resizedIcon);
-		add(weaponImageLabel, BorderLayout.CENTER);
+		JLabel imageLabel = new JLabel(resizedIcon);
+		add(imageLabel, BorderLayout.CENTER);
 		
 		switch (type) {
 		case STANDARD: {
@@ -81,23 +83,23 @@ public class WeaponCard extends JPanel {
 	}
 	
 	/**
-	 * Adds a label displaying the stats of the weapon.
+	 * Adds a label displaying the stats of the purchasable.
 	 */
 	public void addStatsLabel() {
 	    ;
 	}
 
 	/**
-	 * Adds a button for buying the weapon.
+	 * Add a buy button to the purchasable.
 	 */
 	public void addBuyButton() {
-	    JButton buyButton = new JButton("Buy for $" + weapon.getPrice());
+	    JButton buyButton = new JButton("Buy for $" + purchasable.getPrice());
 	    buyButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					gameManager.getPlayerTeam().buy(weapon);
+					gameManager.getPlayerTeam().buy(purchasable);
 					GraphicalDisplay graphicalDisplay = gameManager.getGraphicalDisplay();
 					graphicalDisplay.displayShop();
 				} catch (InsufficientFundsException | FullTeamException e) {
@@ -109,10 +111,23 @@ public class WeaponCard extends JPanel {
 	}
 
 	/**
-	 * Adds a button for selling the weapon.
+	 * Add a sell button the purchasable.
 	 */
 	public void addSellButton() {
-	    JButton sellButton = new JButton("Sell for $" + weapon.getPrice());
+	    JButton sellButton = new JButton("Sell for $" + purchasable.getPrice());
+	    sellButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					gameManager.getPlayerTeam().sell(purchasable);
+					GraphicalDisplay graphicalDisplay = gameManager.getGraphicalDisplay();
+					graphicalDisplay.displayTeam();
+				} catch (IncompleteTeamException e) {
+					JOptionPane.showMessageDialog(sellButton, e.getMessage());
+				}
+			}
+		});
 	    add(sellButton, BorderLayout.SOUTH);
 	}
 
