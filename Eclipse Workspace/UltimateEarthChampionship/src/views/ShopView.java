@@ -23,14 +23,14 @@ public class ShopView extends JPanel {
 		setName("Shop");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		addAvailableChampions();
-		addAvailableWeapons();
+		addAvailableChampionsPanel();
+		addAvailableWeaponsPanel();
 	}
 
 	/**
 	 * Add a purchasable panel to display the shop's available champions.
 	 */
-	private void addAvailableChampions() {
+	private void addAvailableChampionsPanel() {
 		ArrayList<Purchasable> availableChampions = new ArrayList<Purchasable>();
 		for (Champion champion : gameManager.getShop().getAvailableChampions()) {
 			availableChampions.add(champion);
@@ -42,7 +42,7 @@ public class ShopView extends JPanel {
 	/**
 	 * Add a purchasable panel to display the shop's available weapons.
 	 */
-	private void addAvailableWeapons() {
+	private void addAvailableWeaponsPanel() {
 		ArrayList<Purchasable> availableWeapons = new ArrayList<Purchasable>();
 		for (Weapon weapon : gameManager.getShop().getAvailableWeapons()) {
 			availableWeapons.add(weapon);

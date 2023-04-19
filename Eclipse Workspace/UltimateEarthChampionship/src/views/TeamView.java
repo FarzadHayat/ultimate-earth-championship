@@ -23,15 +23,15 @@ public class TeamView extends JPanel {
 		setName("Team");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		addChosenChampions();
-		addReserveChampions();
-		addAllWeapons();
+		addChosenChampionsPanel();
+		addReserveChampionsPanel();
+		addAllWeaponsPanel();
 	}
 
 	/**
 	 * Add a purchasable panel to display the team's chosen champions.
 	 */
-	private void addChosenChampions() {
+	private void addChosenChampionsPanel() {
 		ArrayList<Purchasable> chosenChampions = new ArrayList<Purchasable>();
 		for (Champion champion : gameManager.getPlayerTeam().getChosenChampions()) {
 			chosenChampions.add(champion);
@@ -43,7 +43,7 @@ public class TeamView extends JPanel {
 	/**
 	 * Add a purchasable panel to display the team's reserve champions.
 	 */
-	private void addReserveChampions() {
+	private void addReserveChampionsPanel() {
 		ArrayList<Purchasable> reserveChampions = new ArrayList<Purchasable>();
 		for (Champion champion : gameManager.getPlayerTeam().getReserveChampions()) {
 			reserveChampions.add(champion);
@@ -55,7 +55,7 @@ public class TeamView extends JPanel {
 	/**
 	 * Add a purchasable panel to display all the team's weapons.
 	 */
-	private void addAllWeapons() {
+	private void addAllWeaponsPanel() {
 		ArrayList<Purchasable> allWeapons = new ArrayList<Purchasable>();
 		for (Weapon weapon : gameManager.getPlayerTeam().getAllWeapons()) {
 			allWeapons.add(weapon);
