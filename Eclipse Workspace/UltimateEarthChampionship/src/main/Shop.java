@@ -137,4 +137,19 @@ public class Shop {
 		return weapons.get(index);
 	}
 
+	/**
+	 * Rmove the given champion from available champions.
+	 * @param champion the champion to remove
+	 */
+	public void removeChampion(Champion champion) {
+		availableChampions.remove(champion);
+	}
+	
+	/**
+	 * Remove the given weapon from available weapons.
+	 * @param weapon the weapon to remove
+	 */
+	public void removeWeapon(Weapon weapon) {
+		availableWeapons.remove(weapon);
+	}
 }

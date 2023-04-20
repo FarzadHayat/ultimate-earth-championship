@@ -382,11 +382,11 @@ public class Team {
 		try {
 			if (purchasable.getClass().getSuperclass() == Champion.class) {
 				addChampion((Champion) purchasable);
-				gameManager.getShop().getAvailableChampions().remove(purchasable);
+				gameManager.getShop().removeChampion((Champion) purchasable);
 			}
 			if (purchasable.getClass().getSuperclass() == Weapon.class) {
 				addReserveWeapon((Weapon) purchasable);
-				gameManager.getShop().getAvailableWeapons().remove(purchasable);
+				gameManager.getShop().removeWeapon((Weapon) purchasable);
 			}
 		}
 		catch (FullTeamException e) {
