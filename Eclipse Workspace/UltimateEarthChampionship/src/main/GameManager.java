@@ -27,7 +27,7 @@ import weapon.weapons.Sledgehammer;
  */
 public abstract class GameManager
 {
-	private static DisplayType displayType;
+	private static DisplayType displayType = DisplayType.CLI;
 	private static GameManager instance;
 	
 	/**

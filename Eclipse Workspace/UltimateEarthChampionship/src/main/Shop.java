@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import champion.Champion;
-import exception.InsufficientFundsException;
-import exception.FullTeamException;
-import exception.IncompleteTeamException;
 import weapon.Weapon;
 
 
