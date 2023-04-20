@@ -1,13 +1,12 @@
 package views;
 
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.GameManager;
-import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
-import javax.swing.SwingConstants;
 
 public class InfoPanel extends JPanel {
 

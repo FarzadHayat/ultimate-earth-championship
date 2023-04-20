@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import champion.Champion;
 import main.Purchasable;
 
 public class PurchasablesPanel extends JPanel {

@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,11 +15,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import champion.Champion;
 import display.GraphicalDisplay;
-import exception.InsufficientFundsException;
 import exception.FullTeamException;
 import exception.IncompleteTeamException;
+import exception.InsufficientFundsException;
 import main.GameManager;
 import main.GraphicalGameManager;
 import main.Purchasable;

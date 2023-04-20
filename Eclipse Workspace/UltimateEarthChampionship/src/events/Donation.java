@@ -1,7 +1,5 @@
 package events;
 
-import champion.Champion;
-
 public class Donation extends RandomEvent {
 
 	

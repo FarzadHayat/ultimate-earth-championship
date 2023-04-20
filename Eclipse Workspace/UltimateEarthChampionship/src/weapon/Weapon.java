@@ -2,8 +2,8 @@ package weapon;
 
 import javax.swing.ImageIcon;
 
-import main.Purchasable;
 import main.Configuration;
+import main.Purchasable;
 
 /**
  * Class Weapon

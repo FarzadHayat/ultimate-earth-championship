@@ -1,17 +1,20 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import main.Team;
-import champion.*;
-import champion.champions.*;
+import champion.Champion;
+import champion.champions.CharlesDarwin;
+import champion.champions.Confucius;
+import champion.champions.QueenVictoria;
+import champion.champions.StephenHawking;
 import champion.champions.SunTzu;
 import exception.FullTeamException;
+import main.Team;
 
 class TeamTest {
 

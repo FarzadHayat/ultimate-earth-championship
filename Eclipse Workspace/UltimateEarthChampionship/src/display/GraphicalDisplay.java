@@ -2,7 +2,9 @@ package display;
 
 import java.awt.Container;
 import java.awt.Font;
+
 import javax.swing.JFrame;
+
 import main.GameEnvironment;
 import main.Match;
 import views.TabbedView;

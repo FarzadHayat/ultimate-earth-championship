@@ -1,9 +1,10 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import events.*;
+import events.Donation;
+import events.RandomEvent;
+import events.RandomEventInfo;
 
 public class GameEnvironment {
 	
