@@ -5,7 +5,6 @@ import java.util.List;
 
 import champion.Champion;
 import champion.champions.*;
-import views.TeamView;
 import weapon.*;
 import weapon.weapons.Chainsaw;
 import weapon.weapons.GolfClub;
@@ -19,6 +18,7 @@ import weapon.weapons.Sledgehammer;
  */
 public abstract class GameManager
 {
+	private static DisplayType displayType;
 	private static GameManager instance;
 	
 	/**
@@ -52,6 +52,15 @@ public abstract class GameManager
 	private ArrayList<Team> teams; 
 	
 	/**
+	 * Starts the game.
+	 */
+	public static void start() {
+		GameManager.getInstance();
+		instance.initialize();
+		instance.play();
+	}
+	
+	/**
 	 * Initialize the necessary starting objects for the game.
 	 */
 	public void initialize() {
@@ -77,6 +86,14 @@ public abstract class GameManager
 	 */
 	public abstract void play();
 
+	public static DisplayType getDisplayType() {
+		return displayType;
+	}
+
+	public static void setDisplayType(DisplayType displayType) {
+		GameManager.displayType = displayType;
+	}
+
 	/**
 	 * Gets the GameManager instance.
 	 * If the instance is null, creates a new instance based on the DisplayType specified in GameInitializer.
@@ -84,7 +101,7 @@ public abstract class GameManager
 	 */
 	public static GameManager getInstance() {
 		if (instance == null) {
-			switch (GameInitializer.TYPE) {
+			switch (getDisplayType()) {
 			case GUI: {
 				instance = new GraphicalGameManager();
 				break;

@@ -7,7 +7,6 @@ import display.CommandLineDisplay;
  */
 public class CommandLineGameManager extends GameManager
 {
-
 	private CommandLineDisplay commandLineDisplay;
 	
 	/**
@@ -19,5 +18,14 @@ public class CommandLineGameManager extends GameManager
 		commandLineDisplay = new CommandLineDisplay();
 		commandLineDisplay.displayShop();
 		commandLineDisplay.closeScanner();
+	}
+	
+	/**
+	 * The main method that initializes and starts the game.
+	 * @param args the command line arguments (not used)
+	 */
+	public static void main(String[] args) {
+		GameManager.setDisplayType(DisplayType.CLI);
+		GameManager.start();
 	}
 }
