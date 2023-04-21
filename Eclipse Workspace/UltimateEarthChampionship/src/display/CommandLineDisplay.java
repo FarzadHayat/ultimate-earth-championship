@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 
 import champion.Champion;
 import main.GameEnvironment;
+import main.GameManager;
 import main.Match;
 import main.Shop;
-import main.Team;
 import views.CardType;
 import weapon.Weapon;
 
@@ -17,6 +17,8 @@ public class CommandLineDisplay implements DisplayStrategy {
 	private static final int LINE_WIDTH = 114;
 	
 	private Scanner scanner;
+	
+	private GameManager gameManager = GameManager.getInstance();
 	
 	/**
 	 * Creat a new CommandLineDisplay object.
@@ -109,7 +111,9 @@ public class CommandLineDisplay implements DisplayStrategy {
 	 * Displays the shop to the console.
 	 * @param shop The shop to display.
 	 */
-	public void displayShop(Shop shop) {
+	public void displayShop() {
+		Shop shop = gameManager.getShop();
+		
 		ArrayList<String> content = new ArrayList<>();
 		
 //		content.add(Champion.toStringHeader());
@@ -249,19 +253,19 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayHome(GameEnvironment gameEnvironment) {
+	public void displayHome() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void displayTeam(Team team) {
+	public void displayTeam() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void displayMatches(ArrayList<Match> matches) {
+	public void displayMatches() {
 		// TODO Auto-generated method stub
 		
 	}

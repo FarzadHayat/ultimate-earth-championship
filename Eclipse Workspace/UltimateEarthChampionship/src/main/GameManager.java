@@ -4,9 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import champion.Champion;
-import champion.champions.*;
-import views.TeamView;
-import weapon.*;
+import champion.champions.AdamSmith;
+import champion.champions.BernardMontgomery;
+import champion.champions.CharlesDarwin;
+import champion.champions.Confucius;
+import champion.champions.GeorgeWashington;
+import champion.champions.JohnDoe;
+import champion.champions.JohnFKennedy;
+import champion.champions.JohnMKeynes;
+import champion.champions.JosefStalin;
+import champion.champions.KingGeorge;
+import weapon.Weapon;
 import weapon.weapons.Chainsaw;
 import weapon.weapons.GolfClub;
 import weapon.weapons.Pickaxe;
@@ -19,6 +27,7 @@ import weapon.weapons.Sledgehammer;
  */
 public abstract class GameManager
 {
+	private static DisplayType displayType = DisplayType.CLI;
 	private static GameManager instance;
 	
 	/**
@@ -40,32 +49,59 @@ public abstract class GameManager
 	 * The list of all available weapons.
 	 */
 	private ArrayList<Weapon> allWeapons;
+	
 	/**
 	 * The player's team for ease of access.
 	 */
 	private Team playerTeam;
 	
 	/**
-	 * Constructs a new GameManager instance.
+	 * All the teams including the player team.
 	 */
-	protected GameManager() {
-		shop = new Shop();
-		gameEnvironment = new GameEnvironment(1);
-		playerTeam = new Team(true, new ArrayList<Champion>());
-		
-		allChampions = new ArrayList<Champion>(
-    			List.of(new AdamSmith(), new BernardMontgomery(), new CharlesDarwin(), new Confucius(), new GeorgeWashington())
-    			);
-    	allWeapons = new ArrayList<Weapon>(
-    			List.of(new Chainsaw(), new GolfClub(), new Pickaxe(), new Sledgehammer(), new Shield())
-    			);
-    	
-	}
+	private ArrayList<Team> teams; 
 	
 	/**
 	 * Starts the game.
 	 */
+	public static void start() {
+		GameManager.getInstance();
+		instance.initialize();
+		instance.play();
+	}
+	
+	/**
+	 * Initialize the necessary starting objects for the game.
+	 */
+	public void initialize() {
+		shop = new Shop();
+		gameEnvironment = new GameEnvironment(1);
+		teams = new ArrayList<Team>();
+		
+		allChampions = new ArrayList<Champion>(
+    			List.of(new AdamSmith(), new BernardMontgomery(), new CharlesDarwin(), new Confucius(), new GeorgeWashington(),
+    					new JohnDoe(), new JohnFKennedy(), new JohnMKeynes(), new JosefStalin(), new KingGeorge())
+    			);
+    	allWeapons = new ArrayList<Weapon>(
+    			List.of(new Chainsaw(), new GolfClub(), new Pickaxe(), new Sledgehammer(), new Shield())
+    			);
+    	playerTeam = new Team(true, new ArrayList<Champion>(allChampions.subList(0, 4)));
+    	teams.add(playerTeam);
+    	
+    	getShop().generateCatalogue();
+	}
+	
+	/**
+	 * Starts the game. Handles individually by the GameManager subclasses.
+	 */
 	public abstract void play();
+
+	public static DisplayType getDisplayType() {
+		return displayType;
+	}
+
+	public static void setDisplayType(DisplayType displayType) {
+		GameManager.displayType = displayType;
+	}
 
 	/**
 	 * Gets the GameManager instance.
@@ -74,7 +110,7 @@ public abstract class GameManager
 	 */
 	public static GameManager getInstance() {
 		if (instance == null) {
-			switch (GameInitializer.TYPE) {
+			switch (getDisplayType()) {
 			case GUI: {
 				instance = new GraphicalGameManager();
 				break;
@@ -164,6 +200,22 @@ public abstract class GameManager
 	 */
 	public void setPlayerTeam(Team playerTeam) {
 		this.playerTeam = playerTeam;
+	}
+
+	/**
+	 * Get list of all the teams in the game.
+	 * @return teams the list of teams
+	 */
+	public ArrayList<Team> getTeams() {
+		return teams;
+	}
+
+	/**
+	 * set  list of all the teams in the game.
+	 * @param teams the list of teams to set
+	 */
+	public void setTeams(ArrayList<Team> teams) {
+		this.teams = teams;
 	}
 
 }

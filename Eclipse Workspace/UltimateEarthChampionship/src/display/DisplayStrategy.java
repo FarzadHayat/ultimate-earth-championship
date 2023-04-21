@@ -1,19 +1,15 @@
 package display;
 
-import java.util.ArrayList;
-
 import main.GameEnvironment;
 import main.Match;
-import main.Shop;
-import main.Team;
 
 public interface DisplayStrategy {
 	public void displayStory(String text);
 	public void displaySetup();
-	public void displayHome(GameEnvironment gameEnvironment);
-	public void displayTeam(Team team);
-	public void displayShop(Shop shop);
-	public void displayMatches(ArrayList<Match> matches);
+	public void displayHome();
+	public void displayTeam();
+	public void displayShop();
+	public void displayMatches();
 	public void displayLiveMatch(Match match);
 	public void displayMatchResults(Match match);
 	public void displayWeekResults(GameEnvironment gameEnvironment);

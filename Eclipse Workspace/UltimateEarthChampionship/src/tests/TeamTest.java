@@ -1,16 +1,20 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import main.Team;
-import champion.*;
-import champion.champions.*;
+import champion.Champion;
+import champion.champions.CharlesDarwin;
+import champion.champions.Confucius;
+import champion.champions.QueenVictoria;
+import champion.champions.StephenHawking;
 import champion.champions.SunTzu;
+import exception.FullTeamException;
+import main.Team;
 
 class TeamTest {
 
@@ -76,7 +80,12 @@ class TeamTest {
 	void testGetAllChampions() {
 		assertEquals(testTeam.getAllChampions().size(), 4);
 		
-		testTeam.addChampion(new Confucius());
+		try {
+			testTeam.addChampion(new Confucius());
+		}
+		catch (FullTeamException e) {
+			e.printStackTrace();
+		}
 		
 		assertEquals(testTeam.getAllChampions().size(), 5);
 	}
@@ -85,7 +94,12 @@ class TeamTest {
 	void testAddChampion() {
 		assertEquals(testTeam.getReserveChampions().size(), 0);
 		
-		testTeam.addChampion(new Confucius());
+		try {
+			testTeam.addChampion(new Confucius());
+		}
+		catch (FullTeamException e) {
+			e.printStackTrace();
+		}
 		
 		assertEquals(testTeam.getReserveChampions().size(), 1);
 	}
@@ -93,7 +107,12 @@ class TeamTest {
 	@Test
 	void testSwapChampion() {
 		
-		testTeam.addChampion(new Confucius());
+		try {
+			testTeam.addChampion(new Confucius());
+		}
+		catch (FullTeamException e) {
+			e.printStackTrace();
+		}
 	
 		Champion confucius = testTeam.getReserveChampions().get(0);
 		

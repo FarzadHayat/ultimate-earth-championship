@@ -2,14 +2,12 @@ package display;
 
 import java.awt.Container;
 import java.awt.Font;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
 import main.GameEnvironment;
 import main.Match;
-import main.Shop;
-import main.Team;
+import views.TabbedView;
 
 public class GraphicalDisplay implements DisplayStrategy {
 
@@ -36,6 +34,8 @@ public class GraphicalDisplay implements DisplayStrategy {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	
+	
 	/**
 	 * Sets the view to be displayed in the main application window.
 	 * @param view the view to be displayed
@@ -58,25 +58,28 @@ public class GraphicalDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayHome(GameEnvironment gameEnvironment) {
+	public void displayHome() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void displayTeam(Team team) {
-		// TODO Auto-generated method stub
-		
+	public void displayTeam() {
+		TabbedView tabbedView = new TabbedView();
+		displayView(tabbedView);
+		tabbedView.showTeamView();
 	}
 
 	@Override
-	public void displayShop(Shop shop) {
-		// TODO Auto-generated method stub
-		
+	public void displayShop() {
+		TabbedView tabbedView = new TabbedView();
+		displayView(tabbedView);
+		tabbedView.showShopView();
+	
 	}
 
 	@Override
-	public void displayMatches(ArrayList<Match> matches) {
+	public void displayMatches() {
 		// TODO Auto-generated method stub
 		
 	}

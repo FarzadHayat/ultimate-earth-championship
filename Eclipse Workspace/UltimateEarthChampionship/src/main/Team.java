@@ -3,10 +3,15 @@ package main;
 import java.util.ArrayList;
 
 import champion.Champion;
+import exception.FullTeamException;
+import exception.IncompleteTeamException;
+import exception.InsufficientFundsException;
 import weapon.Weapon;
 
 public class Team {
 
+	private Configuration config = Configuration.getInstance();
+	
 	/**
 	 * the name of the team.
 	 */
@@ -20,17 +25,17 @@ public class Team {
 	/**
 	 * ArrayList, of size 4, of the champions this team has chosen
 	 */
-	private ArrayList<Champion> chosenChampions;
+	private ArrayList<Champion> chosenChampions = new ArrayList<Champion>();
 	
 	/**
 	 * ArrayList, of size 5, of the champions the team has in reserve
 	 */
-	private ArrayList<Champion> reserveChampions;
+	private ArrayList<Champion> reserveChampions = new ArrayList<Champion>();
 	
 	/**
 	 * ArrayList of all weapons that this team has in reserve, use getAllWeapons() to get all weapons
 	 */
-	private ArrayList<Weapon> reserveWeapons;
+	private ArrayList<Weapon> reserveWeapons = new ArrayList<Weapon>();
 	
 	/**
 	 * The teams money
@@ -42,7 +47,7 @@ public class Team {
 	 */
 	private int score;
 	
-	
+	private GameManager gameManager = GameManager.getInstance();
 	
 	/**
 	 * Gets the team name
@@ -76,15 +81,24 @@ public class Team {
 	
 	/**
 	 * Adds amount to total money
+	 * @param amount the amount of money to add
 	 */
 	public void addMoney(float amount)
 	{
 		money += amount;
-		
-		if (money < 0)
+	}
+	
+	/**
+	 * Removes amount from total money
+	 * @param amount the amount of money to remove
+	 * @throws InsufficientFundsException if team has less money than the given amount
+	 */
+	public void removeMoney(float amount) throws InsufficientFundsException {
+		if (money < amount)
 		{
-			System.out.println("WARNING: Money should never fall below 0!");
+			throw new InsufficientFundsException("You do not have enough money to perform this action!");
 		}
+		money -= amount;
 	}
 	
 	public int getScore()
@@ -123,12 +137,9 @@ public class Team {
 	{
 		this.isPlayer = isPlayer;
 		
-		// TODO: Setup config default money start value:
-		this.money = 100f;
+		this.money = config.STARTING_MONEY;
 		
 		score = 0;
-		
-		reserveChampions = new ArrayList<Champion>();
 		
 		if (startingChampions.size() != 4)
 		{
@@ -177,8 +188,9 @@ public class Team {
 	/**
 	 * Add a champion to the team. Will add to the roster first, and then to the reserve if the roster is full
 	 * @param newChampion the new champion to be added
+	 * @throws FullTeamException if team champions lists are already full
 	 */
-	public void addChampion(Champion newChampion)
+	public void addChampion(Champion newChampion) throws FullTeamException
 	{
 		if (chosenChampions.size() < 4)
 		{
@@ -192,20 +204,17 @@ public class Team {
 		}
 		
 	}
-	
-	//TODO: 2 functions needed: Add to Reserve and Add to roster (Should be called by addChampion)
-	
+		
 	/**
 	 * Adds a champion to roster
 	 * @param toRoster Champion to be added to chosenChampion
+	 * @throws FullTeamException if the chosen champions list is already full
 	 */
-	private void addToRoster(Champion toRoster)
+	private void addToRoster(Champion toRoster) throws FullTeamException
 	{
-		if (chosenChampions.size() == 4)
+		if (chosenChampions.size() == config.NUM_CHOSEN_CHAMPIONS)
 		{
-			System.out.println("EXCEPTION: Reached team max champion limit");
-			//TODO: Throw an exception
-			return;
+			throw new FullTeamException("EXCEPTION: Reached team max champion limit");
 		}
 		
 		chosenChampions.add(toRoster);
@@ -214,17 +223,14 @@ public class Team {
 	/**
 	 * Adds a champion to Reserve
 	 * @param toReserve Champion to be added to reserve
+	 * @throws FullTeamException if the reserve champions list is already full
 	 */
-	private void addToReserve(Champion toReserve)
+	private void addToReserve(Champion toReserve) throws FullTeamException
 	{
-		// TODO: Setup Config for max size
-		if (reserveChampions.size() == 5)
+		if (reserveChampions.size() == config.NUM_RESERVE_CHAMPIONS)
 		{
-			System.out.println("EXCEPTION: Reached team max champion limit");
-			//TODO: Throw an exception
-			return;
+			throw new FullTeamException("EXCEPTION: Reached team max champion limit");
 		}
-	
 		reserveChampions.add(toReserve);
 	}
 
@@ -232,9 +238,13 @@ public class Team {
 	/**
 	 * Removes a champion from the team, will check both rostered and reserve champions
 	 * @param toRemove
+	 * @throws IncompleteTeamException if the team is already at the minimum number of champions allowed
 	 */
-	public void removeChampion(Champion toRemove)
+	public void removeChampion(Champion toRemove) throws IncompleteTeamException
 	{
+		if (chosenChampions.size() + reserveChampions.size() <= config.NUM_CHOSEN_CHAMPIONS) {
+			throw new IncompleteTeamException("Must have at least " + config.NUM_CHOSEN_CHAMPIONS + " champions in your team!");
+		}
 		if (chosenChampions.contains(toRemove))
 		{
 			chosenChampions.remove(toRemove);
@@ -313,6 +323,17 @@ public class Team {
 	}
 	
 	/**
+	 * Adds a weapon to reserve weapons
+	 * @throws FullTeamException if reserve weapons list is already full
+	 */
+	public void addReserveWeapon(Weapon weapon) throws FullTeamException {
+		if (reserveWeapons.size() == config.NUM_RESERVE_WEAPONS) {
+			throw new FullTeamException("Reached team max reserve weapon limit!");
+		}
+		reserveWeapons.add(weapon);
+	}
+	
+	/**
 	 * Gets all weapons
 	 * @return All weapons in the team, both in reserve and in champions
 	 */
@@ -321,6 +342,73 @@ public class Team {
 		ArrayList<Weapon> out = getChampionsWeapons();
 		out.addAll(reserveWeapons);
 		return out;
+	}
+	
+	/**
+	 * Removes a weapon from the team
+	 * @param toRemove the weapon to remove from the team
+	 */
+	public void removeWeapon(Weapon toRemove)
+	{		
+		for(Champion champion : getAllChampions())
+		{
+			if (champion.getWeapon() == toRemove)
+			{
+				champion.removeWeapon();
+			}
+		}
+		if (reserveWeapons.contains(toRemove))
+		{
+			reserveWeapons.remove(toRemove);
+		}
+		else {
+			System.out.println("EXCEPTION: Weapon to remove not in team!");
+			//TODO: Throw an exception
+			return;
+		}
+	}
+	
+
+	/**
+	 * Buys the purchasable for the team.
+	 * 1. Removes the purchasable price from the team's money.
+	 * 2. Adds the weapon to the team.
+	 * 3. Removes the purchasable from the shop.
+	 * @throws InsufficientFundsException if team cannot afford this purchasable
+	 * @throws FullTeamException if team is already full
+	 */
+	public void buy(Purchasable purchasable) throws InsufficientFundsException, FullTeamException {
+		removeMoney(purchasable.getPrice());
+		try {
+			if (purchasable.getClass().getSuperclass() == Champion.class) {
+				addChampion((Champion) purchasable);
+				gameManager.getShop().removeChampion((Champion) purchasable);
+			}
+			if (purchasable.getClass().getSuperclass() == Weapon.class) {
+				addReserveWeapon((Weapon) purchasable);
+				gameManager.getShop().removeWeapon((Weapon) purchasable);
+			}
+		}
+		catch (FullTeamException e) {
+			addMoney(purchasable.getPrice());
+			throw new FullTeamException(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Sells the purchasable and refunds the price.
+	 * 1. Removes the purchasable from the team
+	 * 2. Adds the purchasable price to the team's money.
+	 * @throws IncompleteTeamException if the team is already at the minimum number of champions allowed
+	 */
+	public void sell(Purchasable purchasable) throws IncompleteTeamException {
+		if (purchasable.getClass().getSuperclass() == Champion.class) {
+			removeChampion((Champion) purchasable);
+		}
+		if (purchasable.getClass().getSuperclass() == Weapon.class) {
+			removeWeapon((Weapon) purchasable);
+		}
+		addMoney(purchasable.getPrice());
 	}
 	
 }

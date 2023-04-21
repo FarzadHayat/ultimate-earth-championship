@@ -24,6 +24,8 @@ public class Shop {
     private ArrayList<Champion> availableChampions;
     
     private ArrayList<Weapon> availableWeapons;
+    
+    private GameManager gameManager = GameManager.getInstance();
         
     /**
      * Accessor methods
@@ -66,7 +68,7 @@ public class Shop {
 	 */
 	
 	/**
-	 * Refresh the weekly catalogue by regenerating availableChampions and availableWeapons.
+	 * Refresh the weekly catalogue by generating new champions and champions.
 	 */
 	public void generateCatalogue() {
 		generateChampions();
@@ -74,49 +76,77 @@ public class Shop {
 	}
 	
 	/**
-	 * Refresh the available champions by populating with random but unique champions from allChampions.
+	 * Refresh the available champions in the shop.
+	 * The champions are randomly selected but they must not already be in shop or any teams.
+	 * If there is not enough unique champions to populate the shop, then populate with any champion.
 	 */
 	public void generateChampions() {
-        availableChampions = new ArrayList<Champion>();
-        while (availableChampions.size() < config.NUM_TEAMS) {
-        	Champion champion = getRandomChampion();
-        	if (!availableChampions.contains(champion)) {
-        		availableChampions.add(champion);
-        	}
-        }
+		ArrayList<Champion> championsLeft = new ArrayList<Champion>(gameManager.getAllChampions());
+		for (Team team : gameManager.getTeams()) {
+			for (Champion champion : team.getAllChampions()) {
+				if (championsLeft.contains(champion)) {
+					championsLeft.remove(champion);
+				}
+			}
+		}
+		availableChampions = new ArrayList<Champion>();
+		if (championsLeft.size() < config.NUM_TEAMS) {
+			championsLeft = new ArrayList<Champion>(gameManager.getAllChampions());
+			System.out.println("WARNING: Not enough champions available to create a unique shop catalogue!");
+		}
+		for (int i = 0; i < config.NUM_TEAMS; i++) {
+			Champion randomChampion = getRandomChampion(championsLeft);
+			availableChampions.add(randomChampion);
+			championsLeft.remove(randomChampion);
+		}
 	}
 	
 	/**
-	 * Return a randomly chosen champion from allChampions.
+	 * Return a randomly chosen champion from the given list.
 	 * @return the randomly chosen champion
 	 */
-	public Champion getRandomChampion() {
+	public Champion getRandomChampion(ArrayList<Champion> champions) {
 		Random random = new Random();
-		int index = random.nextInt(GameManager.getInstance().getAllChampions().size());
-		return GameManager.getInstance().getAllChampions().get(index);
+		int index = random.nextInt(champions.size());
+		return champions.get(index);
 	}
     
 	/**
-	 * Refresh the available weapons by populating with random but unique weapons from allWeapons.
+	 * Refresh the available weapons by populating with random weapons.
 	 */
 	public void generateWeapons() {
+		ArrayList<Weapon> weaponsLeft = new ArrayList<Weapon>(gameManager.getAllWeapons()); 
 		availableWeapons = new ArrayList<Weapon>();
-        while (availableWeapons.size() < config.NUM_TEAMS) {
-        	Weapon weapon = getRandomWeapon();
-        	if (!availableWeapons.contains(weapon)) {
-        		availableWeapons.add(weapon);
-        	}
+        for (int i = 0; i < config.NUM_TEAMS; i++) {
+    		Weapon randomWeapon = getRandomWeapon(weaponsLeft);
+			availableWeapons.add(randomWeapon);
+    		weaponsLeft.remove(randomWeapon);
         }
 	}
 	
 	/**
-	 * Return a randomly chosen weapon from allWeapons.
+	 * Return a randomly chosen weapon from all weapons.
 	 * @return the randomly chosen weapon
 	 */
-	public Weapon getRandomWeapon() {
+	public Weapon getRandomWeapon(ArrayList<Weapon> weapons) {
 		Random random = new Random();
-		int index = random.nextInt(GameManager.getInstance().getAllWeapons().size());
-		return GameManager.getInstance().getAllWeapons().get(index);
+		int index = random.nextInt(weapons.size());
+		return weapons.get(index);
 	}
 
+	/**
+	 * Rmove the given champion from available champions.
+	 * @param champion the champion to remove
+	 */
+	public void removeChampion(Champion champion) {
+		availableChampions.remove(champion);
+	}
+	
+	/**
+	 * Remove the given weapon from available weapons.
+	 * @param weapon the weapon to remove
+	 */
+	public void removeWeapon(Weapon weapon) {
+		availableWeapons.remove(weapon);
+	}
 }

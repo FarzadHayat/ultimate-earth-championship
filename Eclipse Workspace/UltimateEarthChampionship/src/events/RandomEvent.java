@@ -1,9 +1,5 @@
 package events;
 
-import champion.Champion;
-import main.GameEnvironment;
-
-
 public abstract class RandomEvent {
 
 	/**

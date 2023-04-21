@@ -8,7 +8,6 @@ import views.TabbedView;
  */
 public class GraphicalGameManager extends GameManager
 {
-	
 	private GraphicalDisplay graphicalDisplay;
 
 	/**
@@ -18,9 +17,22 @@ public class GraphicalGameManager extends GameManager
 	public void play()
 	{
 		graphicalDisplay = new GraphicalDisplay();
-		getShop().generateCatalogue();
 		TabbedView tabbedView = new TabbedView();
 		graphicalDisplay.displayView(tabbedView);
 	}
+	
+	public GraphicalDisplay getGraphicalDisplay() {
+		return graphicalDisplay;
+	}
+	
+	/**
+	 * The main method that initializes and starts the game.
+	 * @param args the command line arguments (not used)
+	 */
+	public static void main(String[] args) {
+		GameManager.setDisplayType(DisplayType.GUI);
+		GameManager.start();
+	}
+
 
 }
