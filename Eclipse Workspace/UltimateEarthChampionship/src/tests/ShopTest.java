@@ -100,7 +100,7 @@ class ShopTest {
 	}
 	
 	@Test
-	void testGetRandomWeapon_twoArray() {
+	void testGetRandomWeapon_fourArray() {
 		int numTests = 1000;
 		Weapon weapon1 = new Shield();
 		Weapon weapon2 = new Chainsaw();

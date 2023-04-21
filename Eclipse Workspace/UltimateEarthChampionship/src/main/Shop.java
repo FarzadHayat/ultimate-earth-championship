@@ -92,7 +92,7 @@ public class Shop {
 		availableChampions = new ArrayList<Champion>();
 		if (championsLeft.size() < config.NUM_TEAMS) {
 			championsLeft = new ArrayList<Champion>(gameManager.getAllChampions());
-			System.out.println("WARNING: Not enough champions available to create a unique shop catalogue!");
+			System.out.println("WARNING: Not enough champions available to create a unique shop catalogue! creating duplicate champions...");
 		}
 		for (int i = 0; i < config.NUM_TEAMS; i++) {
 			Champion randomChampion = getRandomChampion(championsLeft);
