@@ -1,24 +1,29 @@
-package views;
+package display;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import champion.Champion;
+import main.GameEnvironment;
+import main.GameManager;
+import main.Match;
 import main.Shop;
+import views.CardType;
 import weapon.Weapon;
 
-public class CommandLineView
-{
+public class CommandLineDisplay implements DisplayStrategy {
 	private static final String FILLER = "=";
 	private static final int LINE_WIDTH = 114;
 	
 	private Scanner scanner;
 	
+	private GameManager gameManager = GameManager.getInstance();
+	
 	/**
-	 * Creat a new CommandLineView object.
+	 * Creat a new CommandLineDisplay object.
 	 */
-	public CommandLineView() {
+	public CommandLineDisplay() {
 		scanner = new Scanner(System.in);
 	}
 	
@@ -106,7 +111,9 @@ public class CommandLineView
 	 * Displays the shop to the console.
 	 * @param shop The shop to display.
 	 */
-	public void displayShop(Shop shop) {
+	public void displayShop() {
+		Shop shop = gameManager.getShop();
+		
 		ArrayList<String> content = new ArrayList<>();
 		
 //		content.add(Champion.toStringHeader());
@@ -231,6 +238,60 @@ public class CommandLineView
 	 */
 	public static String getWeaponHeaderString() {
 		return "Weapon [ Name                 | Damage multiplier | Offense boost | Defense boost | Price | Price change weekly ]";
+	}
+
+	@Override
+	public void displayStory(String text) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displaySetup() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayHome() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayTeam() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayMatches() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayLiveMatch(Match match) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayMatchResults(Match match) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayWeekResults(GameEnvironment gameEnvironment) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayGameResults(GameEnvironment gameEnvironment) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -1,6 +1,6 @@
 package main;
 
-import views.MainScreen;
+import display.GraphicalDisplay;
 import views.TabbedView;
 
 /**
@@ -8,19 +8,31 @@ import views.TabbedView;
  */
 public class GraphicalGameManager extends GameManager
 {
-	
-	private MainScreen mainScreen;
+	private GraphicalDisplay graphicalDisplay;
 
 	/**
-	 * Starts the game by initializing the MainScreen.
+	 * Starts the game by initializing the GraphicalDisplay.
 	 */
 	@Override
 	public void play()
 	{
-		mainScreen = new MainScreen();
-		getShop().generateCatalogue();
+		graphicalDisplay = new GraphicalDisplay();
 		TabbedView tabbedView = new TabbedView();
-		mainScreen.displayView(tabbedView);
+		graphicalDisplay.displayView(tabbedView);
 	}
+	
+	public GraphicalDisplay getGraphicalDisplay() {
+		return graphicalDisplay;
+	}
+	
+	/**
+	 * The main method that initializes and starts the game.
+	 * @param args the command line arguments (not used)
+	 */
+	public static void main(String[] args) {
+		GameManager.setDisplayType(DisplayType.GUI);
+		GameManager.start();
+	}
+
 
 }

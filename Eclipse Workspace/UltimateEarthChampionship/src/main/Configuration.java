@@ -132,6 +132,26 @@ public class Configuration {
 	 * The amount that the prize score of matches increases each week
 	 */
 	public final int PRIZE_SCORE_WEEKLY_MODIFIER = 2;
+
+	/**
+	 * Number of champions a team can hold as chosen.
+	 */
+	public final int NUM_CHOSEN_CHAMPIONS = 4;
+	
+	/**
+	 * Number of champions a team can hold as reserve.
+	 */
+	public final int NUM_RESERVE_CHAMPIONS = 5;
+	
+	/**
+	 * Number of weapons a team can hold as reserve.
+	 */
+	public final int NUM_RESERVE_WEAPONS = 4;
+	
+	/**
+	 * The starting money for each team.
+	 */
+	public final float STARTING_MONEY = 100f;
 	
 	public float getDifficulty()
 	{

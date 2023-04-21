@@ -1,10 +1,11 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 import events.*;
+import events.RandomEvent;
+import events.RandomEventInfo;
 
 public class GameEnvironment {
 	

@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import champion.Champion;
 import main.GameManager;
 import main.Purchasable;
-import main.Shop;
 import weapon.Weapon;
 
 public class ShopView extends JPanel {
@@ -24,19 +23,32 @@ public class ShopView extends JPanel {
 		setName("Shop");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
+		addAvailableChampionsPanel();
+		addAvailableWeaponsPanel();
+	}
+
+	/**
+	 * Add a purchasable panel to display the shop's available champions.
+	 */
+	private void addAvailableChampionsPanel() {
 		ArrayList<Purchasable> availableChampions = new ArrayList<Purchasable>();
 		for (Champion champion : gameManager.getShop().getAvailableChampions()) {
 			availableChampions.add(champion);
 		}
-		PurchasableListPanel championListPanel = new PurchasableListPanel(availableChampions, CardType.CAN_BUY);
-		add(championListPanel);
-		
-		ArrayList<Purchasable>availableWeapons = new ArrayList<Purchasable>();
+		PurchasablesPanel championsPanel = new PurchasablesPanel(availableChampions, CardType.CAN_BUY);
+		add(championsPanel);
+	}
+
+	/**
+	 * Add a purchasable panel to display the shop's available weapons.
+	 */
+	private void addAvailableWeaponsPanel() {
+		ArrayList<Purchasable> availableWeapons = new ArrayList<Purchasable>();
 		for (Weapon weapon : gameManager.getShop().getAvailableWeapons()) {
 			availableWeapons.add(weapon);
 		}
-		PurchasableListPanel weaponListPanel = new PurchasableListPanel(availableWeapons, CardType.CAN_BUY);
-		add(weaponListPanel);
+		PurchasablesPanel WeaponsPanel = new PurchasablesPanel(availableWeapons, CardType.CAN_BUY);
+		add(WeaponsPanel);
 	}
 
 }

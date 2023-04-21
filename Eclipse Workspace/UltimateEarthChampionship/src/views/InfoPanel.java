@@ -1,13 +1,12 @@
 package views;
 
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.GameManager;
-import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
-import javax.swing.SwingConstants;
 
 public class InfoPanel extends JPanel {
 
@@ -28,7 +27,7 @@ public class InfoPanel extends JPanel {
 		JLabel moneyLabel = new JLabel("Money: ");
 		moneyPanel.add(moneyLabel);
 		
-		JLabel moneyValue = new JLabel(); //TODO: add player team's money here
+		JLabel moneyValue = new JLabel(String.valueOf(gameManager.getPlayerTeam().getMoney()));
 		moneyPanel.add(moneyValue);
 		
 		JPanel scorePanel = new JPanel();
@@ -38,7 +37,7 @@ public class InfoPanel extends JPanel {
 		JLabel scoreLabel = new JLabel("Score: ");
 		scorePanel.add(scoreLabel);
 		
-		JLabel scoreValue = new JLabel(); //TODO: add player team's score here
+		JLabel scoreValue = new JLabel(String.valueOf(gameManager.getPlayerTeam().getScore()));
 		scorePanel.add(scoreValue);
 		
 		JPanel weekPanel = new JPanel();

@@ -2,7 +2,6 @@ package events;
 
 import main.Team;
 
-
 public abstract class RandomEvent {
 
 	/**

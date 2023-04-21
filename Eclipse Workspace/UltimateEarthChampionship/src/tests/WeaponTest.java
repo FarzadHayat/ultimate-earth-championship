@@ -19,7 +19,7 @@ class WeaponTest
 	@Test
 	void testToString() {
 		Weapon shield = new Shield();
-		assertEquals("Weapon [Name: Shield | Damage boost: 1 | Offense boost: -1 "
-				+ "| Defense boost: 3 | Price: 10.0 | Price change weekly: 0.9]", shield.toString());
+		assertEquals("Weapon [name=Shield, damageMultiplier=1, offenseBoost=-1, "
+				+ "defenseBoost=3, price=10.0, priceChangeWeekly=0.9]", shield.toString());
 	}
 }
