@@ -108,6 +108,30 @@ public class Configuration {
 	 */
 	public final int NUM_TEAMS = 4;
 	
+	/**
+	 * The base amount of money given as a prize to the winning team
+	 */
+	public final float PRIZE_MONEY_BASE = 25f;
+	
+	/**
+	 * The amount that both teams score increases the prize money allotted
+	 */
+	public final float PRIZE_MONEY_SCORE_SCALE_FACTOR = 0.25f;
+	
+	/**
+	 * The multiplier of the prize money for the losing team
+	 */
+	public final float PRIZE_MONEY_FOR_LOSER = 0.40f;
+	
+	/**
+	 * The base amount of score given to the winning team
+	 */
+	public final int PRIZE_SCORE_BASE = 5;
+	
+	/**
+	 * The amount that the prize score of matches increases each week
+	 */
+	public final int PRIZE_SCORE_WEEKLY_MODIFIER = 2;
 	
 	public float getDifficulty()
 	{

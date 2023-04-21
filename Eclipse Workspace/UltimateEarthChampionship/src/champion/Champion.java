@@ -239,7 +239,7 @@ public abstract class Champion implements Purchasable {
 	 */
 	public int getOffense()
 	{
-		return offense;
+		return offense + weapon.getOffenseBoost();
 	}
 	
 	/**
@@ -257,7 +257,7 @@ public abstract class Champion implements Purchasable {
 	 */
 	public int getDefense()
 	{
-		return defense;
+		return defense + weapon.getDefenseBoost();
 	}
 	
 	/**
@@ -344,6 +344,15 @@ public abstract class Champion implements Purchasable {
 		price = price * priceChangeWeekly;
 	}
 	// ---------
+	
+	/**
+	 * Returns the damage dealt by the champion in an attack
+	 * @return the damage dealt by the champion in an attack
+	 */
+	public float getDamage()
+	{
+		return (getOffense() * weapon.getDamageMultiplier());
+	}
 	
 	/**
 	 * Returns the champions weapon
