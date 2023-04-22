@@ -13,6 +13,8 @@ public class TabbedView extends JPanel {
 	private TeamView teamView;
 
 	private ShopView shopView;
+	
+	private MatchSelectionView matchSelectionView;
 
 	/**
 	 * Create the panel.
@@ -31,6 +33,9 @@ public class TabbedView extends JPanel {
 
 		shopView = new ShopView();
 		tabbedPane.addTab(shopView.getName(), null, shopView, "Buy new champion and weapons");
+		
+		matchSelectionView = new MatchSelectionView();
+		tabbedPane.addTab(matchSelectionView.getName(), null, matchSelectionView, "Select a match and fight");
 	}
 	
 	public void showTeamView() {
@@ -39,6 +44,10 @@ public class TabbedView extends JPanel {
 	
 	public void showShopView() {
 		tabbedPane.setSelectedComponent(shopView);
+	}
+	
+	public void showMatchSelectionView() {
+		tabbedPane.setSelectedComponent(matchSelectionView);
 	}
 
 }

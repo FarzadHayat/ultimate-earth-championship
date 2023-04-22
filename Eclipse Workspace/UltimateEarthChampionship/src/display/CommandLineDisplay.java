@@ -9,6 +9,7 @@ import model.Champion;
 import model.GameEnvironment;
 import model.Match;
 import model.Shop;
+import model.Team;
 import model.Weapon;
 import views.CardType;
 
@@ -265,7 +266,13 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayMatches() {
+	public void displayMatchSelection() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayMatchSetup(Team team) {
 		// TODO Auto-generated method stub
 		
 	}

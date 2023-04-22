@@ -24,7 +24,7 @@ class DumbMatchTest {
 		a.add(new SunTzu());
 		a.add(new WilliamShakespeare());
 		
-		Team team1 = new Team(false, a);
+		Team team1 = new Team(false, "", a);
 		
 		a = new ArrayList<Champion>();
 		
@@ -33,7 +33,7 @@ class DumbMatchTest {
 		a.add(new AdamSmith());
 		a.add(new CharlesDarwin());
 		
-		Team team2 = new Team(false, a);
+		Team team2 = new Team(false, "", a);
 		
 		DumbMatch testMatch = new DumbMatch(team1, team2);
 		
