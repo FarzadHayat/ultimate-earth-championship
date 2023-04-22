@@ -19,11 +19,26 @@ import model.GameEnvironment;
 import model.Shop;
 import model.Team;
 import model.Weapon;
+import weapons.Axe;
+import weapons.BaseballBat;
 import weapons.Chainsaw;
+import weapons.Dagger;
+import weapons.FryingPan;
 import weapons.GolfClub;
+import weapons.Katana;
+import weapons.Mace;
+import weapons.Machete;
+import weapons.Nunchucks;
 import weapons.Pickaxe;
+import weapons.Pitchfork;
+import weapons.Scythe;
 import weapons.Shield;
+import weapons.Shovel;
+import weapons.Shuriken;
 import weapons.Sledgehammer;
+import weapons.Spear;
+import weapons.Sword;
+import weapons.TennisRacket;
 
 /**
  * The GameManager class is an abstract class that defines the basic functionality of a game manager.
@@ -85,9 +100,12 @@ public abstract class GameManager
     			List.of(new AdamSmith(), new BernardMontgomery(), new CharlesDarwin(), new Confucius(), new GeorgeWashington(),
     					new JohnDoe(), new JohnFKennedy(), new JohnMKeynes(), new JosefStalin(), new KingGeorge())
     			);
-    	allWeapons = new ArrayList<Weapon>(
-    			List.of(new Chainsaw(), new GolfClub(), new Pickaxe(), new Sledgehammer(), new Shield())
-    			);
+    	allWeapons = new ArrayList<Weapon>(List.of(
+    			new Axe(), new BaseballBat(), new Chainsaw(), new Dagger(), new FryingPan(),
+    			new GolfClub(), new Katana(), new Mace(), new Machete(), new Nunchucks(),
+    			new Pickaxe(), new Pitchfork(), new Scythe(), new Shield(), new Shovel(),
+    			new Shuriken(), new Sledgehammer(), new Spear(), new Sword(), new TennisRacket()
+    			));
     	playerTeam = new Team(true, new ArrayList<Champion>(allChampions.subList(0, 4)));
     	teams.add(playerTeam);
     	
