@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 /**
  * Class Weapon
  */
-public abstract class Weapon implements Purchasable {
+public abstract class Weapon implements Purchasable, Cloneable {
 	
 	/**
 	 * Fields
@@ -212,5 +212,18 @@ public abstract class Weapon implements Purchasable {
 				"Weapon [name=%s, damageMultiplier=%s, offenseBoost=%s, defenseBoost=%s, price=%s, priceChangeWeekly=%s]",
 				name, damageMultiplier, offenseBoost, defenseBoost, price, priceChangeWeekly);
 	}
+	
+	/**
+	 * Create a clone of the Weapon with the same stats.
+	 */
+	@Override
+	public Weapon clone() {
+        try {
+            return (Weapon) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }

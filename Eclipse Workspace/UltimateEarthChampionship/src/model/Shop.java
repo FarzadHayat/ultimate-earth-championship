@@ -130,7 +130,7 @@ public class Shop {
 	public Weapon getRandomWeapon(ArrayList<Weapon> weapons) {
 		Random random = new Random();
 		int index = random.nextInt(weapons.size());
-		return weapons.get(index);
+		return weapons.get(index).clone();
 	}
 
 	/**
