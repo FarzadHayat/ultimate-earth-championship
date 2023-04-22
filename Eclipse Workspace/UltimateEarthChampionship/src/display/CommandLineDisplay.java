@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import champion.Champion;
 import manager.GameManager;
+import model.Champion;
 import model.GameEnvironment;
 import model.Match;
 import model.Shop;
+import model.Weapon;
 import views.CardType;
-import weapon.Weapon;
 
 public class CommandLineDisplay implements DisplayStrategy {
 	private static final String FILLER = "=";

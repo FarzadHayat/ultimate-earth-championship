@@ -3,8 +3,8 @@ package match;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import champion.Champion;
 import manager.GameManager;
+import model.Champion;
 import model.Configuration;
 import model.Team;
 

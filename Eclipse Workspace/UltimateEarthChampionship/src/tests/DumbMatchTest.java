@@ -8,9 +8,9 @@ import java.util.regex.MatchResult;
 import org.junit.jupiter.api.Test;
 
 import match.DumbMatch;
+import model.Champion;
 import model.Team;
-import champion.*;
-import champion.champions.*;
+import champions.*;
 
 class DumbMatchTest {
 

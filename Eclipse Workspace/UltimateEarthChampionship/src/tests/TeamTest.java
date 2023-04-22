@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import champion.Champion;
-import champion.champions.CharlesDarwin;
-import champion.champions.Confucius;
-import champion.champions.QueenVictoria;
-import champion.champions.StephenHawking;
-import champion.champions.SunTzu;
+import champions.CharlesDarwin;
+import champions.Confucius;
+import champions.QueenVictoria;
+import champions.StephenHawking;
+import champions.SunTzu;
 import exception.FullTeamException;
+import model.Champion;
 import model.Team;
 
 class TeamTest {

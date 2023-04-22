@@ -3,27 +3,27 @@ package manager;
 import java.util.ArrayList;
 import java.util.List;
 
-import champion.Champion;
-import champion.champions.AdamSmith;
-import champion.champions.BernardMontgomery;
-import champion.champions.CharlesDarwin;
-import champion.champions.Confucius;
-import champion.champions.GeorgeWashington;
-import champion.champions.JohnDoe;
-import champion.champions.JohnFKennedy;
-import champion.champions.JohnMKeynes;
-import champion.champions.JosefStalin;
-import champion.champions.KingGeorge;
+import champions.AdamSmith;
+import champions.BernardMontgomery;
+import champions.CharlesDarwin;
+import champions.Confucius;
+import champions.GeorgeWashington;
+import champions.JohnDoe;
+import champions.JohnFKennedy;
+import champions.JohnMKeynes;
+import champions.JosefStalin;
+import champions.KingGeorge;
 import display.DisplayType;
+import model.Champion;
 import model.GameEnvironment;
 import model.Shop;
 import model.Team;
-import weapon.Weapon;
-import weapon.weapons.Chainsaw;
-import weapon.weapons.GolfClub;
-import weapon.weapons.Pickaxe;
-import weapon.weapons.Shield;
-import weapon.weapons.Sledgehammer;
+import model.Weapon;
+import weapons.Chainsaw;
+import weapons.GolfClub;
+import weapons.Pickaxe;
+import weapons.Shield;
+import weapons.Sledgehammer;
 
 /**
  * The GameManager class is an abstract class that defines the basic functionality of a game manager.

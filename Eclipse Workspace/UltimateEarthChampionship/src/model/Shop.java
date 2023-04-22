@@ -3,9 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
-import champion.Champion;
 import manager.GameManager;
-import weapon.Weapon;
 
 
 /**

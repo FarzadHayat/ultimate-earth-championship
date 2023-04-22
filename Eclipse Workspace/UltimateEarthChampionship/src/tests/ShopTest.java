@@ -11,18 +11,18 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import champion.Champion;
-import champion.champions.AdamSmith;
-import champion.champions.JohnDoe;
+import champions.AdamSmith;
+import champions.JohnDoe;
 import manager.GameManager;
+import model.Champion;
 import model.Configuration;
 import model.Shop;
 import model.Team;
-import weapon.Weapon;
-import weapon.weapons.Chainsaw;
-import weapon.weapons.Pickaxe;
-import weapon.weapons.Shield;
-import weapon.weapons.Sledgehammer;
+import model.Weapon;
+import weapons.Chainsaw;
+import weapons.Pickaxe;
+import weapons.Shield;
+import weapons.Sledgehammer;
 
 class ShopTest {
 

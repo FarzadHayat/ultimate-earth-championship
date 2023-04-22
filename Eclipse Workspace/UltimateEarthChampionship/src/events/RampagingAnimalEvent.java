@@ -1,6 +1,6 @@
 package events;
 
-import champion.Champion;
+import model.Champion;
 import model.Team;
 
 public class RampagingAnimalEvent extends RandomEvent {

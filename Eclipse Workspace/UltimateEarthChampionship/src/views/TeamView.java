@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import champion.Champion;
 import manager.GameManager;
+import model.Champion;
 import model.Purchasable;
-import weapon.Weapon;
+import model.Weapon;
 
 public class TeamView extends JPanel {
 
