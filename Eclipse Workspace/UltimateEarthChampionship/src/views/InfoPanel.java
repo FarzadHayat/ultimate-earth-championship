@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main.GameManager;
+import manager.GameManager;
 
 public class InfoPanel extends JPanel {
 

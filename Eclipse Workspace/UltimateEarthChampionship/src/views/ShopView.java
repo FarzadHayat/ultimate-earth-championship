@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import champion.Champion;
-import main.GameManager;
-import main.Purchasable;
-import weapon.Weapon;
+import manager.GameManager;
+import model.Champion;
+import model.Purchasable;
+import model.Weapon;
 
 public class ShopView extends JPanel {
 

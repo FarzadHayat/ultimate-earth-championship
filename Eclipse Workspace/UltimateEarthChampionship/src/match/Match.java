@@ -3,10 +3,10 @@ package match;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import champion.Champion;
-import main.Configuration;
-import main.GameManager;
-import main.Team;
+import manager.GameManager;
+import model.Champion;
+import model.Configuration;
+import model.Team;
 
 public abstract class Match {
 	

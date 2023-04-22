@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import main.Purchasable;
+import model.Purchasable;
 
 public class PurchasablesPanel extends JPanel {
 

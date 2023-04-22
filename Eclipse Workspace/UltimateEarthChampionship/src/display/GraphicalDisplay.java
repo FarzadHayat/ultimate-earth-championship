@@ -5,8 +5,9 @@ import java.awt.Font;
 
 import javax.swing.JFrame;
 
-import main.GameEnvironment;
-import main.Match;
+import model.GameEnvironment;
+import model.Match;
+import model.Team;
 import views.TabbedView;
 
 public class GraphicalDisplay implements DisplayStrategy {
@@ -79,7 +80,13 @@ public class GraphicalDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayMatches() {
+	public void displayMatchSelection() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayMatchSetup(Team team) {
 		// TODO Auto-generated method stub
 		
 	}

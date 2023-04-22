@@ -1,7 +1,7 @@
 package events;
 
-import champion.Champion;
-import main.Team;
+import model.Champion;
+import model.Team;
 
 public class RadiationPoisoningEvent extends RandomEvent {
 

@@ -7,10 +7,10 @@ import java.util.regex.MatchResult;
 
 import org.junit.jupiter.api.Test;
 
-import main.Team;
 import match.DumbMatch;
-import champion.*;
-import champion.champions.*;
+import model.Champion;
+import model.Team;
+import champions.*;
 
 class DumbMatchTest {
 
@@ -24,7 +24,7 @@ class DumbMatchTest {
 		a.add(new SunTzu());
 		a.add(new WilliamShakespeare());
 		
-		Team team1 = new Team(false, a);
+		Team team1 = new Team(false, "", a);
 		
 		a = new ArrayList<Champion>();
 		
@@ -33,7 +33,7 @@ class DumbMatchTest {
 		a.add(new AdamSmith());
 		a.add(new CharlesDarwin());
 		
-		Team team2 = new Team(false, a);
+		Team team2 = new Team(false, "", a);
 		
 		DumbMatch testMatch = new DumbMatch(team1, team2);
 		

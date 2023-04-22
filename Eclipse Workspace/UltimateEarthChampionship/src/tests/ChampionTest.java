@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import champion.Champion;
-import champion.champions.CharlesDarwin;
-import champion.champions.JohnDoe;
+import champions.CharlesDarwin;
+import champions.JohnDoe;
+import model.Champion;
 
 class ChampionTest {
 

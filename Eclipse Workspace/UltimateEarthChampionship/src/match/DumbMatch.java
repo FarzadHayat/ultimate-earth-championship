@@ -1,8 +1,9 @@
 package match;
 
-import main.Team;
-import weapon.Weapon;
-import champion.Champion;
+import model.Champion;
+import model.Team;
+import model.Weapon;
+
 import java.util.*;
 
 public class DumbMatch extends Match {

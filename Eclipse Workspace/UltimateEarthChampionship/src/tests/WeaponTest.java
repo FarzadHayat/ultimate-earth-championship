@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import main.Purchasable;
-import weapon.Weapon;
-import weapon.weapons.Shield;
+import model.Purchasable;
+import model.Weapon;
+import weapons.Shield;
 
 class WeaponTest
 {

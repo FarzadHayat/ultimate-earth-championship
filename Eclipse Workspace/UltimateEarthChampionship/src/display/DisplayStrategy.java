@@ -1,7 +1,8 @@
 package display;
 
-import main.GameEnvironment;
-import main.Match;
+import model.GameEnvironment;
+import model.Match;
+import model.Team;
 
 public interface DisplayStrategy {
 	public void displayStory(String text);
@@ -9,7 +10,8 @@ public interface DisplayStrategy {
 	public void displayHome();
 	public void displayTeam();
 	public void displayShop();
-	public void displayMatches();
+	public void displayMatchSelection();
+	public void displayMatchSetup(Team team);
 	public void displayLiveMatch(Match match);
 	public void displayMatchResults(Match match);
 	public void displayWeekResults(GameEnvironment gameEnvironment);
