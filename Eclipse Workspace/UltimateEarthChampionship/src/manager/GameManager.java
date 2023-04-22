@@ -3,27 +3,10 @@ package manager;
 import java.util.ArrayList;
 import java.util.List;
 
-import champions.AdamSmith;
-import champions.BernardMontgomery;
-import champions.CharlesDarwin;
-import champions.Confucius;
-import champions.GeorgeWashington;
-import champions.JohnDoe;
-import champions.JohnFKennedy;
-import champions.JohnMKeynes;
-import champions.JosefStalin;
-import champions.KingGeorge;
 import display.DisplayType;
-import model.Champion;
-import model.GameEnvironment;
-import model.Shop;
-import model.Team;
-import model.Weapon;
-import weapons.Chainsaw;
-import weapons.GolfClub;
-import weapons.Pickaxe;
-import weapons.Shield;
-import weapons.Sledgehammer;
+import model.*;
+import champions.*;
+import weapons.*;
 
 /**
  * The GameManager class is an abstract class that defines the basic functionality of a game manager.
@@ -77,20 +60,40 @@ public abstract class GameManager
 	 * Initialize the necessary starting objects for the game.
 	 */
 	public void initialize() {
-		shop = new Shop();
+		// Game environment
 		gameEnvironment = new GameEnvironment(1);
-		teams = new ArrayList<Team>();
 		
-		allChampions = new ArrayList<Champion>(
-    			List.of(new AdamSmith(), new BernardMontgomery(), new CharlesDarwin(), new Confucius(), new GeorgeWashington(),
-    					new JohnDoe(), new JohnFKennedy(), new JohnMKeynes(), new JosefStalin(), new KingGeorge())
-    			);
+		// Teams
+		playerTeam = new Team(true, new ArrayList<Champion>(List.of(
+				new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery())));
+		Team team1 = new Team(false, new ArrayList<Champion>(List.of(
+				new Confucius(), new DavidLange(), new DouglasMacarthur(), new DwightEisenhower())));
+		Team team2 = new Team(false, new ArrayList<Champion>(List.of(
+				new FranzFerdinand(), new GeorgeWashington(), new GhengisKhan(), new HarryTruman())));
+		Team team3 = new Team(false, new ArrayList<Champion>(List.of(
+				new JohnBrowning(), new JohnDoe(), new JohnFKennedy(), new JohnMKeynes())));
+		teams = new ArrayList<Team>(List.of(playerTeam, team1, team2, team3));
+		
+		// All champions
+		allChampions = new ArrayList<Champion>(List.of(
+				new CharlesDarwin(), new ElvisPresley(), new JoeRogan(), new JosefStalin(),
+    			new KingGeorge(), new MarcusAurelius(), new MargaretThatcher(), new MarieCurie(), new MarkRickerby(),
+    			new MatthiasGalster(), new MikolosHorthy(), new NapoleonBonaparte(), new NeilArmstrong(), new NikitaKrustchev(),
+    			new PhilGarland(), new PhilippePetain(), new QueenVictoria(), new RobertMuldoon(), new RudyardKipling(),
+    			new ShokoAsahara(), new StephenHawking(), new SunTzu(), new TedKaczynski(), new TimBell(), new WilliamShakespeare()
+    			));
+		allChampions.addAll(playerTeam.getAllChampions());
+		allChampions.addAll(team1.getAllChampions());
+		allChampions.addAll(team2.getAllChampions());
+		allChampions.addAll(team3.getAllChampions());
+		
+		// All weapons
     	allWeapons = new ArrayList<Weapon>(
     			List.of(new Chainsaw(), new GolfClub(), new Pickaxe(), new Sledgehammer(), new Shield())
     			);
-    	playerTeam = new Team(true, new ArrayList<Champion>(allChampions.subList(0, 4)));
-    	teams.add(playerTeam);
     	
+    	// Shop
+    	shop = new Shop();
     	getShop().generateCatalogue();
 	}
 	
