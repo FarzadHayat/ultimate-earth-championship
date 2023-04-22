@@ -3,17 +3,17 @@ package weapons;
 import model.Weapon;
 
 /**
- * Represents a Pickaxe weapon.
+ * Represents a Frying Pan weapon.
  */
-public class Pickaxe extends Weapon {
+public class FryingPan extends Weapon {
 	
 	// Name
-	private static final String name = "Pickaxe";
+	private static final String name = "Frying Pan";
 	
 	// Stat Boosts
 	private static final int damageMultiplier = 1;
-	private static final int offenseBoost = 1;
-	private static final int defenseBoost = 1;
+	private static final int offenseBoost = 0;
+	private static final int defenseBoost = 2;
 	
 	// Price
 	private static final float startingPrice = 10f;
@@ -23,9 +23,9 @@ public class Pickaxe extends Weapon {
 	private static final String imageFileName = "";
 	
 	/**
-     * Creates a new Pickaxe object with default attribute values.
+     * Creates a new Frying Pan object with default attribute values.
      */
-	public Pickaxe() {
+	public FryingPan() {
 		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, false);
 	}
 	

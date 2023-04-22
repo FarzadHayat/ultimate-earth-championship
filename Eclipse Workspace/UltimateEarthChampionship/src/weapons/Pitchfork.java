@@ -3,12 +3,12 @@ package weapons;
 import model.Weapon;
 
 /**
- * Represents a Pickaxe weapon.
+ * Represents a Pitchfork weapon.
  */
-public class Pickaxe extends Weapon {
+public class Pitchfork extends Weapon {
 	
 	// Name
-	private static final String name = "Pickaxe";
+	private static final String name = "Pitchfork";
 	
 	// Stat Boosts
 	private static final int damageMultiplier = 1;
@@ -23,9 +23,9 @@ public class Pickaxe extends Weapon {
 	private static final String imageFileName = "";
 	
 	/**
-     * Creates a new Pickaxe object with default attribute values.
+     * Creates a new Pitchfork object with default attribute values.
      */
-	public Pickaxe() {
+	public Pitchfork() {
 		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, false);
 	}
 	

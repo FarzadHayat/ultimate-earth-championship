@@ -3,12 +3,12 @@ package weapons;
 import model.Weapon;
 
 /**
- * Represents a Pickaxe weapon.
+ * Represents a Tennis Racket weapon.
  */
-public class Pickaxe extends Weapon {
+public class TennisRacket extends Weapon {
 	
 	// Name
-	private static final String name = "Pickaxe";
+	private static final String name = "Tennis Racket";
 	
 	// Stat Boosts
 	private static final int damageMultiplier = 1;
@@ -23,9 +23,9 @@ public class Pickaxe extends Weapon {
 	private static final String imageFileName = "";
 	
 	/**
-     * Creates a new Pickaxe object with default attribute values.
+     * Creates a new Tennis Racket object with default attribute values.
      */
-	public Pickaxe() {
+	public TennisRacket() {
 		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, false);
 	}
 	

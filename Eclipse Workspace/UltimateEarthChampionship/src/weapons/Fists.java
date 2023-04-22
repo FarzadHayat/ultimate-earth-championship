@@ -23,7 +23,7 @@ public class Fists extends Weapon {
 	private static final String imageFileName = "";
 	
 	/**
-     * Creates a new Fist object with default attribute values.
+     * Creates a new Fists object with default attribute values.
      */
 	public Fists() {
 		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, true);

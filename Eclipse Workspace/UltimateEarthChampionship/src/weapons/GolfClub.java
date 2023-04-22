@@ -23,7 +23,7 @@ public class GolfClub extends Weapon {
 	private static final String imageFileName = "";
 	
 	/**
-     * Creates a new GolfClub object with default attribute values.
+     * Creates a new Golf Club object with default attribute values.
      */
 	public GolfClub() {
 		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, false);
