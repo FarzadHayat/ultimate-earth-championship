@@ -133,9 +133,10 @@ public class Team {
 	 * @param isPlayer is this team a player
 	 * @param startingChampions ArrayList of the four starting champions
 	 */
-	public Team(boolean isPlayer, ArrayList<Champion> startingChampions)
+	public Team(boolean isPlayer, String name, ArrayList<Champion> startingChampions)
 	{
 		this.isPlayer = isPlayer;
+		this.name = name;
 		
 		this.money = config.STARTING_MONEY;
 		

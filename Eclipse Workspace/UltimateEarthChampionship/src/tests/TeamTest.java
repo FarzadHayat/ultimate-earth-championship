@@ -32,7 +32,7 @@ class TeamTest {
 		champions.add(new QueenVictoria());
 		champions.add(new StephenHawking());
 		
-		testTeam = new Team(false, champions);
+		testTeam = new Team(false, "", champions);
 	}
 	
 	@Test

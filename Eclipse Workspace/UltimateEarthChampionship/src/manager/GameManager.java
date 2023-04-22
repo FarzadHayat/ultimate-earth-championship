@@ -64,15 +64,15 @@ public abstract class GameManager
 		gameEnvironment = new GameEnvironment(1);
 		
 		// Teams
-		playerTeam = new Team(true, new ArrayList<Champion>(List.of(
+		playerTeam = new Team(true, "Player", new ArrayList<Champion>(List.of(
 				new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery())));
-		Team team1 = new Team(false, new ArrayList<Champion>(List.of(
+		Team team1 = new Team(false, "Team 1", new ArrayList<Champion>(List.of(
 				new Confucius(), new DavidLange(), new DouglasMacarthur(), new DwightEisenhower())));
-		Team team2 = new Team(false, new ArrayList<Champion>(List.of(
+		Team team2 = new Team(false, "Team 2", new ArrayList<Champion>(List.of(
 				new FranzFerdinand(), new GeorgeWashington(), new GhengisKhan(), new HarryTruman())));
-		Team team3 = new Team(false, new ArrayList<Champion>(List.of(
+		Team team3 = new Team(false, "Team 3", new ArrayList<Champion>(List.of(
 				new JohnBrowning(), new JohnDoe(), new JohnFKennedy(), new JohnMKeynes())));
-		teams = new ArrayList<Team>(List.of(playerTeam, team1, team2, team3));
+		teams = new ArrayList<Team>(List.of(team1, team2, team3));
 		
 		// All champions
 		allChampions = new ArrayList<Champion>(List.of(
