@@ -219,7 +219,9 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	@Override
 	public Weapon clone() {
         try {
-            return (Weapon) super.clone();
+        	Weapon weapon = (Weapon) super.clone();
+        	weapon.setImage(new ImageIcon(weapon.getImage().getImage()));
+            return weapon;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;

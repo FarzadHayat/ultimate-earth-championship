@@ -107,7 +107,7 @@ public class Shop {
 	public Champion getRandomChampion(ArrayList<Champion> champions) {
 		Random random = new Random();
 		int index = random.nextInt(champions.size());
-		return champions.get(index);
+		return champions.get(index).clone();
 	}
     
 	/**

@@ -11,7 +11,7 @@ import weapons.Fists;
 *Champion Class, responsible for data and functionality related to each individual champion competing.
 *
 */
-public abstract class Champion implements Purchasable {
+public abstract class Champion implements Purchasable, Cloneable {
 
 	private Configuration config = Configuration.getInstance();
 	
@@ -362,6 +362,15 @@ public abstract class Champion implements Purchasable {
 	}
 	
 	/**
+	 * Set the champion weapon to the given weapon
+	 * @return weapon the new weapon to set
+	 */
+	public void setWeapon(Weapon weapon)
+	{
+		this.weapon = weapon;
+	}
+	
+	/**
 	 * Removes the champions weapon, replacing it with their fists
 	 */
 	public void removeWeapon()
@@ -398,6 +407,21 @@ public abstract class Champion implements Purchasable {
 	public ImageIcon getImage() {
 		return image;
 	}
+	
 
+	/**
+	 * Create a clone of the Champion with the same stats.
+	 */
+	@Override
+	public Champion clone() {
+        try {
+        	Champion champion = (Champion) super.clone();
+        	champion.setWeapon(champion.getWeapon().clone());
+            return champion;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 	
 }
