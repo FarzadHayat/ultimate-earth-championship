@@ -1,7 +1,7 @@
 package display;
 
-import main.GameEnvironment;
-import main.Match;
+import model.GameEnvironment;
+import model.Match;
 
 public interface DisplayStrategy {
 	public void displayStory(String text);

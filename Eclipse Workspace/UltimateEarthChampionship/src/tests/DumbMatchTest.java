@@ -7,8 +7,8 @@ import java.util.regex.MatchResult;
 
 import org.junit.jupiter.api.Test;
 
-import main.Team;
 import match.DumbMatch;
+import model.Team;
 import champion.*;
 import champion.champions.*;
 

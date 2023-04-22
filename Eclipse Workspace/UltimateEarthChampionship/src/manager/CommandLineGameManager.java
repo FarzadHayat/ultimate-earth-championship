@@ -1,6 +1,7 @@
-package main;
+package manager;
 
 import display.CommandLineDisplay;
+import display.DisplayType;
 
 /**
  * A subclass of GameManager that represents the command line version of the game.

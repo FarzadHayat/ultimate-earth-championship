@@ -6,8 +6,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import champion.Champion;
-import main.GameManager;
-import main.Purchasable;
+import manager.GameManager;
+import model.Purchasable;
 import weapon.Weapon;
 
 public class TeamView extends JPanel {

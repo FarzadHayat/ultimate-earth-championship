@@ -1,4 +1,4 @@
-package main;
+package model;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -7,6 +7,7 @@ import champion.Champion;
 import exception.FullTeamException;
 import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
+import manager.GameManager;
 import weapon.Weapon;
 
 public class Team {

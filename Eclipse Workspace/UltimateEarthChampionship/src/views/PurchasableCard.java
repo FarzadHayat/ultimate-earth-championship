@@ -19,9 +19,9 @@ import display.GraphicalDisplay;
 import exception.FullTeamException;
 import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
-import main.GameManager;
-import main.GraphicalGameManager;
-import main.Purchasable;
+import manager.GameManager;
+import manager.GraphicalGameManager;
+import model.Purchasable;
 
 public class PurchasableCard extends JPanel {
 

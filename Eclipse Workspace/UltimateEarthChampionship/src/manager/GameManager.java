@@ -1,4 +1,4 @@
-package main;
+package manager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,10 @@ import champion.champions.JohnFKennedy;
 import champion.champions.JohnMKeynes;
 import champion.champions.JosefStalin;
 import champion.champions.KingGeorge;
+import display.DisplayType;
+import model.GameEnvironment;
+import model.Shop;
+import model.Team;
 import weapon.Weapon;
 import weapon.weapons.Chainsaw;
 import weapon.weapons.GolfClub;

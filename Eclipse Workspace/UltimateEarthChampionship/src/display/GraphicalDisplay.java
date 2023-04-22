@@ -5,8 +5,8 @@ import java.awt.Font;
 
 import javax.swing.JFrame;
 
-import main.GameEnvironment;
-import main.Match;
+import model.GameEnvironment;
+import model.Match;
 import views.TabbedView;
 
 public class GraphicalDisplay implements DisplayStrategy {

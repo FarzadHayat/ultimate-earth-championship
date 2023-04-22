@@ -1,6 +1,6 @@
 package match;
 
-import main.Team;
+import model.Team;
 
 public class MatchResult {
 	

@@ -2,8 +2,8 @@ package champion;
 
 import javax.swing.ImageIcon;
 
-import main.Configuration;
-import main.Purchasable;
+import model.Configuration;
+import model.Purchasable;
 import weapon.Weapon;
 import weapon.weapons.Fists;
 

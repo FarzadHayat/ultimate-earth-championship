@@ -1,6 +1,6 @@
 package events;
 
-import main.Team;
+import model.Team;
 
 public abstract class RandomEvent {
 

@@ -5,10 +5,10 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import champion.Champion;
-import main.GameEnvironment;
-import main.GameManager;
-import main.Match;
-import main.Shop;
+import manager.GameManager;
+import model.GameEnvironment;
+import model.Match;
+import model.Shop;
 import views.CardType;
 import weapon.Weapon;
 

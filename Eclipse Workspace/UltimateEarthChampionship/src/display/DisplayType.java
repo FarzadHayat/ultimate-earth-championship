@@ -1,4 +1,4 @@
-package main;
+package display;
 
 /**
  * An enum representing the display type for the game.

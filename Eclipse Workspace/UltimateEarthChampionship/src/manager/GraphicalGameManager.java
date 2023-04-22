@@ -1,5 +1,6 @@
-package main;
+package manager;
 
+import display.DisplayType;
 import display.GraphicalDisplay;
 import views.TabbedView;
 

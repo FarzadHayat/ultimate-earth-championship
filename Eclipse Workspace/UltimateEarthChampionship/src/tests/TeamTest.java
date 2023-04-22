@@ -14,7 +14,7 @@ import champion.champions.QueenVictoria;
 import champion.champions.StephenHawking;
 import champion.champions.SunTzu;
 import exception.FullTeamException;
-import main.Team;
+import model.Team;
 
 class TeamTest {
 
