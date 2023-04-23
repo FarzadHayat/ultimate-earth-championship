@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import model.GameEnvironment;
 import model.Match;
 import model.Team;
-import views.MatchSelectionView;
+import views.MatchSetupView;
 import views.TabbedView;
 
 public class GraphicalDisplay implements DisplayStrategy {
@@ -89,9 +89,9 @@ public class GraphicalDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayMatchSetup(Team team) {
-		// TODO Auto-generated method stub
-		
+	public void displayMatchSetup(Team enemyTeam) {
+		MatchSetupView matchSetupView = new MatchSetupView(enemyTeam);
+		displayView(matchSetupView);
 	}
 
 	@Override

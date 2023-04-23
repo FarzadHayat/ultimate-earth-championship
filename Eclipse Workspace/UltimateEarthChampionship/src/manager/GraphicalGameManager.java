@@ -72,9 +72,8 @@ public class GraphicalGameManager extends GameManager
 	}
 
 	@Override
-	public void visitMatchSetup(Team team) {
-		// TODO Auto-generated method stub
-		
+	public void visitMatchSetup(Team enemyTeam) {
+		graphicalDisplay.displayMatchSetup(enemyTeam);
 	}
 
 	@Override
