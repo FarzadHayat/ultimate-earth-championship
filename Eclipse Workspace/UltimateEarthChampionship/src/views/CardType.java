@@ -7,6 +7,7 @@ package views;
  * CAN_SELL: a card that can be sold by the player.
  */
 public enum CardType {
+	MINIMAL,
 	STANDARD,
 	CAN_BUY,
 	CAN_SELL

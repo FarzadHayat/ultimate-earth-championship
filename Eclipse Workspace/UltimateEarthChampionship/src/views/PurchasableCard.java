@@ -79,6 +79,10 @@ public class PurchasableCard extends JPanel {
 			addSellButton();
 			break;
 		}
+		case MINIMAL:
+			break;
+		default:
+			break;
 		}
 	}
 	
