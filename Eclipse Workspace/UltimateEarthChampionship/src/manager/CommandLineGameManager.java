@@ -17,7 +17,7 @@ public class CommandLineGameManager extends GameManager
 	public void play()
 	{
 		commandLineDisplay = new CommandLineDisplay();
-		commandLineDisplay.displayShop();
+		commandLineDisplay.displayMatchSelection();
 		commandLineDisplay.closeScanner();
 	}
 	

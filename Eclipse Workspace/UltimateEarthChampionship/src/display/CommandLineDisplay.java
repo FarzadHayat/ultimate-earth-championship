@@ -267,8 +267,24 @@ public class CommandLineDisplay implements DisplayStrategy {
 
 	@Override
 	public void displayMatchSelection() {
-		// TODO Auto-generated method stub
+		ArrayList<Team> teams = gameManager.getTeams();
 		
+		ArrayList<String> content = new ArrayList<String>();
+		
+		for (Team team : teams) {
+			content.add(team.getName());
+			for (Champion champion : team.getChosenChampions()) {
+				content.add(String.format("- %s (%s)", champion.getName(), champion.getWeapon().getName()));
+			}
+		}
+		
+		ArrayList<String> options = new ArrayList<String>();
+		for (Team team : teams) {
+			options.add("FIGHT: " + team.getName());
+		}
+		
+		printView("Matches", content, options);
+		System.out.println(promptForInput());
 	}
 
 	@Override
