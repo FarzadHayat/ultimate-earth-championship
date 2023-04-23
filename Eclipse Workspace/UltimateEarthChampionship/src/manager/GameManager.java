@@ -227,5 +227,17 @@ public abstract class GameManager
 	public void setTeams(ArrayList<Team> teams) {
 		this.teams = teams;
 	}
+	
+	public abstract void visitStory(String text);
+	public abstract void visitSetup();
+	public abstract void visitHome();
+	public abstract void visitTeam();
+	public abstract void visitShop();
+	public abstract void visitMatchSelection();
+	public abstract void visitMatchSetup(Team team);
+	public abstract void visitLiveMatch(Match match);
+	public abstract void visitMatchResults(Match match);
+	public abstract void visitWeekResults(GameEnvironment gameEnvironment);
+	public abstract void visitGameResults(GameEnvironment gameEnvironment);
 
 }

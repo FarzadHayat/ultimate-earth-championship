@@ -24,7 +24,7 @@ public class MatchSelectionView extends JPanel {
 
 	private static final long serialVersionUID = 6012771276554788813L;
 	
-	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
+	private GameManager gameManager = GameManager.getInstance();
 
 	/**
 	 * Create the panel.
@@ -61,8 +61,7 @@ public class MatchSelectionView extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GraphicalDisplay graphicalDisplay = gameManager.getGraphicalDisplay();
-				graphicalDisplay.displayMatchSetup(team);
+				gameManager.visitMatchSetup(team);
 			}
 		});
 		panel.add(fightButton, BorderLayout.SOUTH);

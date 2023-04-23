@@ -35,7 +35,7 @@ public class PurchasableCard extends JPanel {
 	
 	private Purchasable purchasable;
 	
-	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
+	private GameManager gameManager = GameManager.getInstance();
 		
 	/**
 	 * Create the panel.
@@ -100,8 +100,7 @@ public class PurchasableCard extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					gameManager.getPlayerTeam().buy(purchasable);
-					GraphicalDisplay graphicalDisplay = gameManager.getGraphicalDisplay();
-					graphicalDisplay.displayShop();
+					gameManager.visitShop();
 				} catch (InsufficientFundsException | FullTeamException e) {
 					JOptionPane.showMessageDialog(buyButton, e.getMessage());
 				}
@@ -121,8 +120,7 @@ public class PurchasableCard extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					gameManager.getPlayerTeam().sell(purchasable);
-					GraphicalDisplay graphicalDisplay = gameManager.getGraphicalDisplay();
-					graphicalDisplay.displayTeam();
+					gameManager.visitTeam();
 				} catch (IncompleteTeamException e) {
 					JOptionPane.showMessageDialog(sellButton, e.getMessage());
 				}
