@@ -5,6 +5,7 @@ import display.GraphicalDisplay;
 import model.GameEnvironment;
 import model.Match;
 import model.Team;
+import views.MatchSetupView;
 import views.TabbedView;
 
 /**
@@ -21,12 +22,7 @@ public class GraphicalGameManager extends GameManager
 	public void play()
 	{
 		graphicalDisplay = new GraphicalDisplay();
-		TabbedView tabbedView = new TabbedView();
-		graphicalDisplay.displayView(tabbedView);
-	}
-	
-	public GraphicalDisplay getGraphicalDisplay() {
-		return graphicalDisplay;
+		visitMatchSetup(getTeams().get(0));
 	}
 	
 	/**

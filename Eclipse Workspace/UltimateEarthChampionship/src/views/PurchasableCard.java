@@ -15,12 +15,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import display.GraphicalDisplay;
 import exception.FullTeamException;
 import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
 import manager.GameManager;
-import manager.GraphicalGameManager;
 import model.Purchasable;
 
 public class PurchasableCard extends JPanel {
@@ -40,9 +38,9 @@ public class PurchasableCard extends JPanel {
 	/**
 	 * Create the panel.
 	 * @param purchasable the purchasable to display
-	 * @param type the type of the card according to the CardType enum
+	 * @param cardType the type of the card according to the CardType enum
 	 */
-	public PurchasableCard(Purchasable purchasable, CardType type) {
+	public PurchasableCard(Purchasable purchasable, CardType cardType) {
 		setBackground(Color.ORANGE);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(new BorderLayout(0, 0));
@@ -64,7 +62,7 @@ public class PurchasableCard extends JPanel {
 		JLabel imageLabel = new JLabel(resizedIcon);
 		add(imageLabel, BorderLayout.CENTER);
 		
-		switch (type) {
+		switch (cardType) {
 		case STANDARD: {
 			addStatsLabel();
 			break;
