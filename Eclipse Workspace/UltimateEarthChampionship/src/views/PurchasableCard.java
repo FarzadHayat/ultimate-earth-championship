@@ -101,10 +101,16 @@ public class PurchasableCard extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					gameManager.getPlayerTeam().buy(purchasable);
-					gameManager.visitShop();
+					String message = String.format("Are you sure you want to buy %s for $%s?",
+							purchasable.getName(), purchasable.getPrice());
+					int answer = JOptionPane.showConfirmDialog(getParent(), message,
+							"Buy: " + purchasable.getName(), JOptionPane.YES_NO_OPTION);
+					if (answer == JOptionPane.YES_OPTION) {
+						gameManager.getPlayerTeam().buy(purchasable);
+						gameManager.visitShop();
+					}
 				} catch (InsufficientFundsException | FullTeamException e) {
-					JOptionPane.showMessageDialog(buyButton, e.getMessage());
+					JOptionPane.showMessageDialog(getParent(), e.getMessage());
 				}
 			}
 		});
@@ -121,10 +127,16 @@ public class PurchasableCard extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					gameManager.getPlayerTeam().sell(purchasable);
-					gameManager.visitTeam();
+					String message = String.format("Are you sure you want to sell %s for $%s?",
+							purchasable.getName(), purchasable.getPrice());
+					int answer = JOptionPane.showConfirmDialog(getParent(), message,
+							"Sell: " + purchasable.getName(), JOptionPane.YES_NO_OPTION);
+					if (answer == JOptionPane.YES_OPTION) {
+						gameManager.getPlayerTeam().sell(purchasable);
+						gameManager.visitTeam();
+					}
 				} catch (IncompleteTeamException e) {
-					JOptionPane.showMessageDialog(sellButton, e.getMessage());
+					JOptionPane.showMessageDialog(getParent(), e.getMessage());
 				}
 			}
 		});

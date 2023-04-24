@@ -22,7 +22,7 @@ public class GraphicalGameManager extends GameManager
 	public void play()
 	{
 		graphicalDisplay = new GraphicalDisplay();
-		visitMatchSetup(getTeams().get(0));
+		visitShop();
 	}
 	
 	/**
