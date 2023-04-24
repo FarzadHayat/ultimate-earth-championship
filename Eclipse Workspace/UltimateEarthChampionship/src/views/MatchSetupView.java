@@ -33,13 +33,8 @@ public class MatchSetupView extends JPanel {
 	public MatchSetupView(Team enemyTeam) {
 		setLayout(new FlowLayout());
 		
-		ArrayList<Purchasable> playerChampions = new ArrayList<Purchasable>();
 		for (Champion champion : gameManager.getPlayerTeam().getChosenChampions()) {
-			playerChampions.add(champion);
-		}
-		
-		for (Purchasable purchasable : playerChampions) {
-			PurchasableCard purchasableCard = new PurchasableCard(purchasable, CardType.MINIMAL);
+			PurchasableCard purchasableCard = new PurchasableCard((Purchasable) champion, CardType.MINIMAL);
 			purchasableCard.addMouseMotionListener(new MouseMotionAdapter() {
 				@Override
 				public void mouseDragged(MouseEvent e) {
@@ -73,23 +68,10 @@ public class MatchSetupView extends JPanel {
 						}
 					}
 					if (replacement != null) {
-						int z1 = getComponentZOrder(purchasableCard);
-						int z2 = getComponentZOrder(replacement);
-						Component[] components = getComponents();
-						removeAll();
-						if (z1 < z2) {
-							components[z1] = replacement;
-							components[z2] = purchasableCard; 
-						}
-						else {
-							components[z2] = purchasableCard;
-							components[z1] = replacement;
-						}
-				        for (Component component : components) {
-				            add(component);
-				        }
-						revalidate();
-						repaint();
+						int i1 = getComponentZOrder(purchasableCard);
+						int i2 = getComponentZOrder(replacement);
+						gameManager.getPlayerTeam().swapPositions(i1, i2);
+						gameManager.visitMatchSetup(enemyTeam);
 					}
 					else {
 						purchasableCard.setLocation(startPoint);

@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -290,6 +291,18 @@ public class Team {
 		
 		reserveChampions.add(indexRostered, championToReserve);
 		
+	}
+	
+	/**
+	 * Swap the position of the two champions at the given indexes in team roster.  
+	 * @param i1 index of the first champion in team roster
+	 * @param i2 index of the second champion in team roster
+	 */
+	public void swapPositions(int i1, int i2) {
+		Champion champion1 = chosenChampions.get(i1);
+		Champion champion2 = chosenChampions.get(i2);
+		chosenChampions.set(i2, champion1);
+		chosenChampions.set(i1, champion2);
 	}
 	
 	/**
