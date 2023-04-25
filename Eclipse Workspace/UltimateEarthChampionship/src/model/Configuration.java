@@ -153,6 +153,26 @@ public class Configuration {
 	 */
 	public final float STARTING_MONEY = 100f;
 	
+	/**
+	 * The minimum number of characters a teams name can be (inclusive)
+	 */
+	public final int MIN_TEAM_NAME_CHARS = 3;
+	
+	/**
+	 * The maximum number of characters a teams name can be (inclusive)
+	 */
+	public final int MAX_TEAM_NAME_CHARS = 15;
+	
+	/**
+	 * The minimum number of weeks the player can choose for the season to be
+	 */
+	public final int MIN_NUM_GAME_WEEKS = 5;
+	
+	/**
+	 * The maximum number of weeks the player can choose for the season to be
+	 */
+	public final int MAX_NUM_GAME_WEEKS = 15;
+	
 	public float getDifficulty()
 	{
 		return difficulty;

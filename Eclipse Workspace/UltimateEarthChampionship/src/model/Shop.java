@@ -109,6 +109,29 @@ public class Shop {
 		int index = random.nextInt(champions.size());
 		return champions.get(index).clone();
 	}
+	
+	/**
+	 * Returns a list of 8 unique champions for the player to choose from to form their team
+	 * at startup
+	 * @return
+	 */
+	public ArrayList<Champion> getStartingChampions()
+	{
+		ArrayList<Champion> champs = new ArrayList<Champion>();
+		
+		while (champs.size() < 8)
+		{
+			Champion candidate = getRandomChampion(gameManager.getAllChampions());
+			
+			// Ensure the chosen candidate is unique
+			if (!champs.contains(candidate))
+			{
+				champs.add(candidate);
+			}
+		}
+		
+		return champs;
+	}
     
 	/**
 	 * Refresh the available weapons by populating with random weapons.

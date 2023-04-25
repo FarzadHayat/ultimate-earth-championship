@@ -46,6 +46,11 @@ public class GameEnvironment {
 		return maxWeek;
 	}
 	
+	public void setMaxWeeks(int weekNum)
+	{
+		maxWeek = weekNum;
+	}
+	
 	/**
 	 * Finds the number of weeks remaining, will return a 0 on the last week
 	 * @return The number of weeks remaining
@@ -55,15 +60,13 @@ public class GameEnvironment {
 		return maxWeek - currentWeek;
 	}
 	
+
 	/**
 	 * Constructor class
-	 * @param gameDifficulty How difficult the game should be, on a scale from 0.1 to 2f
 	 */
-	public GameEnvironment(float gameDifficulty) {
+	public GameEnvironment() {
 		currentWeek = 0;
-		maxWeek = 10;
-		
-		setDifficulty(gameDifficulty);
+		maxWeek = 99;
 		
 		events = new ArrayList<RandomEvent>();
 		getAllEvents();
@@ -87,12 +90,12 @@ public class GameEnvironment {
 	 *  to apply the difficulty.
 	 * @param difficulty The difficulty of the game.
 	 */
-	private void setDifficulty(float difficulty) // Private because this should only be accessed in the constructor
+	public void setDifficulty(float difficulty) // Private because this should only be accessed in the constructor
 	{
 		this.difficulty = difficulty;
 		
 		// Check within range:
-		if (difficulty < 0.1f || difficulty > 2f)
+		if (difficulty < 0.5f || difficulty > 2f)
 		{
 			System.out.println("WARNING: Difficulty setting outside of expected range, aborting.");
 			return;

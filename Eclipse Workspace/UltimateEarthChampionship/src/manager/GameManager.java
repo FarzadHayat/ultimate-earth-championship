@@ -61,11 +61,10 @@ public abstract class GameManager
 	 */
 	public void initialize() {
 		// Game environment
-		gameEnvironment = new GameEnvironment(1);
+		gameEnvironment = new GameEnvironment();
 		
 		// Teams
-		playerTeam = new Team(true, "Player", new ArrayList<Champion>(List.of(
-				new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery())));
+		playerTeam = new Team(true, "Player", new ArrayList<Champion>()); // Champions are assigned later, after setup
 		Team team1 = new Team(false, "Team 1", new ArrayList<Champion>(List.of(
 				new Confucius(), new DavidLange(), new DouglasMacarthur(), new DwightEisenhower())));
 		Team team2 = new Team(false, "Team 2", new ArrayList<Champion>(List.of(
@@ -80,7 +79,8 @@ public abstract class GameManager
     			new KingGeorge(), new MarcusAurelius(), new MargaretThatcher(), new MarieCurie(), new MarkRickerby(),
     			new MatthiasGalster(), new MikolosHorthy(), new NapoleonBonaparte(), new NeilArmstrong(), new NikitaKrustchev(),
     			new PhilGarland(), new PhilippePetain(), new QueenVictoria(), new RobertMuldoon(), new RudyardKipling(),
-    			new ShokoAsahara(), new StephenHawking(), new SunTzu(), new TedKaczynski(), new TimBell(), new WilliamShakespeare()
+    			new ShokoAsahara(), new StephenHawking(), new SunTzu(), new TedKaczynski(), new TimBell(), new WilliamShakespeare(),
+    			new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery()
     			));
 		allChampions.addAll(playerTeam.getAllChampions());
 		allChampions.addAll(team1.getAllChampions());
@@ -226,6 +226,28 @@ public abstract class GameManager
 	 */
 	public void setTeams(ArrayList<Team> teams) {
 		this.teams = teams;
+	}
+	
+	/**
+	 * Sets up the playerTeam, the difficulty and the number of weeks, should be called by the setup
+	 * @param teamName The team name
+	 * @param numWeeks The number of weeks in the season
+	 * @param champions List of champions in the player team
+	 * @param difficulty The difficulty of the game
+	 */
+	public void setupPlayerTeam(String teamName, int numWeeks, ArrayList<Champion> champions, float difficulty)
+	{
+		Team playerTeam = new Team(true, teamName, champions);
+		setPlayerTeam(playerTeam);
+		
+		gameEnvironment.setDifficulty(difficulty);
+		gameEnvironment.setMaxWeeks(numWeeks);
+		
+		// Remove from allChampions the champions that the player chose
+		for (Champion champ : champions)
+		{
+			allChampions.remove(champ);
+		}
 	}
 
 }
