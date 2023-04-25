@@ -25,18 +25,10 @@ public class ShopView extends JPanel {
 		setName("Shop");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		addHeader("Champions");
+		add(new HeaderPanel("Champions"));
 		addAvailableChampionsPanel();
-		addHeader("Weapons");
+		add(new HeaderPanel("Weapons"));
 		addAvailableWeaponsPanel();
-	}
-
-	private void addHeader(String header) {
-		JPanel panel = new JPanel();
-		JLabel label = new JLabel(header);
-		label.setFont(Configuration.HEADER_FONT);
-		panel.add(label);
-		add(panel);
 	}
 
 	/**
