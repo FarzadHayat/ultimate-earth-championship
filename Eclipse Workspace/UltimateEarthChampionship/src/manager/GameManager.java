@@ -45,7 +45,12 @@ public abstract class GameManager
 	/**
 	 * All the teams including the player team.
 	 */
-	private ArrayList<Team> teams; 
+	private ArrayList<Team> teams;
+	
+	/**
+	 * The currently selected enemy team.
+	 */
+	private Team enemyTeam;
 	
 	/**
 	 * Starts the game.
@@ -228,16 +233,34 @@ public abstract class GameManager
 		this.teams = teams;
 	}
 	
+	/**
+	 * @return the enemyTeam
+	 */
+	public Team getEnemyTeam() {
+		return enemyTeam;
+	}
+
+	/**
+	 * @param enemyTeam the enemyTeam to set
+	 */
+	public void setEnemyTeam(Team enemyTeam) {
+		this.enemyTeam = enemyTeam;
+	}
+
 	public abstract void visitStory(String text);
 	public abstract void visitSetup();
 	public abstract void visitHome();
 	public abstract void visitTeam();
 	public abstract void visitShop();
 	public abstract void visitMatchSelection();
-	public abstract void visitMatchSetup(Team team);
+	public abstract void visitMatchSetup();
 	public abstract void visitLiveMatch(Match match);
 	public abstract void visitMatchResults(Match match);
 	public abstract void visitWeekResults(GameEnvironment gameEnvironment);
 	public abstract void visitGameResults(GameEnvironment gameEnvironment);
+	
+	public void closeMatchSetup() {
+		// Visit live match
+	}
 
 }

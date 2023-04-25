@@ -7,6 +7,7 @@ import model.Match;
 import model.Team;
 import views.MatchSetupView;
 import views.TabbedView;
+import match.DumbMatch;
 
 /**
  * A subclass of GameManager that represents the graphical version of the game.
@@ -68,8 +69,8 @@ public class GraphicalGameManager extends GameManager
 	}
 
 	@Override
-	public void visitMatchSetup(Team enemyTeam) {
-		graphicalDisplay.displayMatchSetup(enemyTeam);
+	public void visitMatchSetup() {
+		graphicalDisplay.displayMatchSetup(getEnemyTeam());
 	}
 
 	@Override
@@ -95,6 +96,5 @@ public class GraphicalGameManager extends GameManager
 		// TODO Auto-generated method stub
 		
 	}
-
 
 }

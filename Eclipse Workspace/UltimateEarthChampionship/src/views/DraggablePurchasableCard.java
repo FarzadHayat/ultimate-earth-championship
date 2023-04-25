@@ -24,7 +24,7 @@ public class DraggablePurchasableCard extends PurchasableCard {
 	/**
 	 * Create the panel.
 	 */
-	public DraggablePurchasableCard(Purchasable purchasable, CardType cardType, Team enemyTeam) {
+	public DraggablePurchasableCard(Purchasable purchasable, CardType cardType) {
 		super(purchasable, cardType);
 		PurchasableCard purchasableCard = this;
 		addMouseMotionListener(new MouseMotionAdapter() {
@@ -63,7 +63,7 @@ public class DraggablePurchasableCard extends PurchasableCard {
 					int i1 = purchasableCard.getParent().getComponentZOrder(purchasableCard);
 					int i2 = purchasableCard.getParent().getComponentZOrder(replacement);
 					gameManager.getPlayerTeam().swapPositions(i1, i2);
-					gameManager.visitMatchSetup(enemyTeam);
+					gameManager.visitMatchSetup();
 				}
 				else {
 					purchasableCard.setLocation(startPoint);

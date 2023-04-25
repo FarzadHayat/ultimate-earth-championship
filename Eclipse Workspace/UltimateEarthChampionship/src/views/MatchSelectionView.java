@@ -61,7 +61,8 @@ public class MatchSelectionView extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gameManager.visitMatchSetup(team);
+				gameManager.setEnemyTeam(team);
+				gameManager.visitMatchSetup();
 			}
 		});
 		panel.add(fightButton, BorderLayout.SOUTH);

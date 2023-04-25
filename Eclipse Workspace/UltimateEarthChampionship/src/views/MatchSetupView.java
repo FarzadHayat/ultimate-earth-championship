@@ -29,12 +29,13 @@ public class MatchSetupView extends JPanel {
 	public MatchSetupView(Team enemyTeam) {
 		setLayout(new BorderLayout());
 		
-		JPanel northPanel = new JPanel();
+		JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JButton backButton = new JButton("Go back");
 		backButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				gameManager.setEnemyTeam(null);
 				gameManager.visitMatchSelection();
 			}
 		});
@@ -44,7 +45,7 @@ public class MatchSetupView extends JPanel {
 		JPanel centerPanel = new JPanel();
 		add(centerPanel, BorderLayout.CENTER);
 		for (Champion champion : gameManager.getPlayerTeam().getChosenChampions()) {
-			DraggablePurchasableCard card = new DraggablePurchasableCard((Purchasable) champion, CardType.MINIMAL, enemyTeam);
+			DraggablePurchasableCard card = new DraggablePurchasableCard((Purchasable) champion, CardType.MINIMAL);
 			centerPanel.add(card);
 		}
 		
@@ -54,7 +55,7 @@ public class MatchSetupView extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gameManager.visitLiveMatch(null); //TODO: create new LiveMatch and begin fight.
+				gameManager.closeMatchSetup();
 			}
 		});
 		southPanel.add(startButton);
