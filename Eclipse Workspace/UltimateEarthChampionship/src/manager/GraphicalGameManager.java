@@ -23,7 +23,8 @@ public class GraphicalGameManager extends GameManager
 	{
 		graphicalDisplay = new GraphicalDisplay();
 		
-		setup();
+		tabbedView();
+		//setup();
 	}
 	
 	private void setup()

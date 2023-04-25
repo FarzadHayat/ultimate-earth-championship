@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Configuration {
 	
 	/**
@@ -172,6 +175,13 @@ public class Configuration {
 	 * The maximum number of weeks the player can choose for the season to be
 	 */
 	public final int MAX_NUM_GAME_WEEKS = 15;
+	
+	/**
+	 * List of possible names for enemy teams
+	 */
+	public final List<String> AI_TEAM_NAMES = 
+			List.of("Team Butter", "Team Green", "Team Duty", "Team Truffle",
+										"Team Garfield", "Team Buxley", "Team Brisbane", "Team Eagle");
 	
 	public float getDifficulty()
 	{

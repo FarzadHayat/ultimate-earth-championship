@@ -1,7 +1,9 @@
 package manager;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import display.DisplayType;
 import model.*;
@@ -16,6 +18,7 @@ public abstract class GameManager
 {
 	private static DisplayType displayType = DisplayType.CLI;
 	private static GameManager instance;
+	private model.Configuration config = model.Configuration.getInstance();
 	
 	/**
 	 * The GameEnvironment instance for this GameManager.
@@ -36,6 +39,11 @@ public abstract class GameManager
 	 * The list of all available weapons.
 	 */
 	private ArrayList<Weapon> allWeapons;
+	
+	/**
+	 * List of all champions being used by AI teams, these champions need to be removed from the shop
+	 */
+	private ArrayList<Champion> setupChampionsInUse;
 	
 	/**
 	 * The player's team for ease of access.
@@ -63,16 +71,6 @@ public abstract class GameManager
 		// Game environment
 		gameEnvironment = new GameEnvironment();
 		
-		// Teams
-		playerTeam = new Team(true, "Player", new ArrayList<Champion>()); // Champions are assigned later, after setup
-		Team team1 = new Team(false, "Team 1", new ArrayList<Champion>(List.of(
-				new Confucius(), new DavidLange(), new DouglasMacarthur(), new DwightEisenhower())));
-		Team team2 = new Team(false, "Team 2", new ArrayList<Champion>(List.of(
-				new FranzFerdinand(), new GeorgeWashington(), new GhengisKhan(), new HarryTruman())));
-		Team team3 = new Team(false, "Team 3", new ArrayList<Champion>(List.of(
-				new JohnBrowning(), new JohnDoe(), new JohnFKennedy(), new JohnMKeynes())));
-		teams = new ArrayList<Team>(List.of(team1, team2, team3));
-		
 		// All champions
 		allChampions = new ArrayList<Champion>(List.of(
 				new CharlesDarwin(), new ElvisPresley(), new JoeRogan(), new JosefStalin(),
@@ -80,12 +78,11 @@ public abstract class GameManager
     			new MatthiasGalster(), new MikolosHorthy(), new NapoleonBonaparte(), new NeilArmstrong(), new NikitaKrustchev(),
     			new PhilGarland(), new PhilippePetain(), new QueenVictoria(), new RobertMuldoon(), new RudyardKipling(),
     			new ShokoAsahara(), new StephenHawking(), new SunTzu(), new TedKaczynski(), new TimBell(), new WilliamShakespeare(),
-    			new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery()
+    			new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery(),
+    			new JohnBrowning(), new JohnDoe(), new JohnFKennedy(), new JohnMKeynes(),
+    			new FranzFerdinand(), new GeorgeWashington(), new GhengisKhan(), new HarryTruman(),
+    			new Confucius(), new DavidLange(), new DouglasMacarthur(), new DwightEisenhower()
     			));
-		allChampions.addAll(playerTeam.getAllChampions());
-		allChampions.addAll(team1.getAllChampions());
-		allChampions.addAll(team2.getAllChampions());
-		allChampions.addAll(team3.getAllChampions());
 		
 		// All weapons
 		allWeapons = new ArrayList<Weapon>(List.of(
@@ -95,9 +92,19 @@ public abstract class GameManager
     			new Shuriken(), new Sledgehammer(), new Spear(), new Sword(), new TennisRacket()
     			));
     	
+		// Teams
+		playerTeam = new Team(true, "Player", new ArrayList<Champion>()); // Champions are assigned later, after setup
+		teams = generateAITeams();
+		
     	// Shop
     	shop = new Shop();
     	getShop().generateCatalogue();
+    	
+    	// Remove from the shop all the champions that are in use by the AI
+    	for(Champion champion : setupChampionsInUse)
+    	{
+    		shop.removeChampion(champion);
+    	}
 	}
 	
 	/**
@@ -246,8 +253,68 @@ public abstract class GameManager
 		// Remove from allChampions the champions that the player chose
 		for (Champion champ : champions)
 		{
-			allChampions.remove(champ);
+			shop.removeChampion(champ);
 		}
 	}
 
+	/**
+	 * Generates all the AI teams
+	 * @return A list of 3 AI teams
+	 */
+	public ArrayList<Team> generateAITeams()
+	{
+		ArrayList<Team> teams = new ArrayList<Team>();
+		
+		// Copy of all Champions
+		ArrayList<Champion> localAllChampions = new ArrayList<Champion>(allChampions);
+
+		// List of champions in use by the AI
+		setupChampionsInUse = new ArrayList<Champion>();
+		
+		// Since Java does not allow for ArrayLists to be stored as final variables,
+		// An arrayList cannot be stored in the Config class :(.
+		// To solve this, A list has to be used instead and then converted over in the following
+		// stupid way.
+		ArrayList<String> possibleTeamNames = new ArrayList<String>();
+		
+		for (String str : config.AI_TEAM_NAMES)
+		{
+			possibleTeamNames.add(str);
+		}
+		
+		Random rand = new Random();
+		
+		int teamNum = 0;
+		while (teamNum < 3)
+		{
+			// get team name
+			String name = possibleTeamNames.get(rand.nextInt(possibleTeamNames.size()));
+			possibleTeamNames.remove(name);
+			
+			// get team champions
+			ArrayList<Champion> champions = new ArrayList<Champion>();
+			int championNum = 0;
+			while (championNum < 4)
+			{
+				// Get champion
+				@SuppressWarnings("static-access")
+				Champion newChamp = shop.getRandomChampion(localAllChampions);
+				
+				// Remove from available champions
+				localAllChampions.remove(newChamp);
+				
+				// Remember that this champion is in-use
+				setupChampionsInUse.add(newChamp);
+				
+				champions.add(newChamp);
+				championNum++;
+			}
+			
+			teams.add(new Team(false, name, champions));
+			teamNum++;
+			
+		}
+		
+		return teams;
+	}
 }

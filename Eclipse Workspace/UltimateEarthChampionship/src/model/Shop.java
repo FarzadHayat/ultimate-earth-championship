@@ -104,7 +104,7 @@ public class Shop {
 	 * Return a randomly chosen champion from the given list.
 	 * @return the randomly chosen champion
 	 */
-	public Champion getRandomChampion(ArrayList<Champion> champions) {
+	public static Champion getRandomChampion(ArrayList<Champion> champions) {
 		Random random = new Random();
 		int index = random.nextInt(champions.size());
 		return champions.get(index).clone();
