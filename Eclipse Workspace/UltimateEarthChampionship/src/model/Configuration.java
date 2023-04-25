@@ -179,9 +179,9 @@ public class Configuration {
 	/**
 	 * List of possible names for enemy teams
 	 */
-	public final List<String> AI_TEAM_NAMES = 
-			List.of("Team Butter", "Team Green", "Team Duty", "Team Truffle",
-										"Team Garfield", "Team Buxley", "Team Brisbane", "Team Eagle");
+	public final ArrayList<String> AI_TEAM_NAMES = 
+			new ArrayList<String>(List.of("Team Butter", "Team Green", "Team Duty", "Team Truffle",
+										"Team Garfield", "Team Buxley", "Team Brisbane", "Team Eagle"));
 	
 	public float getDifficulty()
 	{

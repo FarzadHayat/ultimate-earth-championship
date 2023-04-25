@@ -407,7 +407,6 @@ public abstract class Champion implements Purchasable, Cloneable {
 	public ImageIcon getImage() {
 		return image;
 	}
-	
 
 	/**
 	 * Create a clone of the Champion with the same stats.

@@ -40,10 +40,7 @@ public abstract class GameManager
 	 */
 	private ArrayList<Weapon> allWeapons;
 	
-	/**
-	 * List of all champions being used by AI teams, these champions need to be removed from the shop
-	 */
-	private ArrayList<Champion> setupChampionsInUse;
+	
 	
 	/**
 	 * The player's team for ease of access.
@@ -99,12 +96,6 @@ public abstract class GameManager
     	// Shop
     	shop = new Shop();
     	getShop().generateCatalogue();
-    	
-    	// Remove from the shop all the champions that are in use by the AI
-    	for(Champion champion : setupChampionsInUse)
-    	{
-    		shop.removeChampion(champion);
-    	}
 	}
 	
 	/**
@@ -265,22 +256,12 @@ public abstract class GameManager
 	{
 		ArrayList<Team> teams = new ArrayList<Team>();
 		
-		// Copy of all Champions
-		ArrayList<Champion> localAllChampions = new ArrayList<Champion>(allChampions);
 
 		// List of champions in use by the AI
-		setupChampionsInUse = new ArrayList<Champion>();
+		// We use this to make sure that duplicate champions are not chosen for the teams
+		ArrayList<Champion> setupChampionsInUse = new ArrayList<Champion>();
 		
-		// Since Java does not allow for ArrayLists to be stored as final variables,
-		// An arrayList cannot be stored in the Config class :(.
-		// To solve this, A list has to be used instead and then converted over in the following
-		// stupid way.
-		ArrayList<String> possibleTeamNames = new ArrayList<String>();
-		
-		for (String str : config.AI_TEAM_NAMES)
-		{
-			possibleTeamNames.add(str);
-		}
+		ArrayList<String> possibleTeamNames = new ArrayList<String>(config.AI_TEAM_NAMES);
 		
 		Random rand = new Random();
 		
@@ -293,21 +274,22 @@ public abstract class GameManager
 			
 			// get team champions
 			ArrayList<Champion> champions = new ArrayList<Champion>();
+			
 			int championNum = 0;
 			while (championNum < 4)
 			{
 				// Get champion
 				@SuppressWarnings("static-access")
-				Champion newChamp = shop.getRandomChampion(localAllChampions);
+				Champion newChamp = shop.getRandomChampion(getAllChampions());
 				
-				// Remove from available champions
-				localAllChampions.remove(newChamp);
-				
-				// Remember that this champion is in-use
-				setupChampionsInUse.add(newChamp);
-				
-				champions.add(newChamp);
-				championNum++;
+				if (!setupChampionsInUse.contains(newChamp))
+				{
+					// Remember that this champion is in-use
+					setupChampionsInUse.add(newChamp);
+					
+					champions.add(newChamp);
+					championNum++;
+				}
 			}
 			
 			teams.add(new Team(false, name, champions));
