@@ -1,6 +1,9 @@
 package views;
 
 import java.awt.FlowLayout;
+import java.awt.Font;
+import model.Configuration;
+
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,8 +25,18 @@ public class ShopView extends JPanel {
 		setName("Shop");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
+		addHeader("Champions");
 		addAvailableChampionsPanel();
+		addHeader("Weapons");
 		addAvailableWeaponsPanel();
+	}
+
+	private void addHeader(String header) {
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel(header);
+		label.setFont(Configuration.HEADER_FONT);
+		panel.add(label);
+		add(panel);
 	}
 
 	/**

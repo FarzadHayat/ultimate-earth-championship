@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Font;
+
 public class Configuration {
 	
 	/**
@@ -152,6 +154,21 @@ public class Configuration {
 	 * The starting money for each team.
 	 */
 	public final float STARTING_MONEY = 100f;
+	
+	/**
+	 * The font family for the graphical game.
+	 */
+	public static final String FONT_FAMILY = "Ubuntu";
+	
+	/**
+	 * The font used for headers.
+	 */
+	public static final Font HEADER_FONT = new Font(FONT_FAMILY, Font.PLAIN, 20);
+	
+	/**
+	 * The font used for regular text.
+	 */
+	public static final Font TEXT_FONT = new Font(FONT_FAMILY, Font.PLAIN, 14);
 	
 	public float getDifficulty()
 	{
