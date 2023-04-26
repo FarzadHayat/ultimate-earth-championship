@@ -224,7 +224,7 @@ public class Team {
 			throw new FullTeamException("Reached team max roster limit!");
 		}
 		
-		champions.add(toRoster);
+		chosenChampions.add(toRoster);
 	}
 	
 	/**
@@ -233,7 +233,7 @@ public class Team {
 	 */
 	private void removeFromRoster(Champion champion)
 	{	
-		champions.remove(champion);
+		chosenChampions.remove(champion);
 	}
 
 	/**
