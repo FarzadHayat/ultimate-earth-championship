@@ -41,7 +41,7 @@ public class MatchSetupView extends JPanel {
 		
 		JPanel centerPanel = new JPanel();
 		add(centerPanel, BorderLayout.CENTER);
-		for (Champion champion : gameManager.getPlayerTeam().getChosenChampions()) {
+		for (Champion champion : gameManager.getPlayerTeam().getChampions()) {
 			DraggablePurchasableCard card = new DraggablePurchasableCard((Purchasable) champion, CardType.MINIMAL);
 			centerPanel.add(card);
 		}

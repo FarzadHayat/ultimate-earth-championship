@@ -54,7 +54,7 @@ class ShopTest {
 				pass = false;
 			}
 			for (Team team : gameManager.getTeams()) {
-				if (team.getAllChampions().contains(champion)) {
+				if (team.getChampions().contains(champion)) {
 					pass = false;
 				}
 			}
@@ -81,7 +81,7 @@ class ShopTest {
 				pass = false;
 			}
 			for (Team team : gameManager.getTeams()) {
-				if (team.getAllWeapons().contains(weapon)) {
+				if (team.getWeapons().contains(weapon)) {
 					pass = false;
 				}
 			}

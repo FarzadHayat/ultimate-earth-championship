@@ -33,7 +33,7 @@ public class TeamView extends JPanel {
 	 */
 	private void addChampionsPanel() {
 		JPanel championsPanel = new JPanel(new FlowLayout());
-		for (Champion champion : gameManager.getPlayerTeam().getAllChampions()) {
+		for (Champion champion : gameManager.getPlayerTeam().getChampions()) {
 			championsPanel.add(new PurchasableCard(champion, CardType.CAN_SELL));
 		}
 		add(championsPanel);
@@ -44,7 +44,7 @@ public class TeamView extends JPanel {
 	 */
 	private void addAllWeaponsPanel() {
 		JPanel weaponsPanel = new JPanel(new FlowLayout());
-		for (Weapon weapon : gameManager.getPlayerTeam().getAllWeapons()) {
+		for (Weapon weapon : gameManager.getPlayerTeam().getWeapons()) {
 			weaponsPanel.add(new PurchasableCard(weapon, CardType.CAN_SELL));
 		}
 		add(weaponsPanel);

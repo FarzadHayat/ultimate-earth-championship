@@ -24,19 +24,19 @@ public class Team {
 	private boolean isPlayer;
 	
 	/**
-	 * ArrayList, of size 4, of the champions this team has chosen
+	 * champions of the team
+	 */
+	private ArrayList<Champion> champions = new ArrayList<Champion>();
+	
+	/**
+	 * chosen champions of the team
 	 */
 	private ArrayList<Champion> chosenChampions = new ArrayList<Champion>();
 	
 	/**
-	 * ArrayList, of size 5, of the champions the team has in reserve
+	 * weapons of the team
 	 */
-	private ArrayList<Champion> reserveChampions = new ArrayList<Champion>();
-	
-	/**
-	 * ArrayList of all weapons that this team has in reserve, use getAllWeapons() to get all weapons
-	 */
-	private ArrayList<Weapon> reserveWeapons = new ArrayList<Weapon>();
+	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	
 	/**
 	 * The teams money
@@ -50,6 +50,30 @@ public class Team {
 	
 	private GameManager gameManager = GameManager.getInstance();
 	
+	/**
+	 * Constructor of team
+	 * @param isPlayer is this team a player
+	 * @param startingChampions ArrayList of the four starting champions
+	 */
+	public Team(boolean isPlayer, String name, ArrayList<Champion> startingChampions)
+	{
+		this.isPlayer = isPlayer;
+		this.name = name;
+		
+		this.money = config.STARTING_MONEY;
+		
+		score = 0;
+		
+		if (startingChampions.size() != config.NUM_CHOSEN_CHAMPIONS)
+		{
+			System.out.println(String.format("EXCEPTION: Starting champions size is not %s!", config.NUM_CHOSEN_CHAMPIONS));
+			//TODO: Throw an exception
+			return;
+		}
+		champions = startingChampions;
+		
+	}
+
 	/**
 	 * Gets the team name
 	 * @return the name
@@ -102,6 +126,16 @@ public class Team {
 		money -= amount;
 	}
 	
+	/**
+	 * Returns true if the team has enough money to buy a champion
+	 * @param purchaseCost the cost of a hypothetical purchase
+	 * @return whether the team can afford this hypothetical purchase
+	 */
+	public boolean hasMoney(float purchaseCost)
+	{
+		return (money >= purchaseCost);
+	}
+
 	public int getScore()
 	{
 		return score;
@@ -114,146 +148,43 @@ public class Team {
 	public void addScore(int amount)
 	{
 		score += amount;
-	}
-	
-	public ArrayList<Champion> getChosenChampions()
-	{
-		return chosenChampions;
-	}
-	
-	public ArrayList<Champion> getReserveChampions()
-	{
-		return reserveChampions;
-	}
-	
-	
-	
+	}	
 	
 	/**
-	 * Constructor of team
-	 * @param isPlayer is this team a player
-	 * @param startingChampions ArrayList of the four starting champions
+	 * Returns the champions in the team
+	 * @return the list of champions in the team
 	 */
-	public Team(boolean isPlayer, String name, ArrayList<Champion> startingChampions)
+	public ArrayList<Champion> getChampions()
 	{
-		this.isPlayer = isPlayer;
-		this.name = name;
-		
-		this.money = config.STARTING_MONEY;
-		
-		score = 0;
-		
-		if (startingChampions.size() != 4)
-		{
-			System.out.println("EXCEPTION: Starting champions size is not 4!");
-			//TODO: Throw an exception
-			return;
-		}
-		chosenChampions = startingChampions;
-		
-	}
-	
-	
-	/**
-	 * Returns true if the team has enough money to buy a champion
-	 * @param purchaseCost the cost of a hypothetical purchase
-	 * @return whether the team can afford this hypothetical purchase
-	 */
-	public boolean hasMoney(float purchaseCost)
-	{
-		return (money >= purchaseCost);
+		return champions;
 	}
 	
 	/**
-	 * Returns all champions in the team
-	 * @return all the champions in the team, as an arrayList;
-	 */
-	public ArrayList<Champion> getAllChampions()
-	{
-		ArrayList<Champion> allChampions = new ArrayList<Champion>();
-		
-		// Get all chosen
-		for (Champion champ : chosenChampions)
-		{
-			allChampions.add(champ);
-		}
-		
-		// Get all in reserve
-		for (Champion champ : reserveChampions)
-		{
-			allChampions.add(champ);
-		}
-		
-		return allChampions;
-	}
-	
-	/**
-	 * Add a champion to the team. Will add to the roster first, and then to the reserve if the roster is full
+	 * Add a champion to the team.
 	 * @param newChampion the new champion to be added
-	 * @throws FullTeamException if team champions lists are already full
+	 * @throws FullTeamException if team champions list are already full
 	 */
 	public void addChampion(Champion newChampion) throws FullTeamException
 	{
-		if (chosenChampions.size() < 4)
-		{
-			// Add to roster first
-			addToRoster(newChampion);
+		if (champions.size() >= config.NUM_CHAMPIONS) {
+			throw new FullTeamException("Reached team max champions limit!");
 		}
-		else
-		{
-			// Add to reserve if roster is first
-			addToReserve(newChampion);
-		}
-		
-	}
-		
-	/**
-	 * Adds a champion to roster
-	 * @param toRoster Champion to be added to chosenChampion
-	 * @throws FullTeamException if the chosen champions list is already full
-	 */
-	private void addToRoster(Champion toRoster) throws FullTeamException
-	{
-		if (chosenChampions.size() == config.NUM_CHOSEN_CHAMPIONS)
-		{
-			throw new FullTeamException("EXCEPTION: Reached team max champion limit");
-		}
-		
-		chosenChampions.add(toRoster);
-	}
-	
-	/**
-	 * Adds a champion to Reserve
-	 * @param toReserve Champion to be added to reserve
-	 * @throws FullTeamException if the reserve champions list is already full
-	 */
-	private void addToReserve(Champion toReserve) throws FullTeamException
-	{
-		if (reserveChampions.size() == config.NUM_RESERVE_CHAMPIONS)
-		{
-			throw new FullTeamException("EXCEPTION: Reached team max champion limit");
-		}
-		reserveChampions.add(toReserve);
+		champions.add(newChampion);
 	}
 
-	
 	/**
-	 * Removes a champion from the team, will check both rostered and reserve champions
-	 * @param toRemove
+	 * Removes a champion from the team
+	 * @param toRemove the champion to remove
 	 * @throws IncompleteTeamException if the team is already at the minimum number of champions allowed
 	 */
 	public void removeChampion(Champion toRemove) throws IncompleteTeamException
 	{
-		if (chosenChampions.size() + reserveChampions.size() <= config.NUM_CHOSEN_CHAMPIONS) {
+		if (champions.size() <= config.NUM_CHOSEN_CHAMPIONS) {
 			throw new IncompleteTeamException("Must have at least " + config.NUM_CHOSEN_CHAMPIONS + " champions in your team!");
 		}
-		if (chosenChampions.contains(toRemove))
+		if (champions.contains(toRemove))
 		{
-			chosenChampions.remove(toRemove);
-		}
-		else if (reserveChampions.contains(toRemove))
-		{
-			reserveChampions.remove(toRemove);
+			champions.remove(toRemove);
 		}
 		else {
 			System.out.println("EXCEPTION: Champion to remove not in team!");
@@ -261,130 +192,86 @@ public class Team {
 			return;
 		}
 	}
-	
-	/**
-	 * Swaps a champion in reserve with a champion currently rostered
-	 * @param championToRoster The champion, current in reserve, to be rostered
-	 * @param championToReserve The champion, currently rostered, to be placed in reserve
-	 */
-	public void swapChampion(Champion championToRoster, Champion championToReserve)
-	{
-		if (!reserveChampions.contains(championToRoster))
-		{
-			System.out.println("EXCEPTION: Champion not in team reserve!");
-			//TODO: Throw an exception
-			return;
-		}
-		
-		if (!chosenChampions.contains(championToReserve))
-		{
-			System.out.println("EXCEPTION: Champion not in team roster!");
-			//TODO: Throw an exception
-			return;
-		}
-		
-		// Swap them
-		int indexChosen = chosenChampions.indexOf(championToReserve);
-		int indexRostered = reserveChampions.indexOf(championToRoster);
-		
-		chosenChampions.add(indexChosen, championToRoster);
-		
-		reserveChampions.add(indexRostered, championToReserve);
-		
+
+	public ArrayList<Champion> getChosenChampions() {
+		return chosenChampions;
 	}
-	
-	/**
-	 * Swap the position of the two champions at the given indexes in team roster.  
-	 * @param i1 index of the first champion in team roster
-	 * @param i2 index of the second champion in team roster
-	 */
-	public void swapPositions(int i1, int i2) {
-		Champion champion1 = chosenChampions.get(i1);
-		Champion champion2 = chosenChampions.get(i2);
-		chosenChampions.set(i2, champion1);
-		chosenChampions.set(i1, champion2);
+
+	public void setChosenChampions(ArrayList<Champion> chosenChampions) {
+		this.chosenChampions = chosenChampions;
 	}
-	
-	/**
-	 * Returns all reserve weapons
-	 * @return all weapons in reserve
-	 */
-	public ArrayList<Weapon> getReserveWeapons()
-	{
-		return reserveWeapons;
-	}
-	
-	/**
-	 * Returns all weapons currently assigned to a champion
-	 * @return All weapons assigned to a champion
-	 */
-	public ArrayList<Weapon> getChampionsWeapons()
-	{
-		ArrayList<Weapon> out = new ArrayList<Weapon>();
-		
-		for(Champion champ : getAllChampions())
-		{
-			Weapon w = champ.getWeapon();
-			
-			// Check that it isn't a default weapon
-			if (w.isDefault() == false)
-			{
-				out.add(w);
-			}
-		}
-		
-		return out;
-	}
-	
-	/**
-	 * Adds a weapon to reserve weapons
-	 * @throws FullTeamException if reserve weapons list is already full
-	 */
-	public void addReserveWeapon(Weapon weapon) throws FullTeamException {
-		if (reserveWeapons.size() == config.NUM_RESERVE_WEAPONS) {
-			throw new FullTeamException("Reached team max reserve weapon limit!");
-		}
-		reserveWeapons.add(weapon);
-	}
-	
-	/**
-	 * Gets all weapons
-	 * @return All weapons in the team, both in reserve and in champions
-	 */
-	public ArrayList<Weapon> getAllWeapons()
-	{
-		ArrayList<Weapon> out = getChampionsWeapons();
-		out.addAll(reserveWeapons);
-		return out;
-	}
-	
+
 	/**
 	 * Gets a random champion from the team
 	 * @return a random champion
 	 */
-	public Champion getRandomChampion()
+	public Champion randomChampion()
 	{
 		Random random = new Random();
-		int champInt = random.nextInt(getAllChampions().size());
-		return getAllChampions().get(champInt);
+		int champInt = random.nextInt(getChampions().size());
+		return getChampions().get(champInt);
 	}
+
+	/**
+	 * Adds a champion to the chosen champions
+	 * @param toRoster Champion to be added to chosenChampions
+	 * @throws FullTeamException if the chosen champions list is already full
+	 */
+	private void addToRoster(Champion toRoster) throws FullTeamException
+	{
+		if (champions.size() >= config.NUM_CHOSEN_CHAMPIONS)
+		{
+			throw new FullTeamException("Reached team max roster limit!");
+		}
 		
+		champions.add(toRoster);
+	}
+	
+	/**
+	 * Remove a champion to chosen champions
+	 * @param champion Champion to be removed from chosenChampions
+	 */
+	private void removeFromRoster(Champion champion)
+	{	
+		champions.remove(champion);
+	}
+
+	/**
+	 * Gets weapons in the team
+	 * @return list of weapons
+	 */
+	public ArrayList<Weapon> getWeapons()
+	{
+		return weapons;
+	}
+
+	/**
+	 * Adds a weapon to weapons
+	 * @throws FullTeamException if weapons list is already full
+	 */
+	public void addWeapon(Weapon weapon) throws FullTeamException {
+		if (weapons.size() == config.NUM_WEAPONS) {
+			throw new FullTeamException("Reached team max weapon limit!");
+		}
+		weapons.add(weapon);
+	}
+
 	/**
 	 * Removes a weapon from the team
 	 * @param toRemove the weapon to remove from the team
 	 */
 	public void removeWeapon(Weapon toRemove)
 	{		
-		for(Champion champion : getAllChampions())
+		for(Champion champion : getChampions())
 		{
 			if (champion.getWeapon() == toRemove)
 			{
 				champion.removeWeapon();
 			}
 		}
-		if (reserveWeapons.contains(toRemove))
+		if (weapons.contains(toRemove))
 		{
-			reserveWeapons.remove(toRemove);
+			weapons.remove(toRemove);
 		}
 		else {
 			System.out.println("EXCEPTION: Weapon to remove not in team!");
@@ -392,8 +279,19 @@ public class Team {
 			return;
 		}
 	}
-	
 
+	/**
+	 * Swap the position of the two champions at the given indexes in team roster.  
+	 * @param i1 index of the first champion in team roster
+	 * @param i2 index of the second champion in team roster
+	 */
+	public void swapPositions(int i1, int i2) {
+		Champion champion1 = champions.get(i1);
+		Champion champion2 = champions.get(i2);
+		champions.set(i2, champion1);
+		champions.set(i1, champion2);
+	}
+	
 	/**
 	 * Buys the purchasable for the team.
 	 * 1. Removes the purchasable price from the team's money.
@@ -410,7 +308,7 @@ public class Team {
 				gameManager.getShop().removeChampion((Champion) purchasable);
 			}
 			if (purchasable.getClass().getSuperclass() == Weapon.class) {
-				addReserveWeapon((Weapon) purchasable);
+				addWeapon((Weapon) purchasable);
 				gameManager.getShop().removeWeapon((Weapon) purchasable);
 			}
 		}

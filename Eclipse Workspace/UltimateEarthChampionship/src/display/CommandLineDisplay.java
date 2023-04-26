@@ -273,7 +273,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 		
 		for (Team team : teams) {
 			content.add(team.getName());
-			for (Champion champion : team.getChosenChampions()) {
+			for (Champion champion : team.getChampions()) {
 				content.add(String.format("- %s (%s)", champion.getName(), champion.getWeapon().getName()));
 			}
 		}

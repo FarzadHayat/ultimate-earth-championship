@@ -82,7 +82,7 @@ public class Shop {
 	public void generateChampions() {
 		ArrayList<Champion> championsLeft = new ArrayList<Champion>(gameManager.getAllChampions());
 		for (Team team : gameManager.getTeams()) {
-			for (Champion champion : team.getAllChampions()) {
+			for (Champion champion : team.getChampions()) {
 				if (championsLeft.contains(champion)) {
 					championsLeft.remove(champion);
 				}
