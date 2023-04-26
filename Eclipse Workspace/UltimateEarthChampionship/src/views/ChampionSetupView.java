@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -40,6 +41,7 @@ public class ChampionSetupView extends JPanel {
 		
 		addBackButton();
 		addChampionsPanel();
+		addLanesPanel();
 		addChosenChampionsPanel();
 		addNextButton();
 	}
@@ -72,6 +74,16 @@ public class ChampionSetupView extends JPanel {
 			}
 			PurchasableCard card = new PurchasableCard((Purchasable) champion, CardType.SELECTABLE);
 			championsPanel.add(card);
+		}
+	}
+	
+	private void addLanesPanel() {
+		JPanel lanesPanel = new JPanel(new GridLayout(0, 1, 20, 20));
+		add(lanesPanel, BorderLayout.CENTER);
+		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
+			JLabel label = new JLabel(String.valueOf(i+1), JLabel.RIGHT);
+			label.setFont(Configuration.HEADER_FONT);
+			lanesPanel.add(label);
 		}
 	}
 	
