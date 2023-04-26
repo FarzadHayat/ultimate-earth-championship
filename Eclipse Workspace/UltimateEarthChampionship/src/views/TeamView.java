@@ -1,16 +1,11 @@
 package views;
 
 import java.awt.FlowLayout;
-import java.util.ArrayList;
-
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import manager.GameManager;
 import model.Champion;
-import model.Configuration;
-import model.Purchasable;
 import model.Weapon;
 
 public class TeamView extends JPanel {
