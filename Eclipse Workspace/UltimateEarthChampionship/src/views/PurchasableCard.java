@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.OverlayLayout;
 import javax.swing.SwingConstants;
 
 import exception.FullTeamException;
@@ -38,6 +41,8 @@ public class PurchasableCard extends JPanel {
 	
 	private GameManager gameManager = GameManager.getInstance();
 	
+	private JPanel mainPanel = new JPanel(new BorderLayout(0, 0));
+	private JPanel soldOverlay;
 	private JPanel centerPanel = new JPanel(new FlowLayout());
 	
 	/**
@@ -62,9 +67,12 @@ public class PurchasableCard extends JPanel {
 	public PurchasableCard(Purchasable purchasable, CardType cardType) {
 		setBackground(Color.orange);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		setLayout(new BorderLayout(0, 0));
+		mainPanel.setBounds(0, 0, 1920, 1042);
+		mainPanel.setOpaque(false);
 		centerPanel.setOpaque(false);
-		add(centerPanel, BorderLayout.CENTER);
+		setLayout(new OverlayLayout(this));
+		mainPanel.add(centerPanel, BorderLayout.CENTER);
+		add(mainPanel);		
 		this.purchasable = purchasable;
 		
 		addName();
@@ -80,7 +88,12 @@ public class PurchasableCard extends JPanel {
 		}
 		case CAN_BUY: {
 			addStatsLabel();
-			addBuyButton();
+			if (purchasable.getClass().getSuperclass() == Champion.class && gameManager.getPlayerTeam().getChampions().contains((Champion) purchasable) ||
+					purchasable.getClass().getSuperclass() == Weapon.class && gameManager.getPlayerTeam().getWeapons().contains((Weapon) purchasable)) {
+				addSoldOverlay();
+			} else {
+				addBuyButton();
+			}
 			break;
 		}
 		case CAN_SELL: {
@@ -92,13 +105,23 @@ public class PurchasableCard extends JPanel {
 		
 	}
 
+	private void addSoldOverlay() {
+		soldOverlay = new JPanel(new GridBagLayout());
+		soldOverlay.setBackground(new Color(0.6f, 0.6f, 0.6f, 1f));
+		JLabel soldLabel = new JLabel("SOLD!");
+		soldLabel.setFont(new Font("Arial", Font.BOLD, 24));
+		soldLabel.setForeground(Color.red);
+		soldOverlay.add(soldLabel);
+		add(soldOverlay);
+	}
+
 	/**
 	 * Adds a label for the name to the north of the card.
 	 */
 	private void addName() {
 		JLabel nameLabel = new JLabel(purchasable.getName());
 		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		add(nameLabel, BorderLayout.NORTH);
+		mainPanel.add(nameLabel, BorderLayout.NORTH);
 	}
 
 	/**
@@ -161,7 +184,7 @@ public class PurchasableCard extends JPanel {
 				}
 			}
 		});
-	    add(buyButton, BorderLayout.SOUTH);
+	    mainPanel.add(buyButton, BorderLayout.SOUTH);
 	}
 
 	/**
@@ -187,7 +210,7 @@ public class PurchasableCard extends JPanel {
 				}
 			}
 		});
-	    add(sellButton, BorderLayout.SOUTH);
+	    mainPanel.add(sellButton, BorderLayout.SOUTH);
 	}
 
 }

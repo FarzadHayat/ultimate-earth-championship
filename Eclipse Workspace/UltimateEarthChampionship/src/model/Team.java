@@ -305,11 +305,9 @@ public class Team {
 		try {
 			if (purchasable.getClass().getSuperclass() == Champion.class) {
 				addChampion((Champion) purchasable);
-				gameManager.getShop().removeChampion((Champion) purchasable);
 			}
 			if (purchasable.getClass().getSuperclass() == Weapon.class) {
 				addWeapon((Weapon) purchasable);
-				gameManager.getShop().removeWeapon((Weapon) purchasable);
 			}
 		}
 		catch (FullTeamException e) {
