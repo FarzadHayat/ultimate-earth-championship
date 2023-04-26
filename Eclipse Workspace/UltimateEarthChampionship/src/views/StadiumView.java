@@ -62,7 +62,7 @@ public class StadiumView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gameManager.setEnemyTeam(team);
-				gameManager.visitMatchSetup();
+				gameManager.visitChampionSetup();
 			}
 		});
 		panel.add(fightButton, BorderLayout.SOUTH);

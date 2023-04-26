@@ -288,7 +288,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayMatchSetup(Team team) {
+	public void displayChampionSetup(Team team) {
 		// TODO Auto-generated method stub
 		
 	}

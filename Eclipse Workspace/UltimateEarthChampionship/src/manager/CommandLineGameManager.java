@@ -67,7 +67,7 @@ public class CommandLineGameManager extends GameManager
 	}
 
 	@Override
-	public void visitMatchSetup() {
+	public void visitChampionSetup() {
 		// TODO Auto-generated method stub
 		
 	}

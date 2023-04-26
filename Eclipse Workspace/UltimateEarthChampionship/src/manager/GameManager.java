@@ -253,7 +253,7 @@ public abstract class GameManager
 	public abstract void visitTeam();
 	public abstract void visitShop();
 	public abstract void visitStadium();
-	public abstract void visitMatchSetup();
+	public abstract void visitChampionSetup();
 	public abstract void visitLiveMatch(Match match);
 	public abstract void visitGameResults(GameEnvironment gameEnvironment);
 	

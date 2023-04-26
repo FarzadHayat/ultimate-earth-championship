@@ -4,10 +4,6 @@ import display.DisplayType;
 import display.GraphicalDisplay;
 import model.GameEnvironment;
 import model.Match;
-import model.Team;
-import views.MatchSetupView;
-import views.TabbedView;
-import match.DumbMatch;
 
 /**
  * A subclass of GameManager that represents the graphical version of the game.
@@ -69,8 +65,8 @@ public class GraphicalGameManager extends GameManager
 	}
 
 	@Override
-	public void visitMatchSetup() {
-		graphicalDisplay.displayMatchSetup(getEnemyTeam());
+	public void visitChampionSetup() {
+		graphicalDisplay.displayChampionSetup(getEnemyTeam());
 	}
 
 	@Override

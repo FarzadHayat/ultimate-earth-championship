@@ -63,7 +63,7 @@ public class DraggablePurchasableCard extends PurchasableCard {
 					int i1 = purchasableCard.getParent().getComponentZOrder(purchasableCard);
 					int i2 = purchasableCard.getParent().getComponentZOrder(replacement);
 					gameManager.getPlayerTeam().swapPositions(i1, i2);
-					gameManager.visitMatchSetup();
+					gameManager.visitChampionSetup();
 				}
 				else {
 					purchasableCard.setLocation(startPoint);

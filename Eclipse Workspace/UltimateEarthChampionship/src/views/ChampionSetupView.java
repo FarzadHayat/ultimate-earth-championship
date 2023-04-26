@@ -14,7 +14,7 @@ import model.Purchasable;
 import model.Team;
 import views.PurchasableCard.CardType;
 
-public class MatchSetupView extends JPanel {
+public class ChampionSetupView extends JPanel {
 
 	private static final long serialVersionUID = -1352915737619575543L;
 	
@@ -23,7 +23,7 @@ public class MatchSetupView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public MatchSetupView(Team enemyTeam) {
+	public ChampionSetupView(Team enemyTeam) {
 		setLayout(new BorderLayout());
 		
 		JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
