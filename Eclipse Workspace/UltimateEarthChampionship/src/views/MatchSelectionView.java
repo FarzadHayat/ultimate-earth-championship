@@ -49,8 +49,8 @@ public class MatchSelectionView extends JPanel {
 		panel.add(nameLabel, BorderLayout.NORTH);
 		
 		DefaultListModel<String> model = new DefaultListModel<>();
-		for (int i = 0; i < team.getChosenChampions().size(); i++) {
-			Champion champion = team.getChosenChampions().get(i);
+		for (int i = 0; i < team.getChampions().size(); i++) {
+			Champion champion = team.getChampions().get(i);
 			model.add(i, String.format("%s (%s)", champion.getName(), champion.getWeapon().getName()));
 		}
 		JList<String> championList = new JList<String>(model);

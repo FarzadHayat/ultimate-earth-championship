@@ -136,17 +136,17 @@ public class Configuration {
 	/**
 	 * Number of champions a team can hold as chosen.
 	 */
+	public final int NUM_CHAMPIONS = 9;
+	
+	/**
+	 * Number of champions a team can hold as chosen.
+	 */
 	public final int NUM_CHOSEN_CHAMPIONS = 4;
 	
 	/**
-	 * Number of champions a team can hold as reserve.
+	 * Number of weapons a team can hold.
 	 */
-	public final int NUM_RESERVE_CHAMPIONS = 5;
-	
-	/**
-	 * Number of weapons a team can hold as reserve.
-	 */
-	public final int NUM_RESERVE_WEAPONS = 4;
+	public final int NUM_WEAPONS = 9;
 	
 	/**
 	 * The starting money for each team.

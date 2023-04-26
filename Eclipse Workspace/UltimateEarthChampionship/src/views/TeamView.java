@@ -23,45 +23,32 @@ public class TeamView extends JPanel {
 		setName("Team");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		addChosenChampionsPanel();
-		addReserveChampionsPanel();
+		addChampionsPanel();		
 		addAllWeaponsPanel();
 	}
 
 	/**
 	 * Add a purchasable panel to display the team's chosen champions.
 	 */
-	private void addChosenChampionsPanel() {
-		ArrayList<Purchasable> chosenChampions = new ArrayList<Purchasable>();
-		for (Champion champion : gameManager.getPlayerTeam().getChosenChampions()) {
-			chosenChampions.add(champion);
+	private void addChampionsPanel() {
+		ArrayList<Purchasable> champions = new ArrayList<Purchasable>();
+		for (Champion champion : gameManager.getPlayerTeam().getChampions()) {
+			champions.add(champion);
 		}
-		PurchasablesPanel chosenChampionsPanel = new PurchasablesPanel(chosenChampions, CardType.CAN_SELL);
-		add(chosenChampionsPanel);
-	}
-	
-	/**
-	 * Add a purchasable panel to display the team's reserve champions.
-	 */
-	private void addReserveChampionsPanel() {
-		ArrayList<Purchasable> reserveChampions = new ArrayList<Purchasable>();
-		for (Champion champion : gameManager.getPlayerTeam().getReserveChampions()) {
-			reserveChampions.add(champion);
-		}
-		PurchasablesPanel reserveChampionsPanel = new PurchasablesPanel(reserveChampions, CardType.CAN_SELL);
-		add(reserveChampionsPanel);
+		PurchasablesPanel championsPanel = new PurchasablesPanel(champions, CardType.CAN_SELL);
+		add(championsPanel);
 	}
 	
 	/**
 	 * Add a purchasable panel to display all the team's weapons.
 	 */
 	private void addAllWeaponsPanel() {
-		ArrayList<Purchasable> allWeapons = new ArrayList<Purchasable>();
-		for (Weapon weapon : gameManager.getPlayerTeam().getAllWeapons()) {
-			allWeapons.add(weapon);
+		ArrayList<Purchasable> weapons = new ArrayList<Purchasable>();
+		for (Weapon weapon : gameManager.getPlayerTeam().getWeapons()) {
+			weapons.add(weapon);
 		}
-		PurchasablesPanel allWeaponsPanel = new PurchasablesPanel(allWeapons, CardType.CAN_SELL);
-		add(allWeaponsPanel);
+		PurchasablesPanel weaponsPanel = new PurchasablesPanel(weapons, CardType.CAN_SELL);
+		add(weaponsPanel);
 	}
 
 }

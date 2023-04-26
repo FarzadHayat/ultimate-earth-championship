@@ -82,10 +82,10 @@ public abstract class GameManager
     			new PhilGarland(), new PhilippePetain(), new QueenVictoria(), new RobertMuldoon(), new RudyardKipling(),
     			new ShokoAsahara(), new StephenHawking(), new SunTzu(), new TedKaczynski(), new TimBell(), new WilliamShakespeare()
     			));
-		allChampions.addAll(playerTeam.getAllChampions());
-		allChampions.addAll(team1.getAllChampions());
-		allChampions.addAll(team2.getAllChampions());
-		allChampions.addAll(team3.getAllChampions());
+		allChampions.addAll(playerTeam.getChampions());
+		allChampions.addAll(team1.getChampions());
+		allChampions.addAll(team2.getChampions());
+		allChampions.addAll(team3.getChampions());
 		
 		// All weapons
 		allWeapons = new ArrayList<Weapon>(List.of(

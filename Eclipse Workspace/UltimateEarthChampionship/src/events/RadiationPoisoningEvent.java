@@ -18,7 +18,7 @@ public class RadiationPoisoningEvent extends RandomEvent {
 	public RandomEventInfo runEvent(Team team) {
 		// Effect Logic:
 		
-		Champion champ = team.getRandomChampion();
+		Champion champ = team.randomChampion();
 		String c = champ.getName();
 		
 		champ.changeOffense(3);
