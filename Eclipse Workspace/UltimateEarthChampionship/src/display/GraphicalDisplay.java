@@ -89,8 +89,8 @@ public class GraphicalDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayChampionSetup(Team enemyTeam) {
-		ChampionSetupView championSetupView = new ChampionSetupView(enemyTeam);
+	public void displayChampionSetup() {
+		ChampionSetupView championSetupView = new ChampionSetupView();
 		displayView(championSetupView);
 	}
 

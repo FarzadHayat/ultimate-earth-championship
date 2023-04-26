@@ -36,7 +36,7 @@ public class ChampionSetupView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ChampionSetupView(Team enemyTeam) {
+	public ChampionSetupView() {
 		setLayout(new BorderLayout());
 		
 		addBackButton();
@@ -109,7 +109,7 @@ public class ChampionSetupView extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gameManager.closeMatchSetup();
+//				gameManager.visitWeaponSetup();
 			}
 		});
 		nextButtonPanel.add(startButton);

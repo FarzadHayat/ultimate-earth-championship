@@ -256,9 +256,5 @@ public abstract class GameManager
 	public abstract void visitChampionSetup();
 	public abstract void visitLiveMatch(Match match);
 	public abstract void visitGameResults(GameEnvironment gameEnvironment);
-	
-	public void closeMatchSetup() {
-		// Visit live match
-	}
 
 }

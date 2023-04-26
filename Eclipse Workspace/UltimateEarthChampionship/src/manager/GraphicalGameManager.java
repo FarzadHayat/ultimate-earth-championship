@@ -66,7 +66,7 @@ public class GraphicalGameManager extends GameManager
 
 	@Override
 	public void visitChampionSetup() {
-		graphicalDisplay.displayChampionSetup(getEnemyTeam());
+		graphicalDisplay.displayChampionSetup();
 	}
 
 	@Override
