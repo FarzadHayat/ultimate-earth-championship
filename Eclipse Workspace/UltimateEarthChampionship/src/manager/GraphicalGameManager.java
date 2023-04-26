@@ -80,18 +80,6 @@ public class GraphicalGameManager extends GameManager
 	}
 
 	@Override
-	public void visitMatchResults(Match match) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitWeekResults(GameEnvironment gameEnvironment) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void visitGameResults(GameEnvironment gameEnvironment) {
 		// TODO Auto-generated method stub
 		

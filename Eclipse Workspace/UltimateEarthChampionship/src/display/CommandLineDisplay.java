@@ -300,18 +300,6 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayMatchResults(Match match) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void displayWeekResults(GameEnvironment gameEnvironment) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void displayGameResults(GameEnvironment gameEnvironment) {
 		// TODO Auto-generated method stub
 		
