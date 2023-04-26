@@ -73,8 +73,7 @@ public class ChampionSetupView extends JPanel {
 			} else {
 				champion = null;
 			}
-			PurchasableCard card = new PurchasableCard((Purchasable) champion, CardType.SELECTABLE);
-			championsPanel.add(card);
+			championsPanel.add(new PurchasableCard(champion, CardType.SELECTABLE));
 		}
 	}
 	
@@ -99,8 +98,7 @@ public class ChampionSetupView extends JPanel {
 			} else {
 				champion = null;
 			}
-			PurchasableCard card = new PurchasableCard((Purchasable) champion, CardType.SELECTABLE);
-			chosenChampionsPanel.add(card);
+			chosenChampionsPanel.add(new PurchasableCard(champion, CardType.SELECTABLE));
 		}
 	}
 		
