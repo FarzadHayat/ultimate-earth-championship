@@ -1,18 +1,23 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.security.interfaces.RSAMultiPrimePrivateCrtKey;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import champions.AdamSmith;
+import exception.FullTeamException;
 import manager.GameManager;
 import model.Champion;
 import model.Purchasable;
@@ -25,6 +30,7 @@ public class ChampionSetupView extends JPanel {
 	private static final long serialVersionUID = -1352915737619575543L;
 	
 	private GameManager gameManager = GameManager.getInstance();
+	private Configuration config = Configuration.getInstance();
 	
 	/**
 	 * Create the panel.
@@ -54,19 +60,33 @@ public class ChampionSetupView extends JPanel {
 	}
 
 	private void addChampionsPanel() {
-		JPanel championsPanel = new JPanel(new FlowLayout());
+		JPanel championsPanel = new JPanel(new GridLayout(3, 3, 20, 20));
+		ArrayList<Champion> champions = gameManager.getPlayerTeam().getChampions(); 
 		add(championsPanel, BorderLayout.WEST);
-		for (Champion champion : gameManager.getPlayerTeam().getChampions()) {
-			DraggablePurchasableCard card = new DraggablePurchasableCard((Purchasable) champion, CardType.MINIMAL);
+		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
+			Champion champion;
+			if (champions.size() > i) {
+				champion = champions.get(i);
+			} else {
+				champion = null;
+			}
+			PurchasableCard card = new PurchasableCard((Purchasable) champion, CardType.SELECTABLE);
 			championsPanel.add(card);
 		}
 	}
 	
 	private void addChosenChampionsPanel() {
-		JPanel chosenChampionsPanel = new JPanel(new GridLayout(Configuration.getInstance().NUM_CHOSEN_CHAMPIONS, 1));
+		JPanel chosenChampionsPanel = new JPanel(new GridLayout(0, 1, 20, 20));
+		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions(); 
 		add(chosenChampionsPanel, BorderLayout.EAST);
-		for (Champion champion : gameManager.getPlayerTeam().getChosenChampions()) {
-			DraggablePurchasableCard card = new DraggablePurchasableCard((Purchasable) champion, CardType.MINIMAL);
+		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
+			Champion champion;
+			if (chosenChampions.size() > i) {
+				champion = chosenChampions.get(i);
+			} else {
+				champion = null;
+			}
+			PurchasableCard card = new PurchasableCard((Purchasable) champion, CardType.SELECTABLE);
 			chosenChampionsPanel.add(card);
 		}
 	}

@@ -217,9 +217,9 @@ public class Team {
 	 * @param toRoster Champion to be added to chosenChampions
 	 * @throws FullTeamException if the chosen champions list is already full
 	 */
-	private void addToRoster(Champion toRoster) throws FullTeamException
+	public void addToRoster(Champion toRoster) throws FullTeamException
 	{
-		if (champions.size() >= config.NUM_CHOSEN_CHAMPIONS)
+		if (chosenChampions.size() >= config.NUM_CHOSEN_CHAMPIONS)
 		{
 			throw new FullTeamException("Reached team max roster limit!");
 		}
@@ -231,7 +231,7 @@ public class Team {
 	 * Remove a champion to chosen champions
 	 * @param champion Champion to be removed from chosenChampions
 	 */
-	private void removeFromRoster(Champion champion)
+	public void removeFromRoster(Champion champion)
 	{	
 		chosenChampions.remove(champion);
 	}
@@ -278,18 +278,6 @@ public class Team {
 			//TODO: Throw an exception
 			return;
 		}
-	}
-
-	/**
-	 * Swap the position of the two champions at the given indexes in team roster.  
-	 * @param i1 index of the first champion in team roster
-	 * @param i2 index of the second champion in team roster
-	 */
-	public void swapPositions(int i1, int i2) {
-		Champion champion1 = champions.get(i1);
-		Champion champion2 = champions.get(i2);
-		champions.set(i2, champion1);
-		champions.set(i1, champion2);
 	}
 	
 	/**

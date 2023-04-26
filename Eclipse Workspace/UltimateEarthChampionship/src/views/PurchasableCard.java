@@ -2,15 +2,20 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -31,11 +36,11 @@ public class PurchasableCard extends JPanel {
 
 	private static final long serialVersionUID = 5339330332731208144L;
 	
-	private static final int IMAGE_WIDTH = 150;
+	private static final int IMAGE_WIDTH = 100;
 	private static final int IMAGE_HEIGHT = IMAGE_WIDTH;
 	
-	private static final int WIDTH = IMAGE_WIDTH + 60;
-	private static final int HEIGHT = IMAGE_HEIGHT + 130;
+	private static final int WIDTH = IMAGE_WIDTH + 100;
+	private static final int HEIGHT = IMAGE_HEIGHT + 50;
 	
 	private Purchasable purchasable;
 	
@@ -43,7 +48,6 @@ public class PurchasableCard extends JPanel {
 	
 	private JPanel mainPanel = new JPanel(new BorderLayout(0, 0));
 	private JPanel soldOverlay;
-	private JPanel centerPanel = new JPanel(new FlowLayout());
 	
 	/**
 	 * Enum to represent the card type.
@@ -51,12 +55,14 @@ public class PurchasableCard extends JPanel {
 	 * STANDARD: a minimal card with stat labels.
 	 * CAN_BUY: a standard card with a buy button.
 	 * CAN_SELL: a standard card with a sell button.
+	 * SELECTABLE: a standard card where clicking it adds/removes it in the roster.
 	 */
 	public enum CardType {
 		MINIMAL,
 		STANDARD,
 		CAN_BUY,
-		CAN_SELL
+		CAN_SELL,
+		SELECTABLE
 	}
 		
 	/**
@@ -65,13 +71,17 @@ public class PurchasableCard extends JPanel {
 	 * @param cardType the type of the card according to the CardType enum
 	 */
 	public PurchasableCard(Purchasable purchasable, CardType cardType) {
-		setBackground(Color.orange);
+		setBackground(Color.yellow);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		mainPanel.setBounds(0, 0, 1920, 1042);
+		if (purchasable == null) {
+			setBackground(Color.gray);
+			return;
+		}
+		if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable)) {
+			setBackground(Color.green);
+		}
 		mainPanel.setOpaque(false);
-		centerPanel.setOpaque(false);
 		setLayout(new OverlayLayout(this));
-		mainPanel.add(centerPanel, BorderLayout.CENTER);
 		add(mainPanel);		
 		this.purchasable = purchasable;
 		
@@ -101,8 +111,50 @@ public class PurchasableCard extends JPanel {
 			addSellButton();
 			break;
 		}
+		case SELECTABLE: {
+			addRosterToggle();
+			break;
+		}
 		}
 		
+	}
+
+	private void addRosterToggle() {
+		addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable)) {
+					setBackground(Color.green);
+				} else {
+					setBackground(Color.yellow);
+				}
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setBackground(Color.orange);
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable)) {
+					gameManager.getPlayerTeam().removeFromRoster((Champion) purchasable);
+				} else {
+					try {
+						gameManager.getPlayerTeam().addToRoster((Champion) purchasable);
+					} catch (FullTeamException e1) {
+						JOptionPane.showMessageDialog(getParent(), e1.getMessage());
+					};
+				}
+				gameManager.visitChampionSetup();
+			}
+		});
 	}
 
 	private void addSoldOverlay() {
@@ -137,27 +189,30 @@ public class PurchasableCard extends JPanel {
 			resizedIcon = new ImageIcon(new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_ARGB));
 		}
 		JLabel imageLabel = new JLabel(resizedIcon);
-		centerPanel.add(imageLabel);
+		mainPanel.add(imageLabel, BorderLayout.WEST);
 	}
 	
 	/**
 	 * Adds a label displaying the purchasable stats to the center panel.
 	 */
 	public void addStatsLabel() {
+		JPanel statsPanel = new JPanel(new GridLayout(0, 1));
+		statsPanel.setOpaque(false);
+		mainPanel.add(statsPanel, BorderLayout.EAST);
 	    if (purchasable.getClass().getSuperclass() == Champion.class) {
 	    	Champion champion = (Champion) purchasable; 
-	    	centerPanel.add(new JLabel("Health: " + String.valueOf(champion.getHealth())));
-	    	centerPanel.add(new JLabel("Stamina: " + String.valueOf(champion.getStamina())));
-	    	centerPanel.add(new JLabel("Offense: " + String.valueOf(champion.getOffense())));
-	    	centerPanel.add(new JLabel("Damage: " + String.valueOf(champion.getDamage())));
-	    	centerPanel.add(new JLabel("Defense: " + String.valueOf(champion.getDefense())));
-	    	centerPanel.add(new JLabel("Weapon: " + champion.getWeapon().getName()));
+	    	statsPanel.add(new JLabel("Health: " + String.valueOf(champion.getHealth())));
+	    	statsPanel.add(new JLabel("Stamina: " + String.valueOf(champion.getStamina())));
+	    	statsPanel.add(new JLabel("Offense: " + String.valueOf(champion.getOffense())));
+	    	statsPanel.add(new JLabel("Damage: " + String.valueOf(champion.getDamage())));
+	    	statsPanel.add(new JLabel("Defense: " + String.valueOf(champion.getDefense())));
+	    	statsPanel.add(new JLabel("Weapon: " + champion.getWeapon().getName()));
 	    }
 	    if (purchasable.getClass().getSuperclass() == Weapon.class) {
 	    	Weapon weapon = (Weapon) purchasable;
-	    	centerPanel.add(new JLabel("Offense boost: " + String.valueOf(weapon.getOffenseBoost())));
-	    	centerPanel.add(new JLabel("Damage boost: " + String.valueOf(weapon.getDamageMultiplier())));
-	    	centerPanel.add(new JLabel("Defense boost: " + String.valueOf(weapon.getDefenseBoost())));
+	    	statsPanel.add(new JLabel("Offense boost: " + String.valueOf(weapon.getOffenseBoost())));
+	    	statsPanel.add(new JLabel("Damage boost: " + String.valueOf(weapon.getDamageMultiplier())));
+	    	statsPanel.add(new JLabel("Defense boost: " + String.valueOf(weapon.getDefenseBoost())));
 	    }
 	}
 
