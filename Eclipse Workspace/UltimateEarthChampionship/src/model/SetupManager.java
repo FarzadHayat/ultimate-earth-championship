@@ -10,8 +10,6 @@ public abstract class SetupManager {
 
 	static model.Configuration config = model.Configuration.getInstance();
 	
-	public enum GUISetupStage {None, Name, Weeks, Champions, Difficulty, Done};
-	
 	public static String PromptForTeamName(String input) throws InputException
 	{
 		String teamName = input;
@@ -122,31 +120,6 @@ public abstract class SetupManager {
 		}
 		
 		return out;
-	}
-	
-	public static GUISetupStage getNextStage(GUISetupStage currentStage)
-	{
-		switch (currentStage) 
-		{
-		case None:
-			return GUISetupStage.Name;
-
-		case Name:
-			return GUISetupStage.Weeks;
-		
-		case Weeks:
-			return GUISetupStage.Champions;
-		
-		case Champions:
-			return GUISetupStage.Difficulty;
-		
-		case Difficulty:
-			return GUISetupStage.Done;
-		default:
-			break;
-		}
-		
-		return GUISetupStage.None;
 	}
 	
 }

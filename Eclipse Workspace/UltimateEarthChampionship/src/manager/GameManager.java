@@ -240,12 +240,6 @@ public abstract class GameManager
 		
 		gameEnvironment.setDifficulty(difficulty);
 		gameEnvironment.setMaxWeeks(numWeeks);
-		
-		// Remove from allChampions the champions that the player chose
-		for (Champion champ : champions)
-		{
-			shop.removeChampion(champ);
-		}
 	}
 
 	/**

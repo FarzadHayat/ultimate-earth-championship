@@ -2,7 +2,6 @@ package manager;
 
 import display.DisplayType;
 import display.GraphicalDisplay;
-import model.SetupManager.GUISetupStage;
 import views.SetupView;
 import views.TabbedView;
 
@@ -32,7 +31,14 @@ public class GraphicalGameManager extends GameManager
 		setupView = new SetupView(this);
 		
 		graphicalDisplay.displayView(setupView);
-		getNextStage(GUISetupStage.None);
+	}
+	
+	/**
+	 * Called by the setupView to confirm that the playerTeam has been setup
+	 */
+	public void finishedSetup()
+	{
+		tabbedView();
 	}
 	
 	private void tabbedView()
@@ -54,10 +60,6 @@ public class GraphicalGameManager extends GameManager
 		GameManager.start();
 	}
 
-	public void getNextStage(GUISetupStage currentStage)
-	{
-		GUISetupStage nextStage = model.SetupManager.getNextStage(currentStage);
-		setupView.showStage(nextStage);
-	}
+
 	
 }
