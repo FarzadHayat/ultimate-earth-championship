@@ -10,7 +10,7 @@ public interface DisplayStrategy {
 	public void displayHome();
 	public void displayTeam();
 	public void displayShop();
-	public void displayMatchSelection();
+	public void displayStadium();
 	public void displayMatchSetup(Team team);
 	public void displayLiveMatch(Match match);
 	public void displayMatchResults(Match match);

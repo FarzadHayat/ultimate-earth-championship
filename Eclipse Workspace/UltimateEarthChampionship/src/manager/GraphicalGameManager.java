@@ -64,8 +64,8 @@ public class GraphicalGameManager extends GameManager
 	}
 
 	@Override
-	public void visitMatchSelection() {
-		graphicalDisplay.displayMatchSelection();
+	public void visitStadium() {
+		graphicalDisplay.displayStadium();
 	}
 
 	@Override

@@ -33,7 +33,7 @@ public class MatchSetupView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gameManager.setEnemyTeam(null);
-				gameManager.visitMatchSelection();
+				gameManager.visitStadium();
 			}
 		});
 		northPanel.add(backButton);

@@ -20,7 +20,7 @@ public class CommandLineGameManager extends GameManager
 	public void play()
 	{
 		commandLineDisplay = new CommandLineDisplay();
-		visitMatchSelection();
+		visitStadium();
 		commandLineDisplay.closeScanner();
 	}
 	
@@ -62,8 +62,8 @@ public class CommandLineGameManager extends GameManager
 	}
 
 	@Override
-	public void visitMatchSelection() {
-		commandLineDisplay.displayMatchSelection();
+	public void visitStadium() {
+		commandLineDisplay.displayStadium();
 	}
 
 	@Override

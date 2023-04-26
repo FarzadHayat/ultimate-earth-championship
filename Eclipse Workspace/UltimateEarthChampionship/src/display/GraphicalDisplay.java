@@ -82,10 +82,10 @@ public class GraphicalDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayMatchSelection() {
+	public void displayStadium() {
 		TabbedView tabbedView = new TabbedView();
 		displayView(tabbedView);
-		tabbedView.showMatchSelectionView();
+		tabbedView.showStadiumView();
 	}
 
 	@Override

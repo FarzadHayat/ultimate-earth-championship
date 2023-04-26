@@ -266,7 +266,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayMatchSelection() {
+	public void displayStadium() {
 		ArrayList<Team> teams = gameManager.getTeams();
 		
 		ArrayList<String> content = new ArrayList<String>();

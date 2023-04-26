@@ -20,7 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 
-public class MatchSelectionView extends JPanel {
+public class StadiumView extends JPanel {
 
 	private static final long serialVersionUID = 6012771276554788813L;
 	
@@ -29,8 +29,8 @@ public class MatchSelectionView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public MatchSelectionView() {
-		setName("Matches");
+	public StadiumView() {
+		setName("Stadium");
 		setLayout(new FlowLayout(FlowLayout.CENTER, 200, 200));
 		
 		for (Team team : gameManager.getTeams()) {
