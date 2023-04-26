@@ -11,7 +11,7 @@ import model.Match;
 import model.Shop;
 import model.Team;
 import model.Weapon;
-import views.CardType;
+import views.PurchasableCard.CardType;
 
 public class CommandLineDisplay implements DisplayStrategy {
 	private static final String FILLER = "=";
@@ -146,14 +146,14 @@ public class CommandLineDisplay implements DisplayStrategy {
 	/**
 	 * Returns an ArrayList of String options for the given list of Champion objects and CardType.
 	 * @param champions the ArrayList of Champion objects to get options for
-	 * @param type the CardType to use to generate the options
+	 * @param cardType the CardType to use to generate the options
 	 * @return an ArrayList of String options for the given list of Champion objects and CardType
 	 */
-	private static ArrayList<String> getChampionOptions(ArrayList<Champion> champions, CardType type) {
+	private static ArrayList<String> getChampionOptions(ArrayList<Champion> champions, CardType cardType) {
 		ArrayList<String> names = new ArrayList<String>();
 		for (Champion champion : champions) {
 			String text;
-			switch (type) {
+			switch (cardType) {
 			case CAN_BUY: {
 				text = "BUY: ";
 				break;
@@ -176,14 +176,14 @@ public class CommandLineDisplay implements DisplayStrategy {
 	/**
 	 * Returns an ArrayList of String options for the given list of Weapon objects and CardType.
 	 * @param weapons the ArrayList of Weapon objects to get options for
-	 * @param type the CardType to use to generate the options
+	 * @param cardType the CardType to use to generate the options
 	 * @return an ArrayList of String options for the given list of Weapon objects and CardType
 	 */
-	private static ArrayList<String> getWeaponOptions(ArrayList<Weapon> weapons, CardType type) {
+	private static ArrayList<String> getWeaponOptions(ArrayList<Weapon> weapons, CardType cardType) {
 		ArrayList<String> names = new ArrayList<String>();
 		for (Weapon weapon : weapons) {
 			String text;
-			switch (type) {
+			switch (cardType) {
 			case CAN_BUY: {
 				text = "BUY: ";
 				break;

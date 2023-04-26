@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import manager.GameManager;
 import model.Champion;
 import model.Weapon;
+import views.PurchasableCard.CardType;
 
 public class TeamView extends JPanel {
 

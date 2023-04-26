@@ -1,16 +1,13 @@
 package views;
 
 import java.awt.FlowLayout;
-import java.awt.Font;
-import model.Configuration;
-
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import manager.GameManager;
 import model.Champion;
 import model.Weapon;
+import views.PurchasableCard.CardType;
 
 public class ShopView extends JPanel {
 

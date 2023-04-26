@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -33,14 +31,28 @@ public class PurchasableCard extends JPanel {
 	private static final int IMAGE_WIDTH = 150;
 	private static final int IMAGE_HEIGHT = IMAGE_WIDTH;
 	
-	private static final int WIDTH = IMAGE_WIDTH + 50;
-	private static final int HEIGHT = IMAGE_HEIGHT + 110;
+	private static final int WIDTH = IMAGE_WIDTH + 60;
+	private static final int HEIGHT = IMAGE_HEIGHT + 130;
 	
 	private Purchasable purchasable;
 	
 	private GameManager gameManager = GameManager.getInstance();
 	
 	private JPanel centerPanel = new JPanel(new FlowLayout());
+	
+	/**
+	 * Enum to represent the card type.
+	 * MINIMAL: small form factor with just a name and image.
+	 * STANDARD: a minimal card with stat labels.
+	 * CAN_BUY: a standard card with a buy button.
+	 * CAN_SELL: a standard card with a sell button.
+	 */
+	public enum CardType {
+		MINIMAL,
+		STANDARD,
+		CAN_BUY,
+		CAN_SELL
+	}
 		
 	/**
 	 * Create the panel.
@@ -59,6 +71,9 @@ public class PurchasableCard extends JPanel {
 		addImageIcon();
 		
 		switch (cardType) {
+		case MINIMAL: {
+			break;
+		}
 		case STANDARD: {
 			addStatsLabel();
 			break;
@@ -73,10 +88,6 @@ public class PurchasableCard extends JPanel {
 			addSellButton();
 			break;
 		}
-		case MINIMAL:
-			break;
-		default:
-			break;
 		}
 		
 	}
@@ -117,6 +128,7 @@ public class PurchasableCard extends JPanel {
 	    	centerPanel.add(new JLabel("Offense: " + String.valueOf(champion.getOffense())));
 	    	centerPanel.add(new JLabel("Damage: " + String.valueOf(champion.getDamage())));
 	    	centerPanel.add(new JLabel("Defense: " + String.valueOf(champion.getDefense())));
+	    	centerPanel.add(new JLabel("Weapon: " + champion.getWeapon().getName()));
 	    }
 	    if (purchasable.getClass().getSuperclass() == Weapon.class) {
 	    	Weapon weapon = (Weapon) purchasable;
