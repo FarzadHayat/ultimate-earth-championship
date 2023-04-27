@@ -1,7 +1,9 @@
 package manager;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import display.DisplayType;
 import model.*;
@@ -16,6 +18,7 @@ public abstract class GameManager
 {
 	private static DisplayType displayType = DisplayType.CLI;
 	private static GameManager instance;
+	private model.Configuration config = model.Configuration.getInstance();
 	
 	/**
 	 * The GameEnvironment instance for this GameManager.
@@ -36,6 +39,8 @@ public abstract class GameManager
 	 * The list of all available weapons.
 	 */
 	private ArrayList<Weapon> allWeapons;
+	
+	
 	
 	/**
 	 * The player's team for ease of access.
@@ -61,18 +66,7 @@ public abstract class GameManager
 	 */
 	public void initialize() {
 		// Game environment
-		gameEnvironment = new GameEnvironment(1);
-		
-		// Teams
-		playerTeam = new Team(true, "Player", new ArrayList<Champion>(List.of(
-				new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery())));
-		Team team1 = new Team(false, "Team 1", new ArrayList<Champion>(List.of(
-				new Confucius(), new DavidLange(), new DouglasMacarthur(), new DwightEisenhower())));
-		Team team2 = new Team(false, "Team 2", new ArrayList<Champion>(List.of(
-				new FranzFerdinand(), new GeorgeWashington(), new GhengisKhan(), new HarryTruman())));
-		Team team3 = new Team(false, "Team 3", new ArrayList<Champion>(List.of(
-				new JohnBrowning(), new JohnDoe(), new JohnFKennedy(), new JohnMKeynes())));
-		teams = new ArrayList<Team>(List.of(team1, team2, team3));
+		gameEnvironment = new GameEnvironment();
 		
 		// All champions
 		allChampions = new ArrayList<Champion>(List.of(
@@ -80,12 +74,12 @@ public abstract class GameManager
     			new KingGeorge(), new MarcusAurelius(), new MargaretThatcher(), new MarieCurie(), new MarkRickerby(),
     			new MatthiasGalster(), new MikolosHorthy(), new NapoleonBonaparte(), new NeilArmstrong(), new NikitaKrustchev(),
     			new PhilGarland(), new PhilippePetain(), new QueenVictoria(), new RobertMuldoon(), new RudyardKipling(),
-    			new ShokoAsahara(), new StephenHawking(), new SunTzu(), new TedKaczynski(), new TimBell(), new WilliamShakespeare()
+    			new ShokoAsahara(), new StephenHawking(), new SunTzu(), new TedKaczynski(), new TimBell(), new WilliamShakespeare(),
+    			new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery(),
+    			new JohnBrowning(), new JohnDoe(), new JohnFKennedy(), new JohnMKeynes(),
+    			new FranzFerdinand(), new GeorgeWashington(), new GhengisKhan(), new HarryTruman(),
+    			new Confucius(), new DavidLange(), new DouglasMacarthur(), new DwightEisenhower()
     			));
-		allChampions.addAll(playerTeam.getAllChampions());
-		allChampions.addAll(team1.getAllChampions());
-		allChampions.addAll(team2.getAllChampions());
-		allChampions.addAll(team3.getAllChampions());
 		
 		// All weapons
 		allWeapons = new ArrayList<Weapon>(List.of(
@@ -95,6 +89,10 @@ public abstract class GameManager
     			new Shuriken(), new Sledgehammer(), new Spear(), new Sword(), new TennisRacket()
     			));
     	
+		// Teams
+		playerTeam = new Team(true, "Player", new ArrayList<Champion>()); // Champions are assigned later, after setup
+		teams = generateAITeams();
+		
     	// Shop
     	shop = new Shop();
     	getShop().generateCatalogue();
@@ -227,5 +225,72 @@ public abstract class GameManager
 	public void setTeams(ArrayList<Team> teams) {
 		this.teams = teams;
 	}
+	
+	/**
+	 * Sets up the playerTeam, the difficulty and the number of weeks, should be called by the setup
+	 * @param teamName The team name
+	 * @param numWeeks The number of weeks in the season
+	 * @param champions List of champions in the player team
+	 * @param difficulty The difficulty of the game
+	 */
+	public void setupPlayerTeam(String teamName, int numWeeks, ArrayList<Champion> champions, float difficulty)
+	{
+		Team playerTeam = new Team(true, teamName, champions);
+		setPlayerTeam(playerTeam);
+		
+		gameEnvironment.setDifficulty(difficulty);
+		gameEnvironment.setMaxWeeks(numWeeks);
+	}
 
+	/**
+	 * Generates all the AI teams
+	 * @return A list of 3 AI teams
+	 */
+	public ArrayList<Team> generateAITeams()
+	{
+		ArrayList<Team> teams = new ArrayList<Team>();
+		
+
+		// List of champions in use by the AI
+		// We use this to make sure that duplicate champions are not chosen for the teams
+		ArrayList<Champion> setupChampionsInUse = new ArrayList<Champion>();
+		
+		ArrayList<String> possibleTeamNames = new ArrayList<String>(config.AI_TEAM_NAMES);
+		
+		Random rand = new Random();
+		
+		int teamNum = 0;
+		while (teamNum < 3)
+		{
+			// get team name
+			String name = possibleTeamNames.get(rand.nextInt(possibleTeamNames.size()));
+			possibleTeamNames.remove(name);
+			
+			// get team champions
+			ArrayList<Champion> champions = new ArrayList<Champion>();
+			
+			int championNum = 0;
+			while (championNum < 4)
+			{
+				// Get champion
+				@SuppressWarnings("static-access")
+				Champion newChamp = shop.getRandomChampion(getAllChampions());
+				
+				if (!setupChampionsInUse.contains(newChamp))
+				{
+					// Remember that this champion is in-use
+					setupChampionsInUse.add(newChamp);
+					
+					champions.add(newChamp);
+					championNum++;
+				}
+			}
+			
+			teams.add(new Team(false, name, champions));
+			teamNum++;
+			
+		}
+		
+		return teams;
+	}
 }

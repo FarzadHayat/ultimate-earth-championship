@@ -104,10 +104,33 @@ public class Shop {
 	 * Return a randomly chosen champion from the given list.
 	 * @return the randomly chosen champion
 	 */
-	public Champion getRandomChampion(ArrayList<Champion> champions) {
+	public static Champion getRandomChampion(ArrayList<Champion> champions) {
 		Random random = new Random();
 		int index = random.nextInt(champions.size());
-		return champions.get(index).clone();
+		return champions.get(index); // .clone();
+	}
+	
+	/**
+	 * Returns a list of 8 unique champions for the player to choose from to form their team
+	 * at startup
+	 * @return
+	 */
+	public ArrayList<Champion> getStartingChampions()
+	{
+		ArrayList<Champion> champs = new ArrayList<Champion>();
+		
+		while (champs.size() < 8)
+		{
+			Champion candidate = getRandomChampion(gameManager.getAllChampions());
+			
+			// Ensure the chosen candidate is unique
+			if (!champs.contains(candidate))
+			{
+				champs.add(candidate);
+			}
+		}
+		
+		return champs;
 	}
     
 	/**

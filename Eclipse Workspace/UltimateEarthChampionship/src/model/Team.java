@@ -142,7 +142,7 @@ public class Team {
 		
 		score = 0;
 		
-		if (startingChampions.size() != 4)
+		if (startingChampions.size() != 4 && !isPlayer) // Ignore this if this is the player class, champions are assigned after setup
 		{
 			System.out.println("EXCEPTION: Starting champions size is not 4!");
 			//TODO: Throw an exception

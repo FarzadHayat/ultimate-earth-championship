@@ -2,6 +2,7 @@ package manager;
 
 import display.DisplayType;
 import display.GraphicalDisplay;
+import views.SetupView;
 import views.TabbedView;
 
 /**
@@ -11,6 +12,8 @@ public class GraphicalGameManager extends GameManager
 {
 	private GraphicalDisplay graphicalDisplay;
 
+	private SetupView setupView;
+	
 	/**
 	 * Starts the game by initializing the GraphicalDisplay.
 	 */
@@ -18,6 +21,28 @@ public class GraphicalGameManager extends GameManager
 	public void play()
 	{
 		graphicalDisplay = new GraphicalDisplay();
+		
+		//tabbedView();
+		setup();
+	}
+	
+	private void setup()
+	{
+		setupView = new SetupView(this);
+		
+		graphicalDisplay.displayView(setupView);
+	}
+	
+	/**
+	 * Called by the setupView to confirm that the playerTeam has been setup
+	 */
+	public void finishedSetup()
+	{
+		tabbedView();
+	}
+	
+	private void tabbedView()
+	{
 		TabbedView tabbedView = new TabbedView();
 		graphicalDisplay.displayView(tabbedView);
 	}
@@ -36,4 +61,5 @@ public class GraphicalGameManager extends GameManager
 	}
 
 
+	
 }

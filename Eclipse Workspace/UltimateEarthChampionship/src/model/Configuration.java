@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Configuration {
 	
 	/**
@@ -152,6 +155,33 @@ public class Configuration {
 	 * The starting money for each team.
 	 */
 	public final float STARTING_MONEY = 100f;
+	
+	/**
+	 * The minimum number of characters a teams name can be (inclusive)
+	 */
+	public final int MIN_TEAM_NAME_CHARS = 3;
+	
+	/**
+	 * The maximum number of characters a teams name can be (inclusive)
+	 */
+	public final int MAX_TEAM_NAME_CHARS = 15;
+	
+	/**
+	 * The minimum number of weeks the player can choose for the season to be
+	 */
+	public final int MIN_NUM_GAME_WEEKS = 5;
+	
+	/**
+	 * The maximum number of weeks the player can choose for the season to be
+	 */
+	public final int MAX_NUM_GAME_WEEKS = 15;
+	
+	/**
+	 * List of possible names for enemy teams
+	 */
+	public final ArrayList<String> AI_TEAM_NAMES = 
+			new ArrayList<String>(List.of("Team Butter", "Team Green", "Team Duty", "Team Truffle",
+										"Team Garfield", "Team Buxley", "Team Brisbane", "Team Eagle"));
 	
 	public float getDifficulty()
 	{
