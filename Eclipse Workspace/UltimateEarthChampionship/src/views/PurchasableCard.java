@@ -219,7 +219,6 @@ public class PurchasableCard extends JPanel {
 	    	statsPanel.add(new JLabel("Offense: " + String.valueOf(champion.getOffense())));
 	    	statsPanel.add(new JLabel("Damage: " + String.valueOf(champion.getDamage())));
 	    	statsPanel.add(new JLabel("Defense: " + String.valueOf(champion.getDefense())));
-	    	statsPanel.add(new JLabel("Weapon: " + champion.getWeapon().getName()));
 	    }
 	    if (purchasable.getClass().getSuperclass() == Weapon.class) {
 	    	Weapon weapon = (Weapon) purchasable;
