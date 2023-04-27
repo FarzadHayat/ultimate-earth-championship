@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 
-import main.GraphicalGameManager;
+import manager.GraphicalGameManager;
 import story.*;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;

@@ -2,6 +2,8 @@ package manager;
 
 import display.DisplayType;
 import display.GraphicalDisplay;
+import story.OpeningCutscene;
+import views.CutsceneView;
 import views.SetupView;
 import views.TabbedView;
 
@@ -14,6 +16,8 @@ public class GraphicalGameManager extends GameManager
 
 	private SetupView setupView;
 	
+	private CutsceneView openingCutsceneView;
+	
 	/**
 	 * Starts the game by initializing the GraphicalDisplay.
 	 */
@@ -23,7 +27,9 @@ public class GraphicalGameManager extends GameManager
 		graphicalDisplay = new GraphicalDisplay();
 		
 		//tabbedView();
-		setup();
+		
+		openingCutsceneView = new CutsceneView(new OpeningCutscene(), this);
+		graphicalDisplay.displayView(openingCutsceneView);
 	}
 	
 	private void setup()
@@ -39,6 +45,17 @@ public class GraphicalGameManager extends GameManager
 	public void finishedSetup()
 	{
 		tabbedView();
+	}
+	
+	public void drawCutscene()
+	{
+		openingCutsceneView.reDrawPanel();
+		graphicalDisplay.displayView(openingCutsceneView);
+	}
+	
+	public void cutsceneFinished()
+	{
+		setup();
 	}
 	
 	private void tabbedView()
