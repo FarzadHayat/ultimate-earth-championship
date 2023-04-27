@@ -15,6 +15,8 @@ import model.Match;
 import model.Shop;
 import model.Team;
 import model.Weapon;
+import story.Cutscene;
+import story.CutsceneSlide;
 import model.SetupManager;
 import views.CardType;
 
@@ -448,6 +450,26 @@ public class CommandLineDisplay implements DisplayStrategy {
 	public void displayGameResults(GameEnvironment gameEnvironment) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void playCutscene(Cutscene c)
+	{
+		while (true)
+		{
+			// Get the next cutscene slide
+			CutsceneSlide slide = c.nextSlide();
+			
+			// If a null has returned, the cutscene has finished
+			if (slide == null)
+			{
+				break;
+			}
+			
+			// else print the cutscene next and prompt for input before continuing
+			System.out.println(slide.getText());
+			
+			promptForInput();
+		}
 	}
 	
 }
