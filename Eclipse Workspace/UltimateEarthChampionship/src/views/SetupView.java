@@ -31,14 +31,16 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
 public class SetupView extends JPanel{
-
-
+	
 	private static final long serialVersionUID = 4605160332340664881L;
 	
 	private model.Configuration config = model.Configuration.getInstance();
 
 	private GraphicalGameManager manager;
-	
+		
+	/**
+	 * List of champions that can be chosen from in setup
+	 */
 	private ArrayList<Champion> championsToChooseFrom;
 	
 	// Data Requested:
@@ -48,6 +50,7 @@ public class SetupView extends JPanel{
 	private float difficulty;
 	
 	// Swing components:
+	// These aren't going to be commented as their names should be very self explanatory
 	private JTextField teamNameField;
 	private JButton submitButton;
 	private JSpinner weekSelectionSpinner;
@@ -55,9 +58,12 @@ public class SetupView extends JPanel{
 	
 	private JList availChampionsList;
 	private JList chosenChampionsList;
-	
 	private JLabel difficultyText;
 	
+	/**
+	 * Constructor, sets up this class
+	 * @param manager The game manager
+	 */
 	public SetupView(GraphicalGameManager manager)
 	{
 		this.manager = manager;
@@ -75,14 +81,17 @@ public class SetupView extends JPanel{
 		initialize();
 	}
 	
+	/**
+	 * Creates all the Swing components so they can be displayed
+	 */
 	private void initialize()
 	{
 		setLayout(null);
 		
 		JLabel headerLabel = new JLabel("Welcome to Ultimate Earth Championship");
+		headerLabel.setBounds(10, 11, 430, 30);
 		headerLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		headerLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		headerLabel.setBounds(10, 11, 430, 30);
 		add(headerLabel);
 		
 		teamNameField = new JTextField();
@@ -90,12 +99,13 @@ public class SetupView extends JPanel{
 		add(teamNameField);
 		
 		JLabel nameTeamLabel = new JLabel("Team name:");
+		nameTeamLabel.setBounds(10, 46, 278, 30);
 		nameTeamLabel.setToolTipText("Must be between 3 and 15 characters, cannot contain special characters");
 		nameTeamLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		nameTeamLabel.setBounds(10, 46, 278, 30);
 		add(nameTeamLabel);
 		
 		JButton submitButton = new JButton("Submit");
+		submitButton.setBounds(10, 628, 105, 30);
 		
 		submitButton.addActionListener(new ActionListener() 
 		{
@@ -104,33 +114,33 @@ public class SetupView extends JPanel{
 				submitData();
 			}
 		});
-		submitButton.setBounds(10, 266, 89, 23);
 		add(submitButton);
 		
 		JLabel chooseWeeksLabel = new JLabel("Number of weeks in tournament:");
+		chooseWeeksLabel.setBounds(10, 87, 230, 30);
 		chooseWeeksLabel.setToolTipText("");
 		chooseWeeksLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		chooseWeeksLabel.setBounds(10, 87, 230, 30);
 		add(chooseWeeksLabel);
 		
 		weekSelectionSpinner = new JSpinner();
-		weekSelectionSpinner.setModel(new SpinnerNumberModel(5, config.MIN_NUM_GAME_WEEKS, config.MAX_NUM_GAME_WEEKS, 1));
 		weekSelectionSpinner.setBounds(294, 92, 51, 20);
+		weekSelectionSpinner.setModel(new SpinnerNumberModel(5, config.MIN_NUM_GAME_WEEKS, config.MAX_NUM_GAME_WEEKS, 1));
 		add(weekSelectionSpinner);
 		
 		JLabel chooseDifficultyLabel = new JLabel("Choose the difficulty:");
+		chooseDifficultyLabel.setBounds(10, 128, 143, 30);
 		chooseDifficultyLabel.setToolTipText("");
 		chooseDifficultyLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		chooseDifficultyLabel.setBounds(10, 128, 143, 30);
 		add(chooseDifficultyLabel);
 		
 		difficultyText = new JLabel("");
+		difficultyText.setBounds(177, 156, 143, 30);
 		difficultyText.setToolTipText("");
 		difficultyText.setHorizontalAlignment(SwingConstants.CENTER);
-		difficultyText.setBounds(177, 156, 143, 30);
 		add(difficultyText);
 		
 		difficultySlider = new JSlider();
+		difficultySlider.setBounds(145, 132, 200, 26);
 		difficultySlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				updateDifficultyText();
@@ -141,22 +151,22 @@ public class SetupView extends JPanel{
 		difficultySlider.setValue(100);
 		difficultySlider.setMinimum(50);
 		difficultySlider.setMaximum(200);
-		difficultySlider.setBounds(145, 132, 200, 26);
 		add(difficultySlider);
 		
 		
 		
 		// Some more labels:
 		JLabel championsChooseHeaderLabel = new JLabel("Champions to choose from:");
-		championsChooseHeaderLabel.setBounds(397, 69, 193, 14);
+		championsChooseHeaderLabel.setBounds(396, 52, 193, 14);
 		add(championsChooseHeaderLabel);
 		
 		JLabel chosenChampionsLabel = new JLabel("Chosen champions:     (Choose 4)");
-		chosenChampionsLabel.setBounds(397, 270, 193, 14);
+		chosenChampionsLabel.setBounds(396, 253, 193, 14);
 		add(chosenChampionsLabel);
 		
 		// Available champions list
 		availChampionsList = new JList<Object>();
+		availChampionsList.setBounds(396, 77, 601, 150);
 		availChampionsList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				// Move champion from available champion to chosen champion...
@@ -182,11 +192,11 @@ public class SetupView extends JPanel{
 			}
 		});
 		availChampionsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		availChampionsList.setBounds(397, 94, 601, 150);
 		add(availChampionsList);
 		
 		// Chosen champions lists
 		chosenChampionsList = new JList<Object>();
+		chosenChampionsList.setBounds(396, 278, 601, 90);
 		chosenChampionsList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				// Move champion from chosen champions to available champion...
@@ -207,12 +217,16 @@ public class SetupView extends JPanel{
 			}
 		});
 		chosenChampionsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		chosenChampionsList.setBounds(397, 295, 601, 90);
 		add(chosenChampionsList);
 		
 		updateChampionLists();
 	}
 	
+	/**
+	 * Retrieves all the data from the components,
+	 * Formats it, and then gives it to the setupManager to be checked.
+	 * Setup Manager handles the logic checking, throwing InputExceptions at incorrect inputs
+	 */
 	private void submitData()
 	{
 		try 
@@ -220,23 +234,31 @@ public class SetupView extends JPanel{
 			teamName = SetupManager.PromptForTeamName(teamNameField.getText());
 			gameWeeks = SetupManager.PromptForNumWeeks(Integer.toString((int) weekSelectionSpinner.getValue()));
 			difficulty = SetupManager.PromptForDifficulty( Float.toString(((float) difficultySlider.getValue()) / 100f));
+			chosenChampions = SetupManager.PromptForTeamChampions(chosenChampions);
 			
-			// In case of too few champions
-			if (chosenChampions.size() < 4)
+			// If everything passed with no exceptions, prompt the player to confirm
+			int reply = JOptionPane.showConfirmDialog(submitButton, 
+					"Are you sure you want to start the game?", 
+					"Confirm Setup", 
+					JOptionPane.YES_NO_OPTION); 
+			
+			if (reply == 0)
 			{
-				throw new InputException("Not enough champions in your team!");
+				manager.setupPlayerTeam(teamName, gameWeeks, chosenChampions, difficulty); // :) setup done
+				manager.finishedSetup(); // Let gameManager know we are done
 			}
+			
 		} 
 		catch (InputException e1) 
 		{
 			JOptionPane.showMessageDialog(submitButton, e1.getMessage());
-		}
+		}		
 		
-		// If everything passed the test:
-		manager.setupPlayerTeam(teamName, gameWeeks, chosenChampions, difficulty); // :) setup done
-		manager.finishedSetup(); // Let gameManager know we are done
 	}
 	
+	/**
+	 * Updates the champion JLists based on the chosenChampions and championsToChooseFrom ArrayLists
+	 */
 	private void updateChampionLists()
 	{
 		// Chosen champions model
@@ -262,6 +284,9 @@ public class SetupView extends JPanel{
 		availChampionsList.setModel(availChampModel);
 	}
 	
+	/**
+	 * Updates the text on the difficulty text label to reflect the chosen difficulty value
+	 */
 	private void updateDifficultyText()
 	{
 		float difficulty = (((float) difficultySlider.getValue()) / 100f);
@@ -299,4 +324,6 @@ public class SetupView extends JPanel{
 		difficultyText.setText(diffText + " (" + difficulty + ")");
 		
 	}
+
+
 }
