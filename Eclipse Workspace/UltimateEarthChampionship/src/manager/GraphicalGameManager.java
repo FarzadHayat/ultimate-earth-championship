@@ -2,7 +2,9 @@ package manager;
 
 import display.DisplayType;
 import display.GraphicalDisplay;
+import model.Champion;
 import model.GameEnvironment;
+import model.Weapon;
 import match.*;
 
 /**
@@ -85,6 +87,16 @@ public class GraphicalGameManager extends GameManager
 	public void visitGameResults(GameEnvironment gameEnvironment) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void finishedWeaponSetup() {
+		for (int i = 0; i < getPlayerTeam().getChosenWeapons().size(); i++) {
+			Champion champion = getPlayerTeam().getChosenChampions().get(i); 
+			Weapon weapon = getPlayerTeam().getChosenWeapons().get(i);
+			champion.setWeapon(weapon);
+		}
+//		gameManager.visitLiveMatch(new LiveMatch(getPlayerTeam(), getEnemyTeam()));
+		// TODO: start live match. waiting for LiveMatch class to be created.
 	}
 
 }

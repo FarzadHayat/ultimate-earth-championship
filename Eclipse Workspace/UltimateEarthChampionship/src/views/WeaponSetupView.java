@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import manager.GameManager;
+import manager.GraphicalGameManager;
 import model.Champion;
 import model.Weapon;
 import model.Configuration;
@@ -20,7 +21,7 @@ public class WeaponSetupView extends JPanel {
 
 	private static final long serialVersionUID = -1352915737619575543L;
 	
-	private GameManager gameManager = GameManager.getInstance();
+	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 	private Configuration config = Configuration.getInstance();
 	
 	private JPanel chosenPanel;
@@ -118,13 +119,7 @@ public class WeaponSetupView extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				for (int i = 0; i < gameManager.getPlayerTeam().getChosenWeapons().size(); i++) {
-					Champion champion = gameManager.getPlayerTeam().getChosenChampions().get(i); 
-					Weapon weapon = gameManager.getPlayerTeam().getChosenWeapons().get(i);
-					champion.setWeapon(weapon);
-				}
-//				gameManager.visitLiveMatch(new LiveMatch(gameManager.getPlayerTeam(), gameManager.getEnemyTeam()));
-				// TODO: start live match
+				gameManager.finishedWeaponSetup();
 			}
 		});
 		nextButtonPanel.add(startButton);
