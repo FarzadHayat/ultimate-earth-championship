@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 
 import exception.FullTeamException;
 import manager.GameManager;
+import manager.GraphicalGameManager;
 import model.Champion;
 import model.Purchasable;
 import model.Team;
@@ -30,7 +31,7 @@ public class ChampionSetupView extends JPanel {
 
 	private static final long serialVersionUID = -1352915737619575543L;
 	
-	private GameManager gameManager = GameManager.getInstance();
+	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 	private Configuration config = Configuration.getInstance();
 	
 	/**
@@ -112,7 +113,7 @@ public class ChampionSetupView extends JPanel {
 				if (gameManager.getPlayerTeam().getChosenChampions().size() < config.NUM_CHOSEN_CHAMPIONS) {
 					JOptionPane.showMessageDialog(getParent(), "Team roster is not complete!\nSelect more champions to continue.");
 				} else {
-					gameManager.visitWeaponSetup();
+					gameManager.finishedChampionSetup();
 				}
 				
 			}

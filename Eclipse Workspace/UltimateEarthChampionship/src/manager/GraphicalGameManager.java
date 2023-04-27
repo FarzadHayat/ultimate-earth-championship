@@ -89,6 +89,10 @@ public class GraphicalGameManager extends GameManager
 		
 	}
 	
+	public void finishedChampionSetup() {
+		visitWeaponSetup();
+	}
+	
 	public void finishedWeaponSetup() {
 		for (int i = 0; i < getPlayerTeam().getChosenWeapons().size(); i++) {
 			Champion champion = getPlayerTeam().getChosenChampions().get(i); 
