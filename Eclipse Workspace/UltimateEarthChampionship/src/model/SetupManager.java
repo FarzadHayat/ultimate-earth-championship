@@ -20,27 +20,31 @@ public abstract class SetupManager {
 	{
 		String teamName = input;
 	
-		Pattern allowedChars = Pattern.compile("[A-Za-z0-9]");
+		Pattern allowedChars = Pattern.compile("[^A-Z^a-z^0-9]");
 		
-		if (teamName.length() < config.MIN_TEAM_NAME_CHARS)
+		if (teamName.length() <= config.MIN_TEAM_NAME_CHARS)
 		{
 			throw new InputException("Team name is too small!");
 		}
-		else if (teamName.length() > config.MAX_TEAM_NAME_CHARS)
+		else if (teamName.length() >= config.MAX_TEAM_NAME_CHARS)
 		{
 			throw new InputException("Team name is too large!");
 		}
-		else 
+		
+		
+		// Check for special characters
+		Matcher matcher = allowedChars.matcher(teamName);
+		
+		Boolean containsSpecialCharacters = matcher.find();
+		
+		//System.out.println(containsSpecialCharacters);
+				
+		if (containsSpecialCharacters)
 		{
-			// Check for special characters
-			Matcher matcher = allowedChars.matcher(teamName);
-			
-			if (!matcher.find())
-			{
-				// Special characters found
-				throw new InputException("Team name contains special characters!");
-			}
+			// Special characters found
+			throw new InputException("Team name contains special characters!");
 		}
+		
 		
 		return teamName;
 	}
