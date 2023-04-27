@@ -55,13 +55,13 @@ class TeamTest {
 	}
 
 	@Test
-	void testGetChosenChampions() {
-		assertEquals(testTeam.getChosenChampions().get(0).getName(), new CharlesDarwin().getName() );
+	void testGetChampions() {
+		assertEquals(testTeam.getChampions().get(0).getName(), new CharlesDarwin().getName());
 	}
 
 	@Test
-	void testGetReserveChampions() {
-		assertEquals(testTeam.getReserveChampions().size(), 0);
+	void testGetChampions2() {
+		assertEquals(testTeam.getChampions().size(), 4);
 	}
 
 	@Test
@@ -77,8 +77,8 @@ class TeamTest {
 	}
 
 	@Test
-	void testGetAllChampions() {
-		assertEquals(testTeam.getAllChampions().size(), 4);
+	void testGetChampions3() {
+		assertEquals(testTeam.getChampions().size(), 4);
 		
 		try {
 			testTeam.addChampion(new Confucius());
@@ -87,12 +87,12 @@ class TeamTest {
 			e.printStackTrace();
 		}
 		
-		assertEquals(testTeam.getAllChampions().size(), 5);
+		assertEquals(testTeam.getChampions().size(), 5);
 	}
 
 	@Test
 	void testAddChampion() {
-		assertEquals(testTeam.getReserveChampions().size(), 0);
+		assertEquals(testTeam.getChampions().size(), 4);
 		
 		try {
 			testTeam.addChampion(new Confucius());
@@ -101,26 +101,7 @@ class TeamTest {
 			e.printStackTrace();
 		}
 		
-		assertEquals(testTeam.getReserveChampions().size(), 1);
-	}
-
-	@Test
-	void testSwapChampion() {
-		
-		try {
-			testTeam.addChampion(new Confucius());
-		}
-		catch (FullTeamException e) {
-			e.printStackTrace();
-		}
-	
-		Champion confucius = testTeam.getReserveChampions().get(0);
-		
-		Champion darwin = testTeam.getChosenChampions().get(0);
-		
-		testTeam.swapChampion(confucius, darwin);
-		
-		assertEquals(testTeam.getChosenChampions().get(0).getName(), "Confucius");
+		assertEquals(testTeam.getChampions().size(), 5);
 	}
 
 }

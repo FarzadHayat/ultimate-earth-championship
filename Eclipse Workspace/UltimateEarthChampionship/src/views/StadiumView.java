@@ -20,20 +20,20 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 
-public class MatchSelectionView extends JPanel {
+public class StadiumView extends JPanel {
 
 	private static final long serialVersionUID = 6012771276554788813L;
 	
-	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
+	private GameManager gameManager = GameManager.getInstance();
 
 	/**
 	 * Create the panel.
 	 */
-	public MatchSelectionView() {
-		setName("Matches");
+	public StadiumView() {
+		setName("Stadium");
 		setLayout(new FlowLayout(FlowLayout.CENTER, 200, 200));
 		
-		for (Team team : gameManager.getTeams()) {
+		for (Team team : gameManager.getAITeams()) {
 			addTeamPanel(team);
 		}
 	}
@@ -49,8 +49,8 @@ public class MatchSelectionView extends JPanel {
 		panel.add(nameLabel, BorderLayout.NORTH);
 		
 		DefaultListModel<String> model = new DefaultListModel<>();
-		for (int i = 0; i < team.getChosenChampions().size(); i++) {
-			Champion champion = team.getChosenChampions().get(i);
+		for (int i = 0; i < team.getChampions().size(); i++) {
+			Champion champion = team.getChampions().get(i);
 			model.add(i, String.format("%s (%s)", champion.getName(), champion.getWeapon().getName()));
 		}
 		JList<String> championList = new JList<String>(model);
@@ -61,8 +61,8 @@ public class MatchSelectionView extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GraphicalDisplay graphicalDisplay = gameManager.getGraphicalDisplay();
-				graphicalDisplay.displayMatchSetup(team);
+				gameManager.setEnemyTeam(team);
+				gameManager.visitChampionSetup();
 			}
 		});
 		panel.add(fightButton, BorderLayout.SOUTH);

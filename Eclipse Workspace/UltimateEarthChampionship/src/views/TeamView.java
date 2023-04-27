@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -7,15 +8,18 @@ import javax.swing.JPanel;
 
 import manager.GameManager;
 import model.Champion;
+import model.Configuration;
 import model.Purchasable;
 import model.Weapon;
+import views.PurchasableCard.CardType;
 
 public class TeamView extends JPanel {
 
 	private static final long serialVersionUID = -8010724197066539267L;
 	
 	private GameManager gameManager = GameManager.getInstance();
-
+	private Configuration config = Configuration.getInstance();
+	
 	/**
 	 * Create the panel.
 	 */
@@ -23,45 +27,46 @@ public class TeamView extends JPanel {
 		setName("Team");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		addChosenChampionsPanel();
-		addReserveChampionsPanel();
+		add(new HeaderPanel("Champions"));
+		addChampionsPanel();
+		add(new HeaderPanel("Weapons"));
 		addAllWeaponsPanel();
 	}
 
 	/**
-	 * Add a purchasable panel to display the team's chosen champions.
+	 * Add a purchasable panel to display the team's champions.
 	 */
-	private void addChosenChampionsPanel() {
-		ArrayList<Purchasable> chosenChampions = new ArrayList<Purchasable>();
-		for (Champion champion : gameManager.getPlayerTeam().getChosenChampions()) {
-			chosenChampions.add(champion);
+	private void addChampionsPanel() {
+		JPanel championsPanel = new JPanel(new FlowLayout());
+		ArrayList<Champion> champions = gameManager.getPlayerTeam().getChampions();
+		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
+			Champion champion;
+			if (champions.size() > i) {
+				champion = champions.get(i);
+			} else {
+				champion = null;
+			}
+			championsPanel.add(new PurchasableCard(champion, CardType.CAN_SELL));
 		}
-		PurchasablesPanel chosenChampionsPanel = new PurchasablesPanel(chosenChampions, CardType.CAN_SELL);
-		add(chosenChampionsPanel);
-	}
-	
-	/**
-	 * Add a purchasable panel to display the team's reserve champions.
-	 */
-	private void addReserveChampionsPanel() {
-		ArrayList<Purchasable> reserveChampions = new ArrayList<Purchasable>();
-		for (Champion champion : gameManager.getPlayerTeam().getReserveChampions()) {
-			reserveChampions.add(champion);
-		}
-		PurchasablesPanel reserveChampionsPanel = new PurchasablesPanel(reserveChampions, CardType.CAN_SELL);
-		add(reserveChampionsPanel);
+		add(championsPanel);
 	}
 	
 	/**
 	 * Add a purchasable panel to display all the team's weapons.
 	 */
 	private void addAllWeaponsPanel() {
-		ArrayList<Purchasable> allWeapons = new ArrayList<Purchasable>();
-		for (Weapon weapon : gameManager.getPlayerTeam().getAllWeapons()) {
-			allWeapons.add(weapon);
+		JPanel weaponsPanel = new JPanel(new FlowLayout());
+		ArrayList<Weapon> weapons = gameManager.getPlayerTeam().getWeapons();
+		for (int i = 0; i < config.NUM_WEAPONS; i++) {
+			Weapon weapon;
+			if (weapons.size() > i) {
+				weapon = weapons.get(i);
+			} else {
+				weapon = null;
+			}
+			weaponsPanel.add(new PurchasableCard(weapon, CardType.CAN_SELL));
 		}
-		PurchasablesPanel allWeaponsPanel = new PurchasablesPanel(allWeapons, CardType.CAN_SELL);
-		add(allWeaponsPanel);
+		add(weaponsPanel);
 	}
 
 }

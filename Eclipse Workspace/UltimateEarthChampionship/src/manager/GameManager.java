@@ -1,12 +1,12 @@
 package manager;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import display.DisplayType;
 import model.*;
+import match.*;
 import champions.*;
 import weapons.*;
 
@@ -50,7 +50,12 @@ public abstract class GameManager
 	/**
 	 * All the teams including the player team.
 	 */
-	private ArrayList<Team> teams; 
+	private ArrayList<Team> teams;
+	
+	/**
+	 * The currently selected enemy team.
+	 */
+	private Team enemyTeam;
 	
 	/**
 	 * Starts the game.
@@ -92,6 +97,7 @@ public abstract class GameManager
 		// Teams
 		playerTeam = new Team(true, "Player", new ArrayList<Champion>()); // Champions are assigned later, after setup
 		teams = generateAITeams();
+		teams.add(playerTeam);
 		
     	// Shop
     	shop = new Shop();
@@ -227,6 +233,21 @@ public abstract class GameManager
 	}
 	
 	/**
+	 * Get list of all AI teams in the game.
+	 * @return teams the list of AI teams
+	 */
+	public ArrayList<Team> getAITeams() {
+		ArrayList<Team> AITeams = new ArrayList<Team>();
+		AITeams.remove(playerTeam);
+		for (Team team : teams) {
+			if (!team.isPlayerTeam()) {
+				AITeams.add(team); 	
+			}
+		}
+		return AITeams;
+	}
+	
+	/**
 	 * Sets up the playerTeam, the difficulty and the number of weeks, should be called by the setup
 	 * @param teamName The team name
 	 * @param numWeeks The number of weeks in the season
@@ -241,6 +262,31 @@ public abstract class GameManager
 		gameEnvironment.setDifficulty(difficulty);
 		gameEnvironment.setMaxWeeks(numWeeks);
 	}
+
+	/**
+	 * @return the enemyTeam
+	 */
+	public Team getEnemyTeam() {
+		return enemyTeam;
+	}
+
+	/**
+	 * @param enemyTeam the enemyTeam to set
+	 */
+	public void setEnemyTeam(Team enemyTeam) {
+		this.enemyTeam = enemyTeam;
+	}
+
+	public abstract void visitStory(String text);
+	public abstract void visitSetup();
+	public abstract void visitHome();
+	public abstract void visitTeam();
+	public abstract void visitShop();
+	public abstract void visitStadium();
+	public abstract void visitChampionSetup();
+	public abstract void visitWeaponSetup();
+	public abstract void visitLiveMatch(Match match);
+	public abstract void visitGameResults(GameEnvironment gameEnvironment);
 
 	/**
 	 * Generates all the AI teams

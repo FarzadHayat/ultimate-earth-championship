@@ -6,8 +6,9 @@ import java.awt.Font;
 import javax.swing.JFrame;
 
 import model.GameEnvironment;
-import model.Match;
-import model.Team;
+import match.*;
+import views.ChampionSetupView;
+import views.WeaponSetupView;
 import views.TabbedView;
 
 public class GraphicalDisplay implements DisplayStrategy {
@@ -32,6 +33,7 @@ public class GraphicalDisplay implements DisplayStrategy {
 		frame.setFont(new Font("Ubuntu", Font.PLAIN, 12));
 		frame.setTitle("Ultimate Earth Championship");
 		frame.setBounds(100, 100, 1280, 720);
+		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
@@ -80,31 +82,27 @@ public class GraphicalDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayMatchSelection() {
-		// TODO Auto-generated method stub
-		
+	public void displayStadium() {
+		TabbedView tabbedView = new TabbedView();
+		displayView(tabbedView);
+		tabbedView.showStadiumView();
 	}
 
 	@Override
-	public void displayMatchSetup(Team team) {
-		// TODO Auto-generated method stub
-		
+	public void displayChampionSetup() {
+		ChampionSetupView championSetupView = new ChampionSetupView();
+		displayView(championSetupView);
+	}
+	
+
+	@Override
+	public void displayWeaponSetup() {
+		WeaponSetupView weaponSetupView = new WeaponSetupView();
+		displayView(weaponSetupView);
 	}
 
 	@Override
 	public void displayLiveMatch(Match match) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void displayMatchResults(Match match) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void displayWeekResults(GameEnvironment gameEnvironment) {
 		// TODO Auto-generated method stub
 		
 	}

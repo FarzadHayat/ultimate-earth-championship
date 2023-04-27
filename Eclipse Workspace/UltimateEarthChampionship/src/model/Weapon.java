@@ -61,11 +61,13 @@ public abstract class Weapon implements Purchasable, Cloneable {
     	this.isDefaultWeapon = isDefault;
     	this.price = price * config.WEAPON_PRICE_MODIFIER;
     	this.priceChangeWeekly = priceChangeWeekly * config.WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER;
-    	try {
-    		this.image = new ImageIcon(config.WEAPON_IMAGE_FOLDER_PATH + imageFileName);
-    	}
-    	catch (NullPointerException e) {
-    		System.out.println(e.getMessage());
+    	if (imageFileName != "") {
+        	try {
+        		this.image = new ImageIcon(config.WEAPON_IMAGE_FOLDER_PATH + imageFileName);
+        	}
+        	catch (NullPointerException e) {
+        		System.out.println(e.getMessage());
+        	}
     	}
     }
     
@@ -219,9 +221,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	@Override
 	public Weapon clone() {
         try {
-        	Weapon weapon = (Weapon) super.clone();
-        	weapon.setImage(new ImageIcon(weapon.getImage().getImage()));
-            return weapon;
+            return (Weapon) super.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;

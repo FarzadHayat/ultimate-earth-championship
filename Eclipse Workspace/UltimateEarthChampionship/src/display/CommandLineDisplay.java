@@ -1,24 +1,21 @@
 package display;
 
-import java.lang.module.Configuration;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import exception.InputException;
 import manager.GameManager;
 import model.Champion;
 import model.GameEnvironment;
-import model.Match;
+import match.*;
 import model.Shop;
 import model.Team;
 import model.Weapon;
 import story.Cutscene;
 import story.CutsceneSlide;
 import model.SetupManager;
-import views.CardType;
+import views.PurchasableCard.CardType;
 
 public class CommandLineDisplay implements DisplayStrategy {
 	private static final String FILLER = "=";
@@ -155,14 +152,14 @@ public class CommandLineDisplay implements DisplayStrategy {
 	/**
 	 * Returns an ArrayList of String options for the given list of Champion objects and CardType.
 	 * @param champions the ArrayList of Champion objects to get options for
-	 * @param type the CardType to use to generate the options
+	 * @param cardType the CardType to use to generate the options
 	 * @return an ArrayList of String options for the given list of Champion objects and CardType
 	 */
-	private static ArrayList<String> getChampionOptions(ArrayList<Champion> champions, CardType type) {
+	private static ArrayList<String> getChampionOptions(ArrayList<Champion> champions, CardType cardType) {
 		ArrayList<String> names = new ArrayList<String>();
 		for (Champion champion : champions) {
 			String text;
-			switch (type) {
+			switch (cardType) {
 			case CAN_BUY: {
 				text = "BUY: ";
 				break;
@@ -185,14 +182,14 @@ public class CommandLineDisplay implements DisplayStrategy {
 	/**
 	 * Returns an ArrayList of String options for the given list of Weapon objects and CardType.
 	 * @param weapons the ArrayList of Weapon objects to get options for
-	 * @param type the CardType to use to generate the options
+	 * @param cardType the CardType to use to generate the options
 	 * @return an ArrayList of String options for the given list of Weapon objects and CardType
 	 */
-	private static ArrayList<String> getWeaponOptions(ArrayList<Weapon> weapons, CardType type) {
+	private static ArrayList<String> getWeaponOptions(ArrayList<Weapon> weapons, CardType cardType) {
 		ArrayList<String> names = new ArrayList<String>();
 		for (Weapon weapon : weapons) {
 			String text;
-			switch (type) {
+			switch (cardType) {
 			case CAN_BUY: {
 				text = "BUY: ";
 				break;
@@ -417,31 +414,42 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayMatchSelection() {
-		// TODO Auto-generated method stub
+	public void displayStadium() {
+		ArrayList<Team> teams = gameManager.getTeams();
 		
+		ArrayList<String> content = new ArrayList<String>();
+		
+		for (Team team : teams) {
+			content.add(team.getName());
+			for (Champion champion : team.getChampions()) {
+				content.add(String.format("- %s (%s)", champion.getName(), champion.getWeapon().getName()));
+			}
+		}
+		
+		ArrayList<String> options = new ArrayList<String>();
+		for (Team team : teams) {
+			options.add("FIGHT: " + team.getName());
+		}
+		
+		printView("Matches", content, options);
+		System.out.println(promptForInput());
 	}
 
 	@Override
-	public void displayMatchSetup(Team team) {
+	public void displayChampionSetup() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+	@Override
+	public void displayWeaponSetup() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void displayLiveMatch(Match match) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void displayMatchResults(Match match) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void displayWeekResults(GameEnvironment gameEnvironment) {
 		// TODO Auto-generated method stub
 		
 	}

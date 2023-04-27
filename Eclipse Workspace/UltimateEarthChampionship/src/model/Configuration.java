@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Font;
 
 public class Configuration {
 	
@@ -139,17 +140,17 @@ public class Configuration {
 	/**
 	 * Number of champions a team can hold as chosen.
 	 */
+	public final int NUM_CHAMPIONS = 9;
+	
+	/**
+	 * Number of champions a team can hold as chosen.
+	 */
 	public final int NUM_CHOSEN_CHAMPIONS = 4;
 	
 	/**
-	 * Number of champions a team can hold as reserve.
+	 * Number of weapons a team can hold.
 	 */
-	public final int NUM_RESERVE_CHAMPIONS = 5;
-	
-	/**
-	 * Number of weapons a team can hold as reserve.
-	 */
-	public final int NUM_RESERVE_WEAPONS = 4;
+	public final int NUM_WEAPONS = 9;
 	
 	/**
 	 * The starting money for each team.
@@ -157,6 +158,7 @@ public class Configuration {
 	public final float STARTING_MONEY = 100f;
 	
 	/**
+<<<<<<< HEAD
 	 * The minimum number of characters a teams name can be (inclusive)
 	 */
 	public final int MIN_TEAM_NAME_CHARS = 3;
@@ -182,6 +184,21 @@ public class Configuration {
 	public final ArrayList<String> AI_TEAM_NAMES = 
 			new ArrayList<String>(List.of("Team Butter", "Team Green", "Team Duty", "Team Truffle",
 										"Team Garfield", "Team Buxley", "Team Brisbane", "Team Eagle"));
+
+	/**
+	 * The font family for the graphical game.
+	 */
+	public static final String FONT_FAMILY = "Ubuntu";
+	
+	/**
+	 * The font used for headers.
+	 */
+	public static final Font HEADER_FONT = new Font(FONT_FAMILY, Font.PLAIN, 20);
+	
+	/**
+	 * The font used for regular text.
+	 */
+	public static final Font TEXT_FONT = new Font(FONT_FAMILY, Font.PLAIN, 14);
 	
 	public float getDifficulty()
 	{

@@ -16,8 +16,8 @@ public class DumbMatch extends Match {
 	@Override
 	public MatchResult runMatch() {
 		
-		ArrayList<Champion> team1Champs = team1.getChosenChampions();
-		ArrayList<Champion> team2Champs = team2.getChosenChampions();
+		ArrayList<Champion> team1Champs = team1.getChampions();
+		ArrayList<Champion> team2Champs = team2.getChampions();
 		
 		// Prepare a best of 3 match...
 		int team1Score = 0;
