@@ -3,8 +3,7 @@ package manager;
 import display.CommandLineDisplay;
 import display.DisplayType;
 import model.GameEnvironment;
-import model.Match;
-import model.Team;
+import match.*;
 
 /**
  * A subclass of GameManager that represents the command line version of the game.
@@ -68,6 +67,12 @@ public class CommandLineGameManager extends GameManager
 
 	@Override
 	public void visitChampionSetup() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void visitWeaponSetup() {
 		// TODO Auto-generated method stub
 		
 	}

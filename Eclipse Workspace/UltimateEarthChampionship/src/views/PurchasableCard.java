@@ -2,9 +2,7 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -15,7 +13,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -77,7 +74,8 @@ public class PurchasableCard extends JPanel {
 			setBackground(Color.gray);
 			return;
 		}
-		if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable)) {
+		if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable) ||
+				gameManager.getPlayerTeam().getChosenWeapons().contains(purchasable)) {
 			setBackground(Color.green);
 		}
 		mainPanel.setOpaque(false);
@@ -129,7 +127,8 @@ public class PurchasableCard extends JPanel {
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable)) {
+				if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable) ||
+						gameManager.getPlayerTeam().getChosenWeapons().contains(purchasable)) {
 					setBackground(Color.green);
 				} else {
 					setBackground(Color.yellow);
@@ -143,16 +142,30 @@ public class PurchasableCard extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable)) {
-					gameManager.getPlayerTeam().removeFromRoster((Champion) purchasable);
-				} else {
-					try {
-						gameManager.getPlayerTeam().addToRoster((Champion) purchasable);
-					} catch (FullTeamException e1) {
-						JOptionPane.showMessageDialog(getParent(), e1.getMessage());
-					};
+				if (purchasable.getClass().getSuperclass() == Champion.class) {
+					if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable)) {
+						gameManager.getPlayerTeam().removeChosenChampion((Champion) purchasable);
+					} else {
+						try {
+							gameManager.getPlayerTeam().addChosenChampion((Champion) purchasable);
+						} catch (FullTeamException e1) {
+							JOptionPane.showMessageDialog(getParent(), e1.getMessage());
+						};
+					}
+					gameManager.visitChampionSetup();
 				}
-				gameManager.visitChampionSetup();
+				if (purchasable.getClass().getSuperclass() == Weapon.class) {
+					if (gameManager.getPlayerTeam().getChosenWeapons().contains(purchasable)) {
+						gameManager.getPlayerTeam().removeChosenWeapon((Weapon) purchasable);
+					} else {
+						try {
+							gameManager.getPlayerTeam().addChosenWeapon((Weapon) purchasable);
+						} catch (FullTeamException e1) {
+							JOptionPane.showMessageDialog(getParent(), e1.getMessage());
+						};
+					}
+					gameManager.visitWeaponSetup();
+				}
 			}
 		});
 	}

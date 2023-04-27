@@ -34,6 +34,11 @@ public class Team {
 	private ArrayList<Champion> chosenChampions = new ArrayList<Champion>();
 	
 	/**
+	 * chosen weapons of the team
+	 */
+	private ArrayList<Weapon> chosenWeapons = new ArrayList<Weapon>();
+	
+	/**
 	 * weapons of the team
 	 */
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
@@ -200,6 +205,14 @@ public class Team {
 	public void setChosenChampions(ArrayList<Champion> chosenChampions) {
 		this.chosenChampions = chosenChampions;
 	}
+	
+	public ArrayList<Weapon> getChosenWeapons() {
+		return chosenWeapons;
+	}
+
+	public void setChosenWeapons(ArrayList<Weapon> chosenWeapons) {
+		this.chosenWeapons = chosenWeapons;
+	}
 
 	/**
 	 * Gets a random champion from the team
@@ -214,26 +227,50 @@ public class Team {
 
 	/**
 	 * Adds a champion to the chosen champions
-	 * @param toRoster Champion to be added to chosenChampions
+	 * @param champion the champion to be added to chosenChampions
 	 * @throws FullTeamException if the chosen champions list is already full
 	 */
-	public void addToRoster(Champion toRoster) throws FullTeamException
+	public void addChosenChampion(Champion champion) throws FullTeamException
 	{
 		if (chosenChampions.size() >= config.NUM_CHOSEN_CHAMPIONS)
 		{
-			throw new FullTeamException("Reached team max roster limit!");
+			throw new FullTeamException("Reached team max chosen champions limit!");
 		}
 		
-		chosenChampions.add(toRoster);
+		chosenChampions.add(champion);
 	}
 	
 	/**
 	 * Remove a champion to chosen champions
-	 * @param champion Champion to be removed from chosenChampions
+	 * @param champion the champion to be removed from chosenChampions
 	 */
-	public void removeFromRoster(Champion champion)
+	public void removeChosenChampion(Champion champion)
 	{	
 		chosenChampions.remove(champion);
+	}
+	
+	/**
+	 * Adds a weapon to the chosen weapons
+	 * @param weapon the weapon to be added to chosenWeapons
+	 * @throws FullTeamException if the chosen weapons list is already full
+	 */
+	public void addChosenWeapon(Weapon weapon) throws FullTeamException
+	{
+		if (chosenWeapons.size() >= config.NUM_CHOSEN_CHAMPIONS)
+		{
+			throw new FullTeamException("Reached team max chosen weapons limit!");
+		}
+		
+		chosenWeapons.add(weapon);
+	}
+	
+	/**
+	 * Remove a weapon to chosen weapons
+	 * @param weapon the weapon to be removed from chosenWeapons
+	 */
+	public void removeChosenWeapon(Weapon weapon)
+	{	
+		chosenWeapons.remove(weapon);
 	}
 
 	/**

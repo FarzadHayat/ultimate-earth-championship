@@ -6,9 +6,9 @@ import java.awt.Font;
 import javax.swing.JFrame;
 
 import model.GameEnvironment;
-import model.Match;
-import model.Team;
+import match.*;
 import views.ChampionSetupView;
+import views.WeaponSetupView;
 import views.TabbedView;
 
 public class GraphicalDisplay implements DisplayStrategy {
@@ -92,6 +92,13 @@ public class GraphicalDisplay implements DisplayStrategy {
 	public void displayChampionSetup() {
 		ChampionSetupView championSetupView = new ChampionSetupView();
 		displayView(championSetupView);
+	}
+	
+
+	@Override
+	public void displayWeaponSetup() {
+		WeaponSetupView weaponSetupView = new WeaponSetupView();
+		displayView(weaponSetupView);
 	}
 
 	@Override

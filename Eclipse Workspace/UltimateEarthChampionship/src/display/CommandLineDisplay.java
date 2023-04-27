@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import manager.GameManager;
 import model.Champion;
 import model.GameEnvironment;
-import model.Match;
+import match.*;
 import model.Shop;
 import model.Team;
 import model.Weapon;
@@ -289,6 +289,13 @@ public class CommandLineDisplay implements DisplayStrategy {
 
 	@Override
 	public void displayChampionSetup() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+	@Override
+	public void displayWeaponSetup() {
 		// TODO Auto-generated method stub
 		
 	}

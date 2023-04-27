@@ -3,7 +3,7 @@ package manager;
 import display.DisplayType;
 import display.GraphicalDisplay;
 import model.GameEnvironment;
-import model.Match;
+import match.*;
 
 /**
  * A subclass of GameManager that represents the graphical version of the game.
@@ -67,6 +67,12 @@ public class GraphicalGameManager extends GameManager
 	@Override
 	public void visitChampionSetup() {
 		graphicalDisplay.displayChampionSetup();
+	}
+	
+
+	@Override
+	public void visitWeaponSetup() {
+		graphicalDisplay.displayWeaponSetup();
 	}
 
 	@Override

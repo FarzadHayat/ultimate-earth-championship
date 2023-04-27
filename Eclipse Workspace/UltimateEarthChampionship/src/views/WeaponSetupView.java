@@ -1,79 +1,73 @@
 package views;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.security.interfaces.RSAMultiPrimePrivateCrtKey;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import exception.FullTeamException;
 import manager.GameManager;
 import model.Champion;
-import model.Purchasable;
-import model.Team;
+import model.Weapon;
 import model.Configuration;
 import views.PurchasableCard.CardType;
 
-public class ChampionSetupView extends JPanel {
+public class WeaponSetupView extends JPanel {
 
 	private static final long serialVersionUID = -1352915737619575543L;
 	
 	private GameManager gameManager = GameManager.getInstance();
 	private Configuration config = Configuration.getInstance();
 	
+	private JPanel chosenPanel;
+	
 	/**
 	 * Create the panel.
 	 */
-	public ChampionSetupView() {
+	public WeaponSetupView() {
 		setLayout(new BorderLayout());
+		chosenPanel = new JPanel(new GridLayout(0, 2));
+		add(chosenPanel, BorderLayout.EAST);
 		
 		addBackButton();
-		addChampionsPanel();
+		addWeaponsPanel();
 		addLanesPanel();
 		addChosenChampionsPanel();
+		addChosenWeaponsPanel();
 		addNextButton();
 	}
 
 	private void addBackButton() {
 		JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton backButton = new JButton("Go back to the Stadium");
+		JButton backButton = new JButton("Go back to Champion Setup");
 		backButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gameManager.setEnemyTeam(null);
-				gameManager.getPlayerTeam().setChosenChampions(new ArrayList<Champion>());
-				gameManager.visitStadium();
+				gameManager.getPlayerTeam().setChosenWeapons(new ArrayList<Weapon>());
+				gameManager.visitChampionSetup();
 			}
 		});
 		backButtonPanel.add(backButton);
 		add(backButtonPanel, BorderLayout.NORTH);
 	}
 
-	private void addChampionsPanel() {
-		JPanel championsPanel = new JPanel(new GridLayout(3, 3, 20, 20));
-		ArrayList<Champion> champions = gameManager.getPlayerTeam().getChampions(); 
-		add(championsPanel, BorderLayout.WEST);
+	private void addWeaponsPanel() {
+		JPanel weaponsPanel = new JPanel(new GridLayout(3, 3, 20, 20));
+		ArrayList<Weapon> weapons = gameManager.getPlayerTeam().getWeapons(); 
+		add(weaponsPanel, BorderLayout.WEST);
 		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
-			Champion champion;
-			if (champions.size() > i) {
-				champion = champions.get(i);
+			Weapon weapon;
+			if (weapons.size() > i) {
+				weapon = weapons.get(i);
 			} else {
-				champion = null;
+				weapon = null;
 			}
-			championsPanel.add(new PurchasableCard(champion, CardType.SELECTABLE));
+			weaponsPanel.add(new PurchasableCard(weapon, CardType.SELECTABLE));
 		}
 	}
 	
@@ -90,7 +84,7 @@ public class ChampionSetupView extends JPanel {
 	private void addChosenChampionsPanel() {
 		JPanel chosenChampionsPanel = new JPanel(new GridLayout(0, 1, 20, 20));
 		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions(); 
-		add(chosenChampionsPanel, BorderLayout.EAST);
+		chosenPanel.add(chosenChampionsPanel);
 		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
 			Champion champion;
 			if (chosenChampions.size() > i) {
@@ -98,23 +92,39 @@ public class ChampionSetupView extends JPanel {
 			} else {
 				champion = null;
 			}
-			chosenChampionsPanel.add(new PurchasableCard(champion, CardType.SELECTABLE));
+			chosenChampionsPanel.add(new PurchasableCard(champion, CardType.STANDARD));
+		}
+	}
+	
+	private void addChosenWeaponsPanel() {
+		JPanel chosenWeaponsPanel = new JPanel(new GridLayout(0, 1, 20, 20));
+		ArrayList<Weapon> chosenWeapons = gameManager.getPlayerTeam().getChosenWeapons(); 
+		chosenPanel.add(chosenWeaponsPanel);
+		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
+			Weapon weapon;
+			if (chosenWeapons.size() > i) {
+				weapon = chosenWeapons.get(i);
+			} else {
+				weapon = null;
+			}
+			chosenWeaponsPanel.add(new PurchasableCard(weapon, CardType.SELECTABLE));
 		}
 	}
 		
 	private void addNextButton() {
 		JPanel nextButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JButton startButton = new JButton("Go to Weapon Setup");
+		JButton startButton = new JButton("Start match!");
 		startButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (gameManager.getPlayerTeam().getChosenChampions().size() < config.NUM_CHOSEN_CHAMPIONS) {
-					JOptionPane.showMessageDialog(getParent(), "Team roster is not complete!\nSelect more champions to continue.");
-				} else {
-					gameManager.visitWeaponSetup();
+				for (int i = 0; i < gameManager.getPlayerTeam().getChosenWeapons().size(); i++) {
+					Champion champion = gameManager.getPlayerTeam().getChosenChampions().get(i); 
+					Weapon weapon = gameManager.getPlayerTeam().getChosenWeapons().get(i);
+					champion.setWeapon(weapon);
 				}
-				
+//				gameManager.visitLiveMatch(new LiveMatch(gameManager.getPlayerTeam(), gameManager.getEnemyTeam()));
+				// TODO: start live match
 			}
 		});
 		nextButtonPanel.add(startButton);
