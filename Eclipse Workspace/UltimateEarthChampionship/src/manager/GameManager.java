@@ -76,7 +76,7 @@ public abstract class GameManager
 		// All champions
 		allChampions = new ArrayList<Champion>(List.of(
 				new CharlesDarwin(), new ElvisPresley(), new JoeRogan(), new JosefStalin(),
-    			new KingGeorge(), new MarcusAurelius(), new MargaretThatcher(), new MarieCurie(), new MarkRickerby(),
+    			new KingGeorge(), new MarcusAurelius(), new MargaretThatcher(), new MarieCurie(), new SimonHoermann(),
     			new MatthiasGalster(), new MikolosHorthy(), new NapoleonBonaparte(), new NeilArmstrong(), new NikitaKrustchev(),
     			new PhilGarland(), new PhilippePetain(), new QueenVictoria(), new RobertMuldoon(), new RudyardKipling(),
     			new ShokoAsahara(), new StephenHawking(), new SunTzu(), new TedKaczynski(), new TimBell(), new WilliamShakespeare(),

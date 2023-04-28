@@ -15,6 +15,6 @@ public class WilliamShakespeare extends Champion{
 	private static float priceChangeWeekly = 1.1f;
 	
 	public WilliamShakespeare() {
-		super("Willian Shakespeare", healthBoost, staminaBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly);
+		super("William Shakespeare", healthBoost, staminaBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly);
 	}
 }
