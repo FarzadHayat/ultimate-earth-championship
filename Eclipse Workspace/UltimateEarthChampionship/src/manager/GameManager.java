@@ -462,6 +462,5 @@ public abstract class GameManager
 		//TODO: Process week results and upcoming random events
 		displayStrategy.displayTeam();
 	}
-
 	
 }

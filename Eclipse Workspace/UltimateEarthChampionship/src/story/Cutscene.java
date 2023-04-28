@@ -25,9 +25,7 @@ public abstract class Cutscene {
 	}
 	
 	/**
-	 * Returns the next slide in this cutscene, returns null once all slides have been
-	 * shown.
-	 * @return The next slide in this cutscene.
+	 * Iterates forward to the next slide.
 	 */
 	public void nextSlide()
 	{
@@ -35,10 +33,8 @@ public abstract class Cutscene {
 	}
 	
 	/**
-	 * Returns the next slide in this cutscene without iterating through it,
-	 * useful for checking if the next slide is going to null for instance.
-	 * Will return null once reached the end of slides
-	 * @return The next slide in this cutscene (no iteration)
+	 * Returns the next slide in this cutscene or null if current slide is the last slide.
+	 * @return The next slide in this cutscene or null
 	 */
 	public CutsceneSlide checkNextSlide()
 	{

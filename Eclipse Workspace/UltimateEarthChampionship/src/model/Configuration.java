@@ -158,7 +158,6 @@ public class Configuration {
 	public final float STARTING_MONEY = 100f;
 	
 	/**
-<<<<<<< HEAD
 	 * The minimum number of characters a teams name can be (inclusive)
 	 */
 	public final int MIN_TEAM_NAME_CHARS = 3;
