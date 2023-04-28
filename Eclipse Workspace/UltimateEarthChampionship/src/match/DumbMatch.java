@@ -1,10 +1,10 @@
 package match;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import model.Champion;
 import model.Team;
-import model.Weapon;
-
-import java.util.*;
 
 public class DumbMatch extends Match {
 

@@ -7,14 +7,12 @@ import java.util.stream.Collectors;
 import exception.InputException;
 import manager.GameManager;
 import model.Champion;
-import model.GameEnvironment;
-import match.*;
+import model.SetupManager;
 import model.Shop;
 import model.Team;
 import model.Weapon;
 import story.Cutscene;
 import story.CutsceneSlide;
-import model.SetupManager;
 import views.PurchasableCard.CardType;
 
 public class CommandLineDisplay implements DisplayStrategy {
@@ -248,7 +246,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayStory(String text) {
+	public void displayCutscene(Cutscene cutscene) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -402,12 +400,6 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayHome() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void displayTeam() {
 		// TODO Auto-generated method stub
 		
@@ -449,13 +441,13 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayLiveMatch(Match match) {
+	public void displayLiveMatch() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void displayGameResults(GameEnvironment gameEnvironment) {
+	public void displayGameResults() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -465,7 +457,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 		while (true)
 		{
 			// Get the next cutscene slide
-			CutsceneSlide slide = c.nextSlide();
+			CutsceneSlide slide = c.getCurrentSlide();
 			
 			// If a null has returned, the cutscene has finished
 			if (slide == null)
@@ -477,6 +469,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 			System.out.println(slide.getText());
 			
 			promptForInput();
+			c.nextSlide();
 		}
 	}
 	

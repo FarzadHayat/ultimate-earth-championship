@@ -1,6 +1,5 @@
 package match;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import manager.GameManager;

@@ -3,70 +3,50 @@ package manager;
 import display.DisplayType;
 import display.GraphicalDisplay;
 import story.OpeningCutscene;
-import views.CutsceneView;
-import views.SetupView;
-import views.TabbedView;
-import model.Champion;
-import model.GameEnvironment;
-import model.Weapon;
-import match.*;
 
 /**
  * A subclass of GameManager that represents the graphical version of the game.
  */
 public class GraphicalGameManager extends GameManager
 {
-	private GraphicalDisplay graphicalDisplay;
-
-	private SetupView setupView;
-	
-	private CutsceneView openingCutsceneView;
-	
 	/**
 	 * Starts the game by initializing the GraphicalDisplay.
 	 */
 	@Override
 	public void play()
 	{
-		graphicalDisplay = new GraphicalDisplay();
-		openingCutsceneView = new CutsceneView(new OpeningCutscene(), this);
-		graphicalDisplay.displayView(openingCutsceneView);
+		displayStrategy = new GraphicalDisplay();
+		setCutscene(new OpeningCutscene());
+		displayStrategy.displayCutscene(getCutscene());
 	}
 	
-	private void setup()
-	{
-		setupView = new SetupView(this);
-		
-		graphicalDisplay.displayView(setupView);
+	public void backFromChampionSetup() {
+		displayStrategy.displayStadium();
 	}
 	
-	/**
-	 * Called by the setupView to confirm that the playerTeam has been setup
-	 */
-	public void finishedSetup()
-	{
-		tabbedView();
+	public void backFromWeaponSetup() {
+		displayStrategy.displayChampionSetup();
 	}
 	
-	public void drawCutscene()
-	{
-		openingCutsceneView.reDrawPanel();
-		graphicalDisplay.displayView(openingCutsceneView);
+	//TODO: Fix this mess
+	public void repaintTeam() {
+		displayStrategy.displayTeam();
+	}
+
+	public void repaintShop() {
+		displayStrategy.displayShop();
 	}
 	
-	public void cutsceneFinished()
-	{
-		setup();
+	public void repaintChampionSetup() {
+		displayStrategy.displayChampionSetup();
 	}
 	
-	private void tabbedView()
-	{
-		TabbedView tabbedView = new TabbedView();
-		graphicalDisplay.displayView(tabbedView);
+	public void repaintWeaponSetup() {
+		displayStrategy.displayWeaponSetup();
 	}
 	
-	public GraphicalDisplay getGraphicalDisplay() {
-		return graphicalDisplay;
+	public void repaintCutscene() {
+		displayStrategy.displayCutscene(getCutscene());
 	}
 	
 	/**
@@ -77,76 +57,5 @@ public class GraphicalGameManager extends GameManager
 		GameManager.setDisplayType(DisplayType.GUI);
 		GameManager.start();
 	}
-
-	@Override
-	public void visitStory(String text) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitSetup() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitHome() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitTeam() {
-		graphicalDisplay.displayTeam();
-	}
-
-	@Override
-	public void visitShop() {
-		graphicalDisplay.displayShop();
-	}
-
-	@Override
-	public void visitStadium() {
-		graphicalDisplay.displayStadium();
-	}
-
-	@Override
-	public void visitChampionSetup() {
-		graphicalDisplay.displayChampionSetup();
-	}
-	
-
-	@Override
-	public void visitWeaponSetup() {
-		graphicalDisplay.displayWeaponSetup();
-	}
-
-	@Override
-	public void visitLiveMatch(Match match) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitGameResults(GameEnvironment gameEnvironment) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public void finishedChampionSetup() {
-		visitWeaponSetup();
-	}
-	
-	public void finishedWeaponSetup() {
-		for (int i = 0; i < getPlayerTeam().getChosenWeapons().size(); i++) {
-			Champion champion = getPlayerTeam().getChosenChampions().get(i); 
-			Weapon weapon = getPlayerTeam().getChosenWeapons().get(i);
-			champion.setWeapon(weapon);
-		}
-//		gameManager.visitLiveMatch(new LiveMatch(getPlayerTeam(), getEnemyTeam()));
-		// TODO: start live match. waiting for LiveMatch class to be created.
-	}
-
 	
 }

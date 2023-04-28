@@ -1,34 +1,32 @@
 package views;
 
-import javax.swing.JPanel;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import exception.InputException;
+import manager.GameManager;
 import manager.GraphicalGameManager;
 import model.Champion;
 import model.SetupManager;
-
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.JScrollBar;
-import javax.swing.JProgressBar;
-import javax.swing.JSlider;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
-import javax.swing.JList;
-import javax.swing.ListSelectionModel;
-import javax.swing.AbstractListModel;
-import javax.swing.DefaultListModel;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
 
 public class SetupView extends JPanel{
 	
@@ -36,7 +34,7 @@ public class SetupView extends JPanel{
 	
 	private model.Configuration config = model.Configuration.getInstance();
 
-	private GraphicalGameManager manager;
+	private GraphicalGameManager manager = (GraphicalGameManager) GameManager.getInstance();
 		
 	/**
 	 * List of champions that can be chosen from in setup
@@ -64,10 +62,8 @@ public class SetupView extends JPanel{
 	 * Constructor, sets up this class
 	 * @param manager The game manager
 	 */
-	public SetupView(GraphicalGameManager manager)
-	{
-		this.manager = manager;
-		
+	public SetupView()
+	{	
 		// Data requested:
 		teamName = null;
 		gameWeeks = 0;

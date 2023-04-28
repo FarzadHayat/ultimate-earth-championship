@@ -1,19 +1,22 @@
 package display;
 
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
 
 import javax.swing.JFrame;
 
-import model.GameEnvironment;
-import match.*;
+import story.Cutscene;
 import views.ChampionSetupView;
-import views.WeaponSetupView;
+import views.CutsceneView;
+import views.SetupView;
 import views.TabbedView;
+import views.WeaponSetupView;
 
 public class GraphicalDisplay implements DisplayStrategy {
 
 	private JFrame frame;
+
 
 	/**
 	 * Create the application.
@@ -37,33 +40,25 @@ public class GraphicalDisplay implements DisplayStrategy {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	
-	
 	/**
-	 * Sets the view to be displayed in the main application window.
-	 * @param view the view to be displayed
+	 * Paint the given view onto the frame's content pane.
+	 * @param view the view to display on the screen
 	 */
-	public void displayView(Container view) {
+	public void displayView(Container view) {		
 		frame.setContentPane(view);
 		frame.setVisible(true);
 	}
 
 	@Override
-	public void displayStory(String text) {
-		// TODO Auto-generated method stub
-		
+	public void displayCutscene(Cutscene cutscene) {
+		CutsceneView cutsceneView = new CutsceneView(cutscene);
+		displayView(cutsceneView);
 	}
 
 	@Override
 	public void displaySetup() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void displayHome() {
-		// TODO Auto-generated method stub
-		
+		SetupView setupView = new SetupView();
+		displayView(setupView);
 	}
 
 	@Override
@@ -102,13 +97,13 @@ public class GraphicalDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayLiveMatch(Match match) {
+	public void displayLiveMatch() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void displayGameResults(GameEnvironment gameEnvironment) {
+	public void displayGameResults() {
 		// TODO Auto-generated method stub
 		
 	}

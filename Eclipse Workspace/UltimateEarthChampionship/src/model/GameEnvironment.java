@@ -3,9 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
-import events.*;
+import events.DonationEvent;
+import events.RadiationPoisoningEvent;
+import events.RampagingAnimalEvent;
 import events.RandomEvent;
 import events.RandomEventInfo;
+import events.TVShowEvent;
 
 public class GameEnvironment {
 	

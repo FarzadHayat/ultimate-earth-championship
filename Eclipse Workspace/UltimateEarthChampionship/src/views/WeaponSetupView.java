@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,8 +14,8 @@ import javax.swing.JPanel;
 import manager.GameManager;
 import manager.GraphicalGameManager;
 import model.Champion;
-import model.Weapon;
 import model.Configuration;
+import model.Weapon;
 import views.PurchasableCard.CardType;
 
 public class WeaponSetupView extends JPanel {
@@ -50,7 +51,7 @@ public class WeaponSetupView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gameManager.getPlayerTeam().setChosenWeapons(new ArrayList<Weapon>());
-				gameManager.visitChampionSetup();
+				gameManager.backFromWeaponSetup();;
 			}
 		});
 		backButtonPanel.add(backButton);

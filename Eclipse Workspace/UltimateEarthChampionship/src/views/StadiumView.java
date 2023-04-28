@@ -1,24 +1,19 @@
 package views;
 
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneLayout;
-
-import display.GraphicalDisplay;
-import manager.GameManager;
-import manager.GraphicalGameManager;
-import model.Team;
-import model.Champion;
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
+
+import manager.GameManager;
+import model.Champion;
+import model.Team;
 
 public class StadiumView extends JPanel {
 
@@ -61,8 +56,7 @@ public class StadiumView extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gameManager.setEnemyTeam(team);
-				gameManager.visitChampionSetup();
+				gameManager.startMatchSetup(team);
 			}
 		});
 		panel.add(fightButton, BorderLayout.SOUTH);

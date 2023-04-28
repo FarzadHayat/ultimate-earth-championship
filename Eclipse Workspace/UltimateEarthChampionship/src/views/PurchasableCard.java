@@ -25,6 +25,7 @@ import exception.FullTeamException;
 import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
 import manager.GameManager;
+import manager.GraphicalGameManager;
 import model.Champion;
 import model.Purchasable;
 import model.Weapon;
@@ -41,7 +42,7 @@ public class PurchasableCard extends JPanel {
 	
 	private Purchasable purchasable;
 	
-	private GameManager gameManager = GameManager.getInstance();
+	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 	
 	private JPanel mainPanel = new JPanel(new BorderLayout(0, 0));
 	private JPanel soldOverlay;
@@ -152,7 +153,7 @@ public class PurchasableCard extends JPanel {
 							JOptionPane.showMessageDialog(getParent(), e1.getMessage());
 						};
 					}
-					gameManager.visitChampionSetup();
+					gameManager.repaintChampionSetup();
 				}
 				if (purchasable.getClass().getSuperclass() == Weapon.class) {
 					if (gameManager.getPlayerTeam().getChosenWeapons().contains(purchasable)) {
@@ -164,7 +165,7 @@ public class PurchasableCard extends JPanel {
 							JOptionPane.showMessageDialog(getParent(), e1.getMessage());
 						};
 					}
-					gameManager.visitWeaponSetup();
+					gameManager.repaintWeaponSetup();
 				}
 			}
 		});
@@ -244,7 +245,7 @@ public class PurchasableCard extends JPanel {
 							"Buy: " + purchasable.getName(), JOptionPane.YES_NO_OPTION);
 					if (answer == JOptionPane.YES_OPTION) {
 						gameManager.getPlayerTeam().buy(purchasable);
-						gameManager.visitShop();
+						gameManager.repaintShop();
 					}
 				} catch (InsufficientFundsException | FullTeamException e) {
 					JOptionPane.showMessageDialog(getParent(), e.getMessage());
@@ -270,7 +271,7 @@ public class PurchasableCard extends JPanel {
 							"Sell: " + purchasable.getName(), JOptionPane.YES_NO_OPTION);
 					if (answer == JOptionPane.YES_OPTION) {
 						gameManager.getPlayerTeam().sell(purchasable);
-						gameManager.visitTeam();
+						gameManager.repaintTeam();
 					}
 				} catch (IncompleteTeamException e) {
 					JOptionPane.showMessageDialog(getParent(), e.getMessage());

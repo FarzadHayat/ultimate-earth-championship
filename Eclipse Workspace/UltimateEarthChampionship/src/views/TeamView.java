@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import manager.GameManager;
 import model.Champion;
 import model.Configuration;
-import model.Purchasable;
 import model.Weapon;
 import views.PurchasableCard.CardType;
 

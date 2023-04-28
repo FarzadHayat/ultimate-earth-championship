@@ -29,16 +29,9 @@ public abstract class Cutscene {
 	 * shown.
 	 * @return The next slide in this cutscene.
 	 */
-	public CutsceneSlide nextSlide()
+	public void nextSlide()
 	{
-		if (iteration == content.size())
-		{
-			iteration = 0;
-			return null;
-		}
-		
 		iteration++;
-		return content.get(iteration-1);
 	}
 	
 	/**
@@ -49,11 +42,15 @@ public abstract class Cutscene {
 	 */
 	public CutsceneSlide checkNextSlide()
 	{
-		if (iteration == content.size())
+		if (iteration+1 == content.size())
 		{
 			return null;
 		}
 		
+		return content.get(iteration+1);
+	}
+	
+	public CutsceneSlide getCurrentSlide() {
 		return content.get(iteration);
 	}
 	

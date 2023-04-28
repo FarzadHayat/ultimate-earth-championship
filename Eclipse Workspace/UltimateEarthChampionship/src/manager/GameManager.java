@@ -4,11 +4,78 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import champions.AdamSmith;
+import champions.AugustoPinochet;
+import champions.AugustusCaesar;
+import champions.BernardMontgomery;
+import champions.CharlesDarwin;
+import champions.Confucius;
+import champions.DavidLange;
+import champions.DouglasMacarthur;
+import champions.DwightEisenhower;
+import champions.ElvisPresley;
+import champions.FranzFerdinand;
+import champions.GeorgeWashington;
+import champions.GhengisKhan;
+import champions.HarryTruman;
+import champions.JoeRogan;
+import champions.JohnBrowning;
+import champions.JohnDoe;
+import champions.JohnFKennedy;
+import champions.JohnMKeynes;
+import champions.JosefStalin;
+import champions.KingGeorge;
+import champions.MarcusAurelius;
+import champions.MargaretThatcher;
+import champions.MarieCurie;
+import champions.MarkRickerby;
+import champions.MatthiasGalster;
+import champions.MikolosHorthy;
+import champions.NapoleonBonaparte;
+import champions.NeilArmstrong;
+import champions.NikitaKrustchev;
+import champions.PhilGarland;
+import champions.PhilippePetain;
+import champions.QueenVictoria;
+import champions.RobertMuldoon;
+import champions.RudyardKipling;
+import champions.ShokoAsahara;
+import champions.StephenHawking;
+import champions.SunTzu;
+import champions.TedKaczynski;
+import champions.TimBell;
+import champions.WilliamShakespeare;
+import display.DisplayStrategy;
 import display.DisplayType;
-import model.*;
-import match.*;
-import champions.*;
-import weapons.*;
+import match.Match;
+import model.Champion;
+import model.Configuration;
+import model.GameEnvironment;
+import model.Shop;
+import model.Team;
+import model.Weapon;
+import story.Cutscene;
+import story.OpeningCutscene;
+import weapons.Axe;
+import weapons.BaseballBat;
+import weapons.Chainsaw;
+import weapons.Dagger;
+import weapons.FryingPan;
+import weapons.GolfClub;
+import weapons.Katana;
+import weapons.Mace;
+import weapons.Machete;
+import weapons.Nunchucks;
+import weapons.Pickaxe;
+import weapons.Pitchfork;
+import weapons.Scythe;
+import weapons.Shield;
+import weapons.Shovel;
+import weapons.Shuriken;
+import weapons.Sledgehammer;
+import weapons.Spear;
+import weapons.Sword;
+import weapons.TennisRacket;
 
 /**
  * The GameManager class is an abstract class that defines the basic functionality of a game manager.
@@ -18,7 +85,8 @@ public abstract class GameManager
 {
 	private static DisplayType displayType = DisplayType.CLI;
 	private static GameManager instance;
-	private model.Configuration config = model.Configuration.getInstance();
+	protected DisplayStrategy displayStrategy;
+	private Configuration config = Configuration.getInstance();
 	
 	/**
 	 * The GameEnvironment instance for this GameManager.
@@ -56,6 +124,16 @@ public abstract class GameManager
 	 * The currently selected enemy team.
 	 */
 	private Team enemyTeam;
+	
+	/**
+	 * The currently active match.
+	 */
+	private Match match;
+	
+	/**
+	 * The current cutscene for the game.
+	 */
+	private Cutscene cutscene;
 	
 	/**
 	 * Starts the game.
@@ -109,14 +187,6 @@ public abstract class GameManager
 	 */
 	public abstract void play();
 
-	public static DisplayType getDisplayType() {
-		return displayType;
-	}
-
-	public static void setDisplayType(DisplayType displayType) {
-		GameManager.displayType = displayType;
-	}
-
 	/**
 	 * Gets the GameManager instance.
 	 * If the instance is null, creates a new instance based on the DisplayType specified in GameInitializer.
@@ -137,7 +207,15 @@ public abstract class GameManager
 		}
 		return instance;
 	}
-	
+
+	public static DisplayType getDisplayType() {
+		return displayType;
+	}
+
+	public static void setDisplayType(DisplayType displayType) {
+		GameManager.displayType = displayType;
+	}
+
 	/**
 	 * @return the gameEnvironment
 	 */
@@ -233,6 +311,36 @@ public abstract class GameManager
 	}
 	
 	/**
+	 * @return the enemyTeam
+	 */
+	public Team getEnemyTeam() {
+		return enemyTeam;
+	}
+
+	/**
+	 * @param enemyTeam the enemyTeam to set
+	 */
+	public void setEnemyTeam(Team enemyTeam) {
+		this.enemyTeam = enemyTeam;
+	}
+
+	public Match getMatch() {
+		return match;
+	}
+
+	public void setMatch(Match match) {
+		this.match = match;
+	}
+
+	public Cutscene getCutscene() {
+		return cutscene;
+	}
+
+	public void setCutscene(Cutscene cutscene) {
+		this.cutscene = cutscene;
+	}
+
+	/**
 	 * Get list of all AI teams in the game.
 	 * @return teams the list of AI teams
 	 */
@@ -262,31 +370,6 @@ public abstract class GameManager
 		gameEnvironment.setDifficulty(difficulty);
 		gameEnvironment.setMaxWeeks(numWeeks);
 	}
-
-	/**
-	 * @return the enemyTeam
-	 */
-	public Team getEnemyTeam() {
-		return enemyTeam;
-	}
-
-	/**
-	 * @param enemyTeam the enemyTeam to set
-	 */
-	public void setEnemyTeam(Team enemyTeam) {
-		this.enemyTeam = enemyTeam;
-	}
-
-	public abstract void visitStory(String text);
-	public abstract void visitSetup();
-	public abstract void visitHome();
-	public abstract void visitTeam();
-	public abstract void visitShop();
-	public abstract void visitStadium();
-	public abstract void visitChampionSetup();
-	public abstract void visitWeaponSetup();
-	public abstract void visitLiveMatch(Match match);
-	public abstract void visitGameResults(GameEnvironment gameEnvironment);
 
 	/**
 	 * Generates all the AI teams
@@ -339,4 +422,46 @@ public abstract class GameManager
 		
 		return teams;
 	}
+	
+
+	public void finishedCutscene()
+	{
+		displayStrategy.displaySetup();
+	}
+	
+	public void finishedSetup()
+	{
+		displayStrategy.displayTeam();
+	}
+	
+	public void startMatchSetup(Team team) {
+		enemyTeam = team;
+		displayStrategy.displayChampionSetup();
+	}
+	
+	public void finishedChampionSetup() {
+		displayStrategy.displayWeaponSetup();
+	}
+	
+	public void finishedWeaponSetup() {
+		for (int i = 0; i < getPlayerTeam().getChosenWeapons().size(); i++) {
+			Champion champion = getPlayerTeam().getChosenChampions().get(i); 
+			Weapon weapon = getPlayerTeam().getChosenWeapons().get(i);
+			champion.setWeapon(weapon);
+		}
+		// TODO: create live match. waiting for LiveMatch class to be created.
+		displayStrategy.displayLiveMatch();
+	}
+	
+	public void finishedMatch() {
+		//TODO: Process match results and go to next week
+		finishedWeek();
+	}
+	
+	public void finishedWeek() {
+		//TODO: Process week results and upcoming random events
+		displayStrategy.displayTeam();
+	}
+
+	
 }

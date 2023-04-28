@@ -1,29 +1,20 @@
 package views;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.security.interfaces.RSAMultiPrimePrivateCrtKey;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import exception.FullTeamException;
 import manager.GameManager;
 import manager.GraphicalGameManager;
 import model.Champion;
-import model.Purchasable;
-import model.Team;
 import model.Configuration;
 import views.PurchasableCard.CardType;
 
@@ -56,7 +47,7 @@ public class ChampionSetupView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				gameManager.setEnemyTeam(null);
 				gameManager.getPlayerTeam().setChosenChampions(new ArrayList<Champion>());
-				gameManager.visitStadium();
+				gameManager.backFromChampionSetup();
 			}
 		});
 		backButtonPanel.add(backButton);

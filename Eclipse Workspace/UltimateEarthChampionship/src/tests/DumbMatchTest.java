@@ -1,16 +1,19 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
-import java.util.regex.MatchResult;
 
 import org.junit.jupiter.api.Test;
 
+import champions.AdamSmith;
+import champions.BernardMontgomery;
+import champions.CharlesDarwin;
+import champions.Confucius;
+import champions.QueenVictoria;
+import champions.SunTzu;
+import champions.WilliamShakespeare;
 import match.DumbMatch;
 import model.Champion;
 import model.Team;
-import champions.*;
 
 class DumbMatchTest {
 

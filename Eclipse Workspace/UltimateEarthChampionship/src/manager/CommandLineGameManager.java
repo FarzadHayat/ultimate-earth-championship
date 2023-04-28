@@ -2,25 +2,21 @@ package manager;
 
 import display.CommandLineDisplay;
 import display.DisplayType;
-import model.GameEnvironment;
-import match.*;
 
 /**
  * A subclass of GameManager that represents the command line version of the game.
  */
 public class CommandLineGameManager extends GameManager
-{
-	private CommandLineDisplay commandLineDisplay;
-	
+{	
 	/**
 	 * Starts the game by initializing the CommandLineDisplay.
 	 */
 	@Override
 	public void play()
 	{
-		commandLineDisplay = new CommandLineDisplay();		
-		commandLineDisplay.displayStadium();
-		commandLineDisplay.closeScanner();
+		displayStrategy = new CommandLineDisplay();		
+		displayStrategy.displayStadium();
+//		displayStrategy.closeScanner();
 	}
 	
 	/**
@@ -32,60 +28,4 @@ public class CommandLineGameManager extends GameManager
 		GameManager.start();
 	}
 
-	@Override
-	public void visitStory(String text) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitSetup() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitHome() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitTeam() {
-		commandLineDisplay.displayTeam();
-	}
-
-	@Override
-	public void visitShop() {
-		commandLineDisplay.displayShop();
-	}
-
-	@Override
-	public void visitStadium() {
-		commandLineDisplay.displayStadium();
-	}
-
-	@Override
-	public void visitChampionSetup() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void visitWeaponSetup() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitLiveMatch(Match match) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitGameResults(GameEnvironment gameEnvironment) {
-		// TODO Auto-generated method stub
-		
-	}
 }
