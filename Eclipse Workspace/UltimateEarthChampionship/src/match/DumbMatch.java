@@ -14,7 +14,7 @@ public class DumbMatch extends Match {
 	}
 	
 	@Override
-	public MatchResult runMatch() {
+	public MatchResult getMatchResult() {
 		
 		ArrayList<Champion> team1Champs = team1.getChampions();
 		ArrayList<Champion> team2Champs = team2.getChampions();

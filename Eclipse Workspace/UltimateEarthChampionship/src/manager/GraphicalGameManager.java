@@ -122,11 +122,7 @@ public class GraphicalGameManager extends GameManager
 		graphicalDisplay.displayWeaponSetup();
 	}
 
-	@Override
-	public void visitLiveMatch(Match match) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void visitGameResults(GameEnvironment gameEnvironment) {
@@ -144,8 +140,17 @@ public class GraphicalGameManager extends GameManager
 			Weapon weapon = getPlayerTeam().getChosenWeapons().get(i);
 			champion.setWeapon(weapon);
 		}
-//		gameManager.visitLiveMatch(new LiveMatch(getPlayerTeam(), getEnemyTeam()));
-		// TODO: start live match. waiting for LiveMatch class to be created.
+		// gameManager.visitLiveMatch(new LiveMatch(getPlayerTeam(), getEnemyTeam()));
+		
+		LiveMatch match = new LiveMatch(getPlayerTeam(), getEnemyTeam());
+		
+		visitLiveMatch(match);
+	}
+	
+	@Override
+	public void visitLiveMatch(LiveMatch match) {
+		graphicalDisplay.displayLiveMatch(match);
+		
 	}
 
 	

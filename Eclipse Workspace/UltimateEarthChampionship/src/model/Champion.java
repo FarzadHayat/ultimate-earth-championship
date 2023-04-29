@@ -79,6 +79,16 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 */
 	private Weapon weapon;
 	
+	/**
+	 * The lane that the champion is position in, used during LiveMatches
+	 */
+	private int lane;
+	
+	/**
+	 * The position that the champion is in, used during Live Matches
+	 */
+	private int position;
+	
 	// Constructor:
 	/**
 	 * Constructor for champion Class
@@ -284,6 +294,26 @@ public abstract class Champion implements Purchasable, Cloneable {
 	{
 		currentXP += amount;
 		checkForLevelUp();
+	}
+	
+	public void setLane(int lane)
+	{
+		this.lane = lane; 
+	}
+	
+	public int getLane()
+	{
+		return lane;
+	}
+	
+	public void setPosition(int position)
+	{
+		this.position = position;
+	}
+	
+	public int getPosition()
+	{
+		return position;
 	}
 	
 	

@@ -449,12 +449,6 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayLiveMatch(Match match) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void displayGameResults(GameEnvironment gameEnvironment) {
 		// TODO Auto-generated method stub
 		
@@ -478,6 +472,12 @@ public class CommandLineDisplay implements DisplayStrategy {
 			
 			promptForInput();
 		}
+	}
+
+	@Override
+	public void displayLiveMatch(LiveMatch match) {
+		System.out.println("TODO: Livematch in command line interface");
+		
 	}
 	
 }

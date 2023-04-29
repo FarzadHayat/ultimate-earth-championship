@@ -285,7 +285,7 @@ public abstract class GameManager
 	public abstract void visitStadium();
 	public abstract void visitChampionSetup();
 	public abstract void visitWeaponSetup();
-	public abstract void visitLiveMatch(Match match);
+	public abstract void visitLiveMatch(LiveMatch match);
 	public abstract void visitGameResults(GameEnvironment gameEnvironment);
 
 	/**

@@ -12,6 +12,6 @@ public interface DisplayStrategy {
 	public void displayStadium();
 	public void displayChampionSetup();
 	public void displayWeaponSetup();
-	public void displayLiveMatch(Match match);
+	public void displayLiveMatch(LiveMatch match);
 	public void displayGameResults(GameEnvironment gameEnvironment);
 }

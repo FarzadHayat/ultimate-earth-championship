@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import model.GameEnvironment;
 import match.*;
 import views.ChampionSetupView;
+import views.MatchView;
 import views.WeaponSetupView;
 import views.TabbedView;
 
@@ -102,8 +103,10 @@ public class GraphicalDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayLiveMatch(Match match) {
-		// TODO Auto-generated method stub
+	public void displayLiveMatch(LiveMatch match) {
+		
+		MatchView matchView = new MatchView(match);
+		displayView(matchView);
 		
 	}
 
@@ -112,6 +115,7 @@ public class GraphicalDisplay implements DisplayStrategy {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 
 }
