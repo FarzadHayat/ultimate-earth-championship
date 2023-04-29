@@ -2,6 +2,8 @@ package views;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -199,7 +201,7 @@ public class MatchView extends JPanel {
 	public void updateButtons()
 	{
 		// Disable the move button if at the very right of the screen
-		if (selectedChampion.getPosition() == 7)
+		if (selectedChampion.getPosition() == 6)
 		{
 			attackButton.setEnabled(false);
 		}
@@ -209,7 +211,7 @@ public class MatchView extends JPanel {
 		}
 		
 		// Change the text of attack button depending on if there is an enemy infront of them
-		if (selectedChampion.getPosition() != 7 &&
+		if (selectedChampion.getPosition() != 6 &&
 			match.getCard(selectedChampion.getLane(), selectedChampion.getPosition()+1).getChampion() != null)
 		{
 			attackButton.setText("Attack");
@@ -236,12 +238,15 @@ public class MatchView extends JPanel {
 		}
 		else 
 		{
+			// Get the champion above
 			Champion championAbove = match.getCard(selectedChampion.getLane()-1, selectedChampion.getPosition()).getChampion();
+			
+			// check they exist
 			if (championAbove == null)
 			{
 				attackUpButton.setEnabled(false);
 			}
-			else if (!match.championIsOnTeam(championAbove, match.getTeam1())) {
+			else if (!match.championIsOnPlayerTeam(championAbove)) {
 				attackButton.setEnabled(true);
 			}
 			else {
@@ -256,12 +261,15 @@ public class MatchView extends JPanel {
 		}
 		else 
 		{
+			// Get champion below
 			Champion championBelow = match.getCard(selectedChampion.getLane()+1, selectedChampion.getPosition()).getChampion();
+			
+			// Check they exist
 			if (championBelow == null)
 			{
 				attackDownButton.setEnabled(false);
 			}
-			else if (!match.championIsOnTeam(championBelow, match.getTeam1())) {
+			else if (!match.championIsOnPlayerTeam(championBelow)) {
 				attackDownButton.setEnabled(true);
 			}
 			else {
@@ -270,7 +278,10 @@ public class MatchView extends JPanel {
 		}
 	}
 	
-
+	public void showDialogue(String message)
+	{
+		JOptionPane.showMessageDialog(null, message);
+	}
 
 
 
