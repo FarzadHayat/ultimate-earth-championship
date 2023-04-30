@@ -2,7 +2,11 @@ package views;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.management.ValueExp;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -17,12 +21,16 @@ public class StatLabel extends JPanel {
 	private final int IMAGE_WIDTH = 30;
 	private final int IMAGE_HEIGHT = IMAGE_WIDTH;
 	
+	private String value;
+	
 	/**
 	 * Create the panel.
 	 */
 	public StatLabel(String imageFileName, String value) {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		setOpaque(false);
+		this.value = value;
+		
 		addImageLabel(imageFileName);
 		addValueLabel(value);
 	}
@@ -42,12 +50,14 @@ public class StatLabel extends JPanel {
 	private void addImageLabel(String imageFileName) {
 		if (imageFileName != "") {
 			ImageIcon imageIcon = null;
-        	try {
-        		imageIcon = new ImageIcon(Configuration.ICON_IMAGE_FOLDER_PATH + imageFileName);
-        	}
-        	catch (NullPointerException e) {
-        		System.out.println(e.getMessage());
-        	}
+			try {
+				String path = Configuration.ICON_IMAGE_FOLDER_PATH 
+						+ String.valueOf(getClass().getSimpleName()) + ".png";
+	            imageIcon = new ImageIcon(ImageIO.read(new File(path)));
+
+	        } catch (IOException e) {
+	        	System.out.println("Could not find image file for '" + value + "'!");
+	        }
         	ImageIcon resizedIcon;
     		if (imageIcon != null) {
     			resizedIcon = new ImageIcon(imageIcon.getImage().getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_SMOOTH));
