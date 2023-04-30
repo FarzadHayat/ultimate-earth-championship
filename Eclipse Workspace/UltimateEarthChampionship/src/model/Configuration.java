@@ -108,6 +108,11 @@ public class Configuration {
 	public final String WEAPON_IMAGE_FOLDER_PATH = "src/images/";
 	
 	/**
+	 *  Path to folder containing icon images
+	 */
+	public static final String ICON_IMAGE_FOLDER_PATH = "src/images/icons/";
+	
+	/**
 	 * Number of teams, including player team
 	 */
 	public final int NUM_TEAMS = 4;

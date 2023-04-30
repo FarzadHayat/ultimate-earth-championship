@@ -92,11 +92,11 @@ public class PurchasableCard extends JPanel {
 			break;
 		}
 		case STANDARD: {
-			addStatsLabel();
+			addStatsPanel();
 			break;
 		}
 		case CAN_BUY: {
-			addStatsLabel();
+			addStatsPanel();
 			if (purchasable.getClass().getSuperclass() == Champion.class && gameManager.getPlayerTeam().getChampions().contains((Champion) purchasable) ||
 					purchasable.getClass().getSuperclass() == Weapon.class && gameManager.getPlayerTeam().getWeapons().contains((Weapon) purchasable)) {
 				addSoldOverlay();
@@ -106,7 +106,7 @@ public class PurchasableCard extends JPanel {
 			break;
 		}
 		case CAN_SELL: {
-			addStatsLabel();
+			addStatsPanel();
 			addSellButton();
 			break;
 		}
@@ -207,25 +207,25 @@ public class PurchasableCard extends JPanel {
 	}
 	
 	/**
-	 * Adds a label displaying the purchasable stats to the center panel.
+	 * Add a panel displaying the purchasable stats to the center panel.
 	 */
-	public void addStatsLabel() {
+	public void addStatsPanel() {
 		JPanel statsPanel = new JPanel(new GridLayout(0, 1));
 		statsPanel.setOpaque(false);
 		mainPanel.add(statsPanel, BorderLayout.EAST);
 	    if (purchasable.getClass().getSuperclass() == Champion.class) {
 	    	Champion champion = (Champion) purchasable; 
-	    	statsPanel.add(new JLabel("Health: " + String.valueOf(champion.getHealth())));
-	    	statsPanel.add(new JLabel("Stamina: " + String.valueOf(champion.getStamina())));
-	    	statsPanel.add(new JLabel("Offense: " + String.valueOf(champion.getOffense())));
-	    	statsPanel.add(new JLabel("Damage: " + String.valueOf(champion.getDamage())));
-	    	statsPanel.add(new JLabel("Defense: " + String.valueOf(champion.getDefense())));
+	    	statsPanel.add(new StatLabel("health.png", String.valueOf(champion.getHealth())));
+	    	statsPanel.add(new StatLabel("stamina.png", String.valueOf(champion.getStamina())));
+	    	statsPanel.add(new StatLabel("offense.png", String.valueOf(champion.getOffense())));
+	    	statsPanel.add(new StatLabel("damage.png", String.valueOf(champion.getDamage())));
+	    	statsPanel.add(new StatLabel("defense.png", String.valueOf(champion.getDefense())));
 	    }
 	    if (purchasable.getClass().getSuperclass() == Weapon.class) {
 	    	Weapon weapon = (Weapon) purchasable;
-	    	statsPanel.add(new JLabel("Offense boost: " + String.valueOf(weapon.getOffenseBoost())));
-	    	statsPanel.add(new JLabel("Damage boost: " + String.valueOf(weapon.getDamageMultiplier())));
-	    	statsPanel.add(new JLabel("Defense boost: " + String.valueOf(weapon.getDefenseBoost())));
+	    	statsPanel.add(new StatLabel("offense.png", String.valueOf(weapon.getOffenseBoost())));
+	    	statsPanel.add(new StatLabel("damage.png", String.valueOf(weapon.getDamageMultiplier())));
+	    	statsPanel.add(new StatLabel("defense.png", String.valueOf(weapon.getDefenseBoost())));
 	    }
 	}
 
