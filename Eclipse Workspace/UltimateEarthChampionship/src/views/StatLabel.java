@@ -45,25 +45,22 @@ public class StatLabel extends JPanel {
 	 * @param imageFileName the name of the image file including the file extension located in Configuration.ICON_IMAGE_FOLDER_PATH
 	 */
 	private void addImageLabel(String imageFileName) {
-		if (imageFileName != "") {
-			ImageIcon imageIcon = null;
-			try {
-				String path = Configuration.ICON_IMAGE_FOLDER_PATH 
-						+ String.valueOf(getClass().getSimpleName()) + ".png";
-	            imageIcon = new ImageIcon(ImageIO.read(new File(path)));
+		ImageIcon imageIcon = null;
+		try {
+			String path = Configuration.ICON_IMAGE_FOLDER_PATH + imageFileName + ".png";
+            imageIcon = new ImageIcon(ImageIO.read(new File(path)));
 
-	        } catch (IOException e) {
-	        	System.out.println("Could not find image file for " + imageFileName + "!");
-	        }
-        	ImageIcon resizedIcon;
-    		if (imageIcon != null) {
-    			resizedIcon = new ImageIcon(imageIcon.getImage().getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_SMOOTH));
-    		}
-    		else {
-    			resizedIcon = new ImageIcon(new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_ARGB));
-    		}
-        	add(new JLabel(resizedIcon));
-    	}
+        } catch (IOException e) {
+        	System.out.println("Could not find image file for " + imageFileName + "!");
+        }
+    	ImageIcon resizedIcon;
+		if (imageIcon != null) {
+			resizedIcon = new ImageIcon(imageIcon.getImage().getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_SMOOTH));
+		}
+		else {
+			resizedIcon = new ImageIcon(new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_ARGB));
+		}
+    	add(new JLabel(resizedIcon));
 	}
 
 }

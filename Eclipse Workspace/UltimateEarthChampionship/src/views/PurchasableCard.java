@@ -37,7 +37,7 @@ public class PurchasableCard extends JPanel {
 	private static final int IMAGE_WIDTH = 100;
 	private static final int IMAGE_HEIGHT = IMAGE_WIDTH;
 	
-	private static final int WIDTH = IMAGE_WIDTH + 100;
+	private static final int WIDTH = IMAGE_WIDTH + 70;
 	private static final int HEIGHT = IMAGE_HEIGHT + 50;
 	
 	private Purchasable purchasable;
@@ -215,17 +215,17 @@ public class PurchasableCard extends JPanel {
 		mainPanel.add(statsPanel, BorderLayout.EAST);
 	    if (purchasable.getClass().getSuperclass() == Champion.class) {
 	    	Champion champion = (Champion) purchasable; 
-	    	statsPanel.add(new StatLabel("health.png", String.valueOf(champion.getHealth())));
-	    	statsPanel.add(new StatLabel("stamina.png", String.valueOf(champion.getStamina())));
-	    	statsPanel.add(new StatLabel("offense.png", String.valueOf(champion.getOffense())));
-	    	statsPanel.add(new StatLabel("damage.png", String.valueOf(champion.getDamage())));
-	    	statsPanel.add(new StatLabel("defense.png", String.valueOf(champion.getDefense())));
+	    	statsPanel.add(new StatLabel("health", String.valueOf(champion.getHealth())));
+	    	statsPanel.add(new StatLabel("stamina", String.valueOf(champion.getStamina())));
+	    	statsPanel.add(new StatLabel("offense", String.valueOf(champion.getOffense())));
+	    	statsPanel.add(new StatLabel("damage", String.valueOf(champion.getDamage())));
+	    	statsPanel.add(new StatLabel("defense", String.valueOf(champion.getDefense())));
 	    }
 	    if (purchasable.getClass().getSuperclass() == Weapon.class) {
 	    	Weapon weapon = (Weapon) purchasable;
-	    	statsPanel.add(new StatLabel("offense.png", String.valueOf(weapon.getOffenseBoost())));
-	    	statsPanel.add(new StatLabel("damage.png", String.valueOf(weapon.getDamageMultiplier())));
-	    	statsPanel.add(new StatLabel("defense.png", String.valueOf(weapon.getDefenseBoost())));
+	    	statsPanel.add(new StatLabel("offense", String.valueOf(weapon.getOffenseBoost())));
+	    	statsPanel.add(new StatLabel("damage", String.valueOf(weapon.getDamageMultiplier())));
+	    	statsPanel.add(new StatLabel("defense", String.valueOf(weapon.getDefenseBoost())));
 	    }
 	}
 
