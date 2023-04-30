@@ -21,15 +21,12 @@ public class StatLabel extends JPanel {
 	private final int IMAGE_WIDTH = 30;
 	private final int IMAGE_HEIGHT = IMAGE_WIDTH;
 	
-	private String value;
-	
 	/**
 	 * Create the panel.
 	 */
 	public StatLabel(String imageFileName, String value) {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		setOpaque(false);
-		this.value = value;
 		
 		addImageLabel(imageFileName);
 		addValueLabel(value);
@@ -56,7 +53,7 @@ public class StatLabel extends JPanel {
 	            imageIcon = new ImageIcon(ImageIO.read(new File(path)));
 
 	        } catch (IOException e) {
-	        	System.out.println("Could not find image file for '" + value + "'!");
+	        	System.out.println("Could not find image file for " + imageFileName + "!");
 	        }
         	ImageIcon resizedIcon;
     		if (imageIcon != null) {
