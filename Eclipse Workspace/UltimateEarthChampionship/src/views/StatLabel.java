@@ -23,6 +23,23 @@ public class StatLabel extends JPanel {
 	public StatLabel(String imageFileName, String value) {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		setOpaque(false);
+		addImageLabel(imageFileName);
+		addValueLabel(value);
+	}
+	
+	/**
+	 * Add a value label to the stat label.
+	 * @param value the value of the value label
+	 */
+	private void addValueLabel(String value) {
+		add(new JLabel(value));
+	}
+
+	/**
+	 * Add an image label to the stat label if the image file is found or an empty image otherwise.
+	 * @param imageFileName the name of the image file including the file extension located in Configuration.ICON_IMAGE_FOLDER_PATH
+	 */
+	private void addImageLabel(String imageFileName) {
 		if (imageFileName != "") {
 			ImageIcon imageIcon = null;
         	try {
@@ -40,7 +57,6 @@ public class StatLabel extends JPanel {
     		}
         	add(new JLabel(resizedIcon));
     	}
-		add(new JLabel(value));
 	}
 
 }

@@ -1,8 +1,8 @@
 package views;
 
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -20,29 +20,20 @@ public class InfoPanel extends JPanel {
 	public InfoPanel() {
 		setLayout(new GridLayout(1, 3, 0, 0));
 		
-		JPanel moneyPanel = new JPanel();
-		add(moneyPanel);
-		moneyPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		add(new StatLabel("money.png", String.valueOf(gameManager.getPlayerTeam().getMoney())));
+		add(new StatLabel("score.png", String.valueOf(gameManager.getPlayerTeam().getScore())));
+		addWeekLabel();
+		addDifficultyLabel();
 		
-		JLabel moneyLabel = new JLabel("Money: ");
-		moneyPanel.add(moneyLabel);
-		
-		JLabel moneyValue = new JLabel(String.valueOf(gameManager.getPlayerTeam().getMoney()));
-		moneyPanel.add(moneyValue);
-		
-		JPanel scorePanel = new JPanel();
-		add(scorePanel);
-		scorePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JLabel scoreLabel = new JLabel("Score: ");
-		scorePanel.add(scoreLabel);
-		
-		JLabel scoreValue = new JLabel(String.valueOf(gameManager.getPlayerTeam().getScore()));
-		scorePanel.add(scoreValue);
-		
+	}
+
+	/**
+	 * Add a current week out of total weeks label to the info panel.
+	 */
+	private void addWeekLabel() {
 		JPanel weekPanel = new JPanel();
 		add(weekPanel);
-		weekPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		weekPanel.setLayout(new GridLayout(1, 2));
 		
 		JLabel weekLabel = new JLabel("Week: ");
 		weekPanel.add(weekLabel);
@@ -51,17 +42,22 @@ public class InfoPanel extends JPanel {
 								String.valueOf(gameManager.getGameEnvironment().getCurrentWeek());
 		JLabel weekValue = new JLabel(weekValueString);
 		weekPanel.add(weekValue);
-		
+	}
+	
+
+	/**
+	 * Add a difficulty label to the info panel.
+	 */
+	private void addDifficultyLabel() {
 		JPanel difficultyPanel = new JPanel();
 		add(difficultyPanel);
-		difficultyPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		difficultyPanel.setLayout(new GridLayout(1, 2));
 		
 		JLabel difficultyLabel = new JLabel("Difficulty:");
 		difficultyPanel.add(difficultyLabel);
 		
 		JLabel difficultyValue = new JLabel(String.valueOf(gameManager.getGameEnvironment().getDifficulty()));
 		difficultyPanel.add(difficultyValue);
-		
 	}
 
 }
