@@ -81,9 +81,9 @@ public abstract class GameManager
     			new PhilGarland(), new PhilippePetain(), new QueenVictoria(), new RobertMuldoon(), new RudyardKipling(),
     			new ShokoAsahara(), new StephenHawking(), new SunTzu(), new TedKaczynski(), new TimBell(), new WilliamShakespeare(),
     			new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery(),
-    			new JohnBrowning(), new JohnDoe(), new JohnFKennedy(), new JohnMKeynes(),
+    			new JohnBrowning(), new JohnDoe(), new JohnFKennedy(), new JohnMaynardKeynes(),
     			new FranzFerdinand(), new GeorgeWashington(), new GhengisKhan(), new HarryTruman(),
-    			new Confucius(), new DavidLange(), new DouglasMacarthur(), new DwightEisenhower()
+    			new Confucius(), new DavidLange(), new DouglasMacArthur(), new DwightEisenhower()
     			));
 		
 		// All weapons

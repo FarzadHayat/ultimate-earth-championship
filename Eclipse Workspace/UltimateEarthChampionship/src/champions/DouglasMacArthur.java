@@ -2,9 +2,9 @@ package champions;
 
 import model.Champion;
 
-public class DouglasMacarthur extends Champion{
+public class DouglasMacArthur extends Champion{
 
-	public static String name = "Douglas Macarthur";
+	public static String name = "Douglas MacArthur";
 	
 	// Stat Boosts:
 	private static int healthBoost = -1;
@@ -16,7 +16,7 @@ public class DouglasMacarthur extends Champion{
 	private static float startingPrice = 50f;
 	private static float priceChangeWeekly = 1.1f;
 	
-	public DouglasMacarthur() {
+	public DouglasMacArthur() {
 		super(name, healthBoost, staminaBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly);
 	}
 }
