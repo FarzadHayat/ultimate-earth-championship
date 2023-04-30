@@ -63,7 +63,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
     	this.priceChangeWeekly = priceChangeWeekly * config.WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER;
     	if (imageFileName != "") {
         	try {
-        		this.image = new ImageIcon(config.WEAPON_IMAGE_FOLDER_PATH + imageFileName);
+        		image = new ImageIcon(config.WEAPON_IMAGE_FOLDER_PATH + imageFileName);
         	}
         	catch (NullPointerException e) {
         		System.out.println(e.getMessage());

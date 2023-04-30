@@ -79,6 +79,11 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 */
 	private Weapon weapon;
 	
+	/**
+	 * The image icon for the champion
+	 */
+	private ImageIcon image;
+	
 	// Constructor:
 	/**
 	 * Constructor for champion Class
@@ -107,6 +112,14 @@ public abstract class Champion implements Purchasable, Cloneable {
 		this.priceChangeWeekly = priceChangeWeekly * config.CHAMPION_PRICE_WEEKLY_CHANGE_MODIFIER;
 		
 		this.weapon = new Fists(); // Created champions should start with the fists weapon
+	
+    	try {
+    		image = new ImageIcon(Configuration.CHAMPION_IMAGE_FOLDER_PATH 
+    				+ String.valueOf(this.getClass().getSimpleName()) + ".png");
+    	}
+    	catch (NullPointerException e) {
+    		System.out.println(e.getMessage());
+    	}
 		
 		level = 1;
 		currentXP = 0f;
@@ -386,11 +399,6 @@ public abstract class Champion implements Purchasable, Cloneable {
 	{
 		weapon = newWeapon;
 	}
-	
-	/**
-     * The image of the weapon to display
-     */
-    private ImageIcon image;
     
     /**
 	 * Set the value of image

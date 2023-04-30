@@ -103,6 +103,11 @@ public class Configuration {
 	public final float WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER = 1f;
 	
 	/**
+	 *  Path to folder containing champion images
+	 */
+	public static final String CHAMPION_IMAGE_FOLDER_PATH = "src/images/champions/";
+	
+	/**
 	 *  Path to folder containing weapon images
 	 */
 	public final String WEAPON_IMAGE_FOLDER_PATH = "src/images/";
@@ -158,7 +163,6 @@ public class Configuration {
 	public final float STARTING_MONEY = 100f;
 	
 	/**
-<<<<<<< HEAD
 	 * The minimum number of characters a teams name can be (inclusive)
 	 */
 	public final int MIN_TEAM_NAME_CHARS = 3;
