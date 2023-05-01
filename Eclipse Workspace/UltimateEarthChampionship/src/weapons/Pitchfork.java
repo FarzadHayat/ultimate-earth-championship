@@ -19,14 +19,11 @@ public class Pitchfork extends Weapon {
 	private static final float startingPrice = 10f;
 	private static final float priceChangeWeekly = 0.9f;
 	
-	// Image
-	private static final String imageFileName = "";
-	
 	/**
      * Creates a new Pitchfork object with default attribute values.
      */
 	public Pitchfork() {
-		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, false);
+		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, false);
 	}
 	
 }

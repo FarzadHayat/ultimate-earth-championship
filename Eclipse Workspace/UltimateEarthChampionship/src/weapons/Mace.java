@@ -19,14 +19,11 @@ public class Mace extends Weapon {
 	private static final float startingPrice = 10f;
 	private static final float priceChangeWeekly = 0.9f;
 	
-	// Image
-	private static final String imageFileName = "";
-	
 	/**
      * Creates a new Mace object with default attribute values.
      */
 	public Mace() {
-		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, false);
+		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, false);
 	}
 	
 }

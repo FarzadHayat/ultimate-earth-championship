@@ -19,14 +19,11 @@ public class Shield extends Weapon {
 	private static final float startingPrice = 10f;
 	private static final float priceChangeWeekly = 0.9f;
 	
-	// Image
-	private static final String imagePath = "shield.png";
-	
 	/**
      * Creates a new Shield object with default attribute values.
      */
 	public Shield() {
-		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imagePath, false);
+		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, false);
 	}
 	
 }

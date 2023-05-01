@@ -110,7 +110,7 @@ public class Configuration {
 	/**
 	 *  Path to folder containing weapon images
 	 */
-	public final String WEAPON_IMAGE_FOLDER_PATH = "src/images/";
+	public static final String WEAPON_IMAGE_FOLDER_PATH = "src/images/weapons/";
 	
 	/**
 	 *  Path to folder containing icon images

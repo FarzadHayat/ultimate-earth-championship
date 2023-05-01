@@ -19,14 +19,11 @@ public class Fists extends Weapon {
 	private static final float startingPrice = 0f;
 	private static final float priceChangeWeekly = 1f;
 	
-	// Image
-	private static final String imageFileName = "";
-	
 	/**
      * Creates a new Fists object with default attribute values.
      */
 	public Fists() {
-		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, true);
+		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, true);
 	}
 	
 }

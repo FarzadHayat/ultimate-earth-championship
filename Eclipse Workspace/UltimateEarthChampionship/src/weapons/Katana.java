@@ -19,14 +19,11 @@ public class Katana extends Weapon {
 	private static final float startingPrice = 10f;
 	private static final float priceChangeWeekly = 0.9f;
 	
-	// Image
-	private static final String imageFileName = "";
-	
 	/**
      * Creates a new Katana object with default attribute values.
      */
 	public Katana() {
-		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, imageFileName, false);
+		super(name, damageMultiplier, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly, false);
 	}
 	
 }

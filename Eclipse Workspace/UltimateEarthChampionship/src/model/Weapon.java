@@ -1,5 +1,9 @@
 package model;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
@@ -51,9 +55,8 @@ public abstract class Weapon implements Purchasable, Cloneable {
      * @param defenseBoost the amount of defense boost the weapon provides
      * @param price the base price of the weapon
      * @param priceChangeWeekly the weekly price change of the weapon
-     * @param imageFileName the name of the file containing the image of the weapon
      */
-    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly, String imageFileName, boolean isDefault) {
+    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly, boolean isDefault) {
     	this.name = name;
     	this.damageMultiplier = damageBoost;
     	this.offenseBoost = offenseBoost;
@@ -61,14 +64,15 @@ public abstract class Weapon implements Purchasable, Cloneable {
     	this.isDefaultWeapon = isDefault;
     	this.price = price * config.WEAPON_PRICE_MODIFIER;
     	this.priceChangeWeekly = priceChangeWeekly * config.WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER;
-    	if (imageFileName != "") {
-        	try {
-        		image = new ImageIcon(config.WEAPON_IMAGE_FOLDER_PATH + imageFileName);
-        	}
-        	catch (NullPointerException e) {
-        		System.out.println(e.getMessage());
-        	}
-    	}
+    	
+    	try {
+			String path = Configuration.WEAPON_IMAGE_FOLDER_PATH 
+					+ String.valueOf(getClass().getSimpleName()) + ".png";
+            image = new ImageIcon(ImageIO.read(new File(path)));
+
+        } catch (IOException e) {
+        	System.out.println("Could not find image file for " + getClass().getSimpleName() + " object!");
+        }
     }
     
 	/**

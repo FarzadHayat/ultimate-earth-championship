@@ -51,7 +51,7 @@ public class StatLabel extends JPanel {
             imageIcon = new ImageIcon(ImageIO.read(new File(path)));
 
         } catch (IOException e) {
-        	System.out.println("Could not find image file for " + imageFileName + "!");
+        	System.out.println("Could not find image file for " + imageFileName + " label!");
         }
     	ImageIcon resizedIcon;
 		if (imageIcon != null) {
