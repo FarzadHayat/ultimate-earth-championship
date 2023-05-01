@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import exception.InputException;
 import manager.GameManager;
 import model.Champion;
+import model.Purchasable;
 import model.SetupManager;
 import model.Shop;
 import model.Team;
@@ -128,8 +129,15 @@ public class CommandLineDisplay implements DisplayStrategy {
 		content.addAll(getWeaponStrings(shop.getAvailableWeapons()));
 		
 		ArrayList<String> options = new ArrayList<String>();
-		options.addAll(getChampionOptions(shop.getAvailableChampions(), CardType.CAN_BUY));
-		options.addAll(getWeaponOptions(shop.getAvailableWeapons(), CardType.CAN_BUY));
+		
+		ArrayList<Purchasable> purchasables = new ArrayList<Purchasable>();
+		for (Champion champion : shop.getAvailableChampions()) {
+			purchasables.add(champion);
+		}
+		for (Weapon weapon : shop.getAvailableWeapons()) {
+			purchasables.add(weapon);
+		}
+		options.addAll(getPurchasableOptions(purchasables, CardType.CAN_BUY));
 		
 		printView("Shop", content, options);
 		System.out.println(promptForInput());
@@ -148,14 +156,14 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	/**
-	 * Returns an ArrayList of String options for the given list of Champion objects and CardType.
-	 * @param champions the ArrayList of Champion objects to get options for
+	 * Returns an ArrayList of String options for the given list of purchasable objects and CardType.
+	 * @param purchasables the ArrayList of purchasable objects to get options for
 	 * @param cardType the CardType to use to generate the options
-	 * @return an ArrayList of String options for the given list of Champion objects and CardType
+	 * @return an ArrayList of String options for the given list of purchasable objects and CardType
 	 */
-	private static ArrayList<String> getChampionOptions(ArrayList<Champion> champions, CardType cardType) {
+	private static ArrayList<String> getPurchasableOptions(ArrayList<Purchasable> purchasables, CardType cardType) {
 		ArrayList<String> names = new ArrayList<String>();
-		for (Champion champion : champions) {
+		for (Purchasable purchasable : purchasables) {
 			String text;
 			switch (cardType) {
 			case CAN_BUY: {
@@ -171,37 +179,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 				break;
 			}
 			}
-			text += champion.getName();
-			names.add(text);
-		}
-		return names;
-	}
-
-	/**
-	 * Returns an ArrayList of String options for the given list of Weapon objects and CardType.
-	 * @param weapons the ArrayList of Weapon objects to get options for
-	 * @param cardType the CardType to use to generate the options
-	 * @return an ArrayList of String options for the given list of Weapon objects and CardType
-	 */
-	private static ArrayList<String> getWeaponOptions(ArrayList<Weapon> weapons, CardType cardType) {
-		ArrayList<String> names = new ArrayList<String>();
-		for (Weapon weapon : weapons) {
-			String text;
-			switch (cardType) {
-			case CAN_BUY: {
-				text = "BUY: ";
-				break;
-			}
-			case CAN_SELL: {
-				text = "SELL: ";
-				break;
-			}
-			default: {
-				text = "";
-				break;
-			}
-			}
-			text += weapon.getName();
+			text += purchasable.getName();
 			names.add(text);
 		}
 		return names;
@@ -253,7 +231,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 
 	/**
 	 * Displays all the text related to setting up the game,
-	 * Requires the player to input a team name,
+	 )* Requires the player to input a team name,
 	 * Weeks of championship,
 	 * Choose their starting team,
 	 * Choose a difficulty

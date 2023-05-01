@@ -437,4 +437,12 @@ public abstract class Champion implements Purchasable, Cloneable {
         }
     }
 	
+	@Override
+	public String toString() {
+		return String.format(
+				"Champion [name=%s, health=%s, maxHealth=%s, stamina=%s, maxStamina=%s, offense=%s, defense=%s, level=%s, currentXP=%s, maxXP=%s, price=%s, priceChangeWeekly=%s, weapon=%s]",
+				name, health, maxHealth, stamina, maxStamina, offense, defense, level, currentXP, maxXP, price,
+				priceChangeWeekly, weapon);
+	}
+	
 }
