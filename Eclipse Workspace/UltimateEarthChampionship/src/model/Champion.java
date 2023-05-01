@@ -122,7 +122,9 @@ public abstract class Champion implements Purchasable, Cloneable {
             image = new ImageIcon(ImageIO.read(new File(path)));
 
         } catch (IOException e) {
-        	System.out.println("Could not find image file for " + getClass().getSimpleName() + " object!");
+        	if (Configuration.DEBUG) {
+        		System.out.println("Could not find image file for " + getClass().getSimpleName() + " object!");
+        	}
         }
 		
 		level = 1;

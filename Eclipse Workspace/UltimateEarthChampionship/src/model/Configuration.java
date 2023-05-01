@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DebugGraphics;
+
 public class Configuration {
 	
 	/**
@@ -30,6 +32,11 @@ public class Configuration {
 		return instance;
 	}
 	
+	
+	/**
+	 * Whether to print debugging messages to console.
+	 */
+	public static final boolean DEBUG = false; 
 	
 	/**
 	 *  Global difficulty modifier, should exist on a scale between 0.1 - 2.
