@@ -67,7 +67,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
     	
     	try {
 			String path = Configuration.WEAPON_IMAGE_FOLDER_PATH 
-					+ String.valueOf(getClass().getSimpleName()) + ".png";
+					+ String.valueOf(getClass().getSimpleName()) + ".jpg";
             image = new ImageIcon(ImageIO.read(new File(path)));
 
         } catch (IOException e) {
