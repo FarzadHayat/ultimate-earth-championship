@@ -20,8 +20,8 @@ public class InfoPanel extends JPanel {
 	public InfoPanel() {
 		setLayout(new GridLayout(1, 3, 0, 0));
 		
-		add(new StatLabel("money.png", String.valueOf(gameManager.getPlayerTeam().getMoney())));
-		add(new StatLabel("score.png", String.valueOf(gameManager.getPlayerTeam().getScore())));
+		add(new StatLabel("money", String.valueOf(gameManager.getPlayerTeam().getMoney())));
+		add(new StatLabel("score", String.valueOf(gameManager.getPlayerTeam().getScore())));
 		addWeekLabel();
 		addDifficultyLabel();
 		
