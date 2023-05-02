@@ -9,6 +9,8 @@ import events.RampagingAnimalEvent;
 import events.RandomEvent;
 import events.RandomEventInfo;
 import events.TVShowEvent;
+import exception.GameFinishedException;
+import manager.GameManager;
 
 public class GameEnvironment {
 	
@@ -33,11 +35,6 @@ public class GameEnvironment {
 	 * List of all random events in the game
 	 */
 	private ArrayList<RandomEvent> events;
-		
-	/**
-	 *  All the teams in the game, including the player team
-	 */
-	private ArrayList<Team> teams;
 	
 	public int getCurrentWeek()
 	{
@@ -70,7 +67,6 @@ public class GameEnvironment {
 	public GameEnvironment() {
 		currentWeek = 0;
 		maxWeek = 99;
-		
 		events = new ArrayList<RandomEvent>();
 		getAllEvents();
 	}
@@ -121,7 +117,7 @@ public class GameEnvironment {
 	 * it is added to the returned list which can then be passed onto the GUI.
 	 * @return
 	 */
-	private ArrayList<RandomEventInfo> generateWeeklyEvents()
+	public ArrayList<RandomEventInfo> generateWeeklyEvents()
 	{
 		ArrayList<RandomEventInfo> weeklyEvents = new ArrayList<RandomEventInfo>();
 		
@@ -157,8 +153,8 @@ public class GameEnvironment {
 	public Team getRandomTeam()
 	{
 		Random random = new Random();
-		int teamInt = random.nextInt(config.NUM_TEAMS);
-		return teams.get(teamInt);
+		int teamInt = random.nextInt(GameManager.getInstance().getTeams().size());
+		return GameManager.getInstance().getTeams().get(teamInt);
 	}
 	
 	/**
