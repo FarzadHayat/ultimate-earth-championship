@@ -150,13 +150,12 @@ public class CommandLineDisplay implements DisplayStrategy {
 			try 
 			{
 				chosenChamp = SetupManager.ChooseChampionFrom(availChampions, promptForInput());
+				chosenChampions.add(chosenChamp);
 			} 
 			catch (InputException e) 
 			{
 				System.out.println(e.getMessage() + " \n");
 			}
-			
-			chosenChampions.add(chosenChamp);
 		}
 		
 		System.out.println("\n Your Team:");

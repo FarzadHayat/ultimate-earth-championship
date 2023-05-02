@@ -106,7 +106,7 @@ public abstract class SetupManager {
 		}
 		
 		// Check for valid Index:
-		if (champIndex >= champions.size())
+		if (champIndex < 0 || champIndex >= champions.size())
 		{
 			throw new InputException("Not a valid champion!");
 		}
