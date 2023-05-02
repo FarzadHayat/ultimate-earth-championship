@@ -377,6 +377,8 @@ public abstract class GameManager
 		// List of champions in use by the AI
 		// We use this to make sure that duplicate champions are not chosen for the teams
 		ArrayList<Champion> setupChampionsInUse = new ArrayList<Champion>();
+		// Add the player champions to list to ensure they are not chosen by then AI.
+		setupChampionsInUse.addAll(playerTeam.getChampions());
 		
 		ArrayList<String> possibleTeamNames = new ArrayList<String>(config.AI_TEAM_NAMES);
 		
