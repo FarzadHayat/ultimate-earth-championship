@@ -240,8 +240,8 @@ public class SetupView extends JPanel{
 			
 			if (reply == 0)
 			{
-				manager.setupPlayerTeam(teamName, gameWeeks, chosenChampions, difficulty); // :) setup done
-				manager.finishedSetup(); // Let gameManager know we are done
+				manager.setupPlayerTeam(teamName, gameWeeks, chosenChampions, difficulty);
+				manager.finishedSetup();
 			}
 			
 		} 

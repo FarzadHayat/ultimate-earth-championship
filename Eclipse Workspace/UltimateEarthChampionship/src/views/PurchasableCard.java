@@ -124,25 +124,7 @@ public class PurchasableCard extends JPanel {
 			public void mouseReleased(MouseEvent e) {}
 			
 			@Override
-			public void mousePressed(MouseEvent e) {}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable) ||
-						gameManager.getPlayerTeam().getChosenWeapons().contains(purchasable)) {
-					setBackground(Color.green);
-				} else {
-					setBackground(Color.yellow);
-				}
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				setBackground(Color.orange);
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				if (purchasable.getClass().getSuperclass() == Champion.class) {
 					if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable)) {
 						gameManager.getPlayerTeam().removeChosenChampion((Champion) purchasable);
@@ -168,6 +150,24 @@ public class PurchasableCard extends JPanel {
 					gameManager.repaintWeaponSetup();
 				}
 			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable) ||
+						gameManager.getPlayerTeam().getChosenWeapons().contains(purchasable)) {
+					setBackground(Color.green);
+				} else {
+					setBackground(Color.yellow);
+				}
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setBackground(Color.orange);
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {}
 		});
 	}
 

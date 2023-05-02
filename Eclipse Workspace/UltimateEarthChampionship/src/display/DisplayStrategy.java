@@ -1,5 +1,8 @@
 package display;
 
+import java.util.ArrayList;
+
+import events.RandomEventInfo;
 import story.Cutscene;
 
 public interface DisplayStrategy {
@@ -11,5 +14,6 @@ public interface DisplayStrategy {
 	public void displayChampionSetup();
 	public void displayWeaponSetup();
 	public void displayLiveMatch();
+	public void displayWeekResults(ArrayList<RandomEventInfo> randomEvents);
 	public void displayGameResults();
 }

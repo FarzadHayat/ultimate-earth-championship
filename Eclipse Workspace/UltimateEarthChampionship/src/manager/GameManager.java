@@ -47,6 +47,8 @@ import champions.TimBell;
 import champions.WilliamShakespeare;
 import display.DisplayStrategy;
 import display.DisplayType;
+import events.RandomEventInfo;
+import exception.GameFinishedException;
 import match.Match;
 import model.Champion;
 import model.Configuration;
@@ -90,49 +92,47 @@ public abstract class GameManager
 	/**
 	 * The GameEnvironment instance for this GameManager.
 	 */
-	private GameEnvironment gameEnvironment;
+	protected GameEnvironment gameEnvironment;
 	
 	/**
 	 * The Shop instance for this GameManager.
 	 */
-	private Shop shop;
+	protected Shop shop;
 	
 	/**
 	 * The list of all available champions.
 	 */
-	private ArrayList<Champion> allChampions; 
+	protected ArrayList<Champion> allChampions; 
 	
 	/**
 	 * The list of all available weapons.
 	 */
-	private ArrayList<Weapon> allWeapons;
-	
-	
+	protected ArrayList<Weapon> allWeapons;
 	
 	/**
 	 * The player's team for ease of access.
 	 */
-	private Team playerTeam;
+	protected Team playerTeam;
 	
 	/**
 	 * All the teams including the player team.
 	 */
-	private ArrayList<Team> teams;
+	protected ArrayList<Team> teams = new ArrayList<Team>();
 	
 	/**
 	 * The currently selected enemy team.
 	 */
-	private Team enemyTeam;
+	protected Team enemyTeam;
 	
 	/**
 	 * The currently active match.
 	 */
-	private Match match;
+	protected Match match;
 	
 	/**
 	 * The current cutscene for the game.
 	 */
-	private Cutscene cutscene;
+	protected Cutscene cutscene;
 	
 	/**
 	 * Starts the game.
@@ -147,9 +147,6 @@ public abstract class GameManager
 	 * Initialize the necessary starting objects for the game.
 	 */
 	public void initialize() {
-		// Game environment
-		gameEnvironment = new GameEnvironment();
-		
 		// All champions
 		allChampions = new ArrayList<Champion>(List.of(
 				new CharlesDarwin(), new ElvisPresley(), new JoeRogan(), new JosefStalin(),
@@ -170,15 +167,12 @@ public abstract class GameManager
     			new Pickaxe(), new Pitchfork(), new Scythe(), new Shield(), new Shovel(),
     			new Shuriken(), new Sledgehammer(), new Spear(), new Sword(), new TennisRacket()
     			));
-    	
-		// Teams
-		playerTeam = new Team(true, "Player", new ArrayList<Champion>()); // Champions are assigned later, after setup
-		teams = generateAITeams();
-		teams.add(playerTeam);
+
+		// Game environment
+		gameEnvironment = new GameEnvironment();
 		
     	// Shop
     	shop = new Shop();
-    	getShop().generateCatalogue();
 	}
 	
 	/**
@@ -365,6 +359,7 @@ public abstract class GameManager
 	{
 		Team playerTeam = new Team(true, teamName, champions);
 		setPlayerTeam(playerTeam);
+		teams.add(playerTeam);
 		
 		gameEnvironment.setDifficulty(difficulty);
 		gameEnvironment.setMaxWeeks(numWeeks);
@@ -430,6 +425,8 @@ public abstract class GameManager
 	
 	public void finishedSetup()
 	{
+		teams.addAll(generateAITeams()); 
+		shop.generateCatalogue();
 		displayStrategy.displayTeam();
 	}
 	
@@ -453,13 +450,22 @@ public abstract class GameManager
 	}
 	
 	public void finishedMatch() {
-		//TODO: Process match results and go to next week
-		finishedWeek();
+		try {
+			gameEnvironment.nextWeek();
+			playerTeam.setChosenChampions(new ArrayList<Champion>());
+			playerTeam.setChosenWeapons(new ArrayList<Weapon>());
+			displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
+		} catch (GameFinishedException e) {
+			finishedGame();
+		}
 	}
 	
 	public void finishedWeek() {
-		//TODO: Process week results and upcoming random events
 		displayStrategy.displayTeam();
+	}
+	
+	public void finishedGame() {
+		displayStrategy.displayGameResults();
 	}
 	
 }
