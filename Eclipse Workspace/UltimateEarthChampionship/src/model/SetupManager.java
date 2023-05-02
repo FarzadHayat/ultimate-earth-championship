@@ -119,6 +119,42 @@ public abstract class SetupManager {
 	}
 	
 	/**
+	 * Returns a weapon from a given list at a given index, throwing relevant exceptions
+	 * @param weapons ArrayList of Weapons to be chosen from
+	 * @param input Index of the weapon selected from the weapons list, as a string
+	 * @return The weapon chosen
+	 * @throws InputException If the inputed string is unrecognizable, or attempts to access a non-existent weapon
+	 */
+	public static Weapon ChooseWeaponFrom(ArrayList<Weapon> weapons, String input) throws InputException
+	{
+		int weaponIndex = -1;
+		
+		// Check for valid Integer
+		try 
+		{
+			weaponIndex = Integer.parseInt(input);
+			// Step down to account for lists starting at 0
+			weaponIndex -= 1;
+		} 
+		catch (NumberFormatException e) 
+		{
+			throw new InputException("Not a valid integer!");
+		}
+		
+		// Check for valid Index:
+		if (weaponIndex < 0 || weaponIndex >= weapons.size())
+		{
+			throw new InputException("Not a valid weapon!");
+		}
+		
+		// Return and remove weapon
+		Weapon out = weapons.get(weaponIndex);
+		weapons.remove(weaponIndex);
+		
+		return out;
+	}
+	
+	/**
 	 * Takes a string and converts it to a difficulty which it returns as a float, throws exceptions if the string
 	 * or difficulty are not allowed.
 	 * @param input String input of game difficulty

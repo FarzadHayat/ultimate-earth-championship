@@ -278,7 +278,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 		while(true)
 		{
 			System.out.println("Are you happy with this? [y/n]");
-			System.out.println(" - Answering 'n' will restart the setup process");
+			System.out.println(" - Answering 'n' will restart the champion setup process");
 			
 			String in = promptForInput();
 			
@@ -301,8 +301,41 @@ public class CommandLineDisplay implements DisplayStrategy {
 
 	@Override
 	public void displayWeaponSetup() {
-		// TODO Auto-generated method stub
-		
+		ArrayList<Weapon> chosenWeapons = new ArrayList<Weapon>();  
+		ArrayList<Weapon> WeaponsLeft = new ArrayList<Weapon>();
+		WeaponsLeft.addAll(gameManager.getPlayerTeam().getWeapons());
+		while (chosenWeapons.size() < Configuration.getInstance().NUM_CHOSEN_CHAMPIONS) {
+			CommandLineUtilities.printHeader("WEAPON SETUP");
+			CommandLineTable.printWeapons(chosenWeapons);
+			CommandLineUtilities.printWeaponOptions("SELECT", WeaponsLeft);
+			
+			System.out.println("Are you happy with this? [y/n]");
+			System.out.println(" - You can continue to select more weapons or continue with the current selection");
+			System.out.println(" - Answering 'y' will start the match");
+			System.out.println(" - Answering 'n' will restart the weapon setup process");
+			
+			String in = promptForInput();
+			
+			if (in.equals("y"))
+			{
+				// Weapon setup complete, assign chosen weapons to the player team
+				gameManager.getPlayerTeam().setChosenWeapons(chosenWeapons);
+				break;
+			}
+			if (in.equals("n"))
+			{
+				// Restart
+				displayWeaponSetup();
+				return;
+			}
+			try {
+				Weapon weapon = SetupManager.ChooseWeaponFrom(WeaponsLeft, in);
+				chosenWeapons.add(weapon);
+			} catch (InputException e) {
+				System.out.println(e.getMessage() + " \n");
+			}
+		}
+		gameManager.finishedWeaponSetup();
 	}
 	
 	@Override
