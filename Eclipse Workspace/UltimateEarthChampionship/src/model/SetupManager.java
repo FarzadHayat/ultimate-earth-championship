@@ -22,11 +22,11 @@ public abstract class SetupManager {
 	
 		Pattern allowedChars = Pattern.compile("[^A-Z^a-z^0-9]");
 		
-		if (teamName.length() <= config.MIN_TEAM_NAME_CHARS)
+		if (teamName.length() < config.MIN_TEAM_NAME_CHARS)
 		{
 			throw new InputException("Team name is too small!");
 		}
-		else if (teamName.length() >= config.MAX_TEAM_NAME_CHARS)
+		else if (teamName.length() > config.MAX_TEAM_NAME_CHARS)
 		{
 			throw new InputException("Team name is too large!");
 		}
