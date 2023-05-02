@@ -2,27 +2,23 @@ package display;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import exception.InputException;
 import manager.GameManager;
 import model.Champion;
-import model.Purchasable;
+import model.Configuration;
 import model.SetupManager;
 import model.Shop;
 import model.Team;
-import model.Weapon;
 import story.Cutscene;
 import story.CutsceneSlide;
 import views.PurchasableCard.CardType;
 
 public class CommandLineDisplay implements DisplayStrategy {
-	private static final String FILLER = "=";
-	private static final int LINE_WIDTH = 114;
 	
 	private Scanner scanner;
 	
-	private model.Configuration config = model.Configuration.getInstance();
+	private Configuration config = Configuration.getInstance();
 	
 	private GameManager gameManager = GameManager.getInstance();
 	
@@ -31,70 +27,6 @@ public class CommandLineDisplay implements DisplayStrategy {
 	 */
 	public CommandLineDisplay() {
 		scanner = new Scanner(System.in);
-	}
-	
-	/**
-	 * Prints a view to the console.
-	 * @param title The title of the view.
-	 * @param content The content of the view.
-	 * @param options The options available in the view.
-	 */
-	public static void printView(String title, ArrayList<String> content, ArrayList<String> options) {
-		printLine();
-		printTitle(title);
-		printLine();
-		printContent(content);
-		printLine();
-		printOptions(options);
-	}
-	
-	/**
-	 * Prints a line of fillers to the console.
-	 */
-	public static void printLine() {
-		String text = "";
-		for (int i = 0; i < LINE_WIDTH; i++) {
-			text += FILLER;
-		}
-		System.out.println(text);
-	}
-	
-	/**
-	 * Prints a title to the console.
-	 * @param title The title to print.
-	 */
-	public static void printTitle(String title) {
-		int numberOfFillers = Integer.max((int) ((LINE_WIDTH - title.length() - 2) / 2), 0);
-		String text = "";
-		for (int i = 0; i < numberOfFillers; i++) {
-			text += FILLER;
-		}
-		if (title.length() % 2 == 0) {
-			System.out.println(text + " " + title + " " + text);
-		}
-		else {
-			System.out.println(text + " " + title + " " + FILLER + text);
-		}
-	}
-	
-	/**
-	 * Prints content to the console line by line.
-	 * @param content The content to print.
-	 */
-	public static void printContent(ArrayList<String> content) {
-		for (String line : content) {
-			System.out.println(line);
-		}
-	}
-	
-	/**
-	 * Prints options to the console line by line and numbered.
-	 * @param options The options to print.
-	 */
-	public static void printOptions(ArrayList<String> options) {
-		for (int i = 0; i < options.size(); i++) {
-			System.out.println(String.valueOf(i+1) + " " + options.get(i));
-		}
 	}
 	
 	/**
@@ -120,109 +52,19 @@ public class CommandLineDisplay implements DisplayStrategy {
 	public void displayShop() {
 		Shop shop = gameManager.getShop();
 		
-		ArrayList<String> content = new ArrayList<>();
+		CommandLineUtilities.printHeader("Shop");
 		
-//		content.add(Champion.toStringHeader());
-		ArrayList<String> championStrings = getChampionStrings(shop.getAvailableChampions());
-		content.addAll(championStrings);
+		CommandLineTable.printChampions(shop.getAvailableChampions());
+		CommandLineUtilities.printLine();
+		CommandLineTable.printWeapons(shop.getAvailableWeapons());
+		CommandLineUtilities.printLine();
 		
-		content.addAll(getWeaponStrings(shop.getAvailableWeapons()));
-		
-		ArrayList<String> options = new ArrayList<String>();
-		
-		ArrayList<Purchasable> purchasables = new ArrayList<Purchasable>();
-		for (Champion champion : shop.getAvailableChampions()) {
-			purchasables.add(champion);
-		}
-		for (Weapon weapon : shop.getAvailableWeapons()) {
-			purchasables.add(weapon);
-		}
-		options.addAll(getPurchasableOptions(purchasables, CardType.CAN_BUY));
-		
-		printView("Shop", content, options);
+		CommandLineUtilities.printChampionOptions(shop.getAvailableChampions(), CardType.CAN_BUY);
+		CommandLineUtilities.printWeaponOptions(shop.getAvailableWeapons(), CardType.CAN_BUY);
+
 		System.out.println(promptForInput());
 	}
 	
-	/**
-	 * Returns an ArrayList of String representations of the given list of Champion objects.
-	 * @param champions the ArrayList of Champion objects to convert to strings
-	 * @return an ArrayList of String representations of the given list of Champion objects
-	 */
-	private static ArrayList<String> getChampionStrings(ArrayList<Champion> champions) {
-		ArrayList<String> championStrings = champions.stream()
-				.map(Champion::toString)
-				.collect(Collectors.toCollection(ArrayList::new));
-		return championStrings;
-	}
-
-	/**
-	 * Returns an ArrayList of String options for the given list of purchasable objects and CardType.
-	 * @param purchasables the ArrayList of purchasable objects to get options for
-	 * @param cardType the CardType to use to generate the options
-	 * @return an ArrayList of String options for the given list of purchasable objects and CardType
-	 */
-	private static ArrayList<String> getPurchasableOptions(ArrayList<Purchasable> purchasables, CardType cardType) {
-		ArrayList<String> names = new ArrayList<String>();
-		for (Purchasable purchasable : purchasables) {
-			String text;
-			switch (cardType) {
-			case CAN_BUY: {
-				text = "BUY: ";
-				break;
-			}
-			case CAN_SELL: {
-				text = "SELL: ";
-				break;
-			}
-			default: {
-				text = "";
-				break;
-			}
-			}
-			text += purchasable.getName();
-			names.add(text);
-		}
-		return names;
-	}
-	
-	/**
-	 * Returns a string list representing the list of weapons.
-	 * The first element in the list is a header for the weapon labels.
-	 * The second element is a divider line.
-	 * The rest of the elements are the weapons with just the stats for each.
-	 */
-	public static ArrayList<String> getWeaponStrings(ArrayList<Weapon> weaponList) {
-		ArrayList<String> stringList = new ArrayList<String>();
-		stringList.add(getWeaponHeaderString());
-		stringList.add(getDividerString());
-		for (Weapon weapon : weaponList) {
-			stringList.add(getWeaponString(weapon));
-		}
-		return stringList;
-	}
-	
-	/**
-	 * Returns a line to divide the table header from the table body.
-	 */
-	public static String getDividerString() {
-		return "       [--------------------------------------------------------------------------------------------------------]";
-	}
-	
-	/**
-	 * Returns a string representation of the given Weapon's stats without labels.
-	 */
-	public static String getWeaponString(Weapon weapon) {
-		return String.format("       [ %-20s | %17s | %13s | %13s | %5s | %19s ]", weapon.getName(), weapon.getDamageMultiplier(),
-				weapon.getOffenseBoost(), weapon.getDefenseBoost(), weapon.getPrice(), weapon.getPriceChangeWeekly());
-	}
-	
-	/**
-	 * Returns a header string for the Weapon class that specifies the format of the `displayWeapon` method's output.
-	 */
-	public static String getWeaponHeaderString() {
-		return "Weapon [ Name                 | Damage multiplier | Offense boost | Defense boost | Price | Price change weekly ]";
-	}
-
 	@Override
 	public void displayCutscene(Cutscene cutscene) {
 		// TODO Auto-generated method stub
@@ -385,23 +227,15 @@ public class CommandLineDisplay implements DisplayStrategy {
 
 	@Override
 	public void displayStadium() {
-		ArrayList<Team> teams = gameManager.getTeams();
+		ArrayList<Team> teams = gameManager.getAITeams();
 		
-		ArrayList<String> content = new ArrayList<String>();
+		CommandLineUtilities.printHeader("Stadium");
 		
-		for (Team team : teams) {
-			content.add(team.getName());
-			for (Champion champion : team.getChampions()) {
-				content.add(String.format("- %s (%s)", champion.getName(), champion.getWeapon().getName()));
-			}
-		}
+		CommandLineUtilities.printTeams(teams);
+		CommandLineUtilities.printLine();
 		
-		ArrayList<String> options = new ArrayList<String>();
-		for (Team team : teams) {
-			options.add("FIGHT: " + team.getName());
-		}
+		CommandLineUtilities.printTeamOptions(teams);
 		
-		printView("Matches", content, options);
 		System.out.println(promptForInput());
 	}
 
@@ -417,7 +251,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public void displayLiveMatch() {
 		// TODO Auto-generated method stub
