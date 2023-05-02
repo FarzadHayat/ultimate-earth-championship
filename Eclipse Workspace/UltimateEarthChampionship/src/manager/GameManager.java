@@ -47,6 +47,8 @@ import champions.TimBell;
 import champions.WilliamShakespeare;
 import display.DisplayStrategy;
 import display.DisplayType;
+import events.RandomEventInfo;
+import exception.GameFinishedException;
 import match.Match;
 import model.Champion;
 import model.Configuration;
@@ -448,13 +450,22 @@ public abstract class GameManager
 	}
 	
 	public void finishedMatch() {
-		//TODO: Process match results and go to next week
-		finishedWeek();
+		try {
+			gameEnvironment.nextWeek();
+			playerTeam.setChosenChampions(new ArrayList<Champion>());
+			playerTeam.setChosenWeapons(new ArrayList<Weapon>());
+			displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
+		} catch (GameFinishedException e) {
+			finishedGame();
+		}
 	}
 	
 	public void finishedWeek() {
-		//TODO: Process week results and upcoming random events
 		displayStrategy.displayTeam();
+	}
+	
+	public void finishedGame() {
+		displayStrategy.displayGameResults();
 	}
 	
 }

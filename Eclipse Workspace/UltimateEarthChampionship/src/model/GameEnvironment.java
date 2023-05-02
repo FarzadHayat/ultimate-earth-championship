@@ -169,7 +169,13 @@ public class GameEnvironment {
 		return (chance >= random);
 	}
 	
-
-	
+	public void nextWeek() throws GameFinishedException {
+		if (currentWeek == maxWeek) {
+			throw new GameFinishedException();
+		}
+		else {
+			currentWeek += 1;
+		}
+	}
 
 }

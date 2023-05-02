@@ -1,11 +1,14 @@
 package display;
 
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
+import events.RandomEventInfo;
+import manager.GameManager;
 import story.Cutscene;
 import views.ChampionSetupView;
 import views.CutsceneView;
@@ -99,7 +102,16 @@ public class GraphicalDisplay implements DisplayStrategy {
 	@Override
 	public void displayLiveMatch() {
 		// TODO Auto-generated method stub
-		
+		GameManager.getInstance().finishedMatch();
+	}
+
+	@Override
+	public void displayWeekResults(ArrayList<RandomEventInfo> randomEvents) {
+		for (RandomEventInfo randomEvent : randomEvents) {
+			JOptionPane.showMessageDialog(frame, randomEvent.description + "\n"
+					+ randomEvent.effectString, randomEvent.name, JOptionPane.INFORMATION_MESSAGE);
+		}
+		GameManager.getInstance().finishedWeek();
 	}
 
 	@Override

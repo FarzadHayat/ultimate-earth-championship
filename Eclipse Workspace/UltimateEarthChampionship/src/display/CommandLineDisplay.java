@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import javax.swing.JOptionPane;
+
+import events.RandomEventInfo;
 import exception.InputException;
 import manager.GameManager;
 import model.Champion;
@@ -444,6 +447,15 @@ public class CommandLineDisplay implements DisplayStrategy {
 	public void displayLiveMatch() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void displayWeekResults(ArrayList<RandomEventInfo> randomEvents) {
+		for (RandomEventInfo randomEvent : randomEvents) {
+			System.out.println(String.format("%s: %s (%s)", randomEvent.name, randomEvent.description, randomEvent.effectString));
+			promptForInput();
+		}
+		GameManager.getInstance().finishedWeek();
 	}
 
 	@Override
