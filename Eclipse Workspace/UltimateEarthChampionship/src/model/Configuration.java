@@ -216,6 +216,22 @@ public class Configuration {
 	 */
 	public static final Font TEXT_FONT = new Font(FONT_FAMILY, Font.PLAIN, 14);
 	
+	/**
+	 * The lower bound of AI aggression, 
+	 */
+	public final int AGRESSION_RANDOM_LOWER_BOUND = -50;
+	
+	/**
+	 * The upper bound of AI aggression
+	 */
+	public final int AGRESSION_RANDOM_UPPER_BOUND = 50;
+	
+	/**
+	 * The number of milliseconds that each AI champion waits before moving.
+	 * Note that 1 second = 1000 Ms
+	 */
+	public final int AI_WAIT_TIME_MS = 1500;
+	
 	public float getDifficulty()
 	{
 		return difficulty;

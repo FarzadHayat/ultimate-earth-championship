@@ -278,6 +278,15 @@ public class MatchView extends JPanel {
 		}
 	}
 	
+	public void disableAllButtons()
+	{
+		attackButton.setEnabled(false);
+		waitButton.setEnabled(false);
+		retreatButton.setEnabled(false);
+		attackUpButton.setEnabled(false);
+		attackDownButton.setEnabled(false);
+	}
+	
 	public void showDialogue(String message)
 	{
 		JOptionPane.showMessageDialog(null, message);

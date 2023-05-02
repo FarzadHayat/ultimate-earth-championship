@@ -52,6 +52,12 @@ public class Team {
 	 */
 	private int score;
 	
+	/**
+	 * The team's aggression, on a scale of -50 (very timid) to 50 (very aggressive)
+	 * Agression determines how likely a team is to get their champions to attack rather than wait
+	 */
+	private int aggression;
+	
 	private GameManager gameManager = GameManager.getInstance();
 	
 	/**
@@ -76,6 +82,10 @@ public class Team {
 		}
 		champions = startingChampions;
 		
+		Random random = new Random();
+		int aggression = random.nextInt(config.AGRESSION_RANDOM_UPPER_BOUND - config.AGRESSION_RANDOM_LOWER_BOUND) + config.AGRESSION_RANDOM_LOWER_BOUND;
+
+		this.aggression = aggression;
 	}
 
 	/**
@@ -211,6 +221,11 @@ public class Team {
 
 	public void setChosenWeapons(ArrayList<Weapon> chosenWeapons) {
 		this.chosenWeapons = chosenWeapons;
+	}
+	
+	public int getAgression()
+	{
+		return aggression;
 	}
 
 	/**

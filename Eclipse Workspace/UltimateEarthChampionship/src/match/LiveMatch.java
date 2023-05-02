@@ -14,9 +14,16 @@ public class LiveMatch extends Match{
 	private MatchView matchView;
 	
 	/**
-	 * List of champions in the order that their turn occurs
+	 * List of player champions in the order that their turn occurs
 	 */
-	private ArrayList<Champion> turnOrder;
+	private ArrayList<Champion> playerChampions;
+	
+	/**
+	 * List of enemy champions in the order that their turn occurs
+	 */
+	private ArrayList<Champion> enemyChampions;
+	
+	private boolean playerTeamsTurn;
 	
 	private int turn;
 	
@@ -70,7 +77,10 @@ public class LiveMatch extends Match{
 	 */
 	public void assignChampions()
 	{
-		turnOrder = new ArrayList<Champion>();
+		playerChampions = new ArrayList<Champion>();
+		enemyChampions = new ArrayList<Champion>();
+		
+		playerTeamsTurn = true;
 		
 		// Player Champions:
 		int lane = 0;
@@ -80,7 +90,7 @@ public class LiveMatch extends Match{
 			champion.setPosition(2);
 			
 			cards.get(lane).get(2).setChampion(champion);
-			turnOrder.add(champion);
+			playerChampions.add(champion);
 			
 			lane++;
 		}
@@ -102,6 +112,7 @@ public class LiveMatch extends Match{
 			champion.setPosition(4);
 			
 			cards.get(lane).get(4).setChampion(champion);
+			enemyChampions.add(champion);
 			
 			lane++;
 		}
@@ -111,15 +122,48 @@ public class LiveMatch extends Match{
 	{
 		turn++;
 		
-		// Wrap turn around so it doesn't go out of index
-		if (turn == turnOrder.size())
+		// If all player champions have had their turn, it is the enemy teams turn to move
+		if (turn == 4)
 		{
+			playerTeamsTurn = !playerTeamsTurn;
 			turn = 0;
 		}
 		
-		currentChampion = turnOrder.get(turn);
+		// Change button visibility on the view
+		if (playerTeamsTurn)
+		{
+			//matchView.updateButtons();
+		}
+		else
+		{
+			matchView.disableAllButtons();
+		}
 		
-		matchView.selectChampion(currentChampion);
+		if (playerTeamsTurn)
+		{
+			// Player's turn
+			currentChampion = playerChampions.get(turn);
+			
+			matchView.selectChampion(currentChampion);
+		}
+		else
+		{
+			// Enemy turn
+			System.out.println(enemyChampions.get(turn).getName() + "'s turn");
+			
+			try {
+				Thread.sleep(config.AI_WAIT_TIME_MS);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			nextTurn();
+		}
+		
+		
+		
+		
 		
 	}
 	
