@@ -49,6 +49,7 @@ import display.DisplayStrategy;
 import display.DisplayType;
 import events.RandomEventInfo;
 import exception.GameFinishedException;
+import match.LiveMatch;
 import match.Match;
 import model.Champion;
 import model.Configuration;
@@ -365,6 +366,7 @@ public abstract class GameManager
 		gameEnvironment.setMaxWeeks(numWeeks);
 	}
 
+
 	/**
 	 * Generates all the AI teams
 	 * @return A list of 3 AI teams
@@ -447,8 +449,10 @@ public abstract class GameManager
 			Weapon weapon = getPlayerTeam().getChosenWeapons().get(i);
 			champion.setWeapon(weapon);
 		}
-		// TODO: create live match. waiting for LiveMatch class to be created.
-		displayStrategy.displayLiveMatch();
+		
+		LiveMatch match = new LiveMatch(getPlayerTeam(), getEnemyTeam());
+		
+		displayStrategy.displayLiveMatch(match);
 	}
 	
 	public void finishedMatch() {

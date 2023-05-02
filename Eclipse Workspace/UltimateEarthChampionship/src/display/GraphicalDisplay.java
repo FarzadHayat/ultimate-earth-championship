@@ -9,12 +9,14 @@ import javax.swing.JOptionPane;
 
 import events.RandomEventInfo;
 import manager.GameManager;
+import match.LiveMatch;
 import story.Cutscene;
 import views.ChampionSetupView;
 import views.CutsceneView;
 import views.SetupView;
-import views.TabbedView;
+import views.MatchView;
 import views.WeaponSetupView;
+import views.TabbedView;
 
 public class GraphicalDisplay implements DisplayStrategy {
 
@@ -100,9 +102,12 @@ public class GraphicalDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayLiveMatch() {
-		// TODO Auto-generated method stub
-		GameManager.getInstance().finishedMatch();
+
+	public void displayLiveMatch(LiveMatch match) {
+		
+		MatchView matchView = new MatchView(match);
+		displayView(matchView);
+		
 	}
 
 	@Override
@@ -119,6 +124,7 @@ public class GraphicalDisplay implements DisplayStrategy {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 
 }

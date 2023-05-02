@@ -6,6 +6,7 @@ import java.util.Scanner;
 import events.RandomEventInfo;
 import exception.InputException;
 import manager.GameManager;
+import match.LiveMatch;
 import model.Champion;
 import model.Configuration;
 import model.SetupManager;
@@ -268,12 +269,6 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 	
 	@Override
-	public void displayLiveMatch() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public void displayWeekResults(ArrayList<RandomEventInfo> randomEvents) {
 		for (RandomEventInfo randomEvent : randomEvents) {
 			System.out.println(String.format("%s: %s (%s)", randomEvent.name, randomEvent.description, randomEvent.effectString));
@@ -285,6 +280,12 @@ public class CommandLineDisplay implements DisplayStrategy {
 	@Override
 	public void displayGameResults() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayLiveMatch(LiveMatch match) {
+		System.out.println("TODO: Livematch in command line interface");
 		
 	}
 	

@@ -1,0 +1,288 @@
+package views;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+
+import match.LiveMatch;
+import model.Champion;
+
+import javax.swing.JButton;
+import java.awt.CardLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class MatchView extends JPanel {
+
+	private static final long serialVersionUID = -9204549187590810546L;
+
+	private LiveMatch match;
+	
+	private JLabel selectedChampionLabel;
+	
+	private Champion selectedChampion;
+	
+	private JButton attackButton;
+	private JButton waitButton;
+	private JButton retreatButton;
+	private JButton attackUpButton;
+	private JButton attackDownButton;
+	
+	/**
+	 * Create the panel.
+	 */
+	public MatchView(LiveMatch match) {
+		this.match = match;
+		match.setMatchView(this);
+		
+		setLayout(new BorderLayout(0, 0));
+		
+		setupCenter();
+		
+		setupBottomPanel();
+		
+		setupSides();
+		
+		setupHeader();
+
+		// Everything set up and drawn, tell match to start the first turn
+		match.nextTurn();
+	}
+
+	public void setupCenter()
+	{
+		JPanel centerPanel = new JPanel();
+		centerPanel.setBackground(new Color(192, 192, 192));
+		add(centerPanel, BorderLayout.CENTER);
+		centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		
+		JPanel centerGrid = new JPanel();
+		centerGrid.setBackground(new Color(192, 192, 192));
+		centerPanel.add(centerGrid);
+		centerGrid.setLayout(new GridLayout(4, 7, 0, 0));
+		
+		
+		ArrayList<ArrayList<ChampionMatchCard>> cards = new ArrayList<ArrayList<ChampionMatchCard>>();
+				
+		int row = 0;
+		while (row < 4)
+		{
+			ArrayList<ChampionMatchCard> cardsToAdd = new ArrayList<ChampionMatchCard>();
+			
+			int column = 0;
+			
+			while (column < 7)
+			{
+				ChampionMatchCard matchCard = new ChampionMatchCard(centerGrid, row, column);
+				
+				matchCard.updateCard();
+				
+				cardsToAdd.add(matchCard);
+				
+				column++;
+			}
+			
+			cards.add(cardsToAdd);
+			row++;
+		}
+		
+		match.setCards(cards);
+		match.assignChampions();
+	}
+	
+	public void setupBottomPanel()
+	{
+		JPanel bottomPanel = new JPanel();
+		add(bottomPanel, BorderLayout.SOUTH);
+		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 15));
+		
+		JPanel buttonPanel = new JPanel();
+		bottomPanel.add(buttonPanel);
+		buttonPanel.setLayout(new GridLayout(0, 6, 30, 0));
+		
+		selectedChampionLabel = new JLabel("<Champion Selected> :");
+		selectedChampionLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		buttonPanel.add(selectedChampionLabel);
+		
+		attackButton = new JButton("Move");
+		attackButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				match.championAttack();
+			}
+		});
+		buttonPanel.add(attackButton);
+		
+		waitButton = new JButton("Wait");
+		waitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				match.championWait();
+			}
+		});
+		buttonPanel.add(waitButton);
+		
+		retreatButton = new JButton("Retreat");
+		retreatButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				match.championRetreat();
+			}
+		});
+		buttonPanel.add(retreatButton);
+		
+		attackUpButton = new JButton("AttackUp");
+		attackUpButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				match.championAttackUp();
+			}
+		});
+		buttonPanel.add(attackUpButton);
+		
+		attackDownButton = new JButton("AttackDown");
+		attackDownButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				match.championAttackDown();
+			}
+		});
+		buttonPanel.add(attackDownButton);
+	}
+	
+	public void setupSides()
+	{
+		JPanel leftPanel = new JPanel();
+		add(leftPanel, BorderLayout.WEST);
+		leftPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+		
+		JPanel rightPanel = new JPanel();
+		add(rightPanel, BorderLayout.EAST);
+		rightPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+	}
+	
+	public void setupHeader()
+	{
+		JPanel topPanel = new JPanel();
+		add(topPanel, BorderLayout.NORTH);
+		
+		JPanel topGridPanel = new JPanel();
+		topPanel.add(topGridPanel);
+		topGridPanel.setLayout(new GridLayout(3, 1, 0, 0));
+		
+		JLabel headerText = new JLabel(match.getTeam1().getName() + " vs " + match.getTeam2().getName());
+		headerText.setHorizontalAlignment(SwingConstants.CENTER);
+		headerText.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		topGridPanel.add(headerText);
+		
+		JLabel subheader1 = new JLabel("Win by moving your flag bearer to the enemy side");
+		subheader1.setHorizontalAlignment(SwingConstants.CENTER);
+		subheader1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		topGridPanel.add(subheader1);
+		
+		JLabel subheader2 = new JLabel("Match Worth: "+ match.getScore() +" score");
+		subheader2.setHorizontalAlignment(SwingConstants.CENTER);
+		subheader2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		topGridPanel.add(subheader2);
+	}
+	
+	
+	public void selectChampion(Champion champion)
+	{
+		selectedChampionLabel.setText(champion.getName() + ": " );
+		selectedChampion = champion;
+		
+		updateButtons();
+	}
+
+	public void updateButtons()
+	{
+		// Disable the move button if at the very right of the screen
+		if (selectedChampion.getPosition() == 6)
+		{
+			attackButton.setEnabled(false);
+		}
+		else 
+		{
+			attackButton.setEnabled(true);
+		}
+		
+		// Change the text of attack button depending on if there is an enemy infront of them
+		if (selectedChampion.getPosition() != 6 &&
+			match.getCard(selectedChampion.getLane(), selectedChampion.getPosition()+1).getChampion() != null)
+		{
+			attackButton.setText("Attack");
+		}
+		else 
+		{
+			attackButton.setText("Move");
+		}
+		
+		// Disable the retreat button if the player cannot retreat any further
+		if (selectedChampion.getPosition() == 0)
+		{
+			retreatButton.setEnabled(false);
+		}
+		else 
+		{
+			retreatButton.setEnabled(true);
+		}
+		
+		// Enable the attack up button if there is a champion above them who is on the enemy team
+		if (selectedChampion.getLane() == 0)
+		{
+			attackUpButton.setEnabled(false);
+		}
+		else 
+		{
+			// Get the champion above
+			Champion championAbove = match.getCard(selectedChampion.getLane()-1, selectedChampion.getPosition()).getChampion();
+			
+			// check they exist
+			if (championAbove == null)
+			{
+				attackUpButton.setEnabled(false);
+			}
+			else if (!match.championIsOnPlayerTeam(championAbove)) {
+				attackButton.setEnabled(true);
+			}
+			else {
+				attackUpButton.setEnabled(false);
+			}
+		}
+		
+		// Enable the attack up button if there is a champion below them who is on the enemy team
+		if (selectedChampion.getLane() == 3)
+		{
+			attackDownButton.setEnabled(false);
+		}
+		else 
+		{
+			// Get champion below
+			Champion championBelow = match.getCard(selectedChampion.getLane()+1, selectedChampion.getPosition()).getChampion();
+			
+			// Check they exist
+			if (championBelow == null)
+			{
+				attackDownButton.setEnabled(false);
+			}
+			else if (!match.championIsOnPlayerTeam(championBelow)) {
+				attackDownButton.setEnabled(true);
+			}
+			else {
+				attackDownButton.setEnabled(false);
+			}
+		}
+	}
+	
+	public void showDialogue(String message)
+	{
+		JOptionPane.showMessageDialog(null, message);
+	}
+
+
+
+}

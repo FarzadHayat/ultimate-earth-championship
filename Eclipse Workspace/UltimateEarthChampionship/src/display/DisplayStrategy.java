@@ -3,6 +3,7 @@ package display;
 import java.util.ArrayList;
 
 import events.RandomEventInfo;
+import match.LiveMatch;
 import story.Cutscene;
 
 public interface DisplayStrategy {
@@ -13,7 +14,7 @@ public interface DisplayStrategy {
 	public void displayStadium();
 	public void displayChampionSetup();
 	public void displayWeaponSetup();
-	public void displayLiveMatch();
+	public void displayLiveMatch(LiveMatch match);
 	public void displayWeekResults(ArrayList<RandomEventInfo> randomEvents);
 	public void displayGameResults();
 }

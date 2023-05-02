@@ -31,6 +31,20 @@ public abstract class Match {
 	 */
 	protected int prizeScore;
 	
+	public int getScore()
+	{
+		return prizeScore;
+	}
+	
+	public Team getTeam1() {
+		return team1;
+	}
+	
+	public Team getTeam2()
+	{
+		return team2;
+	}
+	
 	/**
 	 * Match constructor
 	 * @param team1 the 1st team competing
@@ -49,7 +63,7 @@ public abstract class Match {
 		prizeScore = config.PRIZE_SCORE_BASE + (currentWeek * config.PRIZE_SCORE_WEEKLY_MODIFIER);
 	}
 	
-	public abstract MatchResult runMatch();
+	public abstract MatchResult getMatchResult();
 	
 	
 	/**

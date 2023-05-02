@@ -40,7 +40,7 @@ class DumbMatchTest {
 		
 		DumbMatch testMatch = new DumbMatch(team1, team2);
 		
-		match.MatchResult result = testMatch.runMatch();
+		match.MatchResult result = testMatch.getMatchResult();
 		
 		System.out.println("Winning team: " + result.winningTeam);
 		System.out.println("Prize Money: " + result.winningTeamMoney);
