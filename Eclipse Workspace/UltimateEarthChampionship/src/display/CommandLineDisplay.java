@@ -12,9 +12,9 @@ import model.Configuration;
 import model.SetupManager;
 import model.Shop;
 import model.Team;
+import model.Weapon;
 import story.Cutscene;
 import story.CutsceneSlide;
-import views.PurchasableCard.CardType;
 
 public class CommandLineDisplay implements DisplayStrategy {
 	
@@ -235,8 +235,8 @@ public class CommandLineDisplay implements DisplayStrategy {
 		CommandLineTable.printWeapons(shop.getAvailableWeapons());
 		CommandLineUtilities.printLine();
 		
-		CommandLineUtilities.printChampionOptions(shop.getAvailableChampions(), CardType.CAN_BUY);
-		CommandLineUtilities.printWeaponOptions(shop.getAvailableWeapons(), CardType.CAN_BUY);
+		CommandLineUtilities.printChampionOptions("BUY", shop.getAvailableChampions());
+		CommandLineUtilities.printWeaponOptions("BUY", shop.getAvailableWeapons());
 	
 		System.out.println(promptForInput());
 	}
@@ -257,8 +257,45 @@ public class CommandLineDisplay implements DisplayStrategy {
 
 	@Override
 	public void displayChampionSetup() {
-		// TODO Auto-generated method stub
+		ArrayList<Champion> chosenChampions = new ArrayList<Champion>();  
+		ArrayList<Champion> championsLeft = new ArrayList<Champion>();
+		championsLeft.addAll(gameManager.getPlayerTeam().getChampions());
+		while (chosenChampions.size() < Configuration.getInstance().NUM_CHOSEN_CHAMPIONS) {
+			CommandLineUtilities.printHeader("CHAMPION SETUP");
+			CommandLineTable.printChampions(chosenChampions);
+			CommandLineUtilities.printChampionOptions("SELECT", championsLeft);
+			try {
+				Champion champion = SetupManager.ChooseChampionFrom(championsLeft, promptForInput());
+				chosenChampions.add(champion);
+			} catch (InputException e) {
+				System.out.println(e.getMessage() + " \n");
+			}
+		}
 		
+		CommandLineUtilities.printHeader("CHAMPION SETUP");
+		CommandLineTable.printChampions(chosenChampions);
+		
+		while(true)
+		{
+			System.out.println("Are you happy with this? [y/n]");
+			System.out.println(" - Answering 'n' will restart the setup process");
+			
+			String in = promptForInput();
+			
+			if (in.equals("y"))
+			{
+				// Weapon setup complete, assign chosen champions to the player team
+				gameManager.getPlayerTeam().setChosenChampions(chosenChampions);
+				break;
+			}
+			if (in.equals("n"))
+			{
+				// Restart
+				displayChampionSetup();
+				return;
+			}
+		}
+		gameManager.finishedChampionSetup();
 	}
 	
 
