@@ -2,6 +2,7 @@ package manager;
 
 import display.CommandLineDisplay;
 import display.DisplayType;
+import story.OpeningCutscene;
 
 /**
  * A subclass of GameManager that represents the command line version of the game.
@@ -15,7 +16,8 @@ public class CommandLineGameManager extends GameManager
 	public void play()
 	{
 		displayStrategy = new CommandLineDisplay();		
-		displayStrategy.displayStadium();
+		setCutscene(new OpeningCutscene());
+		displayStrategy.displayCutscene(getCutscene());
 //		displayStrategy.closeScanner();
 	}
 	

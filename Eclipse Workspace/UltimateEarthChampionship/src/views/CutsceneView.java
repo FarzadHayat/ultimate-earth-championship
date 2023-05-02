@@ -1,61 +1,105 @@
 package views;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 
 import manager.GameManager;
 import manager.GraphicalGameManager;
-import story.Cutscene;
+import story.*;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CutsceneView extends JPanel {
 	
 	private static final long serialVersionUID = -3705567359135004719L;
+
+	private String slideText;
+	private String slideImagePath;
 	
-	private GraphicalGameManager manager = (GraphicalGameManager) GameManager.getInstance();
+	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 	private Cutscene cutscene;
+	
+	private JLabel mainText;
+	private JButton continueButton;
 	
 	public CutsceneView(Cutscene cutscene) {
 		this.cutscene = cutscene;
-		setLayout(new BorderLayout(0, 0));
-		addText();
-
-		JPanel bottomPanel = new JPanel();
-		add(bottomPanel, BorderLayout.SOUTH);
-		if (cutscene.checkNextSlide() == null)
-		{
-			JButton finishButton = new JButton("Go to setup");
-			finishButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) 
-				{
-					cutscene.nextSlide();
-					manager.finishedCutscene();
-				}
-			});
-			bottomPanel.add(finishButton);
-		}
-		else {
-			JButton continueButton = new JButton("Continue...");
-			continueButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) 
-				{
-					cutscene.nextSlide();
-					manager.repaintCutscene();
-				}
-			});
-			bottomPanel.add(continueButton);
-		}
+		
+		
+		initialize();
+		redrawPanel();
 	}
 
-	private void addText() {
-		JLabel mainText = new JLabel(cutscene.getCurrentSlide().getText());
+	private void initialize()
+	{
+		setLayout(new BorderLayout(0, 0));
+		
+		// Text Area:
+		mainText = new JLabel(slideText);
 		mainText.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		add(mainText);
+		
+		// Panel to push button to bottom center of screen
+		JPanel bottomPanel = new JPanel();
+		add(bottomPanel, BorderLayout.SOUTH);
+		
+		// Button...
+		continueButton = new JButton("Continue...");
+		continueButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				buttonPressed();
+			}
+		});
+		bottomPanel.add(continueButton);
+	}
+	
+	public void getNextSlide()
+	{
+		CutsceneSlide slide = cutscene.nextSlide();
+		slideText = slide.getText();
+		slideImagePath = slide.getImage();
+		
+		if (cutscene.checkNextSlide() == null)
+		{
+			continueButton.setText("Go to setup");
+		}
+		else {
+			continueButton.setText("Continue...");
+		}
+	}
+	
+	/**
+	 * Updates the text and images on the panel
+	 */
+	public void redrawPanel()
+	{
+		getNextSlide();
+		
+		mainText.setText(slideText);
+		
+		// TODO: Setup image path here:
+	}
+
+	private void buttonPressed()
+	{
+		// check if next slide is null
+		if (cutscene.checkNextSlide() == null)
+		{
+			// Cutscene finished, tell manager
+			gameManager.finishedCutscene();
+			cutscene.nextSlide(); // Make the cutscene iterate again (to reset it back to 0)
+		}
+		else 
+		{
+			// Tell manager to redraw me
+			gameManager.repaintCutscene();
+		}
+		
 	}
 	
 }

@@ -3,8 +3,6 @@ package display;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
-
 import events.RandomEventInfo;
 import exception.InputException;
 import manager.GameManager;
@@ -48,30 +46,26 @@ public class CommandLineDisplay implements DisplayStrategy {
 		scanner.close();
 	}
 	
-	/**
-	 * Displays the shop to the console.
-	 * @param shop The shop to display.
-	 */
-	public void displayShop() {
-		Shop shop = gameManager.getShop();
-		
-		CommandLineUtilities.printHeader("Shop");
-		
-		CommandLineTable.printChampions(shop.getAvailableChampions());
-		CommandLineUtilities.printLine();
-		CommandLineTable.printWeapons(shop.getAvailableWeapons());
-		CommandLineUtilities.printLine();
-		
-		CommandLineUtilities.printChampionOptions(shop.getAvailableChampions(), CardType.CAN_BUY);
-		CommandLineUtilities.printWeaponOptions(shop.getAvailableWeapons(), CardType.CAN_BUY);
-
-		System.out.println(promptForInput());
-	}
-	
 	@Override
 	public void displayCutscene(Cutscene cutscene) {
-		// TODO Auto-generated method stub
-		
+		while (true)
+		{
+			// Get the next cutscene slide
+			CutsceneSlide slide = cutscene.nextSlide();
+			
+			// If a null has returned, the cutscene has finished
+			if (slide == null)
+			{
+				break;
+			}
+			
+			// else print the cutscene next and prompt for input before continuing
+			System.out.println(slide.getText());
+			
+			promptForInput();
+		}
+
+		gameManager.finishedCutscene();
 	}
 
 	/**
@@ -209,7 +203,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 			{
 				// Setup complete, pass on data to gameManager
 				gameManager.setupPlayerTeam(teamName, gameWeeks, availChampions, difficulty);
-				return;
+				break;
 			}
 			if (in.equals("n"))
 			{
@@ -218,14 +212,33 @@ public class CommandLineDisplay implements DisplayStrategy {
 				return;
 			}
 		}
-		
-		
+		gameManager.finishedSetup();
 	}
 
 	@Override
 	public void displayTeam() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	/**
+	 * Displays the shop to the console.
+	 * @param shop The shop to display.
+	 */
+	public void displayShop() {
+		Shop shop = gameManager.getShop();
+		
+		CommandLineUtilities.printHeader("Shop");
+		
+		CommandLineTable.printChampions(shop.getAvailableChampions());
+		CommandLineUtilities.printLine();
+		CommandLineTable.printWeapons(shop.getAvailableWeapons());
+		CommandLineUtilities.printLine();
+		
+		CommandLineUtilities.printChampionOptions(shop.getAvailableChampions(), CardType.CAN_BUY);
+		CommandLineUtilities.printWeaponOptions(shop.getAvailableWeapons(), CardType.CAN_BUY);
+	
+		System.out.println(promptForInput());
 	}
 
 	@Override
@@ -274,27 +287,6 @@ public class CommandLineDisplay implements DisplayStrategy {
 	public void displayGameResults() {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	public void playCutscene(Cutscene c)
-	{
-		while (true)
-		{
-			// Get the next cutscene slide
-			CutsceneSlide slide = c.getCurrentSlide();
-			
-			// If a null has returned, the cutscene has finished
-			if (slide == null)
-			{
-				break;
-			}
-			
-			// else print the cutscene next and prompt for input before continuing
-			System.out.println(slide.getText());
-			
-			promptForInput();
-			c.nextSlide();
-		}
 	}
 	
 }
