@@ -26,26 +26,17 @@ public class ChampionMatchCard extends JPanel{
 	private JPanel panel;
 	private JLabel championImage;
 	
-//	public JLabel getNameText()
-//	{
-//		return championNameText;
-//	}
-//	
-//	public JLabel getImage()
-//	{
-//		return championImage;
-//	}
-//	
-//	public JLabel getHealthText()
-//	{
-//		return championHealthText;
-//	}
-	
 	public Champion getChampion()
 	{
 		return champion;
 	}
 	
+	/**
+	 * Constructor
+	 * @param centerGrid The grid to be added to
+	 * @param row The lane for this card to sit in
+	 * @param column The position along the aforementioned lane
+	 */
 	public ChampionMatchCard(JPanel centerGrid, int row, int column) {
 		
 		mainPanel = new JPanel();
@@ -77,6 +68,10 @@ public class ChampionMatchCard extends JPanel{
 		centerPanel.add(championHealthText, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * Assigns a new champion to this card
+	 * @param assignedChampion
+	 */
 	public void setChampion(Champion assignedChampion)
 	{
 		champion = assignedChampion;
@@ -84,6 +79,9 @@ public class ChampionMatchCard extends JPanel{
 		updateCard();
 	}
 	
+	/**
+	 * Updates the card to reflect the info of the champion assigned
+	 */
 	public void updateCard()
 	{
 
@@ -131,6 +129,9 @@ public class ChampionMatchCard extends JPanel{
 		}
 	}
 	
+	/**
+	 * Removes the champion from this card
+	 */
 	public void removeChampion()
 	{
 		champion = null;

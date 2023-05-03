@@ -58,6 +58,9 @@ public class MatchView extends JPanel {
 		match.nextTurn();
 	}
 
+	/**
+	 * Sets up the center panel
+	 */
 	public void setupCenter()
 	{
 		JPanel centerPanel = new JPanel();
@@ -99,6 +102,9 @@ public class MatchView extends JPanel {
 		match.assignChampions();
 	}
 	
+	/**
+	 * Sets up the botom panel
+	 */
 	public void setupBottomPanel()
 	{
 		JPanel bottomPanel = new JPanel();
@@ -154,6 +160,9 @@ public class MatchView extends JPanel {
 		buttonPanel.add(attackDownButton);
 	}
 	
+	/**
+	 * Sets up the side panel
+	 */
 	public void setupSides()
 	{
 		JPanel leftPanel = new JPanel();
@@ -165,6 +174,9 @@ public class MatchView extends JPanel {
 		rightPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 	}
 	
+	/**
+	 * Sets up the header
+	 */
 	public void setupHeader()
 	{
 		JPanel topPanel = new JPanel();
@@ -190,7 +202,10 @@ public class MatchView extends JPanel {
 		topGridPanel.add(subheader2);
 	}
 	
-	
+	/**
+	 * Selects a champion as the champion whose turn is currently undergoing
+	 * @param champion Champion to be selected
+	 */
 	public void selectChampion(Champion champion)
 	{
 		selectedChampionLabel.setText(champion.getName() + ": " );
@@ -199,6 +214,9 @@ public class MatchView extends JPanel {
 		updateButtons();
 	}
 
+	/**
+	 * Enables and disables the buttons based upon whether the champion is allowed to make a certain action
+	 */
 	public void updateButtons()
 	{
 		// Enable the move button
@@ -282,6 +300,9 @@ public class MatchView extends JPanel {
 		}
 	}
 	
+	/**
+	 * Disables all buttons, useful for when the AI is taking a turn
+	 */
 	public void disableAllButtons()
 	{
 		attackButton.setEnabled(false);
@@ -290,7 +311,12 @@ public class MatchView extends JPanel {
 		attackUpButton.setEnabled(false);
 		attackDownButton.setEnabled(false);
 	}
-	
+
+
+	/**
+	 * Shows a simple message dialogue
+	 * @param message The string message to be displayed
+	 */
 	public void showDialogue(String message)
 	{
 		JOptionPane.showMessageDialog(null, message);

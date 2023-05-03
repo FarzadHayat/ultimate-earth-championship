@@ -147,6 +147,9 @@ public class LiveMatch extends Match implements ActionListener{
 		}
 	}
 
+	/**
+	 * Updates the current champion to be the next one in the turn order
+	 */
 	public void nextTurn()
 	{
 		//System.out.println("nextTurn() called");
@@ -172,13 +175,9 @@ public class LiveMatch extends Match implements ActionListener{
 		}
 		
 		// Change button visibility on the view
-		if (playerTeamsTurn)
+		if (!playerTeamsTurn)
 		{
-			//matchView.updateButtons();
-		}
-		else
-		{
-			//matchView.disableAllButtons();
+			matchView.disableAllButtons();
 		}
 		
 		if (playerTeamsTurn)
@@ -211,7 +210,9 @@ public class LiveMatch extends Match implements ActionListener{
 		return null;
 	}
 	
-	
+	/**
+	 * Acts out a turn for the AI, dependent upon the current champion
+	 */
 	private void championAITurn()
 	{
 		// Get card infront
@@ -298,11 +299,20 @@ public class LiveMatch extends Match implements ActionListener{
 		
 	}
 	
+	/**
+	 * Modifies a champion card to display the data from a champion at the champions position
+	 * @param champ The champion whose card needs to be edited
+	 */
 	public void setChampionCard(Champion champ)
 	{
 		getCard(champ.getLane(), champ.getPosition()).setChampion(champ);
 	}
 	
+	/**
+	 * Checks to see if a given champion is on the player team
+	 * @param champion Champion to be checked
+	 * @return True if the champion is on the player tema
+	 */
 	public boolean championIsOnPlayerTeam(Champion champion)
 	{
 		if (champion == null) { return false; }
