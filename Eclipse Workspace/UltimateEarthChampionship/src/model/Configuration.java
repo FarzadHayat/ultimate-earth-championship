@@ -227,10 +227,20 @@ public class Configuration {
 	public final int AGRESSION_RANDOM_UPPER_BOUND = 50;
 	
 	/**
+	 *  The base amount damage each attack will deal, this is modified by champion stats
+	 */
+	public final int DAMAGE_BASE = 10;
+	
+	/**
+	 * The amount of extra damage added to an attack per offense point
+	 */
+	public final int OFFENSE_STAT_DAMAGE_MULTIPLER = 2;
+	
+	/**
 	 * The number of milliseconds that each AI champion waits before moving.
 	 * Note that 1 second = 1000 Ms
 	 */
-	public final int AI_WAIT_TIME_MS = 1500;
+	public final int AI_WAIT_TIME_MS = 450;
 	
 	public float getDifficulty()
 	{

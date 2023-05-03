@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
 import match.LiveMatch;
 import model.Champion;
@@ -200,6 +201,9 @@ public class MatchView extends JPanel {
 
 	public void updateButtons()
 	{
+		// Enable the move button
+		waitButton.setEnabled(true);
+		
 		// Disable the move button if at the very right of the screen
 		if (selectedChampion.getPosition() == 6)
 		{
@@ -247,7 +251,7 @@ public class MatchView extends JPanel {
 				attackUpButton.setEnabled(false);
 			}
 			else if (!match.championIsOnPlayerTeam(championAbove)) {
-				attackButton.setEnabled(true);
+				attackUpButton.setEnabled(true);
 			}
 			else {
 				attackUpButton.setEnabled(false);
@@ -292,6 +296,7 @@ public class MatchView extends JPanel {
 		JOptionPane.showMessageDialog(null, message);
 	}
 
+	
 
 
 }

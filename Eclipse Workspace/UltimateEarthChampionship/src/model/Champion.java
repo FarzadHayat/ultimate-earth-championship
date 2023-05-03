@@ -97,6 +97,11 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 */
 	private int position;
 	
+	/**
+	 * Whether this champion is carrying the flag for a liveMatch
+	 */
+	private boolean flagCarrier;
+	
 	// Constructor:
 	/**
 	 * Constructor for champion Class
@@ -335,6 +340,15 @@ public abstract class Champion implements Purchasable, Cloneable {
 		return position;
 	}
 	
+	public boolean isFlagCarrier()
+	{
+		return flagCarrier;
+	}
+	
+	public void setFlagCarrier(boolean flagCarrier)
+	{
+		this.flagCarrier = flagCarrier;
+	}
 	
 	
 	
@@ -398,7 +412,9 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 */
 	public float getDamage()
 	{
-		return (getOffense() * weapon.getDamageMultiplier());
+		return (((getOffense() * config.OFFENSE_STAT_DAMAGE_MULTIPLER )
+				+ config.DAMAGE_BASE)
+				* weapon.getDamageMultiplier());
 	}
 	
 	/**
