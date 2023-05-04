@@ -22,6 +22,7 @@ import javax.swing.OverlayLayout;
 import javax.swing.SwingConstants;
 
 import exception.FullTeamException;
+import exception.IllegalPurchaseException;
 import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
 import manager.GameManager;
@@ -247,7 +248,7 @@ public class PurchasableCard extends JPanel {
 						gameManager.getPlayerTeam().buy(purchasable);
 						gameManager.repaintShop();
 					}
-				} catch (InsufficientFundsException | FullTeamException e) {
+				} catch (InsufficientFundsException | FullTeamException | IllegalPurchaseException e) {
 					JOptionPane.showMessageDialog(getParent(), e.getMessage());
 				}
 			}

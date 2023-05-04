@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import exception.FullTeamException;
+import exception.IllegalPurchaseException;
 import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
-import manager.GameManager;
 import weapons.Fists;
 
 public class Team {
@@ -53,7 +53,8 @@ public class Team {
 	 */
 	private int score;
 	
-	private GameManager gameManager = GameManager.getInstance();
+	private boolean weeklyChampionPurchased = false;
+	private boolean weeklyWeaponPurchased = false;
 	
 	/**
 	 * Constructor of team
@@ -317,6 +318,22 @@ public class Team {
 		}
 	}
 	
+	public boolean isWeeklyChampionPurchased() {
+		return weeklyChampionPurchased;
+	}
+
+	public void setWeeklyChampionPurchased(boolean weeklyChampionPurchased) {
+		this.weeklyChampionPurchased = weeklyChampionPurchased;
+	}
+
+	public boolean isWeeklyWeaponPurchased() {
+		return weeklyWeaponPurchased;
+	}
+
+	public void setWeeklyWeaponPurchased(boolean weeklyWeaponPurchased) {
+		this.weeklyWeaponPurchased = weeklyWeaponPurchased;
+	}
+
 	/**
 	 * Buys the purchasable for the team.
 	 * 1. Removes the purchasable price from the team's money.
@@ -324,18 +341,27 @@ public class Team {
 	 * 3. Removes the purchasable from the shop.
 	 * @throws InsufficientFundsException if team cannot afford this purchasable
 	 * @throws FullTeamException if team is already full
+	 * @throws IllegalPurchaseException if the team tries to buy more than one of a purchasable type in the same week
 	 */
-	public void buy(Purchasable purchasable) throws InsufficientFundsException, FullTeamException {
+	public void buy(Purchasable purchasable) throws InsufficientFundsException, FullTeamException, IllegalPurchaseException {
 		removeMoney(purchasable.getPrice());
 		try {
 			if (purchasable.getClass().getSuperclass() == Champion.class) {
+				if (isWeeklyChampionPurchased()) {
+					throw new IllegalPurchaseException(getName() + " already purchased a champion this week!");
+				}
 				addChampion((Champion) purchasable);
+				setWeeklyChampionPurchased(true);
 			}
 			if (purchasable.getClass().getSuperclass() == Weapon.class) {
+				if (isWeeklyWeaponPurchased()) {
+					throw new IllegalPurchaseException(getName() + " already purchased a weapon this week!");
+				}
 				addWeapon((Weapon) purchasable);
+				setWeeklyWeaponPurchased(true);
 			}
 		}
-		catch (FullTeamException e) {
+		catch (FullTeamException | IllegalPurchaseException e) {
 			addMoney(purchasable.getPrice());
 			throw new FullTeamException(e.getMessage());
 		}
