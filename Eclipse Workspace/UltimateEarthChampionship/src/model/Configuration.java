@@ -34,7 +34,7 @@ public class Configuration {
 	/**
 	 * Whether to print debugging messages to console.
 	 */
-	public static final boolean DEBUG = true; 
+	public static final boolean DEBUG = false; 
 	
 	/**
 	 *  Global difficulty modifier, should exist on a scale between 0.1 - 2.

@@ -45,10 +45,12 @@ import champions.SunTzu;
 import champions.TedKaczynski;
 import champions.TimBell;
 import champions.WilliamShakespeare;
+import display.CommandLineTable;
 import display.DisplayStrategy;
 import display.DisplayType;
 import events.RandomEventInfo;
 import exception.GameFinishedException;
+import match.DumbMatch;
 import match.LiveMatch;
 import match.Match;
 import model.Champion;
@@ -444,34 +446,49 @@ public abstract class GameManager
 	}
 	
 	public void finishedWeaponSetup() {
-		for (int i = 0; i < getPlayerTeam().getChosenWeapons().size(); i++) {
-			Champion champion = getPlayerTeam().getChosenChampions().get(i); 
-			Weapon weapon = getPlayerTeam().getChosenWeapons().get(i);
-			champion.setWeapon(weapon);
-		}
-		
+		playerTeam.assignChosenWeapons();
 		LiveMatch match = new LiveMatch(getPlayerTeam(), getEnemyTeam());
-		
 		displayStrategy.displayLiveMatch(match);
+//		finishedMatch();
 	}
 	
 	public void finishedMatch() {
 		try {
+			ArrayList<Team> teamsLeft = new ArrayList<Team>(teams);
+			teamsLeft.remove(playerTeam);
+			teamsLeft.remove(enemyTeam);
+			shopTeams(teamsLeft);
+			fightTeams(teamsLeft);
+			setEnemyTeam(null);
+			// At this point, the current week is finished so we can go to next week.
 			gameEnvironment.nextWeek();
-			playerTeam.unselectPurchasables();
-			enemyTeam.unselectPurchasables();
-			//TODO: ai teams fight
-			//TODO: ai teams shop
 			displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
 		} catch (GameFinishedException e) {
 			finishedGame();
 		}
 	}
+
+	private void fightTeams(ArrayList<Team> teams) {
+		if (teams.size() % 2 == 1 && Configuration.DEBUG) {
+			System.out.println("WARNING: Odd number of teams. One of the AI team will not be fighting this week!");
+		}
+		while (teams.size() > 1) {
+			Random random = new Random();
+			Team team1 = teams.remove(random.nextInt(teams.size()));
+			Team team2 = teams.remove(random.nextInt(teams.size()));
+			new DumbMatch(team1, team2).getMatchResult();
+		}
+	}
 	
+	private void shopTeams(ArrayList<Team> teams) {
+		// TODO Auto-generated method stub
+	}
+
+
 	public void finishedWeek() {
 		displayStrategy.displayTeam();
 	}
-	
+
 	public void finishedGame() {
 		displayStrategy.displayGameResults();
 	}

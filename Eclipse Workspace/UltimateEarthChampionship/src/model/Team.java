@@ -7,6 +7,7 @@ import exception.FullTeamException;
 import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
 import manager.GameManager;
+import weapons.Fists;
 
 public class Team {
 
@@ -359,17 +360,40 @@ public class Team {
 	public void randomlySelectPurchasables() {
 		randomlySelectChampions();
 		randomlySelectWeapons();
+		assignChosenWeapons();
 	}
 	
 	private void randomlySelectChampions() {
-		//TODO: autoselect champions
+		ArrayList<Champion> championsLeft = new ArrayList<Champion>(champions);
+		while (chosenChampions.size() < config.NUM_CHOSEN_CHAMPIONS) {
+			Random random = new Random();
+			int index = random.nextInt(championsLeft.size());
+			Champion randomChampion = championsLeft.remove(index);
+			chosenChampions.add(randomChampion);
+		}
 	}
 	
 	private void randomlySelectWeapons() {
-		//TODO: autoselect weapons
+		int numWeaponsAvailable = Integer.min(weapons.size(), config.NUM_CHOSEN_CHAMPIONS);
+		ArrayList<Weapon> weaponsLeft = new ArrayList<Weapon>(weapons);
+		while (chosenWeapons.size() < numWeaponsAvailable) {
+			Random random = new Random();
+			int index = random.nextInt(weaponsLeft.size());
+			Weapon randomWeapon = weaponsLeft.remove(index);
+			chosenWeapons.add(randomWeapon);
+		}
+	}
+
+	public void assignChosenWeapons() {
+		for (int i = 0; i < chosenWeapons.size(); i++) {
+			Champion champion = chosenChampions.get(i); 
+			Weapon weapon = chosenWeapons.get(i);
+			champion.setWeapon(weapon);
+		}
 	}
 	
 	public void unselectPurchasables() {
+		unassignChosenWeapons();
 		unselectChampions();
 		unselectWeapons();
 	}
@@ -380,6 +404,12 @@ public class Team {
 	
 	public void unselectWeapons() {
 		chosenWeapons.removeAll(chosenWeapons);
+	}
+	
+	public void unassignChosenWeapons() {
+		for (Champion champion : chosenChampions) {
+			champion.setWeapon(new Fists());
+		}
 	}
 	
 }
