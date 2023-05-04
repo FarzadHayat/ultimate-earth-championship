@@ -142,7 +142,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 			for (Champion champ : availChampions)
 			{
 				System.out.println("["+i+"] " + champ.getName() + 
-						" | Health: " + champ.getMaxHealth() +
+						" | Stamina: " + champ.getMaxStamina() +
 						" | Regen: " + champ.getRegen() +
 						" | Offense: " + champ.getOffense() + 
 						" | Defense: " + champ.getDefense());

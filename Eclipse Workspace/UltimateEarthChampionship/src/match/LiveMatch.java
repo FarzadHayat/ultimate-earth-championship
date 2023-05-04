@@ -432,14 +432,14 @@ public class LiveMatch extends Match implements ActionListener{
 			
 			// damage the champion and give XP to the attacker
 			attacker.giveXP(rawDamage);
-			defender.addHealth(-adjustedDamage);
+			defender.addStamina(-adjustedDamage);
 
 			
 			// Make the champion fall back
 			championMoveBack(defender);
 			
-			// Check for health
-			if (defender.getHealth() <= 0)
+			// Check for stamina
+			if (defender.getStamina() <= 0)
 			{
 				knockoutChampion(defender);
 			}

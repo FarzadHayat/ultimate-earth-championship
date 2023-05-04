@@ -262,7 +262,7 @@ public class SetupView extends JPanel{
 		for (Champion champ : chosenChampions)
 		{
 			chosenChampModel.addElement(
-					champ.getName() + " | Max Health: " + champ.getMaxHealth() + " | Regen: " +
+					champ.getName() + " | Max Stamina: " + champ.getMaxStamina() + " | Regen: " +
 					champ.getRegen() + " | Offense: " + champ.getOffense() + " | Defense: " + champ.getDefense());
 		}
 		
@@ -273,7 +273,7 @@ public class SetupView extends JPanel{
 		for (Champion champ : championsToChooseFrom)
 		{
 			availChampModel.addElement(
-					champ.getName() + " | Max Health: " + champ.getMaxHealth() + " | Regen: " +
+					champ.getName() + " | Max Stamina: " + champ.getMaxStamina() + " | Regen: " +
 					champ.getRegen() + " | Offense: " + champ.getOffense() + " | Defense: " + champ.getDefense());
 		}
 		

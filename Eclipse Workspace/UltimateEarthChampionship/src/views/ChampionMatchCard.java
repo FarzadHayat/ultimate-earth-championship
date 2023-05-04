@@ -22,7 +22,7 @@ public class ChampionMatchCard extends JPanel{
 	private JPanel mainPanel;
 	
 	private JLabel championNameText;
-	private JLabel championHealthText;
+	private JLabel championStaminaText;
 	private JPanel panel;
 	private JLabel championImage;
 	
@@ -62,10 +62,10 @@ public class ChampionMatchCard extends JPanel{
 		championImage.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		panel.add(championImage);
 		
-		championHealthText = new JLabel("0/100 Health");
-		championHealthText.setHorizontalAlignment(SwingConstants.CENTER);
-		championHealthText.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		centerPanel.add(championHealthText, BorderLayout.SOUTH);
+		championStaminaText = new JLabel("0/100 Stamina");
+		championStaminaText.setHorizontalAlignment(SwingConstants.CENTER);
+		championStaminaText.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		centerPanel.add(championStaminaText, BorderLayout.SOUTH);
 	}
 	
 	/**
@@ -93,17 +93,17 @@ public class ChampionMatchCard extends JPanel{
 			championImage.setIcon(null);
 			championImage.setText("");
 			
-			championHealthText.setText("");
+			championStaminaText.setText("");
 			
 		}
-		else if (champion.getHealth() <= 0)
+		else if (champion.getStamina() <= 0)
 		{
 			championNameText.setText("");
 			
 			championImage.setIcon(null);
 			championImage.setText("");
 			
-			championHealthText.setText("");
+			championStaminaText.setText("");
 		}
 		else
 		{
@@ -125,7 +125,7 @@ public class ChampionMatchCard extends JPanel{
 			//champion
 			championImage.setText("");
 			
-			championHealthText.setText(champion.getHealth() + "/" + champion.getMaxHealth());
+			championStaminaText.setText(champion.getStamina() + "/" + champion.getMaxStamina());
 		}
 	}
 	

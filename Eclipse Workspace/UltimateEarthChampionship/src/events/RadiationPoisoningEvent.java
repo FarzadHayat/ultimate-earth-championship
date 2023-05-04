@@ -23,12 +23,12 @@ public class RadiationPoisoningEvent extends RandomEvent {
 		
 		champ.changeOffense(3);
 		champ.changeDefense(2);
-		champ.addHealth(-40);
+		champ.addStamina(-40);
 		
-		// Ensure health doesn't fall below 10
-		if (champ.getHealth() < 10)
+		// Ensure stamina doesn't fall below 10
+		if (champ.getStamina() < 10)
 		{
-			champ.setHealth(10);
+			champ.setStamina(10);
 		}
 		
 		// Generate GUI Info:
@@ -36,7 +36,7 @@ public class RadiationPoisoningEvent extends RandomEvent {
 		String name = "Street Food";
 		String description = "While perusing the alien legation, " + c + " decided to try some glowing roasted nurgoth. While " + c + "has " +
 		"spent the last hour vomiting up radioactive blood, they appear to have become significantly stronger.";
-		String effectString = c + ": -40 health, +3 Offense, + 2 Defense";
+		String effectString = c + ": -40 Stamina, +3 Offense, + 2 Defense";
 		
 		// Return it
 		

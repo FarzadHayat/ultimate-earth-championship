@@ -112,10 +112,10 @@ public class DumbMatch extends Match {
 					System.out.println("DEBUG: " + attacker.getName() + " succesfully hits " + defender.getName() + " for " + damage + " damage!");
 				}
 				attacker.giveXP(damage);
-				defender.addHealth(-damage);
+				defender.addStamina(-damage);
 				
-				// Check for health
-				if (defender.getHealth() < 0)
+				// Check for stamina
+				if (defender.getStamina() < 0)
 				{
 					if (Configuration.DEBUG) {
 						System.out.println("DEBUG" + defender.getName() + " has been knocked out!");

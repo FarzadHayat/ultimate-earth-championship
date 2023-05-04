@@ -29,57 +29,57 @@ class ChampionTest {
 	}
 
 	@Test
-	void testGetHealth() {
+	void testGetStamina() {
 		
 		Champion testChamp = new JohnDoe();
 		
-		assertEquals(testChamp.getHealth(), 100);
+		assertEquals(testChamp.getStamina(), 100);
 	}
 
 	@Test
-	void testSetHealth() {
+	void testSetStamina() {
 		Champion testChamp = new JohnDoe();
 		
-		testChamp.setHealth(125);
+		testChamp.setStamina(125);
 		
-		assertEquals(testChamp.getHealth(), 125);
+		assertEquals(testChamp.getStamina(), 125);
 	}
 
 	@Test
-	void testChangeHealth() {
+	void testChangeStamina() {
 		Champion testChamp = new JohnDoe();
 		
-		testChamp.setHealth(100);
-		testChamp.addHealth(76);
+		testChamp.setStamina(100);
+		testChamp.addStamina(76);
 		
-		assertEquals(testChamp.getHealth(), 100);
+		assertEquals(testChamp.getStamina(), 100);
 		
 		Champion testChamp2 = new JohnDoe();
 		
-		testChamp2.setHealth(1);
-		testChamp2.addHealth(5);
+		testChamp2.setStamina(1);
+		testChamp2.addStamina(5);
 		
-		assertEquals(testChamp2.getHealth(), 6);
+		assertEquals(testChamp2.getStamina(), 6);
 	}
 
 	@Test
-	void testGetMaxHealth() {
+	void testGetMaxStamina() {
 		
 		Champion testChamp = new JohnDoe();
 		
-		assertEquals(testChamp.getMaxHealth(), 100);
+		assertEquals(testChamp.getMaxStamina(), 100);
 	}
 
 	@Test
-	void testChangeMaxHealth() {
+	void testChangeMaxStamina() {
 
 		Champion testChamp = new JohnDoe();
 		
-		assertEquals(testChamp.getMaxHealth(), 100);
+		assertEquals(testChamp.getMaxStamina(), 100);
 		
-		testChamp.addMaxHealth(13);
+		testChamp.addMaxStamina(13);
 		
-		assertEquals(testChamp.getMaxHealth(), 113);
+		assertEquals(testChamp.getMaxStamina(), 113);
 	}
 
 	@Test
