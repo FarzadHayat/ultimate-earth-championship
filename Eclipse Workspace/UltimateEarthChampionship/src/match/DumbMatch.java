@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import model.Champion;
+import model.Configuration;
 import model.Team;
 
 public class DumbMatch extends Match {
@@ -99,20 +100,26 @@ public class DumbMatch extends Match {
 			
 			if (winner == defender)
 			{
-				System.out.println("DEBUG: " + defender.getName() + " succesfully dodges " + attacker.getName() + "'s attack!");
+				if (Configuration.DEBUG) {
+					System.out.println("DEBUG: " + defender.getName() + " succesfully dodges " + attacker.getName() + "'s attack!");
+				}
 				// Defender dodges!
 				defender.giveXP(damage);
 			}
 			else
 			{
-				System.out.println("DEBUG: " + attacker.getName() + " succesfully hits " + defender.getName() + " for " + damage + " damage!");
+				if (Configuration.DEBUG) {
+					System.out.println("DEBUG: " + attacker.getName() + " succesfully hits " + defender.getName() + " for " + damage + " damage!");
+				}
 				attacker.giveXP(damage);
 				defender.addHealth(-damage);
 				
 				// Check for health
 				if (defender.getHealth() < 0)
 				{
-					System.out.println("DEBUG" + defender.getName() + " has been knocked out!");
+					if (Configuration.DEBUG) {
+						System.out.println("DEBUG" + defender.getName() + " has been knocked out!");
+					}
 					return attacker;
 				}
 			}
