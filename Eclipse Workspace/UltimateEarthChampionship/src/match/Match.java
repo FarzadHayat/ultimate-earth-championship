@@ -63,7 +63,9 @@ public abstract class Match {
 		int attackRoll = attacker.getOffense() + d20();
 		int defenseRoll = defender.getDefense() + d20();
 		
-		System.out.println("DEBUG: Attacker rolls " + attackRoll + ". Defender rolls " + defenseRoll);
+		if (Configuration.DEBUG) {
+			System.out.println("DEBUG: Attacker rolls " + attackRoll + ". Defender rolls " + defenseRoll);
+		}
 		
 		if (attackRoll >= defenseRoll)
 		{
