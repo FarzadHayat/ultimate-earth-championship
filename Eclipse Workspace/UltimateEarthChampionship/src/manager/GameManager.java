@@ -447,25 +447,25 @@ public abstract class GameManager
 	
 	public void finishedWeaponSetup() {
 		playerTeam.assignChosenWeapons();
-		LiveMatch match = new LiveMatch(getPlayerTeam(), getEnemyTeam());
-		displayStrategy.displayLiveMatch(match);
-//		finishedMatch();
+		setMatch(new LiveMatch(getPlayerTeam(), getEnemyTeam()));
+//		displayStrategy.displayLiveMatch(getMatch());
+		finishedMatch();
 	}
 	
 	public void finishedMatch() {
-		try {
-			ArrayList<Team> teamsLeft = new ArrayList<Team>(teams);
-			teamsLeft.remove(playerTeam);
-			teamsLeft.remove(enemyTeam);
-			shopTeams(teamsLeft);
-			fightTeams(teamsLeft);
-			setEnemyTeam(null);
-			// At this point, the current week is finished so we can go to next week.
-			gameEnvironment.nextWeek();
-			displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
-		} catch (GameFinishedException e) {
-			finishedGame();
-		}
+		match.getMatchResult();
+		// Shop for all AI teams
+		shopTeams(getAITeams());
+		// Fight for AI teams that haven't fought yet this week
+		ArrayList<Team> teamsLeft = new ArrayList<Team>(teams);
+		teamsLeft.remove(playerTeam);
+		teamsLeft.remove(enemyTeam);
+		fightTeams(teamsLeft);
+		// Reset match and enemy team
+		setMatch(null);
+		setEnemyTeam(null);
+		// Go to next week
+		finishedWeek();
 	}
 
 	private void fightTeams(ArrayList<Team> teams) {
@@ -483,10 +483,18 @@ public abstract class GameManager
 	private void shopTeams(ArrayList<Team> teams) {
 		// TODO Auto-generated method stub
 	}
-
-
+	
 	public void finishedWeek() {
-		displayStrategy.displayTeam();
+		for (Team team : getTeams()) {
+			team.rest();
+		}
+		try {
+			gameEnvironment.nextWeek();
+			displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
+			displayStrategy.displayTeam();
+		} catch (GameFinishedException e) {
+			finishedGame();
+		}
 	}
 
 	public void finishedGame() {

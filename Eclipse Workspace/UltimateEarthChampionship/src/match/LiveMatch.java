@@ -126,8 +126,8 @@ public class LiveMatch extends Match{
 	
 	@Override
 	public MatchResult getMatchResult() {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO Just for testing purposes. Need to be changed to return the correct winner and loser.
+		return matchOver(team1, team2);
 	}
 	
 	

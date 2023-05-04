@@ -438,4 +438,9 @@ public class Team {
 		}
 	}
 	
+	public void rest() {
+		setWeeklyChampionPurchased(false);
+		setWeeklyWeaponPurchased(false);
+	}
+	
 }
