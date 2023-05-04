@@ -11,12 +11,12 @@ public class Sword extends Weapon {
 	private static final String name = "Sword";
 	
 	// Stat Boosts
-	private static final int damageMultiplier = 1;
-	private static final int offenseBoost = 1;
-	private static final int defenseBoost = 1;
+	private static final float damageMultiplier = 1.5f;
+	private static final int offenseBoost = 3;
+	private static final int defenseBoost = 2;
 	
 	// Price
-	private static final float startingPrice = 10f;
+	private static final float startingPrice = 50f;
 	private static final float priceChangeWeekly = 0.9f;
 	
 	/**

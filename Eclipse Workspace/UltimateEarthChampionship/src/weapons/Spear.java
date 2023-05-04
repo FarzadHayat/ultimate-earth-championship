@@ -11,12 +11,12 @@ public class Spear extends Weapon {
 	private static final String name = "Spear";
 	
 	// Stat Boosts
-	private static final int damageMultiplier = 1;
-	private static final int offenseBoost = 1;
-	private static final int defenseBoost = 1;
+	private static final float damageMultiplier = 0.75f;
+	private static final int offenseBoost = 4;
+	private static final int defenseBoost = 3;
 	
 	// Price
-	private static final float startingPrice = 10f;
+	private static final float startingPrice = 50f;
 	private static final float priceChangeWeekly = 0.9f;
 	
 	/**
