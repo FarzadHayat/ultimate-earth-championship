@@ -2,6 +2,7 @@ package match;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import display.CommandLineTable;
 import manager.GameManager;
 import model.Champion;
 import model.Configuration;
@@ -10,6 +11,7 @@ import model.Team;
 public abstract class Match {
 	
 	Configuration config = Configuration.getInstance();
+	GameManager gameManager = GameManager.getInstance();
 	
 	/**
 	 * The 1st team competing in this match
@@ -56,9 +58,17 @@ public abstract class Match {
 		
 		this.team2 = team2;
 		
+		if (!team1.isPlayerTeam()) {
+			team1.randomlySelectPurchasables();
+		}
+		
+		if (!team2.isPlayerTeam()) {
+			team2.randomlySelectPurchasables();
+		}
+		
 		prizeMoney = ((team1.getScore() + team2.getScore()) * config.PRIZE_MONEY_SCORE_SCALE_FACTOR) + config.PRIZE_MONEY_BASE;
 		
-		int currentWeek = GameManager.getInstance().getGameEnvironment().getCurrentWeek();
+		int currentWeek = gameManager.getGameEnvironment().getCurrentWeek();
 		
 		prizeScore = config.PRIZE_SCORE_BASE + (currentWeek * config.PRIZE_SCORE_WEEKLY_MODIFIER);
 	}
@@ -77,7 +87,9 @@ public abstract class Match {
 		int attackRoll = attacker.getOffense() + d20();
 		int defenseRoll = defender.getDefense() + d20();
 		
-		//System.out.println("DEBUG: Attacker rolls " + attackRoll + ". Defender rolls " + defenseRoll);
+		if (Configuration.DEBUG) {
+			System.out.println("DEBUG: Attacker rolls " + attackRoll + ". Defender rolls " + defenseRoll);
+		}
 		
 		if (attackRoll >= defenseRoll)
 		{
@@ -106,6 +118,10 @@ public abstract class Match {
 		winner.addMoney(prizeMoney);
 		winner.addScore(prizeScore);
 		loser.addMoney(prizeMoney * config.PRIZE_MONEY_FOR_LOSER);
+		
+		// Reset chosen purchasables for the teams
+		team1.unselectPurchasables();
+		team2.unselectPurchasables();
 		
 		// Returns match results
 		return new MatchResult(winner, prizeMoney, prizeScore, loser, prizeMoney * config.PRIZE_MONEY_FOR_LOSER);

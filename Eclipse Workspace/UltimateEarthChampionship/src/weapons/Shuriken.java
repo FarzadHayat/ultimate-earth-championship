@@ -11,12 +11,12 @@ public class Shuriken extends Weapon {
 	private static final String name = "Shuriken";
 	
 	// Stat Boosts
-	private static final int damageMultiplier = 1;
-	private static final int offenseBoost = 1;
-	private static final int defenseBoost = 1;
+	private static final float damageMultiplier = 1;
+	private static final int offenseBoost = 2;
+	private static final int defenseBoost = 2;
 	
 	// Price
-	private static final float startingPrice = 10f;
+	private static final float startingPrice = 25f;
 	private static final float priceChangeWeekly = 0.9f;
 	
 	/**

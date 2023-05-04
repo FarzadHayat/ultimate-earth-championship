@@ -1,7 +1,10 @@
 package manager;
 
+import java.util.ArrayList;
+
 import display.DisplayType;
 import display.GraphicalDisplay;
+import model.Champion;
 import story.OpeningCutscene;
 
 /**
@@ -21,10 +24,13 @@ public class GraphicalGameManager extends GameManager
 	}
 	
 	public void backFromChampionSetup() {
+		setEnemyTeam(null);
+		playerTeam.unselectChampions();
 		displayStrategy.displayStadium();
 	}
 	
 	public void backFromWeaponSetup() {
+		playerTeam.unselectWeapons();
 		displayStrategy.displayChampionSetup();
 	}
 	

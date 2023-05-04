@@ -23,7 +23,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
     private String name;
     
     // Stat Boosts
-    private int damageMultiplier;
+    private float damageMultiplier;
     private int offenseBoost;
     private int defenseBoost;
     /**
@@ -56,7 +56,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
      * @param price the base price of the weapon
      * @param priceChangeWeekly the weekly price change of the weapon
      */
-    public Weapon(String name, int damageBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly, boolean isDefault) {
+    public Weapon(String name, float damageBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly, boolean isDefault) {
     	this.name = name;
     	this.damageMultiplier = damageBoost;
     	this.offenseBoost = offenseBoost;
@@ -113,7 +113,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	 * Get the value of damageMultiplier
 	 * @return the value of damageMultiplier
 	 */
-    public int getDamageMultiplier () {
+    public float getDamageMultiplier () {
     	return damageMultiplier;
     }
 

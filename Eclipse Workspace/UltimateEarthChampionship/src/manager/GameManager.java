@@ -45,10 +45,15 @@ import champions.SunTzu;
 import champions.TedKaczynski;
 import champions.TimBell;
 import champions.WilliamShakespeare;
+import display.CommandLineTable;
 import display.DisplayStrategy;
 import display.DisplayType;
 import events.RandomEventInfo;
+import exception.FullTeamException;
 import exception.GameFinishedException;
+import exception.IllegalPurchaseException;
+import exception.InsufficientFundsException;
+import match.DumbMatch;
 import match.LiveMatch;
 import match.Match;
 import model.Champion;
@@ -444,32 +449,90 @@ public abstract class GameManager
 	}
 	
 	public void finishedWeaponSetup() {
-		for (int i = 0; i < getPlayerTeam().getChosenWeapons().size(); i++) {
-			Champion champion = getPlayerTeam().getChosenChampions().get(i); 
-			Weapon weapon = getPlayerTeam().getChosenWeapons().get(i);
-			champion.setWeapon(weapon);
-		}
-		
-		LiveMatch match = new LiveMatch(getPlayerTeam(), getEnemyTeam());
-		
-		displayStrategy.displayLiveMatch(match);
+		playerTeam.assignChosenWeapons();
+		setMatch(new LiveMatch(getPlayerTeam(), getEnemyTeam()));
+//		displayStrategy.displayLiveMatch(getMatch());
+		finishedMatch();
 	}
 	
 	public void finishedMatch() {
-		try {
-			gameEnvironment.nextWeek();
-			playerTeam.setChosenChampions(new ArrayList<Champion>());
-			playerTeam.setChosenWeapons(new ArrayList<Weapon>());
-			displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
-		} catch (GameFinishedException e) {
-			finishedGame();
+		match.getMatchResult();
+		// Shop for all AI teams including the one that the player just fought
+		shopTeams(getAITeams());
+		// Fight for AI teams that haven't fought yet this week
+		ArrayList<Team> teamsLeft = new ArrayList<Team>(teams);
+		teamsLeft.remove(playerTeam);
+		teamsLeft.remove(enemyTeam);
+		fightTeams(teamsLeft);
+		// Reset match and enemy team
+		setMatch(null);
+		setEnemyTeam(null);
+		// Go to next week
+		finishedWeek();
+	}
+
+	private void fightTeams(ArrayList<Team> teams) {
+		if (teams.size() % 2 == 1 && Configuration.DEBUG) {
+			System.out.println("WARNING: Odd number of teams. One of the AI team will not be fighting this week!");
+		}
+		while (teams.size() > 1) {
+			Random random = new Random();
+			Team team1 = teams.remove(random.nextInt(teams.size()));
+			Team team2 = teams.remove(random.nextInt(teams.size()));
+			new DumbMatch(team1, team2).getMatchResult();
+		}
+	}
+	
+	private void shopTeams(ArrayList<Team> teams) {
+		// Get all shop champions except the one(s) player has already bought
+		ArrayList<Champion> championsLeft = new ArrayList<Champion>(shop.getAvailableChampions());
+		for (Champion champion : playerTeam.getChampions()) {
+			championsLeft.remove(champion);
+		}
+		// Get all shop weapons except the one(s) player has already bought
+		ArrayList<Weapon> weaponsLeft = new ArrayList<Weapon>(shop.getAvailableWeapons());
+		for (Weapon weapon : playerTeam.getWeapons()) {
+			weaponsLeft.remove(weapon);
+		}
+		Random random = new Random();
+		for (Team team : teams) {
+			try {
+				int championIndex = random.nextInt(championsLeft.size());
+				team.buy(championsLeft.get(championIndex));
+				championsLeft.remove(championIndex);
+			}
+			catch (FullTeamException | InsufficientFundsException | IllegalPurchaseException e) {
+				if (Configuration.DEBUG) {
+					System.out.println(team.getName() + " BUY CHAMPION: " + e.getMessage());
+				}
+			}
+			try {
+				int weaponIndex = random.nextInt(weaponsLeft.size());
+				team.buy(weaponsLeft.get(weaponIndex));
+				weaponsLeft.remove(weaponIndex);
+			}
+			catch (FullTeamException | InsufficientFundsException | IllegalPurchaseException e) {
+				if (Configuration.DEBUG) {
+					System.out.println(team.getName() + " BUY WEAPON: " + e.getMessage());
+				}
+			}
 		}
 	}
 	
 	public void finishedWeek() {
-		displayStrategy.displayTeam();
+		for (Team team : getTeams()) {
+			team.rest();
+		}
+		try {
+			gameEnvironment.nextWeek();
+			shop.generateCatalogue();
+			displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
+			displayStrategy.displayTeam();
+		} catch (GameFinishedException e) {
+			finishedGame();
+		}
 	}
-	
+
 	public void finishedGame() {
 		displayStrategy.displayGameResults();
 	}

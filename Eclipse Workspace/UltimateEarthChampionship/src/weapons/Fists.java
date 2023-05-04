@@ -11,7 +11,7 @@ public class Fists extends Weapon {
 	private static final String name = "Fists";
 	
 	// Stat Boosts
-	private static final int damageMultiplier = 1;
+	private static final float damageMultiplier = 1f;
 	private static final int offenseBoost = 0;
 	private static final int defenseBoost = 0;
 	

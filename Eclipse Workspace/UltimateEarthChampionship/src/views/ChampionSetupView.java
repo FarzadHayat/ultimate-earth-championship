@@ -45,8 +45,6 @@ public class ChampionSetupView extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gameManager.setEnemyTeam(null);
-				gameManager.getPlayerTeam().setChosenChampions(new ArrayList<Champion>());
 				gameManager.backFromChampionSetup();
 			}
 		});

@@ -11,12 +11,12 @@ public class TennisRacket extends Weapon {
 	private static final String name = "Tennis Racket";
 	
 	// Stat Boosts
-	private static final int damageMultiplier = 1;
-	private static final int offenseBoost = 1;
-	private static final int defenseBoost = 1;
+	private static final float damageMultiplier = 0.8f;
+	private static final int offenseBoost = 3;
+	private static final int defenseBoost = 3;
 	
 	// Price
-	private static final float startingPrice = 10f;
+	private static final float startingPrice = 25f;
 	private static final float priceChangeWeekly = 0.9f;
 	
 	/**

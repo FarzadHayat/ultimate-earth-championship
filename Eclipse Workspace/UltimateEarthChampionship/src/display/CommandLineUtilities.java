@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import model.Champion;
 import model.Team;
 import model.Weapon;
-import views.PurchasableCard.CardType;
 
 public abstract class CommandLineUtilities {
 
@@ -102,40 +101,23 @@ public abstract class CommandLineUtilities {
 		CommandLineTable.printChampions(team.getChampions());
 	}
 
-	public static void printChampionOptions(ArrayList<Champion> champions, CardType cardType) {
+	public static void printChampionOptions(String prefix, ArrayList<Champion> champions) {
 		
 		for (int i = 0; i < champions.size(); i++) {
-			printOption(i, getPrefix(cardType) + " CHAMPION", champions.get(i).getName());
+			printOption(i+1, prefix + " CHAMPION", champions.get(i).getName());
 		}
 	}
 
-	public static void printWeaponOptions(ArrayList<Weapon> weapons, CardType cardType) {
+	public static void printWeaponOptions(String prefix, ArrayList<Weapon> weapons) {
 		for (int i = 0; i < weapons.size(); i++) {
-			printOption(i, getPrefix(cardType) + " CHAMPION", weapons.get(i).getName());
+			printOption(i+1, prefix + " WEAPON", weapons.get(i).getName());
 		}
 	}
 	
 	public static void printTeamOptions(ArrayList<Team> teams) {
 		for (int i = 0; i < teams.size(); i++) {
-			printOption(i, "FIGHT TEAM", teams.get(i).getName());
+			printOption(i+1, "FIGHT TEAM", teams.get(i).getName());
 		}
-	}
-	
-	private static String getPrefix(CardType cardType) {
-		String prefix;
-		switch (cardType) {
-		case CAN_BUY: {
-			prefix = "BUY";
-		}
-		
-		case CAN_SELL: {
-			prefix = "SELL";
-		}
-		default: {
-			prefix = "";
-		}
-		}
-		return prefix;
 	}
 	
 }
