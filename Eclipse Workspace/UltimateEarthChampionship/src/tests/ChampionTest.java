@@ -83,48 +83,6 @@ class ChampionTest {
 	}
 
 	@Test
-	void testGetStamina() {
-
-		Champion testChamp = new JohnDoe();
-		
-		assertEquals(testChamp.getStamina(), 30);
-	}
-	
-	
-	@Test
-	void testChangeStamina() {
-
-		Champion testChamp = new JohnDoe();
-		
-		assertEquals(testChamp.getStamina(), 30);
-		
-		testChamp.addStamina(-8);
-		
-		assertEquals(testChamp.getStamina(), 22);
-		
-		testChamp.addStamina(12);
-		
-		assertEquals(testChamp.getStamina(), 30); // Check that adding more stamina than max keeps it below the maximum value
-	}
-
-	@Test
-	void testGetMaxStamina() {
-
-		Champion testChamp = new JohnDoe();
-		
-		assertEquals(testChamp.getMaxStamina(), 30);
-	}
-
-	@Test
-	void testChangeMaxStamina() {
-		Champion testChamp = new JohnDoe();
-		
-		testChamp.addMaxStamina(-2);
-		
-		assertEquals(testChamp.getMaxStamina(), 28);
-	}
-
-	@Test
 	void testGetOffense() {
 
 		Champion testChamp = new JohnDoe();

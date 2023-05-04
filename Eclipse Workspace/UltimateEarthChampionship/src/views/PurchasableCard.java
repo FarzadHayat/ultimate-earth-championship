@@ -223,7 +223,7 @@ public class PurchasableCard extends JPanel {
 	    if (purchasable.getClass().getSuperclass() == Champion.class) {
 	    	Champion champion = (Champion) purchasable; 
 	    	statsPanel.add(new StatLabel("health", String.valueOf(champion.getHealth())));
-	    	statsPanel.add(new StatLabel("stamina", String.valueOf(champion.getStamina())));
+	    	statsPanel.add(new StatLabel("regen", String.valueOf(champion.getRegen())));
 	    	statsPanel.add(new StatLabel("offense", String.valueOf(champion.getOffense())));
 	    	statsPanel.add(new StatLabel("defense", String.valueOf(champion.getDefense())));
 	    }

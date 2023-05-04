@@ -34,14 +34,9 @@ public abstract class Champion implements Purchasable, Cloneable {
 	private float maxHealth;
 	
 	/**
-	 * The champions stamina
+	 * The champions regen
 	 */
-	private float stamina;
-	
-	/**
-	 * The champion's maximum stamina
-	 */
-	private float maxStamina;
+	private float regen;
 	
 	/**
 	 * The Offense stat
@@ -107,21 +102,20 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 * Constructor for champion Class
 	 * @param name The name of the champion
 	 * @param healthBoost Stat which modifies the maximum health of the champion
-	 * @param maxStamina Stat which modifies the maximum stamina of the champion
+	 * @param regen Stat which modifies the regen of the champion
 	 * @param offense Modifies the offense stat of the champion
 	 * @param defense Modifies the defense stat of the champion
 	 * @param price The champions price
 	 * @param priceChangeWeekly The amount at which the champion's price changes each week once purchased
 	 */
-	public Champion (String name, int healthBoost, int staminaBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly )
+	public Champion (String name, int healthBoost, int regen, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly )
 	{
 		this.name = name;
 				
 		this.maxHealth = config.MAX_HEALTH_DEFAULT + (config.SKILL_HEALTH_INCREMENT * healthBoost);
 		this.health = this.maxHealth;
 		
-		this.maxStamina = config.MAX_STAMINA_DEFAULT + (config.SKILL_STAMINA_INCREMENT * staminaBoost);
-		this.stamina = this.maxStamina;
+		this.regen = config.MAX_REGEN_DEFAULT + (config.SKILL_REGEN_INCREMENT * regen);
 		
 		this.offense = config.SKILL_DEFAULT_OFFENSE + (1 * offenseBoost);
 		this.defense = config.SKILL_DEFAULT_OFFENSE + (1 * defenseBoost);
@@ -222,47 +216,12 @@ public abstract class Champion implements Purchasable, Cloneable {
 	}
 	
 	/**
-	 * Gets the champions stamina
-	 * @return the champions stamina
+	 * Gets the champions regen
+	 * @return the champions regen
 	 */
-	public float getStamina()
+	public float getRegen()
 	{
-		return stamina;
-	}
-	
-	/**
-	 * Adds to the champions stamina
-	 * @param amount to add to stamina, clamped by maxStamina
-	 */
-	public void addStamina(float staminaChange)
-	{
-		stamina += staminaChange;
-		
-		// Clamp to max Stamina
-		if (stamina > maxStamina)
-		{
-			stamina = maxStamina;
-		}
-	}
-	
-	/**
-	 * Gets the champions maximum stamina
-	 * @return The champions maximum stamina
-	 */
-	public float getMaxStamina()
-	
-
-	{
-		return maxStamina;
-	}
-	
-	/**
-	 * Changes the maximum stamina by a certain amount
-	 * @param maxStaminaChange The amount to be added to the champions maximum stamina
-	 */
-	public void addMaxStamina(float maxStaminaChange)
-	{
-		maxStamina += maxStaminaChange;
+		return regen;
 	}
 	
 	/**
@@ -486,8 +445,8 @@ public abstract class Champion implements Purchasable, Cloneable {
 	@Override
 	public String toString() {
 		return String.format(
-				"Champion [name=%s, health=%s, maxHealth=%s, stamina=%s, maxStamina=%s, offense=%s, defense=%s, level=%s, currentXP=%s, maxXP=%s, price=%s, priceChangeWeekly=%s, weapon=%s]",
-				name, health, maxHealth, stamina, maxStamina, offense, defense, level, currentXP, maxXP, price,
+				"Champion [name=%s, health=%s, maxHealth=%s, regen=%s, offense=%s, defense=%s, level=%s, currentXP=%s, maxXP=%s, price=%s, priceChangeWeekly=%s, weapon=%s]",
+				name, health, maxHealth, regen, offense, defense, level, currentXP, maxXP, price,
 				priceChangeWeekly, weapon);
 	}
 	

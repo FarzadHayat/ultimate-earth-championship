@@ -262,8 +262,8 @@ public class SetupView extends JPanel{
 		for (Champion champ : chosenChampions)
 		{
 			chosenChampModel.addElement(
-					champ.getName() + " | Max Health: " + champ.getMaxHealth() + " | Max Stamina: " +
-					champ.getMaxStamina() + " | Offense: " + champ.getOffense() + " | Defense: " + champ.getDefense());
+					champ.getName() + " | Max Health: " + champ.getMaxHealth() + " | Regen: " +
+					champ.getRegen() + " | Offense: " + champ.getOffense() + " | Defense: " + champ.getDefense());
 		}
 		
 		chosenChampionsList.setModel(chosenChampModel);
@@ -273,8 +273,8 @@ public class SetupView extends JPanel{
 		for (Champion champ : championsToChooseFrom)
 		{
 			availChampModel.addElement(
-					champ.getName() + " | Max Health: " + champ.getMaxHealth() + " | Max Stamina: " +
-					champ.getMaxStamina() + " | Offense: " + champ.getOffense() + " | Defense: " + champ.getDefense());
+					champ.getName() + " | Max Health: " + champ.getMaxHealth() + " | Regen: " +
+					champ.getRegen() + " | Offense: " + champ.getOffense() + " | Defense: " + champ.getDefense());
 		}
 		
 		availChampionsList.setModel(availChampModel);

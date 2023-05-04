@@ -21,7 +21,7 @@ public class RampagingAnimalEvent extends RandomEvent {
 		Champion champ = team.randomChampion();
 		String c = champ.getName();
 		
-		champ.addStamina(-30);
+		champ.addHealth(-30);
 		
 		// Ensure health doesn't fall below 10
 		if (champ.getHealth() < 10)
@@ -34,7 +34,7 @@ public class RampagingAnimalEvent extends RandomEvent {
 		String name = "A rampage through the dojo";
 		String description = "A rampaging purple catbull from the planet Vargoth broke into the team's dojo and chased " + c + ". " +
 		"Luckily nobody was hurt, but " + c + " was left severely exerted";
-		String effectString = c + ": -30 stamina";
+		String effectString = c + ": -30 health";
 		
 		// Return it
 		

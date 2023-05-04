@@ -24,7 +24,7 @@ public class CommandLineTable {
 	}
 
 	private static void printChampionTitle() {
-		System.out.println("Champion [ Name                     | Health | Stamina | Offense | Defense | Level | Price | Price change weekly ]");
+		System.out.println("Champion [ Name                     | Health | Regen | Offense | Defense | Level | Price | Price change weekly ]");
 	}
 	
 	private static void printWeaponTitle() {
@@ -41,7 +41,7 @@ public class CommandLineTable {
 
 	private static void printChampionEntry(Champion champion) {
 		System.out.println(String.format("         [ %24s | %6s | %7s | %7s | %7s | %5s | %5s | %19s ]",
-					champion.getName(), champion.getHealth(), champion.getStamina(), champion.getOffense(), champion.getDefense(),
+					champion.getName(), champion.getHealth(), champion.getRegen(), champion.getOffense(), champion.getDefense(),
 					champion.getLevel(), champion.getPrice(), champion.getPriceChangeWeekly()));
 	}
 	

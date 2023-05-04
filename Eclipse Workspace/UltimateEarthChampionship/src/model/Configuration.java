@@ -63,9 +63,9 @@ public class Configuration {
 	public final float MAX_HEALTH_DEFAULT = 100f;
 	
 	/**
-	 *  The default max stamina of each champion, before skill points are accounted for 
+	 *  The default max regen of each champion, before skill points are accounted for 
 	 */
-	public final float MAX_STAMINA_DEFAULT = 30f;
+	public final float MAX_REGEN_DEFAULT = 30f;
 	
 	/**
 	 *  The amount that a skill point into health will increment maximum health of a champion
@@ -73,9 +73,9 @@ public class Configuration {
 	public final float SKILL_HEALTH_INCREMENT = 10f;
 	
 	/**
-	 *  The amount that a skill point into stamina will increment stamina health of a champion
+	 *  The amount that a skill point into regen will increment regen of a champion
 	 */
-	public final float SKILL_STAMINA_INCREMENT = 5f;
+	public final float SKILL_REGEN_INCREMENT = 2f;
 	
 	/**
 	 *  The default amount of offense stat that a champion has, before skill points are accounted for
