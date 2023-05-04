@@ -49,7 +49,10 @@ import display.CommandLineTable;
 import display.DisplayStrategy;
 import display.DisplayType;
 import events.RandomEventInfo;
+import exception.FullTeamException;
 import exception.GameFinishedException;
+import exception.IllegalPurchaseException;
+import exception.InsufficientFundsException;
 import match.DumbMatch;
 import match.LiveMatch;
 import match.Match;
@@ -454,7 +457,7 @@ public abstract class GameManager
 	
 	public void finishedMatch() {
 		match.getMatchResult();
-		// Shop for all AI teams
+		// Shop for all AI teams including the one that the player just fought
 		shopTeams(getAITeams());
 		// Fight for AI teams that haven't fought yet this week
 		ArrayList<Team> teamsLeft = new ArrayList<Team>(teams);
@@ -481,7 +484,39 @@ public abstract class GameManager
 	}
 	
 	private void shopTeams(ArrayList<Team> teams) {
-		// TODO Auto-generated method stub
+		// Get all shop champions except the one(s) player has already bought
+		ArrayList<Champion> championsLeft = new ArrayList<Champion>(shop.getAvailableChampions());
+		for (Champion champion : playerTeam.getChampions()) {
+			championsLeft.remove(champion);
+		}
+		// Get all shop weapons except the one(s) player has already bought
+		ArrayList<Weapon> weaponsLeft = new ArrayList<Weapon>(shop.getAvailableWeapons());
+		for (Weapon weapon : playerTeam.getWeapons()) {
+			weaponsLeft.remove(weapon);
+		}
+		Random random = new Random();
+		for (Team team : teams) {
+			try {
+				int championIndex = random.nextInt(championsLeft.size());
+				team.buy(championsLeft.get(championIndex));
+				championsLeft.remove(championIndex);
+			}
+			catch (FullTeamException | InsufficientFundsException | IllegalPurchaseException e) {
+				if (Configuration.DEBUG) {
+					System.out.println(team.getName() + " BUY CHAMPION: " + e.getMessage());
+				}
+			}
+			try {
+				int weaponIndex = random.nextInt(weaponsLeft.size());
+				team.buy(weaponsLeft.get(weaponIndex));
+				weaponsLeft.remove(weaponIndex);
+			}
+			catch (FullTeamException | InsufficientFundsException | IllegalPurchaseException e) {
+				if (Configuration.DEBUG) {
+					System.out.println(team.getName() + " BUY WEAPON: " + e.getMessage());
+				}
+			}
+		}
 	}
 	
 	public void finishedWeek() {
