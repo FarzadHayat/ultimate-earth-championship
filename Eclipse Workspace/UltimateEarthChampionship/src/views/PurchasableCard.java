@@ -100,9 +100,15 @@ public class PurchasableCard extends JPanel {
 			addStatsPanel();
 			if (purchasable.getClass().getSuperclass() == Champion.class && gameManager.getPlayerTeam().getChampions().contains((Champion) purchasable) ||
 					purchasable.getClass().getSuperclass() == Weapon.class && gameManager.getPlayerTeam().getWeapons().contains((Weapon) purchasable)) {
-				addSoldOverlay();
+				addOverlay("SOLD!");
 			} else {
-				addBuyButton();
+				if (purchasable.getClass().getSuperclass() == Champion.class && gameManager.getPlayerTeam().isWeeklyChampionPurchased() ||
+						purchasable.getClass().getSuperclass() == Weapon.class && gameManager.getPlayerTeam().isWeeklyWeaponPurchased()) {
+					addOverlay("");
+				}
+				else {
+					addBuyButton();
+				}
 			}
 			break;
 		}
@@ -172,14 +178,14 @@ public class PurchasableCard extends JPanel {
 		});
 	}
 
-	private void addSoldOverlay() {
+	private void addOverlay(String text) {
 		soldOverlay = new JPanel(new GridBagLayout());
-		soldOverlay.setBackground(new Color(0.6f, 0.6f, 0.6f, 1f));
-		JLabel soldLabel = new JLabel("SOLD!");
+		soldOverlay.setBackground(new Color(0.7f, 0.7f, 0.7f, 0.7f));
+		JLabel soldLabel = new JLabel(text);
 		soldLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		soldLabel.setForeground(Color.red);
 		soldOverlay.add(soldLabel);
-		add(soldOverlay);
+		add(soldOverlay, 0);
 	}
 
 	/**
