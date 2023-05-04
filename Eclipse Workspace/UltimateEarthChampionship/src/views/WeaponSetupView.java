@@ -50,7 +50,6 @@ public class WeaponSetupView extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gameManager.getPlayerTeam().setChosenWeapons(new ArrayList<Weapon>());
 				gameManager.backFromWeaponSetup();
 			}
 		});

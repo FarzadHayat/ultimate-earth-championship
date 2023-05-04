@@ -458,8 +458,10 @@ public abstract class GameManager
 	public void finishedMatch() {
 		try {
 			gameEnvironment.nextWeek();
-			playerTeam.setChosenChampions(new ArrayList<Champion>());
-			playerTeam.setChosenWeapons(new ArrayList<Weapon>());
+			playerTeam.unselectPurchasables();
+			enemyTeam.unselectPurchasables();
+			//TODO: ai teams fight
+			//TODO: ai teams shop
 			displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
 		} catch (GameFinishedException e) {
 			finishedGame();

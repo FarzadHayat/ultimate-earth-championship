@@ -356,4 +356,30 @@ public class Team {
 		addMoney(purchasable.getPrice());
 	}
 	
+	public void randomlySelectPurchasables() {
+		randomlySelectChampions();
+		randomlySelectWeapons();
+	}
+	
+	private void randomlySelectChampions() {
+		//TODO: autoselect champions
+	}
+	
+	private void randomlySelectWeapons() {
+		//TODO: autoselect weapons
+	}
+	
+	public void unselectPurchasables() {
+		unselectChampions();
+		unselectWeapons();
+	}
+	
+	public void unselectChampions() {
+		chosenChampions.removeAll(chosenChampions);
+	}
+	
+	public void unselectWeapons() {
+		chosenWeapons.removeAll(chosenWeapons);
+	}
+	
 }
