@@ -490,6 +490,7 @@ public abstract class GameManager
 		}
 		try {
 			gameEnvironment.nextWeek();
+			shop.generateCatalogue();
 			displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
 			displayStrategy.displayTeam();
 		} catch (GameFinishedException e) {
