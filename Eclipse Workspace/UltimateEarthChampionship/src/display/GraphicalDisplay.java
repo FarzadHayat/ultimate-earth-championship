@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import events.RandomEventInfo;
 import manager.GameManager;
 import match.LiveMatch;
+import match.MatchResult;
 import story.Cutscene;
 import views.ChampionSetupView;
 import views.CutsceneView;
@@ -22,6 +23,7 @@ public class GraphicalDisplay implements DisplayStrategy {
 
 	private JFrame frame;
 
+	private GameManager gameManager = GameManager.getInstance();
 
 	/**
 	 * Create the application.
@@ -108,6 +110,20 @@ public class GraphicalDisplay implements DisplayStrategy {
 		MatchView matchView = new MatchView(match);
 		displayView(matchView);
 		
+	}
+
+	@Override
+	public void displayMatchResults(MatchResult matchResult) {
+		String text = "";
+		if (matchResult.winningTeam == gameManager.getPlayerTeam()) {
+			text += "You have won the match! Money awarded: " + matchResult.winningTeamMoney
+					+ " Score awarded: " + matchResult.winningTeamScore;
+		}
+		else {
+			text += "You have lost the match! Money : " + matchResult.losingTeamMoney
+					+ " Score awarded: " + matchResult.losingTeamScore;
+		}
+		JOptionPane.showMessageDialog(frame, text);
 	}
 
 	@Override

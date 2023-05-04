@@ -227,7 +227,7 @@ public class Configuration {
 	/**
 	 *  The base amount damage each attack will deal, this is modified by champion stats
 	 */
-	public final int DAMAGE_BASE = 10;
+	public final int DAMAGE_BASE = 20;
 	
 	/**
 	 * The amount of extra damage added to an attack per offense point

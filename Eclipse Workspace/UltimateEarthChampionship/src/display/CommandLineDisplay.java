@@ -3,10 +3,13 @@ package display;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import events.RandomEventInfo;
 import exception.InputException;
 import manager.GameManager;
 import match.LiveMatch;
+import match.MatchResult;
 import model.Champion;
 import model.Configuration;
 import model.SetupManager;
@@ -336,6 +339,20 @@ public class CommandLineDisplay implements DisplayStrategy {
 			}
 		}
 		gameManager.finishedWeaponSetup();
+	}
+	
+	@Override
+	public void displayMatchResults(MatchResult matchResult) {
+		String text = "";
+		if (matchResult.winningTeam == gameManager.getPlayerTeam()) {
+			text += "You have won the match! Money awarded: " + matchResult.winningTeamMoney
+					+ " Score awarded: " + matchResult.winningTeamScore;
+		}
+		else {
+			text += "You have lost the match! Money : " + matchResult.losingTeamMoney
+					+ " Score awarded: " + matchResult.losingTeamScore;
+		}
+		System.out.println(text);
 	}
 	
 	@Override

@@ -52,4 +52,5 @@ public class MatchResult {
 		this.losingTeamMoney = losingTeamMoney;
 		this.losingTeamScore = 0f; // Losing teams shouldn't get any score
 	}
+	
 }

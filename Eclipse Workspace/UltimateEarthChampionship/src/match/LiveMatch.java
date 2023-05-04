@@ -2,6 +2,7 @@ package match;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.UTFDataFormatException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -114,11 +115,10 @@ public class LiveMatch extends Match implements ActionListener{
 		}
 		
 		// Enemy champions:
-		System.out.println("WARNING: Currently using team2.getChampions() as getChosenChampions is not working for AI teams");
 		lane = 0;
 		flagLane = random.nextInt(3);
 		
-		for (Champion champion : team2.getChampions())
+		for (Champion champion : team2.getChosenChampions())
 		{
 			// REMOVE THIS ONCE getChosenChampions is fixed!!!!
 			// This prevents errors in the event of team champion length > 4
@@ -189,15 +189,11 @@ public class LiveMatch extends Match implements ActionListener{
 		}
 		else
 		{
-			// Enemy turn
-			System.out.println(enemyChampions.get(turn).getName() + "'s turn");
-			
+			// Enemy turn			
 			currentChampion = enemyChampions.get(turn);
 			
 			AITurnDelay();
 		}
-		
-		
 		
 		
 		
@@ -215,6 +211,17 @@ public class LiveMatch extends Match implements ActionListener{
 	 */
 	private void championAITurn()
 	{
+		if (currentChampion.getPosition() == 0)
+		{
+			// AI cannot move forward anymore
+			nextTurn();
+		}
+		
+		if (currentChampion.isFlagCarrier())
+		{
+			CheckFlagHolderPosition(currentChampion);
+		}
+		
 		// Get card infront
 		ChampionMatchCard cardInfront = null;
 		
@@ -364,19 +371,7 @@ public class LiveMatch extends Match implements ActionListener{
 		// Check after movement if the champion has properly moved
 		if (champion.isFlagCarrier())
 		{
-			if (championIsOnPlayerTeam(champion) && champion.getPosition() == 6)
-			{
-				// Player victory!
-				matchView.showDialogue(champion.getName() + " has moved the flag across the field! " +
-										team1.getName() + " wins!");
-			}
-			
-			if (!championIsOnPlayerTeam(champion) && champion.getPosition() == 1)
-			{
-				// Enemy victory!
-				matchView.showDialogue(champion.getName() + " has moved the flag across the field! " +
-										team2.getName() + " wins!");
-			}
+			CheckFlagHolderPosition(champion);
 		}
 	}
 	
@@ -433,7 +428,7 @@ public class LiveMatch extends Match implements ActionListener{
 		}
 		else
 		{
-			matchView.showDialogue(attacker.getName() + " succesfully hits " + defender.getName() + " for " + adjustedDamage + " damage!");
+			matchView.showDialogue(attacker.getName() + " succesfully hits " + defender.getName() + " with a " + attacker.getWeapon().getName() + " for " + adjustedDamage + " damage!");
 			
 			// damage the champion and give XP to the attacker
 			attacker.giveXP(rawDamage);
@@ -617,10 +612,12 @@ public class LiveMatch extends Match implements ActionListener{
 			{
 				// Enemy wins
 				matchView.showDialogue(team1.getName() + " has had all their champions injured. " + team2.getName() + " wins!");
+				gameManager.finishedMatch(matchOver(team2, team1));
 			}
 			else {
 				// Player wins
 				matchView.showDialogue(team2.getName() + " has had all their champions injured. " + team1.getName() + " wins!");
+				gameManager.finishedMatch(matchOver(team1, team2));
 			}
 		}
 		
@@ -630,6 +627,33 @@ public class LiveMatch extends Match implements ActionListener{
 		
 		champions.get(i).setFlagCarrier(true);
 		getCard(champions.get(i)).updateCard();
+	}
+	
+	private void CheckFlagHolderPosition(Champion champion)
+	{
+		if (championIsOnPlayerTeam(champion))
+		{
+			if (champion.getPosition() == 6 || champion.getPosition() == 7)
+			{
+				// Player victory!
+				matchView.showDialogue(champion.getName() + " has moved the flag across the field! " +
+										team1.getName() + " wins!");
+				gameManager.finishedMatch(matchOver(team1, team2));
+			}
+			
+		}
+		
+		if (!championIsOnPlayerTeam(champion))
+		{
+			if (champion.getPosition() == 1 || champion.getPosition() == 0)
+			{
+				// Enemy victory!
+				matchView.showDialogue(champion.getName() + " has moved the flag across the field! " +
+										team2.getName() + " wins!");
+				gameManager.finishedMatch(matchOver(team2, team1));
+			}
+			
+		}
 	}
 	
 }

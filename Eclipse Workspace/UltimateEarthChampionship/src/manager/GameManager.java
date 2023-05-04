@@ -56,6 +56,7 @@ import exception.InsufficientFundsException;
 import match.DumbMatch;
 import match.LiveMatch;
 import match.Match;
+import match.MatchResult;
 import model.Champion;
 import model.Configuration;
 import model.GameEnvironment;
@@ -451,12 +452,11 @@ public abstract class GameManager
 	public void finishedWeaponSetup() {
 		playerTeam.assignChosenWeapons();
 		setMatch(new LiveMatch(getPlayerTeam(), getEnemyTeam()));
-//		displayStrategy.displayLiveMatch(getMatch());
-		finishedMatch();
+		displayStrategy.displayLiveMatch((LiveMatch) getMatch());
 	}
 	
-	public void finishedMatch() {
-		match.getMatchResult();
+	public void finishedMatch(MatchResult matchResult) {
+		displayStrategy.displayMatchResults(matchResult);
 		// Shop for all AI teams including the one that the player just fought
 		shopTeams(getAITeams());
 		// Fight for AI teams that haven't fought yet this week
