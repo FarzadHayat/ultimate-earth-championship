@@ -7,6 +7,7 @@ import exception.FullTeamException;
 import exception.IllegalPurchaseException;
 import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
+import manager.GameManager;
 import weapons.Fists;
 
 public class Team {
@@ -60,6 +61,8 @@ public class Team {
 	private int aggression;
 	
 	private GameManager gameManager = GameManager.getInstance();
+	
+	
 	private boolean weeklyChampionPurchased = false;
 	private boolean weeklyWeaponPurchased = false;
 	
