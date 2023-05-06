@@ -185,12 +185,18 @@ public class LiveMatch extends Match implements ActionListener{
 			// Player's turn
 			currentChampion = playerChampions.get(turn);
 			
+			// Regen health
+			ChampionHealthRegen(currentChampion);
+			
 			matchView.selectChampion(currentChampion);
 		}
 		else
 		{
 			// Enemy turn			
 			currentChampion = enemyChampions.get(turn);
+			
+			// Regen health
+			ChampionHealthRegen(currentChampion);
 			
 			AITurnDelay();
 		}
@@ -428,7 +434,16 @@ public class LiveMatch extends Match implements ActionListener{
 		}
 		else
 		{
-			matchView.showDialogue(attacker.getName() + " succesfully hits " + defender.getName() + " with a " + attacker.getWeapon().getName() + " for " + adjustedDamage + " damage!");
+			String hitString = "";
+			if (attacker.getWeapon().getName() == "Fists")
+			{
+				hitString = attacker.getName() + " succesfully hits " + defender.getName() + " for " + adjustedDamage + " damage!";
+			}
+			else {
+				hitString = attacker.getName() + " succesfully hits " + defender.getName() + " with a " + attacker.getWeapon().getName() + " for " + adjustedDamage + " damage!";
+			}
+			
+			matchView.showDialogue(hitString);
 			
 			// damage the champion and give XP to the attacker
 			attacker.giveXP(rawDamage);
@@ -629,11 +644,16 @@ public class LiveMatch extends Match implements ActionListener{
 		getCard(champions.get(i)).updateCard();
 	}
 	
+	/**
+	 * Checks the position of a provided champion and ends the game if
+	 * they have brought the flag to the opposite side of the field
+	 * @param champion The champion to be checked
+	 */
 	private void CheckFlagHolderPosition(Champion champion)
 	{
 		if (championIsOnPlayerTeam(champion))
 		{
-			if (champion.getPosition() == 6 || champion.getPosition() == 7)
+			if (champion.getPosition() == 5 || champion.getPosition() == 6)
 			{
 				// Player victory!
 				matchView.showDialogue(champion.getName() + " has moved the flag across the field! " +
@@ -654,6 +674,16 @@ public class LiveMatch extends Match implements ActionListener{
 			}
 			
 		}
+	}
+
+	/**
+	 * Regenerates a champions health by their regen stat
+	 * @param champion The champion to regenerate
+	 */
+	private void ChampionHealthRegen(Champion champion)
+	{
+		champion.addStamina(champion.getRegen());
+		getCard(champion).updateCard();
 	}
 	
 }

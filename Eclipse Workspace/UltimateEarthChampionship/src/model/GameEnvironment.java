@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import events.DonationEvent;
+import events.FreeWeaponEvent;
 import events.RadiationPoisoningEvent;
 import events.RampagingAnimalEvent;
 import events.RandomEvent;
 import events.RandomEventInfo;
 import events.TVShowEvent;
+import events.ThiefEvent;
 import exception.GameFinishedException;
 import manager.GameManager;
 
@@ -82,6 +84,8 @@ public class GameEnvironment {
 		events.add(new TVShowEvent());
 		events.add(new RadiationPoisoningEvent());
 		events.add(new RampagingAnimalEvent());
+		events.add(new ThiefEvent());
+		events.add(new FreeWeaponEvent());
 	}
 	
 	/**

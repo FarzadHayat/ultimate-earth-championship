@@ -125,7 +125,9 @@ public class ChampionMatchCard extends JPanel{
 			//champion
 			championImage.setText("");
 			
-			championStaminaText.setText(champion.getStamina() + "/" + champion.getMaxStamina());
+			int championStaminaInt = (int) champion.getStamina();
+			
+			championStaminaText.setText(championStaminaInt + "/" + champion.getMaxStamina());
 		}
 	}
 	

@@ -115,7 +115,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 		this.maxStamina = config.MAX_STAMINA_DEFAULT + (config.SKILL_STAMINA_INCREMENT * staminaBoost);
 		this.stamina = this.maxStamina;
 		
-		this.regen = config.MAX_REGEN_DEFAULT + (config.SKILL_REGEN_INCREMENT * regenBoost);
+		this.regen = config.REGEN_DEFAULT + (config.SKILL_REGEN_INCREMENT * regenBoost);
 		
 		this.offense = config.SKILL_DEFAULT_OFFENSE + (1 * offenseBoost);
 		this.defense = config.SKILL_DEFAULT_OFFENSE + (1 * defenseBoost);
