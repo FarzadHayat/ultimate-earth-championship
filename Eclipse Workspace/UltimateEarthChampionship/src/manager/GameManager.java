@@ -368,7 +368,7 @@ public abstract class GameManager
 		setPlayerTeam(playerTeam);
 		teams.add(playerTeam);
 		
-		gameEnvironment.setDifficulty(difficulty);
+		config.setDifficulty(difficulty);
 		gameEnvironment.setMaxWeeks(numWeeks);
 	}
 

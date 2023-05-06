@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.GridLayout;
+import model.Configuration;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -13,6 +14,7 @@ public class InfoPanel extends JPanel {
 	private static final long serialVersionUID = -8835384563469205994L;
 	
 	private GameManager gameManager = GameManager.getInstance();
+	private Configuration config = Configuration.getInstance();
 	
 	/**
 	 * Create the panel.
@@ -56,7 +58,7 @@ public class InfoPanel extends JPanel {
 		JLabel difficultyLabel = new JLabel("Difficulty:");
 		difficultyPanel.add(difficultyLabel);
 		
-		JLabel difficultyValue = new JLabel(String.valueOf(gameManager.getGameEnvironment().getDifficulty()));
+		JLabel difficultyValue = new JLabel(String.valueOf(config.getDifficulty()));
 		difficultyPanel.add(difficultyValue);
 	}
 

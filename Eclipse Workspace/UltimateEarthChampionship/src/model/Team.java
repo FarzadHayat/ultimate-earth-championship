@@ -91,7 +91,7 @@ public class Team {
 		Random random = new Random();
 		int aggression = random.nextInt(config.AGRESSION_RANDOM_UPPER_BOUND - config.AGRESSION_RANDOM_LOWER_BOUND) + config.AGRESSION_RANDOM_LOWER_BOUND;
 
-		this.aggression = aggression;
+		this.aggression = aggression + config.AI_AGRESSION_BOOST;
 	}
 
 	/**
