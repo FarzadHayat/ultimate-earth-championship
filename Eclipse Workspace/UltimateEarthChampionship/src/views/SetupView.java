@@ -1,11 +1,14 @@
 package views;
 
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -22,10 +25,12 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import display.GraphicalDisplay;
 import exception.InputException;
 import manager.GameManager;
 import manager.GraphicalGameManager;
 import model.Champion;
+import model.Configuration;
 import model.SetupManager;
 
 public class SetupView extends JPanel{
@@ -321,5 +326,14 @@ public class SetupView extends JPanel{
 		
 	}
 
-
+	@Override
+	protected void paintComponent(Graphics g) {
+	    super.paintComponent(g);
+	    ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "setup.jpg");
+		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
+	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
+        g.drawImage(icon.getImage(), 0, yPos, null);
+	}
+	
 }
