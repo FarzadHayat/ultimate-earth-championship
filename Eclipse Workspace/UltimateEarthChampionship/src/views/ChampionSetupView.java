@@ -74,37 +74,6 @@ public class ChampionSetupView extends JPanel {
 		}
 	}
 	
-	private void addLanesPanel() {
-		JPanel lanesPanel = new JPanel(new GridLayout(0, 1, 20, 20));
-		lanesPanel.setOpaque(false);
-		add(lanesPanel, BorderLayout.CENTER);
-		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
-			JLabel label = new JLabel("Lane " + String.valueOf(i+1), JLabel.RIGHT);
-			label.setFont(Configuration.HEADER_FONT);
-			label.setForeground(Color.white);
-			lanesPanel.add(label);
-		}
-	}
-	
-	private void addChosenChampionsPanel() {
-		JPanel chosenChampionsPanel = new JPanel(new GridLayout(0, 1, 20, 20));
-		chosenChampionsPanel.setOpaque(false);
-		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions(); 
-		add(chosenChampionsPanel, BorderLayout.EAST);
-		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
-			PurchasableCard card;
-			if (chosenChampions.size() > i) {
-				Champion champion = chosenChampions.get(i);
-				card = new ChampionCard(champion);
-				card.addStatsPanel();
-				card.selected();
-			} else {
-				card = new ChampionCard();
-			}
-			chosenChampionsPanel.add(card);
-		}
-	}
-	
 	private void addChampionToPanel(Champion champion, JPanel panel) {
 		PurchasableCard card = new ChampionCard(champion);
 		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions();
@@ -149,7 +118,38 @@ public class ChampionSetupView extends JPanel {
 		}
 		panel.add(card);
 	}
-		
+
+	private void addLanesPanel() {
+		JPanel lanesPanel = new JPanel(new GridLayout(0, 1, 20, 20));
+		lanesPanel.setOpaque(false);
+		add(lanesPanel, BorderLayout.CENTER);
+		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
+			JLabel label = new JLabel("Lane " + String.valueOf(i+1), JLabel.RIGHT);
+			label.setFont(Configuration.HEADER_FONT);
+			label.setForeground(Color.white);
+			lanesPanel.add(label);
+		}
+	}
+	
+	private void addChosenChampionsPanel() {
+		JPanel chosenChampionsPanel = new JPanel(new GridLayout(0, 1, 20, 20));
+		chosenChampionsPanel.setOpaque(false);
+		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions(); 
+		add(chosenChampionsPanel, BorderLayout.EAST);
+		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
+			PurchasableCard card;
+			if (chosenChampions.size() > i) {
+				Champion champion = chosenChampions.get(i);
+				card = new ChampionCard(champion);
+				card.addStatsPanel();
+				card.selected();
+			} else {
+				card = new ChampionCard();
+			}
+			chosenChampionsPanel.add(card);
+		}
+	}
+	
 	private void addNextButton() {
 		JPanel nextButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		nextButtonPanel.setOpaque(false);
