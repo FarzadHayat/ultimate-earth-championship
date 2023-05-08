@@ -1,18 +1,13 @@
 package views;
 
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
-import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-
-import javax.swing.SwingConstants;
 
 import display.GraphicalDisplay;
 
@@ -107,7 +102,7 @@ public class CutsceneView extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
-	    ImageIcon icon = new ImageIcon(slideImagePath);
+	    ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + slideImagePath);
 		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
 								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);

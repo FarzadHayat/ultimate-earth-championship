@@ -1,12 +1,17 @@
 package views;
 
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import display.GraphicalDisplay;
 import manager.GameManager;
 import model.Champion;
+import model.Configuration;
 import model.Weapon;
 
 public class ShopView extends JPanel {
@@ -33,6 +38,7 @@ public class ShopView extends JPanel {
 	 */
 	private void addAvailableChampionsPanel() {
 		JPanel championsPanel = new JPanel(new FlowLayout());
+		championsPanel.setOpaque(false);
 		for (Champion champion : gameManager.getShop().getAvailableChampions()) {
 			PurchasableCard card = new ChampionCard(champion);
 			card.addStatsPanel();
@@ -54,6 +60,7 @@ public class ShopView extends JPanel {
 	 */
 	private void addAvailableWeaponsPanel() {
 		JPanel weaponsPanel = new JPanel(new FlowLayout());
+		weaponsPanel.setOpaque(false);
 		for (Weapon weapon : gameManager.getShop().getAvailableWeapons()) {
 			PurchasableCard card = new WeaponCard(weapon);
 			card.addStatsPanel();
@@ -63,4 +70,14 @@ public class ShopView extends JPanel {
 		add(weaponsPanel);
 	}
 
+	@Override
+	protected void paintComponent(Graphics g) {
+	    super.paintComponent(g);
+	    ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "shop.jpg");
+		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
+	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
+        g.drawImage(icon.getImage(), 0, yPos, null);
+	}
+	
 }

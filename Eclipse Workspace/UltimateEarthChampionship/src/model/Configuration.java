@@ -212,12 +212,12 @@ public class Configuration {
 	/**
 	 * The font used for headers.
 	 */
-	public static final Font HEADER_FONT = new Font(FONT_FAMILY, Font.PLAIN, 20);
+	public static final Font HEADER_FONT = new Font(FONT_FAMILY, Font.PLAIN, 24);
 	
 	/**
 	 * The font used for regular text.
 	 */
-	public static final Font TEXT_FONT = new Font(FONT_FAMILY, Font.PLAIN, 14);
+	public static final Font TEXT_FONT = new Font(FONT_FAMILY, Font.PLAIN, 16);
 	
 	/**
 	 * The lower bound of AI aggression, 

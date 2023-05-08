@@ -1,11 +1,13 @@
 package views;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import display.GraphicalDisplay;
 import manager.GameManager;
 
 public class InfoPanel extends JPanel {
@@ -18,7 +20,8 @@ public class InfoPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public InfoPanel() {
-		setLayout(new GridLayout(1, 3, 0, 0));
+		setLayout(new GridLayout(1, 0, 0, 0));
+		setMaximumSize(new Dimension(GraphicalDisplay.WIDTH, 100));
 		
 		String nameString = "Team name: " + String.valueOf(gameManager.getPlayerTeam().getName());
 		add(new StatLabel(nameString));

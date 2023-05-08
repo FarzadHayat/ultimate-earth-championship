@@ -1,19 +1,25 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import display.GraphicalDisplay;
 import exception.FullTeamException;
 import manager.GameManager;
 import manager.GraphicalGameManager;
@@ -36,6 +42,7 @@ public class WeaponSetupView extends JPanel {
 	public WeaponSetupView() {
 		setLayout(new BorderLayout());
 		chosenPanel = new JPanel(new GridLayout(0, 2));
+		chosenPanel.setOpaque(false);
 		add(chosenPanel, BorderLayout.EAST);
 		
 		addBackButton();
@@ -48,6 +55,7 @@ public class WeaponSetupView extends JPanel {
 
 	private void addBackButton() {
 		JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		backButtonPanel.setOpaque(false);
 		JButton backButton = new JButton("Go back to Champion Setup");
 		backButton.addActionListener(new ActionListener() {
 			
@@ -62,6 +70,7 @@ public class WeaponSetupView extends JPanel {
 
 	private void addWeaponsPanel() {
 		JPanel weaponsPanel = new JPanel(new GridLayout(3, 3, 20, 20));
+		weaponsPanel.setOpaque(false);
 		ArrayList<Weapon> weapons = gameManager.getPlayerTeam().getWeapons(); 
 		add(weaponsPanel, BorderLayout.WEST);
 		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
@@ -121,16 +130,19 @@ public class WeaponSetupView extends JPanel {
 	
 	private void addLanesPanel() {
 		JPanel lanesPanel = new JPanel(new GridLayout(0, 1, 20, 20));
+		lanesPanel.setOpaque(false);
 		add(lanesPanel, BorderLayout.CENTER);
 		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
-			JLabel label = new JLabel(String.valueOf(i+1), JLabel.RIGHT);
+			JLabel label = new JLabel("Lane " + String.valueOf(i+1), JLabel.RIGHT);
 			label.setFont(Configuration.HEADER_FONT);
+			label.setForeground(Color.white);
 			lanesPanel.add(label);
 		}
 	}
 	
 	private void addChosenChampionsPanel() {
 		JPanel chosenChampionsPanel = new JPanel(new GridLayout(0, 1, 20, 20));
+		chosenChampionsPanel.setOpaque(false);
 		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions(); 
 		chosenPanel.add(chosenChampionsPanel);
 		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
@@ -149,6 +161,7 @@ public class WeaponSetupView extends JPanel {
 	
 	private void addChosenWeaponsPanel() {
 		JPanel chosenWeaponsPanel = new JPanel(new GridLayout(0, 1, 20, 20));
+		chosenWeaponsPanel.setOpaque(false);
 		ArrayList<Weapon> chosenWeapons = gameManager.getPlayerTeam().getChosenWeapons(); 
 		chosenPanel.add(chosenWeaponsPanel);
 		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
@@ -167,6 +180,7 @@ public class WeaponSetupView extends JPanel {
 		
 	private void addNextButton() {
 		JPanel nextButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		nextButtonPanel.setOpaque(false);
 		JButton startButton = new JButton("Start match!");
 		startButton.addActionListener(new ActionListener() {
 			
@@ -177,6 +191,16 @@ public class WeaponSetupView extends JPanel {
 		});
 		nextButtonPanel.add(startButton);
 		add(nextButtonPanel, BorderLayout.SOUTH);
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+	    super.paintComponent(g);
+	    ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "weaponsetup.jpg");
+		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
+	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
+        g.drawImage(icon.getImage(), 0, yPos, null);
 	}
 
 }

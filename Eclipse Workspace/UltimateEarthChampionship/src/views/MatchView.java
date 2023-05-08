@@ -6,16 +6,22 @@ import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
+
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
+import display.GraphicalDisplay;
 import match.LiveMatch;
 import model.Champion;
+import model.Configuration;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
@@ -64,11 +70,13 @@ public class MatchView extends JPanel {
 	public void setupCenter()
 	{
 		JPanel centerPanel = new JPanel();
+		centerPanel.setOpaque(false);
 		centerPanel.setBackground(new Color(192, 192, 192));
 		add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		
 		JPanel centerGrid = new JPanel();
+		centerGrid.setOpaque(false);
 		centerGrid.setBackground(new Color(192, 192, 192));
 		centerPanel.add(centerGrid);
 		centerGrid.setLayout(new GridLayout(4, 7, 0, 0));
@@ -108,10 +116,12 @@ public class MatchView extends JPanel {
 	public void setupBottomPanel()
 	{
 		JPanel bottomPanel = new JPanel();
+		bottomPanel.setOpaque(false);
 		add(bottomPanel, BorderLayout.SOUTH);
 		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 15));
 		
 		JPanel buttonPanel = new JPanel();
+		buttonPanel.setOpaque(false);
 		bottomPanel.add(buttonPanel);
 		buttonPanel.setLayout(new GridLayout(0, 6, 30, 0));
 		
@@ -166,10 +176,12 @@ public class MatchView extends JPanel {
 	public void setupSides()
 	{
 		JPanel leftPanel = new JPanel();
+		leftPanel.setOpaque(false);
 		add(leftPanel, BorderLayout.WEST);
 		leftPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 		
 		JPanel rightPanel = new JPanel();
+		rightPanel.setOpaque(false);
 		add(rightPanel, BorderLayout.EAST);
 		rightPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 	}
@@ -180,9 +192,11 @@ public class MatchView extends JPanel {
 	public void setupHeader()
 	{
 		JPanel topPanel = new JPanel();
+		topPanel.setOpaque(false);
 		add(topPanel, BorderLayout.NORTH);
 		
 		JPanel topGridPanel = new JPanel();
+		topGridPanel.setOpaque(false);
 		topPanel.add(topGridPanel);
 		topGridPanel.setLayout(new GridLayout(3, 1, 0, 0));
 		
@@ -322,7 +336,14 @@ public class MatchView extends JPanel {
 		JOptionPane.showMessageDialog(null, message);
 	}
 
-	
-
+	@Override
+	protected void paintComponent(Graphics g) {
+	    super.paintComponent(g);
+	    ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "match.jpg");
+		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
+	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
+        g.drawImage(icon.getImage(), 0, yPos, null);
+	}
 
 }
