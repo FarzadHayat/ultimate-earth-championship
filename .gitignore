@@ -61,3 +61,6 @@ local.properties
 
 # Metadata
 'Eclipse Workspace'/.metadata/
+
+# GIMP files
+'Eclipse Workspace/UltimateEarthChampionship/src/images/backgrounds/*.xcf'
