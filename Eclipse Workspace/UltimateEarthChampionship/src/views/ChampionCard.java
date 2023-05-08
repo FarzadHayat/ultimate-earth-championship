@@ -2,17 +2,8 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import exception.FullTeamException;
-import exception.IllegalPurchaseException;
-import exception.IncompleteTeamException;
-import exception.InsufficientFundsException;
 import model.Champion;
 
 public class ChampionCard extends PurchasableCard {

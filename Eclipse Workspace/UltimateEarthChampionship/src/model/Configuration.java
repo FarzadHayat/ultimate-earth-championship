@@ -123,6 +123,11 @@ public class Configuration {
 	public static final String ICON_IMAGE_FOLDER_PATH = "src/images/icons/";
 	
 	/**
+	 *  Path to folder containing background images
+	 */
+	public static final String BACKGROUND_IMAGE_FOLDER_PATH = "src/images/backgrounds/";
+	
+	/**
 	 * Number of teams, including player team
 	 */
 	public final int NUM_TEAMS = 4;

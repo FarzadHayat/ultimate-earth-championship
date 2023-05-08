@@ -2,6 +2,8 @@ package story;
 
 import java.util.ArrayList;
 
+import model.Configuration;
+
 public class OpeningCutscene extends Cutscene {
 
 	public OpeningCutscene() {
@@ -14,34 +16,34 @@ public class OpeningCutscene extends Cutscene {
 		
 		c.add(new CutsceneSlide(
 				"When the Thoran Intergalactic Federation first arrived on Earth, the world stood still.", 
-				null));
+				Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "story1.jpg"));
 		
 		c.add(new CutsceneSlide(
 				"Despite our greatest fears, the extraterrestrial visitors came in peace, inviting us "
 				+ "to join their federation.", 
-				null));
+				Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "story2.jpg"));
 		
 		c.add(new CutsceneSlide(
 				"To represent us in the grand galactic senate, four of Earth's greatest champions are needed.", 
-				null));
+				Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "story3.jpg"));
 		
 		c.add(new CutsceneSlide(
 				"To find them, the aliens began resurrecting great Humans of old and devising a grand tournament "
 				+ "so that the most \"badass, jacked, cool-as earthbros\" could be found.", 
-				null));
+				Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "story4.jpg"));
 		
 		c.add(new CutsceneSlide(
 				"This alien sport is one of combat, a test of will, strength and strategy.", 
-				null));
+				Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "story5.jpg"));
 		
 		c.add(new CutsceneSlide(
 				"While the sport's true Thoran name is unpronounceable by the Human tongue, those on earth "
 				+ "would come to know it as the...", 
-				null));
+				Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "story6.jpg"));
 		
 		c.add(new CutsceneSlide(
 				"Ultimate Earth Championship.", 
-				null));
+				Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "story7.jpg"));
 		
 		return c;
 	}

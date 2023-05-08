@@ -3,7 +3,14 @@ package views;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.Image;
+
 import javax.swing.SwingConstants;
+
+import display.GraphicalDisplay;
+
+import javax.swing.ImageIcon;
 
 import manager.GameManager;
 import manager.GraphicalGameManager;
@@ -28,7 +35,6 @@ public class CutsceneView extends JPanel {
 	public CutsceneView(Cutscene cutscene) {
 		this.cutscene = cutscene;
 		
-		
 		initialize();
 		redrawPanel();
 	}
@@ -45,6 +51,7 @@ public class CutsceneView extends JPanel {
 		
 		// Panel to push button to bottom center of screen
 		JPanel bottomPanel = new JPanel();
+		bottomPanel.setOpaque(false);
 		add(bottomPanel, BorderLayout.SOUTH);
 		
 		// Button...
@@ -81,8 +88,16 @@ public class CutsceneView extends JPanel {
 		getNextSlide();
 		
 		mainText.setText(slideText);
-		
-		// TODO: Setup image path here:
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+	    super.paintComponent(g);
+	    ImageIcon icon = new ImageIcon(slideImagePath);
+//		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+//								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
+	    int xPos = (int) ((GraphicalDisplay.WIDTH - icon.getIconWidth()) / 2);
+        g.drawImage(icon.getImage(), xPos, 0, null);
 	}
 
 	private void buttonPressed()
