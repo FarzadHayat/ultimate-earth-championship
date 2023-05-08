@@ -34,10 +34,17 @@ public class ShopView extends JPanel {
 	private void addAvailableChampionsPanel() {
 		JPanel championsPanel = new JPanel(new FlowLayout());
 		for (Champion champion : gameManager.getShop().getAvailableChampions()) {
-			PurchasableCard card = new PurchasableCard(champion);
+			PurchasableCard card = new ChampionCard(champion);
 			card.addStatsPanel();
 			card.addBuyButton();
 			championsPanel.add(card);
+			if (gameManager.getPlayerTeam().getChampions().contains(champion)) {
+				card.addOverlay("SOLD!");
+			} else {
+				if (gameManager.getPlayerTeam().isWeeklyChampionPurchased()) {
+					card.addOverlay("");
+				}
+			}
 		}
 		add(championsPanel);
 	}
@@ -48,7 +55,7 @@ public class ShopView extends JPanel {
 	private void addAvailableWeaponsPanel() {
 		JPanel weaponsPanel = new JPanel(new FlowLayout());
 		for (Weapon weapon : gameManager.getShop().getAvailableWeapons()) {
-			PurchasableCard card = new PurchasableCard(weapon);
+			PurchasableCard card = new WeaponCard(weapon);
 			card.addStatsPanel();
 			card.addBuyButton();
 			weaponsPanel.add(card);

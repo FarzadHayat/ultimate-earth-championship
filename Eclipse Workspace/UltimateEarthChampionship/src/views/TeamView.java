@@ -42,11 +42,11 @@ public class TeamView extends JPanel {
 			PurchasableCard card;
 			if (champions.size() > i) {
 				Champion champion = champions.get(i);
-				card = new PurchasableCard(champion);
+				card = new ChampionCard(champion);
 				card.addStatsPanel();
 				card.addSellButton();
 			} else {
-				card = new PurchasableCard();
+				card = new ChampionCard();
 			}
 			championsPanel.add(card);
 		}
@@ -63,11 +63,11 @@ public class TeamView extends JPanel {
 			PurchasableCard card;
 			if (weapons.size() > i) {
 				Weapon weapon = weapons.get(i);
-				card = new PurchasableCard(weapon);
+				card = new WeaponCard(weapon);
 				card.addStatsPanel();
 				card.addSellButton();
 			} else {
-				card = new PurchasableCard();
+				card = new WeaponCard();
 			}
 			weaponsPanel.add(card);
 		}

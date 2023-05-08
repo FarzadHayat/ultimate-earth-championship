@@ -69,7 +69,7 @@ public class WeaponSetupView extends JPanel {
 			if (weapons.size() > i) {
 				Weapon weapon = weapons.get(i);
 				ArrayList<Weapon> chosenWeapons = gameManager.getPlayerTeam().getChosenWeapons();
-				card = new PurchasableCard(weapon);
+				card = new WeaponCard(weapon);
 				card.addStatsPanel();
 				card.addMouseListener(new MouseListener() {
 					@Override
@@ -110,7 +110,7 @@ public class WeaponSetupView extends JPanel {
 					card.selected();
 				}
 			} else {
-				card = new PurchasableCard();
+				card = new WeaponCard();
 			}
 			weaponsPanel.add(card);
 		}
@@ -134,11 +134,11 @@ public class WeaponSetupView extends JPanel {
 			PurchasableCard card;
 			if (chosenChampions.size() > i) {
 				Champion champion = chosenChampions.get(i);
-				card = new PurchasableCard(champion);
+				card = new ChampionCard(champion);
 				card.addStatsPanel();
 				card.selected();
 			} else {
-				card = new PurchasableCard();
+				card = new ChampionCard();
 			}
 			chosenChampionsPanel.add(card);
 		}
@@ -152,11 +152,11 @@ public class WeaponSetupView extends JPanel {
 			PurchasableCard card;
 			if (chosenWeapons.size() > i) {
 				Weapon weapon = chosenWeapons.get(i);
-				card = new PurchasableCard(weapon);
+				card = new WeaponCard(weapon);
 				card.addStatsPanel();
 				card.selected();
 			} else {
-				card = new PurchasableCard();
+				card = new WeaponCard();
 			}
 			chosenWeaponsPanel.add(card);
 		}

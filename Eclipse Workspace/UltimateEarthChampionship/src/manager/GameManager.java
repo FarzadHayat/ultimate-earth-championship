@@ -511,7 +511,7 @@ public abstract class GameManager
 				team.buy(weaponsLeft.get(weaponIndex));
 				weaponsLeft.remove(weaponIndex);
 			}
-			catch (FullTeamException | InsufficientFundsException | IllegalPurchaseException e) {
+			catch (FullTeamException | InsufficientFundsException e) {
 				if (Configuration.DEBUG) {
 					System.out.println(team.getName() + " BUY WEAPON: " + e.getMessage());
 				}

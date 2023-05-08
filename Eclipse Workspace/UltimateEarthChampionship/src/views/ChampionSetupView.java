@@ -62,7 +62,7 @@ public class ChampionSetupView extends JPanel {
 			if (champions.size() > i) {
 				Champion champion = champions.get(i);
 				ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions();
-				card = new PurchasableCard(champion);
+				card = new ChampionCard(champion);
 				card.addStatsPanel();
 				card.addMouseListener(new MouseListener() {
 					@Override
@@ -103,7 +103,7 @@ public class ChampionSetupView extends JPanel {
 					card.selected();
 				}
 			} else {
-				card = new PurchasableCard();
+				card = new ChampionCard();
 			}
 			championsPanel.add(card);
 		}
@@ -127,11 +127,11 @@ public class ChampionSetupView extends JPanel {
 			PurchasableCard card;
 			if (chosenChampions.size() > i) {
 				Champion champion = chosenChampions.get(i);
-				card = new PurchasableCard(champion);
+				card = new ChampionCard(champion);
 				card.addStatsPanel();
 				card.selected();
 			} else {
-				card = new PurchasableCard();
+				card = new ChampionCard();
 			}
 			chosenChampionsPanel.add(card);
 		}
