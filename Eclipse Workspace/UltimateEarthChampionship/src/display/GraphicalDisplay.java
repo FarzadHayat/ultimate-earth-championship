@@ -14,10 +14,10 @@ import match.MatchResult;
 import story.Cutscene;
 import views.ChampionSetupView;
 import views.CutsceneView;
-import views.SetupView;
 import views.MatchView;
-import views.WeaponSetupView;
+import views.SetupView;
 import views.TabbedView;
+import views.WeaponSetupView;
 
 public class GraphicalDisplay implements DisplayStrategy {
 

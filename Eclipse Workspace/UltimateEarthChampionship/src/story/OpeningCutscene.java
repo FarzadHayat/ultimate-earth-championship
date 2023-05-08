@@ -2,8 +2,6 @@ package story;
 
 import java.util.ArrayList;
 
-import model.Configuration;
-
 public class OpeningCutscene extends Cutscene {
 
 	public OpeningCutscene() {
