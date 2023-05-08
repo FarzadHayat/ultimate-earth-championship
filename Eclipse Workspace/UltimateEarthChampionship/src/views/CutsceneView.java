@@ -1,9 +1,15 @@
 package views;
 
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 
 import javax.swing.SwingConstants;
@@ -14,6 +20,7 @@ import javax.swing.ImageIcon;
 
 import manager.GameManager;
 import manager.GraphicalGameManager;
+import model.Configuration;
 import story.*;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -29,7 +36,7 @@ public class CutsceneView extends JPanel {
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 	private Cutscene cutscene;
 	
-	private JLabel mainText;
+	private JTextPane mainText;
 	private JButton continueButton;
 	
 	public CutsceneView(Cutscene cutscene) {
@@ -44,10 +51,17 @@ public class CutsceneView extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 		
 		// Text Area:
-		mainText = new JLabel(slideText);
-		mainText.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		add(mainText);
+		JPanel textPanel = new JPanel(new GridBagLayout());
+		mainText = new JTextPane();
+		mainText.setText(slideText);
+		mainText.setFont(Configuration.HEADER_FONT);
+		mainText.setForeground(Color.white);
+		mainText.setOpaque(true);
+		mainText.setBackground(Color.darkGray);
+		mainText.setPreferredSize(new Dimension((int) (GraphicalDisplay.WIDTH / 2), 100));
+		textPanel.add(mainText);
+		textPanel.setOpaque(false);
+		add(textPanel, BorderLayout.CENTER);
 		
 		// Panel to push button to bottom center of screen
 		JPanel bottomPanel = new JPanel();
@@ -94,10 +108,10 @@ public class CutsceneView extends JPanel {
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
 	    ImageIcon icon = new ImageIcon(slideImagePath);
-//		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
-//								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
-	    int xPos = (int) ((GraphicalDisplay.WIDTH - icon.getIconWidth()) / 2);
-        g.drawImage(icon.getImage(), xPos, 0, null);
+		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
+	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
+        g.drawImage(icon.getImage(), 0, yPos, null);
 	}
 
 	private void buttonPressed()
