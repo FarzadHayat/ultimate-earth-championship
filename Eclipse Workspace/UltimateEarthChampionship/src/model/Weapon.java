@@ -6,6 +6,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import exception.FullTeamException;
+import exception.IncompleteTeamException;
+import exception.InsufficientFundsException;
+
 /**
  * Class Weapon
  */
@@ -208,6 +212,22 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	public boolean isDefault()
 	{
 		return isDefaultWeapon;
+	}
+	
+	public void buy(Team team) throws InsufficientFundsException, FullTeamException {
+		team.removeMoney(getPrice());
+		try {
+			team.addWeapon(clone());
+		}
+		catch (FullTeamException e) {
+			team.addMoney(getPrice());
+			throw new FullTeamException(e.getMessage());
+		}
+	}
+	
+	public void sell(Team team) throws IncompleteTeamException {
+		team.removeWeapon(this);
+		team.addMoney(getPrice());
 	}
 	
 	/**

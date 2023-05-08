@@ -6,15 +6,23 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import exception.FullTeamException;
+import exception.IllegalPurchaseException;
+import exception.IncompleteTeamException;
+import exception.InsufficientFundsException;
 import manager.GameManager;
 import manager.GraphicalGameManager;
 import model.Purchasable;
@@ -103,9 +111,59 @@ public abstract class PurchasableCard extends JPanel {
 		soldOverlay.add(soldLabel);
 		add(soldOverlay, 0);
 	}
+	
+	/**
+	 * Add a buy button to the south of the card.
+	 */
+	public void addBuyButton() {
+	    JButton buyButton = new JButton("Buy for $" + purchasable.getPrice());
+	    buyButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					String message = String.format("Are you sure you want to buy %s for $%s?",
+							purchasable.getName(), purchasable.getPrice());
+					int answer = JOptionPane.showConfirmDialog(getParent(), message,
+							"Buy: " + purchasable.getName(), JOptionPane.YES_NO_OPTION);
+					if (answer == JOptionPane.YES_OPTION) {
+						purchasable.buy(gameManager.getPlayerTeam());
+						gameManager.repaintShop();
+					}
+				} catch (InsufficientFundsException | FullTeamException | IllegalPurchaseException e) {
+					JOptionPane.showMessageDialog(getParent(), e.getMessage());
+				}
+			}
+		});
+	    mainPanel.add(buyButton, BorderLayout.SOUTH);
+	}
+
+	/**
+	 * Add a sell button the purchasable to the south of the card.
+	 */
+	public void addSellButton() {
+	    JButton sellButton = new JButton("Sell for $" + purchasable.getPrice());
+	    sellButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					String message = String.format("Are you sure you want to sell %s for $%s?",
+							purchasable.getName(), purchasable.getPrice());
+					int answer = JOptionPane.showConfirmDialog(getParent(), message,
+							"Sell: " + purchasable.getName(), JOptionPane.YES_NO_OPTION);
+					if (answer == JOptionPane.YES_OPTION) {
+						purchasable.sell(gameManager.getPlayerTeam());
+						gameManager.repaintTeam();
+					}
+				} catch (IncompleteTeamException e) {
+					JOptionPane.showMessageDialog(getParent(), e.getMessage());
+				}
+			}
+		});
+	    mainPanel.add(sellButton, BorderLayout.SOUTH);
+	}
 
 	public abstract void addStatsPanel();
-	public abstract void addBuyButton();
-	public abstract void addSellButton();
 
 }

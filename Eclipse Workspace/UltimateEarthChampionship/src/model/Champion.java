@@ -5,6 +5,10 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 
+import exception.FullTeamException;
+import exception.IllegalPurchaseException;
+import exception.IncompleteTeamException;
+import exception.InsufficientFundsException;
 import weapons.Fists;
 
 /**
@@ -427,6 +431,30 @@ public abstract class Champion implements Purchasable, Cloneable {
 		return image;
 	}
 
+	public void buy(Team team) throws InsufficientFundsException, FullTeamException, IllegalPurchaseException {
+		team.removeMoney(getPrice());
+		try {
+			if (team.isWeeklyChampionPurchased()) {
+				throw new IllegalPurchaseException(team.getName() + " already purchased a champion this week!");
+			}
+			team.addChampion(this);
+			team.setWeeklyChampionPurchased(true);
+		}
+		catch (FullTeamException e) {
+			team.addMoney(getPrice());
+			throw new FullTeamException(e.getMessage());
+		}
+		catch(IllegalPurchaseException e) {
+			team.addMoney(getPrice());
+			throw new IllegalPurchaseException(e.getMessage());
+		}
+	}
+	
+	public void sell(Team team) throws IncompleteTeamException {
+		team.removeChampion(this);
+		team.addMoney(getPrice());
+	}
+	
 	/**
 	 * Create a clone of the Champion with the same stats.
 	 */

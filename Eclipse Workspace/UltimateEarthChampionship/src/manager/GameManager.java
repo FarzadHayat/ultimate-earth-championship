@@ -498,7 +498,7 @@ public abstract class GameManager
 		for (Team team : teams) {
 			try {
 				int championIndex = random.nextInt(championsLeft.size());
-				team.buy(championsLeft.get(championIndex));
+				championsLeft.get(championIndex).buy(team);
 				championsLeft.remove(championIndex);
 			}
 			catch (FullTeamException | InsufficientFundsException | IllegalPurchaseException e) {
@@ -508,7 +508,7 @@ public abstract class GameManager
 			}
 			try {
 				int weaponIndex = random.nextInt(weaponsLeft.size());
-				team.buy(weaponsLeft.get(weaponIndex));
+				weaponsLeft.get(weaponIndex).buy(team);
 				weaponsLeft.remove(weaponIndex);
 			}
 			catch (FullTeamException | InsufficientFundsException e) {

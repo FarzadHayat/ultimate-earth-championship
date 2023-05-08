@@ -343,47 +343,7 @@ public class Team {
 	public void setWeeklyChampionPurchased(boolean weeklyChampionPurchased) {
 		this.weeklyChampionPurchased = weeklyChampionPurchased;
 	}
-	
-	public void buy(Champion champion) throws InsufficientFundsException, FullTeamException, IllegalPurchaseException {
-		removeMoney(champion.getPrice());
-		try {
-			if (isWeeklyChampionPurchased()) {
-				throw new IllegalPurchaseException(getName() + " already purchased a champion this week!");
-			}
-			addChampion(champion);
-			setWeeklyChampionPurchased(true);
-		}
-		catch (FullTeamException e) {
-			addMoney(champion.getPrice());
-			throw new FullTeamException(e.getMessage());
-		}
-		catch(IllegalPurchaseException e) {
-			addMoney(champion.getPrice());
-			throw new IllegalPurchaseException(e.getMessage());
-		}
-	}
-	
-	public void buy(Weapon weapon) throws InsufficientFundsException, FullTeamException {
-		removeMoney(weapon.getPrice());
-		try {
-			addWeapon(weapon.clone());
-		}
-		catch (FullTeamException e) {
-			addMoney(weapon.getPrice());
-			throw new FullTeamException(e.getMessage());
-		}
-	}
-	
-	public void sell(Champion champion) throws IncompleteTeamException {
-		removeChampion(champion);
-		addMoney(champion.getPrice());
-	}
-	
-	public void sell(Weapon weapon) throws IncompleteTeamException {
-		removeWeapon(weapon);
-		addMoney(weapon.getPrice());
-	}
-	
+		
 	public void randomlySelectPurchasables() {
 		randomlySelectChampions();
 		randomlySelectWeapons();
