@@ -2,6 +2,7 @@ package views;
 
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Label;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +49,9 @@ public class StatLabel extends JPanel {
 	 * @param value the value of the value label
 	 */
 	private void addValueLabel(String value) {
-		add(new JLabel(value));
+		JLabel label = new JLabel(value);
+		label.setFont(Configuration.TEXT_FONT);
+		add(label);
 	}
 
 	/**

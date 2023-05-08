@@ -25,6 +25,7 @@ import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
 import manager.GameManager;
 import manager.GraphicalGameManager;
+import model.Configuration;
 import model.Purchasable;
 
 public abstract class PurchasableCard extends JPanel {
@@ -83,6 +84,7 @@ public abstract class PurchasableCard extends JPanel {
 	private void addName() {
 		JLabel nameLabel = new JLabel(purchasable.getName());
 		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		nameLabel.setFont(Configuration.TEXT_FONT);
 		mainPanel.add(nameLabel, BorderLayout.NORTH);
 	}
 
@@ -106,7 +108,7 @@ public abstract class PurchasableCard extends JPanel {
 		soldOverlay = new JPanel(new GridBagLayout());
 		soldOverlay.setBackground(new Color(0.7f, 0.7f, 0.7f, 0.7f));
 		JLabel soldLabel = new JLabel(text);
-		soldLabel.setFont(new Font("Arial", Font.BOLD, 24));
+		soldLabel.setFont(Configuration.HEADER_FONT);
 		soldLabel.setForeground(Color.red);
 		soldOverlay.add(soldLabel);
 		add(soldOverlay, 0);

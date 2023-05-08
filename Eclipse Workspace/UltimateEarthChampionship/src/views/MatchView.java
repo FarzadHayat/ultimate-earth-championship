@@ -127,6 +127,7 @@ public class MatchView extends JPanel {
 		
 		selectedChampionLabel = new JLabel("<Champion Selected> :");
 		selectedChampionLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		selectedChampionLabel.setFont(Configuration.TEXT_FONT);
 		buttonPanel.add(selectedChampionLabel);
 		
 		attackButton = new JButton("Move");
@@ -202,17 +203,17 @@ public class MatchView extends JPanel {
 		
 		JLabel headerText = new JLabel(match.getTeam1().getName() + " vs " + match.getTeam2().getName());
 		headerText.setHorizontalAlignment(SwingConstants.CENTER);
-		headerText.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		headerText.setFont(Configuration.TEXT_FONT);
 		topGridPanel.add(headerText);
 		
 		JLabel subheader1 = new JLabel("Win by moving your flag bearer to the enemy side");
 		subheader1.setHorizontalAlignment(SwingConstants.CENTER);
-		subheader1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		subheader1.setFont(Configuration.TEXT_FONT);
 		topGridPanel.add(subheader1);
 		
 		JLabel subheader2 = new JLabel("Match Worth: "+ match.getScore() +" score");
 		subheader2.setHorizontalAlignment(SwingConstants.CENTER);
-		subheader2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		subheader2.setFont(Configuration.TEXT_FONT);
 		topGridPanel.add(subheader2);
 	}
 	

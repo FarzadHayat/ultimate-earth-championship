@@ -43,9 +43,10 @@ public class StadiumView extends JPanel {
 	 */
 	public void addTeamPanel(Team team) {
 		JPanel panel = new JPanel();
+		panel.setOpaque(false);
 		panel.setLayout(new BorderLayout());
 		
-		JLabel nameLabel = new JLabel(team.getName());
+		HeaderPanel nameLabel = new HeaderPanel(team.getName());
 		panel.add(nameLabel, BorderLayout.NORTH);
 		
 		DefaultListModel<String> model = new DefaultListModel<>();

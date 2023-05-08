@@ -217,7 +217,7 @@ public class Configuration {
 	/**
 	 * The font used for regular text.
 	 */
-	public static final Font TEXT_FONT = new Font(FONT_FAMILY, Font.PLAIN, 16);
+	public static final Font TEXT_FONT = new Font(FONT_FAMILY, Font.BOLD, 14);
 	
 	/**
 	 * The lower bound of AI aggression, 

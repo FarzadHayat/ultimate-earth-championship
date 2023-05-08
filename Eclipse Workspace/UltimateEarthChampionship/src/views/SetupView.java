@@ -1,6 +1,5 @@
 package views;
 
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -90,23 +89,24 @@ public class SetupView extends JPanel{
 		setLayout(null);
 		
 		JLabel headerLabel = new JLabel("Welcome to Ultimate Earth Championship");
-		headerLabel.setBounds(10, 11, 430, 30);
-		headerLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		headerLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		headerLabel.setBounds(298, 65, 520, 60);
+		headerLabel.setFont(Configuration.HEADER_FONT);
+		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(headerLabel);
 		
 		teamNameField = new JTextField();
-		teamNameField.setBounds(145, 51, 200, 20);
+		teamNameField.setBounds(343, 277, 200, 20);
 		add(teamNameField);
 		
 		JLabel nameTeamLabel = new JLabel("Team name:");
-		nameTeamLabel.setBounds(10, 46, 278, 30);
+		nameTeamLabel.setBounds(164, 274, 278, 30);
 		nameTeamLabel.setToolTipText("Must be between 3 and 15 characters, cannot contain special characters");
 		nameTeamLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		nameTeamLabel.setFont(Configuration.TEXT_FONT);
 		add(nameTeamLabel);
 		
 		JButton submitButton = new JButton("Submit");
-		submitButton.setBounds(10, 628, 105, 30);
+		submitButton.setBounds(314, 574, 105, 30);
 		
 		submitButton.addActionListener(new ActionListener() 
 		{
@@ -118,30 +118,33 @@ public class SetupView extends JPanel{
 		add(submitButton);
 		
 		JLabel chooseWeeksLabel = new JLabel("Number of weeks in tournament:");
-		chooseWeeksLabel.setBounds(10, 87, 230, 30);
+		chooseWeeksLabel.setBounds(156, 367, 266, 30);
 		chooseWeeksLabel.setToolTipText("");
 		chooseWeeksLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		chooseWeeksLabel.setFont(Configuration.TEXT_FONT);
 		add(chooseWeeksLabel);
 		
 		weekSelectionSpinner = new JSpinner();
-		weekSelectionSpinner.setBounds(294, 92, 51, 20);
+		weekSelectionSpinner.setBounds(496, 366, 51, 20);
 		weekSelectionSpinner.setModel(new SpinnerNumberModel(5, config.MIN_NUM_GAME_WEEKS, config.MAX_NUM_GAME_WEEKS, 1));
 		add(weekSelectionSpinner);
 		
 		JLabel chooseDifficultyLabel = new JLabel("Choose the difficulty:");
-		chooseDifficultyLabel.setBounds(10, 128, 143, 30);
+		chooseDifficultyLabel.setBounds(166, 460, 163, 30);
 		chooseDifficultyLabel.setToolTipText("");
 		chooseDifficultyLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		chooseDifficultyLabel.setFont(Configuration.TEXT_FONT);
 		add(chooseDifficultyLabel);
 		
 		difficultyText = new JLabel("");
-		difficultyText.setBounds(177, 156, 143, 30);
+		difficultyText.setBounds(395, 504, 143, 30);
 		difficultyText.setToolTipText("");
 		difficultyText.setHorizontalAlignment(SwingConstants.CENTER);
+		difficultyText.setFont(Configuration.TEXT_FONT);
 		add(difficultyText);
 		
 		difficultySlider = new JSlider();
-		difficultySlider.setBounds(145, 132, 200, 26);
+		difficultySlider.setBounds(359, 468, 200, 26);
 		difficultySlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				updateDifficultyText();
@@ -158,16 +161,18 @@ public class SetupView extends JPanel{
 		
 		// Some more labels:
 		JLabel championsChooseHeaderLabel = new JLabel("Champions to choose from:");
-		championsChooseHeaderLabel.setBounds(396, 52, 193, 14);
+		championsChooseHeaderLabel.setFont(Configuration.TEXT_FONT);
+		championsChooseHeaderLabel.setBounds(626, 272, 519, 14);
 		add(championsChooseHeaderLabel);
 		
 		JLabel chosenChampionsLabel = new JLabel("Chosen champions:     (Choose 4)");
-		chosenChampionsLabel.setBounds(396, 253, 193, 14);
+		chosenChampionsLabel.setFont(Configuration.TEXT_FONT);
+		chosenChampionsLabel.setBounds(628, 501, 467, 14);
 		add(chosenChampionsLabel);
 		
 		// Available champions list
 		availChampionsList = new JList<Object>();
-		availChampionsList.setBounds(396, 77, 601, 150);
+		availChampionsList.setBounds(624, 327, 601, 150);
 		availChampionsList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				// Move champion from available champion to chosen champion...
@@ -197,7 +202,7 @@ public class SetupView extends JPanel{
 		
 		// Chosen champions lists
 		chosenChampionsList = new JList<Object>();
-		chosenChampionsList.setBounds(396, 278, 601, 90);
+		chosenChampionsList.setBounds(626, 548, 601, 90);
 		chosenChampionsList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				// Move champion from chosen champions to available champion...

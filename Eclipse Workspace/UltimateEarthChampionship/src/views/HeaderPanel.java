@@ -17,9 +17,9 @@ public class HeaderPanel extends JPanel {
 	 */
 	public HeaderPanel(String header) {
 		setLayout(new GridBagLayout());
+		setOpaque(false);
 		JLabel label = new JLabel(header);
 		label.setFont(Configuration.HEADER_FONT);
-		setOpaque(false);
 		label.setForeground(Color.white);
 		label.setBackground(Color.darkGray);
 		label.setOpaque(true);

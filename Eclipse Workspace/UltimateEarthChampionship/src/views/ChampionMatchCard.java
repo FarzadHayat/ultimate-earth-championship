@@ -7,15 +7,17 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Image.*;
-
 import javax.swing.SwingConstants;
 
 import model.Champion;
+import model.Configuration;
+
 import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 
 public class ChampionMatchCard extends JPanel{
+
+	private static final long serialVersionUID = 8796554745910845194L;
 
 	private Champion champion;
 	
@@ -49,7 +51,7 @@ public class ChampionMatchCard extends JPanel{
 		
 		championNameText = new JLabel("Champion Name");
 		championNameText.setHorizontalAlignment(SwingConstants.CENTER);
-		championNameText.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		championNameText.setFont(Configuration.TEXT_FONT);
 		centerPanel.add(championNameText, BorderLayout.NORTH);
 		
 		panel = new JPanel();
@@ -59,12 +61,12 @@ public class ChampionMatchCard extends JPanel{
 		championImage = new JLabel("");
 		championImage.setIcon(new ImageIcon());
 		championImage.setHorizontalAlignment(SwingConstants.CENTER);
-		championImage.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		championImage.setFont(Configuration.TEXT_FONT);
 		panel.add(championImage);
 		
 		championStaminaText = new JLabel("0/100 Stamina");
 		championStaminaText.setHorizontalAlignment(SwingConstants.CENTER);
-		championStaminaText.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		championStaminaText.setFont(Configuration.TEXT_FONT);
 		centerPanel.add(championStaminaText, BorderLayout.SOUTH);
 	}
 	
