@@ -107,59 +107,6 @@ public class PurchasableCard extends JPanel {
 		mainPanel.add(imageLabel, BorderLayout.WEST);
 	}
 
-	public void addRosterToggle() {
-		addMouseListener(new MouseListener() {
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (purchasable.getClass().getSuperclass() == Champion.class) {
-					if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable)) {
-						gameManager.getPlayerTeam().removeChosenChampion((Champion) purchasable);
-					} else {
-						try {
-							gameManager.getPlayerTeam().addChosenChampion((Champion) purchasable);
-						} catch (FullTeamException e1) {
-							JOptionPane.showMessageDialog(getParent(), e1.getMessage());
-						};
-					}
-					gameManager.repaintChampionSetup();
-				}
-				if (purchasable.getClass().getSuperclass() == Weapon.class) {
-					if (gameManager.getPlayerTeam().getChosenWeapons().contains(purchasable)) {
-						gameManager.getPlayerTeam().removeChosenWeapon((Weapon) purchasable);
-					} else {
-						try {
-							gameManager.getPlayerTeam().addChosenWeapon((Weapon) purchasable);
-						} catch (FullTeamException e1) {
-							JOptionPane.showMessageDialog(getParent(), e1.getMessage());
-						};
-					}
-					gameManager.repaintWeaponSetup();
-				}
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable) ||
-						gameManager.getPlayerTeam().getChosenWeapons().contains(purchasable)) {
-					selected();
-				} else {
-					unselected();
-				}
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				hovered();
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {}
-		});
-	}
-
 	public void addOverlay(String text) {
 		soldOverlay = new JPanel(new GridBagLayout());
 		soldOverlay.setBackground(new Color(0.7f, 0.7f, 0.7f, 0.7f));

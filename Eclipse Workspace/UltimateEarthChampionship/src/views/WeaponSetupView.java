@@ -1,17 +1,20 @@
 package views;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import exception.FullTeamException;
 import manager.GameManager;
 import manager.GraphicalGameManager;
 import model.Champion;
@@ -65,10 +68,45 @@ public class WeaponSetupView extends JPanel {
 			PurchasableCard card;
 			if (weapons.size() > i) {
 				Weapon weapon = weapons.get(i);
+				ArrayList<Weapon> chosenWeapons = gameManager.getPlayerTeam().getChosenWeapons();
 				card = new PurchasableCard(weapon);
 				card.addStatsPanel();
-				card.addRosterToggle();
-				if (gameManager.getPlayerTeam().getChosenChampions().contains(weapon)) {
+				card.addMouseListener(new MouseListener() {
+					@Override
+					public void mouseReleased(MouseEvent e) {}
+					
+					@Override
+					public void mousePressed(MouseEvent e) {
+						if (chosenWeapons.contains(weapon)) {
+							gameManager.getPlayerTeam().removeChosenWeapon(weapon);
+						} else {
+							try {
+								gameManager.getPlayerTeam().addChosenWeapon(weapon);
+							} catch (FullTeamException e1) {
+								JOptionPane.showMessageDialog(getParent(), e1.getMessage());
+							};
+						}
+						gameManager.repaintWeaponSetup();
+					}
+					
+					@Override
+					public void mouseExited(MouseEvent e) {
+						if (chosenWeapons.contains(weapon)) {
+							card.selected();
+						} else {
+							card.unselected();
+						}
+					}
+					
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						card.hovered();
+					}
+					
+					@Override
+					public void mouseClicked(MouseEvent e) {}
+				});
+				if (chosenWeapons.contains(weapon)) {
 					card.selected();
 				}
 			} else {

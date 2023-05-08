@@ -1,19 +1,19 @@
 package views;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
-
+import exception.FullTeamException;
 import manager.GameManager;
 import manager.GraphicalGameManager;
 import model.Champion;
@@ -61,10 +61,45 @@ public class ChampionSetupView extends JPanel {
 			PurchasableCard card;
 			if (champions.size() > i) {
 				Champion champion = champions.get(i);
+				ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions();
 				card = new PurchasableCard(champion);
 				card.addStatsPanel();
-				card.addRosterToggle();
-				if (gameManager.getPlayerTeam().getChosenChampions().contains(champion)) {
+				card.addMouseListener(new MouseListener() {
+					@Override
+					public void mouseReleased(MouseEvent e) {}
+					
+					@Override
+					public void mousePressed(MouseEvent e) {
+						if (chosenChampions.contains(champion)) {
+							gameManager.getPlayerTeam().removeChosenChampion(champion);
+						} else {
+							try {
+								gameManager.getPlayerTeam().addChosenChampion(champion);
+							} catch (FullTeamException e1) {
+								JOptionPane.showMessageDialog(getParent(), e1.getMessage());
+							};
+						}
+						gameManager.repaintChampionSetup();
+					}
+					
+					@Override
+					public void mouseExited(MouseEvent e) {
+						if (chosenChampions.contains(champion)) {
+							card.selected();
+						} else {
+							card.unselected();
+						}
+					}
+					
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						card.hovered();
+					}
+					
+					@Override
+					public void mouseClicked(MouseEvent e) {}
+				});
+				if (chosenChampions.contains(champion)) {
 					card.selected();
 				}
 			} else {
