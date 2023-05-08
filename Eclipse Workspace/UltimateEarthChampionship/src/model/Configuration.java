@@ -240,6 +240,26 @@ public class Configuration {
 	 */
 	public final int AI_WAIT_TIME_MS = 450;
 	
+	/**
+	 * The amount that stamina increases when a champion levels up
+	 */
+	public final int LEVEL_UP_STAMINA_INCREASE = 10;
+	
+	/**
+	 * The amount that regen increases when a champion levels up
+	 */
+	public final int LEVEL_UP_REGEN_INCREASE = 2;
+	
+	/**
+	 * The amount that offense increases when a champion levels up
+	 */
+	public final int LEVEL_UP_OFFENSE_INCREASE = 1;
+	
+	/**
+	 * The amount that defense increases when a champion levels up
+	 */
+	public final int LEVEL_UP_DEFENSE_INCREASE = 1;
+	
 	public float getDifficulty()
 	{
 		return difficulty;
