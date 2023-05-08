@@ -1,25 +1,25 @@
 package views;
 
-import javax.swing.JPanel;
-import javax.swing.JTextPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-
-import display.GraphicalDisplay;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
 
+import display.GraphicalDisplay;
 import manager.GameManager;
 import manager.GraphicalGameManager;
 import model.Configuration;
-import story.*;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import story.Cutscene;
+import story.CutsceneSlide;
 
 public class CutsceneView extends JPanel {
 	

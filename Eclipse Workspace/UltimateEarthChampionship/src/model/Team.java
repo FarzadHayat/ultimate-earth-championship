@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import exception.FullTeamException;
-import exception.IllegalPurchaseException;
 import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
 import manager.GameManager;
@@ -59,9 +58,6 @@ public class Team {
 	 * Agression determines how likely a team is to get their champions to attack rather than wait
 	 */
 	private int aggression;
-	
-	private GameManager gameManager = GameManager.getInstance();
-	
 	
 	private boolean weeklyChampionPurchased = false;
 	

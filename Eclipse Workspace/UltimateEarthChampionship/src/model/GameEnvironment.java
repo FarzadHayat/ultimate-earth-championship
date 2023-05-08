@@ -14,8 +14,6 @@ import manager.GameManager;
 
 public class GameEnvironment {
 	
-	private Configuration config = Configuration.getInstance();
-	
 	/**
 	 * The current week, starting from 1
 	 */

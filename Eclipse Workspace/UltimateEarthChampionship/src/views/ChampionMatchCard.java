@@ -1,19 +1,17 @@
 package views;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.FlowLayout;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.Image;
 import javax.swing.SwingConstants;
 
 import model.Champion;
 import model.Configuration;
-
-import java.awt.FlowLayout;
-import javax.swing.ImageIcon;
 
 public class ChampionMatchCard extends JPanel{
 
