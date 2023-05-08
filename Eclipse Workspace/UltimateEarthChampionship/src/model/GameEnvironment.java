@@ -65,7 +65,7 @@ public class GameEnvironment {
 	 * Constructor class
 	 */
 	public GameEnvironment() {
-		currentWeek = 0;
+		currentWeek = 1;
 		maxWeek = 99;
 		events = new ArrayList<RandomEvent>();
 		getAllEvents();

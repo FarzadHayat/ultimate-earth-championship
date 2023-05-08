@@ -38,8 +38,8 @@ public class InfoPanel extends JPanel {
 		JLabel weekLabel = new JLabel("Week: ");
 		weekPanel.add(weekLabel);
 		
-		String weekValueString = String.valueOf(gameManager.getGameEnvironment().getCurrentWeek()) + " out of " +
-								String.valueOf(gameManager.getGameEnvironment().getCurrentWeek());
+		String weekValueString = String.valueOf(gameManager.getGameEnvironment().getCurrentWeek())
+					+ " out of " + String.valueOf(gameManager.getGameEnvironment().getMaxWeeks());
 		JLabel weekValue = new JLabel(weekValueString);
 		weekPanel.add(weekValue);
 	}

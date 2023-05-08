@@ -467,8 +467,8 @@ public abstract class GameManager
 		// Reset match and enemy team
 		setMatch(null);
 		setEnemyTeam(null);
-		// Go to next week
-		finishedWeek();
+		// Show end of week results and random events
+		displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
 	}
 
 	private void fightTeams(ArrayList<Team> teams) {
@@ -526,7 +526,6 @@ public abstract class GameManager
 		try {
 			gameEnvironment.nextWeek();
 			shop.generateCatalogue();
-			displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
 			displayStrategy.displayTeam();
 		} catch (GameFinishedException e) {
 			finishedGame();
