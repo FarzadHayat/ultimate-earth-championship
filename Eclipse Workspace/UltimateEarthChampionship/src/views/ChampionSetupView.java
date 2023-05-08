@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,12 +12,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 import manager.GameManager;
 import manager.GraphicalGameManager;
 import model.Champion;
 import model.Configuration;
-import views.PurchasableCard.CardType;
 
 public class ChampionSetupView extends JPanel {
 
@@ -57,13 +58,19 @@ public class ChampionSetupView extends JPanel {
 		ArrayList<Champion> champions = gameManager.getPlayerTeam().getChampions(); 
 		add(championsPanel, BorderLayout.WEST);
 		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
-			Champion champion;
+			PurchasableCard card;
 			if (champions.size() > i) {
-				champion = champions.get(i);
+				Champion champion = champions.get(i);
+				card = new PurchasableCard(champion);
+				card.addStatsPanel();
+				card.addRosterToggle();
+				if (gameManager.getPlayerTeam().getChosenChampions().contains(champion)) {
+					card.selected();
+				}
 			} else {
-				champion = null;
+				card = new PurchasableCard();
 			}
-			championsPanel.add(new PurchasableCard(champion, CardType.SELECTABLE));
+			championsPanel.add(card);
 		}
 	}
 	
@@ -82,13 +89,16 @@ public class ChampionSetupView extends JPanel {
 		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions(); 
 		add(chosenChampionsPanel, BorderLayout.EAST);
 		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
-			Champion champion;
+			PurchasableCard card;
 			if (chosenChampions.size() > i) {
-				champion = chosenChampions.get(i);
+				Champion champion = chosenChampions.get(i);
+				card = new PurchasableCard(champion);
+				card.addStatsPanel();
+				card.selected();
 			} else {
-				champion = null;
+				card = new PurchasableCard();
 			}
-			chosenChampionsPanel.add(new PurchasableCard(champion, CardType.SELECTABLE));
+			chosenChampionsPanel.add(card);
 		}
 	}
 		

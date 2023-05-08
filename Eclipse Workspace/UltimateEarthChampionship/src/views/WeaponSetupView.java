@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -16,7 +17,6 @@ import manager.GraphicalGameManager;
 import model.Champion;
 import model.Configuration;
 import model.Weapon;
-import views.PurchasableCard.CardType;
 
 public class WeaponSetupView extends JPanel {
 
@@ -62,13 +62,19 @@ public class WeaponSetupView extends JPanel {
 		ArrayList<Weapon> weapons = gameManager.getPlayerTeam().getWeapons(); 
 		add(weaponsPanel, BorderLayout.WEST);
 		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
-			Weapon weapon;
+			PurchasableCard card;
 			if (weapons.size() > i) {
-				weapon = weapons.get(i);
+				Weapon weapon = weapons.get(i);
+				card = new PurchasableCard(weapon);
+				card.addStatsPanel();
+				card.addRosterToggle();
+				if (gameManager.getPlayerTeam().getChosenChampions().contains(weapon)) {
+					card.selected();
+				}
 			} else {
-				weapon = null;
+				card = new PurchasableCard();
 			}
-			weaponsPanel.add(new PurchasableCard(weapon, CardType.SELECTABLE));
+			weaponsPanel.add(card);
 		}
 	}
 	
@@ -87,13 +93,16 @@ public class WeaponSetupView extends JPanel {
 		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions(); 
 		chosenPanel.add(chosenChampionsPanel);
 		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
-			Champion champion;
+			PurchasableCard card;
 			if (chosenChampions.size() > i) {
-				champion = chosenChampions.get(i);
+				Champion champion = chosenChampions.get(i);
+				card = new PurchasableCard(champion);
+				card.addStatsPanel();
+				card.selected();
 			} else {
-				champion = null;
+				card = new PurchasableCard();
 			}
-			chosenChampionsPanel.add(new PurchasableCard(champion, CardType.STANDARD));
+			chosenChampionsPanel.add(card);
 		}
 	}
 	
@@ -102,13 +111,16 @@ public class WeaponSetupView extends JPanel {
 		ArrayList<Weapon> chosenWeapons = gameManager.getPlayerTeam().getChosenWeapons(); 
 		chosenPanel.add(chosenWeaponsPanel);
 		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
-			Weapon weapon;
+			PurchasableCard card;
 			if (chosenWeapons.size() > i) {
-				weapon = chosenWeapons.get(i);
+				Weapon weapon = chosenWeapons.get(i);
+				card = new PurchasableCard(weapon);
+				card.addStatsPanel();
+				card.selected();
 			} else {
-				weapon = null;
+				card = new PurchasableCard();
 			}
-			chosenWeaponsPanel.add(new PurchasableCard(weapon, CardType.SELECTABLE));
+			chosenWeaponsPanel.add(card);
 		}
 	}
 		

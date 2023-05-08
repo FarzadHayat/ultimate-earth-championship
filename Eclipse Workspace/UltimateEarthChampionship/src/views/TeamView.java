@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 
@@ -10,7 +11,6 @@ import manager.GameManager;
 import model.Champion;
 import model.Configuration;
 import model.Weapon;
-import views.PurchasableCard.CardType;
 
 public class TeamView extends JPanel {
 
@@ -39,13 +39,16 @@ public class TeamView extends JPanel {
 		JPanel championsPanel = new JPanel(new FlowLayout());
 		ArrayList<Champion> champions = gameManager.getPlayerTeam().getChampions();
 		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
-			Champion champion;
+			PurchasableCard card;
 			if (champions.size() > i) {
-				champion = champions.get(i);
+				Champion champion = champions.get(i);
+				card = new PurchasableCard(champion);
+				card.addStatsPanel();
+				card.addSellButton();
 			} else {
-				champion = null;
+				card = new PurchasableCard();
 			}
-			championsPanel.add(new PurchasableCard(champion, CardType.CAN_SELL));
+			championsPanel.add(card);
 		}
 		add(championsPanel);
 	}
@@ -57,13 +60,16 @@ public class TeamView extends JPanel {
 		JPanel weaponsPanel = new JPanel(new FlowLayout());
 		ArrayList<Weapon> weapons = gameManager.getPlayerTeam().getWeapons();
 		for (int i = 0; i < config.NUM_WEAPONS; i++) {
-			Weapon weapon;
+			PurchasableCard card;
 			if (weapons.size() > i) {
-				weapon = weapons.get(i);
+				Weapon weapon = weapons.get(i);
+				card = new PurchasableCard(weapon);
+				card.addStatsPanel();
+				card.addSellButton();
 			} else {
-				weapon = null;
+				card = new PurchasableCard();
 			}
-			weaponsPanel.add(new PurchasableCard(weapon, CardType.CAN_SELL));
+			weaponsPanel.add(card);
 		}
 		add(weaponsPanel);
 	}

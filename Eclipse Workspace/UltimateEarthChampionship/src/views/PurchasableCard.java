@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import exception.FullTeamException;
 import exception.IllegalPurchaseException;
@@ -48,84 +49,65 @@ public class PurchasableCard extends JPanel {
 	private JPanel mainPanel = new JPanel(new BorderLayout(0, 0));
 	private JPanel soldOverlay;
 	
-	/**
-	 * Enum to represent the card type.
-	 * MINIMAL: small form factor with just a name and image.
-	 * STANDARD: a minimal card with stat labels.
-	 * CAN_BUY: a standard card with a buy button.
-	 * CAN_SELL: a standard card with a sell button.
-	 * SELECTABLE: a standard card where clicking it adds/removes it in the roster.
-	 */
-	public enum CardType {
-		MINIMAL,
-		STANDARD,
-		CAN_BUY,
-		CAN_SELL,
-		SELECTABLE
+	public PurchasableCard() {
+		setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		setBackground(Color.lightGray);
+		unselected();
 	}
-		
+	
 	/**
 	 * Create the panel.
 	 * @param purchasable the purchasable to display
-	 * @param cardType the type of the card according to the CardType enum
 	 */
-	public PurchasableCard(Purchasable purchasable, CardType cardType) {
-		setBackground(Color.yellow);
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		if (purchasable == null) {
-			setBackground(Color.gray);
-			return;
-		}
-		if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable) ||
-				gameManager.getPlayerTeam().getChosenWeapons().contains(purchasable)) {
-			setBackground(Color.green);
-		}
+	public PurchasableCard(Purchasable purchasable) {
+		this();
+		this.purchasable = purchasable;
 		mainPanel.setOpaque(false);
 		setLayout(new OverlayLayout(this));
-		add(mainPanel);		
-		this.purchasable = purchasable;
+		add(mainPanel);
 		
 		addName();
 		addImageIcon();
-		
-		switch (cardType) {
-		case MINIMAL: {
-			break;
-		}
-		case STANDARD: {
-			addStatsPanel();
-			break;
-		}
-		case CAN_BUY: {
-			addStatsPanel();
-			if (purchasable.getClass().getSuperclass() == Champion.class && gameManager.getPlayerTeam().getChampions().contains((Champion) purchasable) ||
-					purchasable.getClass().getSuperclass() == Weapon.class && gameManager.getPlayerTeam().getWeapons().contains((Weapon) purchasable)) {
-				addOverlay("SOLD!");
-			} else {
-				if (purchasable.getClass().getSuperclass() == Champion.class && gameManager.getPlayerTeam().isWeeklyChampionPurchased() ||
-						purchasable.getClass().getSuperclass() == Weapon.class && gameManager.getPlayerTeam().isWeeklyWeaponPurchased()) {
-					addOverlay("");
-				}
-				else {
-					addBuyButton();
-				}
-			}
-			break;
-		}
-		case CAN_SELL: {
-			addStatsPanel();
-			addSellButton();
-			break;
-		}
-		case SELECTABLE: {
-			addRosterToggle();
-			break;
-		}
-		}
-		
+	}
+	
+	public void selected() {
+		setBorder(new LineBorder(Color.green, 2));
+	}
+	
+	public void hovered() {
+		setBorder(new LineBorder(Color.red, 2));
+	}
+	
+	public void unselected() {
+		setBorder(new LineBorder(Color.black, 2));
 	}
 
-	private void addRosterToggle() {
+	/**
+	 * Adds a label for the name to the north of the card.
+	 */
+	private void addName() {
+		JLabel nameLabel = new JLabel(purchasable.getName());
+		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		mainPanel.add(nameLabel, BorderLayout.NORTH);
+	}
+
+	/**
+	 * Adds the image icon to the center panel.
+	 */
+	private void addImageIcon() {
+		ImageIcon icon = purchasable.getImage();
+		ImageIcon resizedIcon;
+		if (icon != null) {
+			resizedIcon = new ImageIcon(icon.getImage().getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_SMOOTH));
+		}
+		else {
+			resizedIcon = new ImageIcon(new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_ARGB));
+		}
+		JLabel imageLabel = new JLabel(resizedIcon);
+		mainPanel.add(imageLabel, BorderLayout.WEST);
+	}
+
+	public void addRosterToggle() {
 		addMouseListener(new MouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent e) {}
@@ -162,15 +144,15 @@ public class PurchasableCard extends JPanel {
 			public void mouseExited(MouseEvent e) {
 				if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable) ||
 						gameManager.getPlayerTeam().getChosenWeapons().contains(purchasable)) {
-					setBackground(Color.green);
+					selected();
 				} else {
-					setBackground(Color.yellow);
+					unselected();
 				}
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				setBackground(Color.orange);
+				hovered();
 			}
 			
 			@Override
@@ -178,7 +160,7 @@ public class PurchasableCard extends JPanel {
 		});
 	}
 
-	private void addOverlay(String text) {
+	public void addOverlay(String text) {
 		soldOverlay = new JPanel(new GridBagLayout());
 		soldOverlay.setBackground(new Color(0.7f, 0.7f, 0.7f, 0.7f));
 		JLabel soldLabel = new JLabel(text);
@@ -188,31 +170,6 @@ public class PurchasableCard extends JPanel {
 		add(soldOverlay, 0);
 	}
 
-	/**
-	 * Adds a label for the name to the north of the card.
-	 */
-	private void addName() {
-		JLabel nameLabel = new JLabel(purchasable.getName());
-		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		mainPanel.add(nameLabel, BorderLayout.NORTH);
-	}
-
-	/**
-	 * Adds the image icon to the center panel.
-	 */
-	private void addImageIcon() {
-		ImageIcon icon = purchasable.getImage();
-		ImageIcon resizedIcon;
-		if (icon != null) {
-			resizedIcon = new ImageIcon(icon.getImage().getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_SMOOTH));
-		}
-		else {
-			resizedIcon = new ImageIcon(new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_ARGB));
-		}
-		JLabel imageLabel = new JLabel(resizedIcon);
-		mainPanel.add(imageLabel, BorderLayout.WEST);
-	}
-	
 	/**
 	 * Add a panel displaying the purchasable stats to the center panel.
 	 */

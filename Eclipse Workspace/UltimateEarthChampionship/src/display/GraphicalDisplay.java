@@ -42,7 +42,7 @@ public class GraphicalDisplay implements DisplayStrategy {
 		frame.setResizable(false);
 		frame.setFont(new Font("Ubuntu", Font.PLAIN, 12));
 		frame.setTitle("Ultimate Earth Championship");
-		frame.setBounds(100, 100, 1920, 1080);
+		frame.setBounds(100, 100, 1600, 900);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

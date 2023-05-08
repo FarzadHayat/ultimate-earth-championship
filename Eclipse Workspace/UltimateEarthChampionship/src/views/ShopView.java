@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import manager.GameManager;
 import model.Champion;
 import model.Weapon;
-import views.PurchasableCard.CardType;
 
 public class ShopView extends JPanel {
 
@@ -35,7 +34,10 @@ public class ShopView extends JPanel {
 	private void addAvailableChampionsPanel() {
 		JPanel championsPanel = new JPanel(new FlowLayout());
 		for (Champion champion : gameManager.getShop().getAvailableChampions()) {
-			championsPanel.add(new PurchasableCard(champion, CardType.CAN_BUY));
+			PurchasableCard card = new PurchasableCard(champion);
+			card.addStatsPanel();
+			card.addBuyButton();
+			championsPanel.add(card);
 		}
 		add(championsPanel);
 	}
@@ -46,7 +48,10 @@ public class ShopView extends JPanel {
 	private void addAvailableWeaponsPanel() {
 		JPanel weaponsPanel = new JPanel(new FlowLayout());
 		for (Weapon weapon : gameManager.getShop().getAvailableWeapons()) {
-			weaponsPanel.add(new PurchasableCard(weapon, CardType.CAN_BUY));
+			PurchasableCard card = new PurchasableCard(weapon);
+			card.addStatsPanel();
+			card.addBuyButton();
+			weaponsPanel.add(card);
 		}
 		add(weaponsPanel);
 	}
