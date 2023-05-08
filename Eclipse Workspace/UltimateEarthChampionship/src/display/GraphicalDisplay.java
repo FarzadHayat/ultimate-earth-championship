@@ -24,6 +24,9 @@ public class GraphicalDisplay implements DisplayStrategy {
 	private JFrame frame;
 
 	private GameManager gameManager = GameManager.getInstance();
+	
+	public static final int WIDTH = 1600;
+	public static final int HEIGHT = 900;
 
 	/**
 	 * Create the application.
@@ -42,7 +45,7 @@ public class GraphicalDisplay implements DisplayStrategy {
 		frame.setResizable(false);
 		frame.setFont(new Font("Ubuntu", Font.PLAIN, 12));
 		frame.setTitle("Ultimate Earth Championship");
-		frame.setBounds(100, 100, 1600, 900);
+		frame.setBounds(100, 100, WIDTH, HEIGHT);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
