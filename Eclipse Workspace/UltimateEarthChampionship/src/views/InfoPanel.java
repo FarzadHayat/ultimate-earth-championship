@@ -20,44 +20,22 @@ public class InfoPanel extends JPanel {
 	public InfoPanel() {
 		setLayout(new GridLayout(1, 3, 0, 0));
 		
-		add(new StatLabel("money", String.valueOf(gameManager.getPlayerTeam().getMoney())));
-		add(new StatLabel("score", String.valueOf(gameManager.getPlayerTeam().getScore())));
-		addWeekLabel();
-		addDifficultyLabel();
+		String nameString = "Team name: " + String.valueOf(gameManager.getPlayerTeam().getName());
+		add(new StatLabel(nameString));
 		
-	}
-
-	/**
-	 * Add a current week out of total weeks label to the info panel.
-	 */
-	private void addWeekLabel() {
-		JPanel weekPanel = new JPanel();
-		add(weekPanel);
-		weekPanel.setLayout(new GridLayout(1, 2));
+		String moneyString = "Money: " + String.valueOf(gameManager.getPlayerTeam().getMoney());
+		add(new StatLabel("money", moneyString));
 		
-		JLabel weekLabel = new JLabel("Week: ");
-		weekPanel.add(weekLabel);
+		String scoreString = "Score: " + String.valueOf(gameManager.getPlayerTeam().getScore());
+		add(new StatLabel("score", scoreString));
 		
-		String weekValueString = String.valueOf(gameManager.getGameEnvironment().getCurrentWeek())
-					+ " out of " + String.valueOf(gameManager.getGameEnvironment().getMaxWeeks());
-		JLabel weekValue = new JLabel(weekValueString);
-		weekPanel.add(weekValue);
-	}
-	
-
-	/**
-	 * Add a difficulty label to the info panel.
-	 */
-	private void addDifficultyLabel() {
-		JPanel difficultyPanel = new JPanel();
-		add(difficultyPanel);
-		difficultyPanel.setLayout(new GridLayout(1, 2));
+		String weekString = "Week: " + String.valueOf(gameManager.getGameEnvironment().getCurrentWeek())
+		+ " out of " + String.valueOf(gameManager.getGameEnvironment().getMaxWeeks()); 
+		add(new StatLabel(weekString));
 		
-		JLabel difficultyLabel = new JLabel("Difficulty:");
-		difficultyPanel.add(difficultyLabel);
+		String difficultyString = "Difficulty: " + String.valueOf(gameManager.getGameEnvironment().getDifficulty());
+		add(new StatLabel(difficultyString));
 		
-		JLabel difficultyValue = new JLabel(String.valueOf(gameManager.getGameEnvironment().getDifficulty()));
-		difficultyPanel.add(difficultyValue);
 	}
 
 }

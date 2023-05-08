@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -24,8 +25,18 @@ public class StatLabel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	public StatLabel(String value) {
+		setLayout(new GridBagLayout());
+		setOpaque(false);
+		
+		addValueLabel(value);
+	}
+	
+	/**
+	 * Create the panel.
+	 */
 	public StatLabel(String imageFileName, String value) {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		setLayout(new GridBagLayout());
 		setOpaque(false);
 		
 		addImageLabel(imageFileName);
