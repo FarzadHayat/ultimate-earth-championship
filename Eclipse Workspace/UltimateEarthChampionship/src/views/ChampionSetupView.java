@@ -58,54 +58,11 @@ public class ChampionSetupView extends JPanel {
 		ArrayList<Champion> champions = gameManager.getPlayerTeam().getChampions(); 
 		add(championsPanel, BorderLayout.WEST);
 		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
-			PurchasableCard card;
 			if (champions.size() > i) {
-				Champion champion = champions.get(i);
-				ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions();
-				card = new ChampionCard(champion);
-				card.addStatsPanel();
-				card.addMouseListener(new MouseListener() {
-					@Override
-					public void mouseReleased(MouseEvent e) {}
-					
-					@Override
-					public void mousePressed(MouseEvent e) {
-						if (chosenChampions.contains(champion)) {
-							gameManager.getPlayerTeam().removeChosenChampion(champion);
-						} else {
-							try {
-								gameManager.getPlayerTeam().addChosenChampion(champion);
-							} catch (FullTeamException e1) {
-								JOptionPane.showMessageDialog(getParent(), e1.getMessage());
-							};
-						}
-						gameManager.repaintChampionSetup();
-					}
-					
-					@Override
-					public void mouseExited(MouseEvent e) {
-						if (chosenChampions.contains(champion)) {
-							card.selected();
-						} else {
-							card.unselected();
-						}
-					}
-					
-					@Override
-					public void mouseEntered(MouseEvent e) {
-						card.hovered();
-					}
-					
-					@Override
-					public void mouseClicked(MouseEvent e) {}
-				});
-				if (chosenChampions.contains(champion)) {
-					card.selected();
-				}
+				addChampionToPanel(champions.get(i), championsPanel);
 			} else {
-				card = new ChampionCard();
+				championsPanel.add(new ChampionCard());
 			}
-			championsPanel.add(card);
 		}
 	}
 	
@@ -135,6 +92,51 @@ public class ChampionSetupView extends JPanel {
 			}
 			chosenChampionsPanel.add(card);
 		}
+	}
+	
+	private void addChampionToPanel(Champion champion, JPanel panel) {
+		PurchasableCard card = new ChampionCard(champion);
+		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions();
+		card.addStatsPanel();
+		card.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (chosenChampions.contains(champion)) {
+					gameManager.getPlayerTeam().removeChosenChampion(champion);
+				} else {
+					try {
+						gameManager.getPlayerTeam().addChosenChampion(champion);
+					} catch (FullTeamException e1) {
+						JOptionPane.showMessageDialog(getParent(), e1.getMessage());
+					};
+				}
+				gameManager.repaintChampionSetup();
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (chosenChampions.contains(champion)) {
+					card.selected();
+				} else {
+					card.unselected();
+				}
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				card.hovered();
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+		});
+		if (chosenChampions.contains(champion)) {
+			card.selected();
+		}
+		panel.add(card);
 	}
 		
 	private void addNextButton() {

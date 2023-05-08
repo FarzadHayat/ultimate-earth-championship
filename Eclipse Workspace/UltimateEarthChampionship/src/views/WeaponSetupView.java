@@ -65,55 +65,58 @@ public class WeaponSetupView extends JPanel {
 		ArrayList<Weapon> weapons = gameManager.getPlayerTeam().getWeapons(); 
 		add(weaponsPanel, BorderLayout.WEST);
 		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
-			PurchasableCard card;
 			if (weapons.size() > i) {
-				Weapon weapon = weapons.get(i);
-				ArrayList<Weapon> chosenWeapons = gameManager.getPlayerTeam().getChosenWeapons();
-				card = new WeaponCard(weapon);
-				card.addStatsPanel();
-				card.addMouseListener(new MouseListener() {
-					@Override
-					public void mouseReleased(MouseEvent e) {}
-					
-					@Override
-					public void mousePressed(MouseEvent e) {
-						if (chosenWeapons.contains(weapon)) {
-							gameManager.getPlayerTeam().removeChosenWeapon(weapon);
-						} else {
-							try {
-								gameManager.getPlayerTeam().addChosenWeapon(weapon);
-							} catch (FullTeamException e1) {
-								JOptionPane.showMessageDialog(getParent(), e1.getMessage());
-							};
-						}
-						gameManager.repaintWeaponSetup();
-					}
-					
-					@Override
-					public void mouseExited(MouseEvent e) {
-						if (chosenWeapons.contains(weapon)) {
-							card.selected();
-						} else {
-							card.unselected();
-						}
-					}
-					
-					@Override
-					public void mouseEntered(MouseEvent e) {
-						card.hovered();
-					}
-					
-					@Override
-					public void mouseClicked(MouseEvent e) {}
-				});
+				addWeaponToPanel(weapons.get(i), weaponsPanel);
+			} else {
+				weaponsPanel.add(new WeaponCard());
+			}
+		}
+	}
+	
+	private void addWeaponToPanel(Weapon weapon, JPanel panel) {
+		PurchasableCard card;
+		ArrayList<Weapon> chosenWeapons = gameManager.getPlayerTeam().getChosenWeapons();
+		card = new WeaponCard(weapon);
+		card.addStatsPanel();
+		card.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (chosenWeapons.contains(weapon)) {
+					gameManager.getPlayerTeam().removeChosenWeapon(weapon);
+				} else {
+					try {
+						gameManager.getPlayerTeam().addChosenWeapon(weapon);
+					} catch (FullTeamException e1) {
+						JOptionPane.showMessageDialog(getParent(), e1.getMessage());
+					};
+				}
+				gameManager.repaintWeaponSetup();
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
 				if (chosenWeapons.contains(weapon)) {
 					card.selected();
+				} else {
+					card.unselected();
 				}
-			} else {
-				card = new WeaponCard();
 			}
-			weaponsPanel.add(card);
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				card.hovered();
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+		});
+		if (chosenWeapons.contains(weapon)) {
+			card.selected();
 		}
+		panel.add(card);
 	}
 	
 	private void addLanesPanel() {
