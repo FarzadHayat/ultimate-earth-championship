@@ -483,6 +483,27 @@ public abstract class GameManager
 		displayStrategy.displayGameResults();
 	}
 	
+	
+	/**
+	 * Levels up a champion depending on whether the champion
+	 * is on the players team or not
+	 * @param champion The champion to level up
+	 */
+	public void championLevelUp(Champion champion)
+	{
+		if (playerTeam.getChampions().contains(champion))
+		{
+			// The champion is on the player team
+			
+			displayLevelUpDialogue(champion);
+		}
+		else
+		{
+			LevelUpStat stat = getRandomLevelUpStat();
+			applyLevelUp(champion, stat);
+		}
+	}
+	
 	/**
 	 * Lets the view know that a champion has leveled up and the player
 	 * needs to be promtped for a stat to upgrade.
@@ -500,9 +521,39 @@ public abstract class GameManager
 	 * @param champion The champion to level up
 	 * @param stat The stat to increase
 	 */
-	public void levelUpChampion(Champion champion, LevelUpStat stat)
+	public void applyLevelUp(Champion champion, LevelUpStat stat)
 	{
 		champion.applyLevelUp(stat);
+	}
+	
+	/**
+	 * Returns a random LevelUpStat
+	 * @return A random levelUpStat
+	 */
+	private LevelUpStat getRandomLevelUpStat()
+	{
+		Random random = new Random();
+		int randInt = random.nextInt(4);
+		
+		LevelUpStat out = LevelUpStat.STAMINA;
+		
+		switch (randInt)
+		{
+		case 0:
+			out = LevelUpStat.STAMINA;
+			break;
+		case 1:
+			out = LevelUpStat.REGEN;
+			break;
+		case 2:
+			out = LevelUpStat.OFFENSE;
+			break;
+		case 3:
+			out = LevelUpStat.DEFENSE;
+			break;
+		}
+		
+		return out;
 	}
 	
 }

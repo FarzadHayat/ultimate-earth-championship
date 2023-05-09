@@ -350,7 +350,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 		
 		maxXP = maxXP * config.XP_INCREMENT_MODIFIER;
 		
-		manager.displayLevelUpDialogue(this);
+		manager.championLevelUp(this);
 	}
 	
 	public void applyLevelUp(LevelUpStat stat)

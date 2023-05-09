@@ -191,6 +191,7 @@ public class LiveMatch extends Match implements ActionListener{
 		}
 		else
 		{
+			if (enemyChampions.size() == 0) { return; }
 			// Enemy turn			
 			currentChampion = enemyChampions.get(turn);
 			
