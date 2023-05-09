@@ -618,14 +618,14 @@ public class LiveMatch extends Match implements ActionListener{
 				matchView.showDialogue(team2.getName() + " has had all their champions injured. " + team1.getName() + " wins!");
 				gameManager.finishedMatch(matchOver(team1, team2));
 			}
+		} else {
+			Random random = new Random();
+			
+			int i = random.nextInt(champions.size());
+			
+			champions.get(i).setFlagCarrier(true);
+			getCard(champions.get(i)).updateCard();
 		}
-		
-		Random random = new Random();
-		
-		int i = random.nextInt(champions.size());
-		
-		champions.get(i).setFlagCarrier(true);
-		getCard(champions.get(i)).updateCard();
 	}
 	
 	private void CheckFlagHolderPosition(Champion champion)
