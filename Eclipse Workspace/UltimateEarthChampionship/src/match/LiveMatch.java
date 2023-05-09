@@ -120,11 +120,11 @@ public class LiveMatch extends Match implements ActionListener{
 		
 		for (Champion champion : team2.getChosenChampions())
 		{
-			// REMOVE THIS ONCE getChosenChampions is fixed!!!!
-			// This prevents errors in the event of team champion length > 4
 			if (lane >= 4)
 			{
-				System.out.println("Breaking!");
+				//System.out.println("Breaking!");
+				// This shouldn't ever occur,
+				// but i'm leaving this here just in case
 				break;
 			}
 			
