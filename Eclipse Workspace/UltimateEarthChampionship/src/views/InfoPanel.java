@@ -36,11 +36,9 @@ public class InfoPanel extends JPanel {
 		+ " out of " + String.valueOf(gameManager.getGameEnvironment().getMaxWeeks()); 
 		add(new StatLabel(weekString));
 		
-		String difficultyString = "Difficulty: " + String.valueOf(gameManager.getGameEnvironment().getDifficulty());
+		String difficultyString = "Difficulty: " + String.valueOf(config.getDifficulty());
 		add(new StatLabel(difficultyString));
 		
-		JLabel difficultyValue = new JLabel(String.valueOf(config.getDifficulty()));
-		difficultyPanel.add(difficultyValue);
 	}
 
 }
