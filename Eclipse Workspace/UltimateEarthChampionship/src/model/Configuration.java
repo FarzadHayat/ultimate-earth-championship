@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
@@ -274,6 +275,10 @@ public class Configuration {
 	 * Flat additive modifier to AI aggression factor
 	 */
 	public int AI_AGRESSION_BOOST;
+	
+	public static final Color RED = new Color(237, 51, 59);
+	public static final Color ORANGE = new Color(255, 120, 0);
+	public static final Color GREEN = new Color(46, 194, 126);
 	
 	public float getDifficulty()
 	{

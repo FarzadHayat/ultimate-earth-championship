@@ -73,8 +73,8 @@ public class ChampionMatchCard extends JPanel{
 		staminaBar = new JProgressBar();
 		staminaBar.setStringPainted(true);
 		staminaBar.setFont(Configuration.TEXT_FONT);
-		staminaBar.setBackground(new Color(237, 51, 59));
-		staminaBar.setForeground(new Color(46, 194, 126));
+		staminaBar.setBackground(Configuration.RED);
+		staminaBar.setForeground(Configuration.GREEN);
 		staminaBar.setVisible(false);
 		centerPanel.add(staminaBar, BorderLayout.SOUTH);
 	}

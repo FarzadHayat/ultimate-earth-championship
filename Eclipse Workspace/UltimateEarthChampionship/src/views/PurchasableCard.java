@@ -66,15 +66,15 @@ public abstract class PurchasableCard extends JPanel {
 	}
 	
 	public void selected() {
-		setBorder(new LineBorder(Color.green, 2));
+		setBorder(new LineBorder(Configuration.GREEN, 3));
 	}
 	
 	public void hovered() {
-		setBorder(new LineBorder(Color.red, 2));
+		setBorder(new LineBorder(Configuration.ORANGE, 3));
 	}
 	
 	public void unselected() {
-		setBorder(new LineBorder(Color.black, 2));
+		setBorder(new LineBorder(Color.darkGray, 3));
 	}
 
 	/**
@@ -108,7 +108,7 @@ public abstract class PurchasableCard extends JPanel {
 		soldOverlay.setBackground(new Color(0.7f, 0.7f, 0.7f, 0.7f));
 		JLabel soldLabel = new JLabel(text);
 		soldLabel.setFont(Configuration.HEADER_FONT);
-		soldLabel.setForeground(Color.red);
+		soldLabel.setForeground(Configuration.RED);
 		soldOverlay.add(soldLabel);
 		add(soldOverlay, 0);
 	}
