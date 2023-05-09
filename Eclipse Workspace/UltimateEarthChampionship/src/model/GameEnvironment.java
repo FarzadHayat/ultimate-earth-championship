@@ -14,8 +14,6 @@ import manager.GameManager;
 
 public class GameEnvironment {
 	
-	private Configuration config = Configuration.getInstance();
-	
 	/**
 	 * The current week, starting from 1
 	 */
@@ -61,7 +59,7 @@ public class GameEnvironment {
 	 * Constructor class
 	 */
 	public GameEnvironment() {
-		currentWeek = 0;
+		currentWeek = 1;
 		maxWeek = 99;
 		events = new ArrayList<RandomEvent>();
 		getAllEvents();

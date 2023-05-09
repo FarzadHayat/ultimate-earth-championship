@@ -68,7 +68,7 @@ class ShopTest {
 	@Test
 	void testGetRandomChampion_oneArray() {
 		Champion champion1 = new JohnDoe();
-		Champion randomChampion = shop.getRandomChampion(new ArrayList<Champion>(List.of(champion1)));
+		Champion randomChampion = Shop.getRandomChampion(new ArrayList<Champion>(List.of(champion1)));
 		assertEquals(champion1, randomChampion);
 	}
 

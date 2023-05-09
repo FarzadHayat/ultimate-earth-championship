@@ -2,7 +2,6 @@ package match;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import display.CommandLineTable;
 import manager.GameManager;
 import model.Champion;
 import model.Configuration;

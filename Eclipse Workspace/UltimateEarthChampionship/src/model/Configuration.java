@@ -123,6 +123,11 @@ public class Configuration {
 	public static final String ICON_IMAGE_FOLDER_PATH = "src/images/icons/";
 	
 	/**
+	 *  Path to folder containing background images
+	 */
+	public static final String BACKGROUND_IMAGE_FOLDER_PATH = "src/images/backgrounds/";
+	
+	/**
 	 * Number of teams, including player team
 	 */
 	public final int NUM_TEAMS = 4;
@@ -207,12 +212,12 @@ public class Configuration {
 	/**
 	 * The font used for headers.
 	 */
-	public static final Font HEADER_FONT = new Font(FONT_FAMILY, Font.PLAIN, 20);
+	public static final Font HEADER_FONT = new Font(FONT_FAMILY, Font.PLAIN, 24);
 	
 	/**
 	 * The font used for regular text.
 	 */
-	public static final Font TEXT_FONT = new Font(FONT_FAMILY, Font.PLAIN, 14);
+	public static final Font TEXT_FONT = new Font(FONT_FAMILY, Font.BOLD, 14);
 	
 	/**
 	 * The lower bound of AI aggression, 

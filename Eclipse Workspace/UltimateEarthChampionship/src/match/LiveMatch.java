@@ -2,7 +2,6 @@ package match;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.UTFDataFormatException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -626,14 +625,14 @@ public class LiveMatch extends Match implements ActionListener{
 				matchView.showDialogue(team2.getName() + " has had all their champions injured. " + team1.getName() + " wins!");
 				gameManager.finishedMatch(matchOver(team1, team2));
 			}
+		} else {
+			Random random = new Random();
+			
+			int i = random.nextInt(champions.size());
+			
+			champions.get(i).setFlagCarrier(true);
+			getCard(champions.get(i)).updateCard();
 		}
-		
-		Random random = new Random();
-		
-		int i = random.nextInt(champions.size());
-		
-		champions.get(i).setFlagCarrier(true);
-		getCard(champions.get(i)).updateCard();
 	}
 	
 	private void CheckFlagHolderPosition(Champion champion)

@@ -1,14 +1,18 @@
 package views;
 
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import display.GraphicalDisplay;
 import manager.GameManager;
 import model.Champion;
+import model.Configuration;
 import model.Weapon;
-import views.PurchasableCard.CardType;
 
 public class ShopView extends JPanel {
 
@@ -34,8 +38,19 @@ public class ShopView extends JPanel {
 	 */
 	private void addAvailableChampionsPanel() {
 		JPanel championsPanel = new JPanel(new FlowLayout());
+		championsPanel.setOpaque(false);
 		for (Champion champion : gameManager.getShop().getAvailableChampions()) {
-			championsPanel.add(new PurchasableCard(champion, CardType.CAN_BUY));
+			PurchasableCard card = new ChampionCard(champion);
+			card.addStatsPanel();
+			card.addBuyButton();
+			championsPanel.add(card);
+			if (gameManager.getPlayerTeam().getChampions().contains(champion)) {
+				card.addOverlay("SOLD!");
+			} else {
+				if (gameManager.getPlayerTeam().isWeeklyChampionPurchased()) {
+					card.addOverlay("");
+				}
+			}
 		}
 		add(championsPanel);
 	}
@@ -45,10 +60,24 @@ public class ShopView extends JPanel {
 	 */
 	private void addAvailableWeaponsPanel() {
 		JPanel weaponsPanel = new JPanel(new FlowLayout());
+		weaponsPanel.setOpaque(false);
 		for (Weapon weapon : gameManager.getShop().getAvailableWeapons()) {
-			weaponsPanel.add(new PurchasableCard(weapon, CardType.CAN_BUY));
+			PurchasableCard card = new WeaponCard(weapon);
+			card.addStatsPanel();
+			card.addBuyButton();
+			weaponsPanel.add(card);
 		}
 		add(weaponsPanel);
 	}
 
+	@Override
+	protected void paintComponent(Graphics g) {
+	    super.paintComponent(g);
+	    ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "shop.jpg");
+		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
+	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
+        g.drawImage(icon.getImage(), 0, yPos, null);
+	}
+	
 }
