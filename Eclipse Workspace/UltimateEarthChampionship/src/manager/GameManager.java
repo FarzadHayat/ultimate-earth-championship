@@ -553,4 +553,18 @@ public abstract class GameManager
 	{
 		displayStrategy.quit();
 	}
+	
+	
+	/**
+	 * Deletes the current instance of the gamemanager class and creates a new one
+	 * This is used in restarting the game
+	 */
+	public void forceCreateNewInstance()
+	{
+		// Delete current gameManager instance
+		instance = null;
+		
+		// Create a new one
+		getInstance();
+	}
 }

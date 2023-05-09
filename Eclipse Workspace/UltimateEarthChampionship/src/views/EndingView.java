@@ -18,6 +18,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.BoxLayout;
 
 public class EndingView extends JPanel {
 
@@ -40,25 +41,26 @@ public class EndingView extends JPanel {
 		centerPanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel subheaderLabel = new JLabel("Tournament Results:");
+		subheaderLabel.setVerticalAlignment(SwingConstants.TOP);
 		subheaderLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		centerPanel.add(subheaderLabel, BorderLayout.NORTH);
 		
 		JPanel teamGrid = new JPanel();
 		centerPanel.add(teamGrid);
-		teamGrid.setLayout(new GridLayout(4, 1, 0, 0));
 		
 		drawResultsGrid(teamGrid);
+		teamGrid.setLayout(new BoxLayout(teamGrid, BoxLayout.Y_AXIS));
 		
 		JPanel bottomPanel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) bottomPanel.getLayout();
-		flowLayout.setHgap(100);
+		flowLayout.setHgap(0);
 		add(bottomPanel, BorderLayout.SOUTH);
 		
 		JPanel bottomGrid = new JPanel();
 		bottomPanel.add(bottomGrid);
 		GridBagLayout gbl_bottomGrid = new GridBagLayout();
 		gbl_bottomGrid.columnWidths = new int[] {250, 250, 250};
-		gbl_bottomGrid.rowHeights = new int[] {30};
+		gbl_bottomGrid.rowHeights = new int[] {60, 60};
 		gbl_bottomGrid.columnWeights = new double[]{0.0, 0.0, 0.0};
 		gbl_bottomGrid.rowWeights = new double[]{0.0, 0.0};
 		bottomGrid.setLayout(gbl_bottomGrid);
@@ -72,6 +74,13 @@ public class EndingView extends JPanel {
 		bottomGrid.add(lblThankYouFor, gbc_lblThankYouFor);
 		
 		JButton newGameButton = new JButton("New Game");
+		newGameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GameManager.getInstance().quitApplication();
+				GameManager.getInstance().forceCreateNewInstance();
+				GameManager.start();
+			}
+		});
 		GridBagConstraints gbc_newGameButton = new GridBagConstraints();
 		gbc_newGameButton.insets = new Insets(0, 0, 0, 5);
 		gbc_newGameButton.gridx = 0;
