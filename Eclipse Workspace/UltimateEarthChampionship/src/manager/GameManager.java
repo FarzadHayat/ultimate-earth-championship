@@ -392,7 +392,6 @@ public abstract class GameManager
 	}
 	
 	public void finishedWeaponSetup() {
-		playerTeam.assignChosenWeapons();
 		setMatch(new LiveMatch(getPlayerTeam(), getEnemyTeam()));
 		displayStrategy.displayLiveMatch((LiveMatch) getMatch());
 	}

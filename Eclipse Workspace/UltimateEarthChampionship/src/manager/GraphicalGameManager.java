@@ -28,6 +28,7 @@ public class GraphicalGameManager extends GameManager
 	
 	public void backFromWeaponSetup() {
 		playerTeam.unselectWeapons();
+		playerTeam.unassignChosenWeapons();
 		displayStrategy.displayChampionSetup();
 	}
 	

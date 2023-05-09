@@ -25,6 +25,7 @@ import manager.GraphicalGameManager;
 import model.Champion;
 import model.Configuration;
 import model.Weapon;
+import weapons.Fists;
 
 public class WeaponSetupView extends JPanel {
 
@@ -101,6 +102,8 @@ public class WeaponSetupView extends JPanel {
 						JOptionPane.showMessageDialog(getParent(), e1.getMessage());
 					};
 				}
+				gameManager.getPlayerTeam().unassignChosenWeapons();
+				gameManager.getPlayerTeam().assignChosenWeapons();
 				gameManager.repaintWeaponSetup();
 			}
 			

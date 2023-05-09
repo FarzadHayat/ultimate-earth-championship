@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -19,6 +20,8 @@ public class StatLabel extends JPanel {
 
 	private final int IMAGE_WIDTH = 30;
 	private final int IMAGE_HEIGHT = IMAGE_WIDTH;
+
+	private JLabel valueLabel;
 	
 	/**
 	 * Create the panel.
@@ -41,14 +44,22 @@ public class StatLabel extends JPanel {
 		addValueLabel(value);
 	}
 	
+	public JLabel getValueLabel() {
+		return valueLabel;
+	}
+
+	public void setValueLabel(JLabel valueLabel) {
+		this.valueLabel = valueLabel;
+	}
+
 	/**
 	 * Add a value label to the stat label.
 	 * @param value the value of the value label
 	 */
 	private void addValueLabel(String value) {
-		JLabel label = new JLabel(value);
-		label.setFont(Configuration.TEXT_FONT);
-		add(label);
+		setValueLabel(new JLabel(value));
+		getValueLabel().setFont(Configuration.TEXT_FONT);
+		add(getValueLabel());
 	}
 
 	/**
