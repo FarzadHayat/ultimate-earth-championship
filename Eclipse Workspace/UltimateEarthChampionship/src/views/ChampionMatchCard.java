@@ -8,6 +8,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 
 import model.Champion;
@@ -23,10 +24,10 @@ public class ChampionMatchCard extends JPanel{
 	
 	private JPanel mainPanel;
 	
-	private JLabel championNameText;
-	private JLabel championStaminaText;
+	private JLabel nameLabel;
+	private JProgressBar staminaBar;
 	private JPanel panel;
-	private JLabel championImage;
+	private JLabel imageLabel;
 	
 	public Champion getChampion()
 	{
@@ -52,28 +53,30 @@ public class ChampionMatchCard extends JPanel{
 		mainPanel.add(centerPanel, "name_205877267141400");
 		centerPanel.setLayout(new BorderLayout(0, 0));
 		
-		championNameText = new JLabel("Champion Name");
-		championNameText.setForeground(new Color(255, 255, 255));
-		championNameText.setHorizontalAlignment(SwingConstants.CENTER);
-		championNameText.setFont(Configuration.TEXT_FONT);
-		centerPanel.add(championNameText, BorderLayout.NORTH);
+		nameLabel = new JLabel("Champion Name");
+		nameLabel.setForeground(new Color(255, 255, 255));
+		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		nameLabel.setFont(Configuration.TEXT_FONT);
+		centerPanel.add(nameLabel, BorderLayout.NORTH);
 		
 		panel = new JPanel();
 		panel.setOpaque(false);
 		centerPanel.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		championImage = new JLabel("");
-		championImage.setIcon(new ImageIcon());
-		championImage.setHorizontalAlignment(SwingConstants.CENTER);
-		championImage.setFont(Configuration.TEXT_FONT);
-		panel.add(championImage);
+		imageLabel = new JLabel();
+		imageLabel.setIcon(new ImageIcon());
+		imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		imageLabel.setFont(Configuration.TEXT_FONT);
+		panel.add(imageLabel);
 		
-		championStaminaText = new JLabel("0/100 Stamina");
-		championStaminaText.setForeground(new Color(255, 255, 255));
-		championStaminaText.setHorizontalAlignment(SwingConstants.CENTER);
-		championStaminaText.setFont(Configuration.TEXT_FONT);
-		centerPanel.add(championStaminaText, BorderLayout.SOUTH);
+		staminaBar = new JProgressBar();
+		staminaBar.setStringPainted(true);
+		staminaBar.setFont(Configuration.TEXT_FONT);
+		staminaBar.setBackground(new Color(237, 51, 59));
+		staminaBar.setForeground(new Color(46, 194, 126));
+		staminaBar.setVisible(false);
+		centerPanel.add(staminaBar, BorderLayout.SOUTH);
 	}
 	
 	/**
@@ -93,25 +96,14 @@ public class ChampionMatchCard extends JPanel{
 	public void updateCard()
 	{
 
-		if (champion == null)
+		if (champion == null || champion.getStamina() <= 0)
 		{
 			// No champion assigned to this...
-			championNameText.setText("");
+			nameLabel.setText("");
 			
-			championImage.setIcon(null);
-			championImage.setText("");
+			imageLabel.setIcon(null);
+			staminaBar.setVisible(false);
 			
-			championStaminaText.setText("");
-			
-		}
-		else if (champion.getStamina() <= 0)
-		{
-			championNameText.setText("");
-			
-			championImage.setIcon(null);
-			championImage.setText("");
-			
-			championStaminaText.setText("");
 		}
 		else
 		{
@@ -122,20 +114,22 @@ public class ChampionMatchCard extends JPanel{
 				champName = "[Flag] " + champName;
 			}
 			
-			championNameText.setText(champName);
+			nameLabel.setText(champName);
 			
 			//Image championSprite = new Image();
 			
 			ImageIcon originalImage = champion.getImage();
 			ImageIcon rescaledImage = new ImageIcon(originalImage.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH));
 			
-			championImage.setIcon(rescaledImage);
-			//champion
-			championImage.setText("");
+			imageLabel.setIcon(rescaledImage);
 			
-			int championStaminaInt = (int) champion.getStamina();
-			
-			championStaminaText.setText(championStaminaInt + "/" + champion.getMaxStamina());
+			staminaBar.setVisible(true);
+			staminaBar.setMinimum(0);
+			int maxStamina = (int) champion.getMaxStamina();
+			staminaBar.setMaximum(maxStamina);
+			int currentStamina = (int) champion.getStamina();
+			staminaBar.setValue(currentStamina);
+			staminaBar.setString(currentStamina + " / " + maxStamina);
 		}
 	}
 	
