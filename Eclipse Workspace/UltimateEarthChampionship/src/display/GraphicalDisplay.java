@@ -131,11 +131,16 @@ public class GraphicalDisplay implements DisplayStrategy {
 
 	@Override
 	public void displayWeekResults(ArrayList<RandomEventInfo> randomEvents) {
+		String weekResults = String.format("You have reached the end of week %s out of %s.\n"
+				+ "Your team will now take a bye and all champions rest back to full stamina.",
+				String.valueOf(gameManager.getGameEnvironment().getCurrentWeek()),
+				String.valueOf(gameManager.getGameEnvironment().getMaxWeeks()));
+		JOptionPane.showMessageDialog(frame, weekResults, "WEEK RESULTS", JOptionPane.INFORMATION_MESSAGE);
 		for (RandomEventInfo randomEvent : randomEvents) {
 			JOptionPane.showMessageDialog(frame, randomEvent.description + "\n"
 					+ randomEvent.effectString, randomEvent.name, JOptionPane.INFORMATION_MESSAGE);
 		}
-		GameManager.getInstance().finishedWeek();
+		gameManager.finishedWeek();
 	}
 
 	@Override
