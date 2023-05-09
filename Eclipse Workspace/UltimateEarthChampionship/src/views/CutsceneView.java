@@ -1,16 +1,25 @@
 package views;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+
+import display.GraphicalDisplay;
 import manager.GameManager;
 import manager.GraphicalGameManager;
-import story.*;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import model.Configuration;
+import story.Cutscene;
+import story.CutsceneSlide;
 
 public class CutsceneView extends JPanel {
 	
@@ -22,12 +31,11 @@ public class CutsceneView extends JPanel {
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 	private Cutscene cutscene;
 	
-	private JLabel mainText;
+	private JTextPane mainText;
 	private JButton continueButton;
 	
 	public CutsceneView(Cutscene cutscene) {
 		this.cutscene = cutscene;
-		
 		
 		initialize();
 		redrawPanel();
@@ -38,13 +46,21 @@ public class CutsceneView extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 		
 		// Text Area:
-		mainText = new JLabel(slideText);
-		mainText.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		add(mainText);
+		JPanel textPanel = new JPanel(new GridBagLayout());
+		mainText = new JTextPane();
+		mainText.setText(slideText);
+		mainText.setFont(Configuration.HEADER_FONT);
+		mainText.setForeground(Color.white);
+		mainText.setOpaque(true);
+		mainText.setBackground(Color.darkGray);
+		mainText.setPreferredSize(new Dimension((int) (GraphicalDisplay.WIDTH / 2), 100));
+		textPanel.add(mainText);
+		textPanel.setOpaque(false);
+		add(textPanel, BorderLayout.CENTER);
 		
 		// Panel to push button to bottom center of screen
 		JPanel bottomPanel = new JPanel();
+		bottomPanel.setOpaque(false);
 		add(bottomPanel, BorderLayout.SOUTH);
 		
 		// Button...
@@ -81,8 +97,16 @@ public class CutsceneView extends JPanel {
 		getNextSlide();
 		
 		mainText.setText(slideText);
-		
-		// TODO: Setup image path here:
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+	    super.paintComponent(g);
+	    ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + slideImagePath);
+		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
+	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
+        g.drawImage(icon.getImage(), 0, yPos, null);
 	}
 
 	private void buttonPressed()

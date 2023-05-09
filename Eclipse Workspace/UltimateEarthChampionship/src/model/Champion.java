@@ -1,10 +1,16 @@
 package model;
 
-import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import manager.GameManager;
+import exception.FullTeamException;
+import exception.IllegalPurchaseException;
+import exception.IncompleteTeamException;
+import exception.InsufficientFundsException;
 import weapons.Fists;
 
 /**
@@ -17,6 +23,7 @@ import weapons.Fists;
 public abstract class Champion implements Purchasable, Cloneable {
 
 	private Configuration config = Configuration.getInstance();
+	private GameManager manager = GameManager.getInstance();
 	
 	/**
 	 * Name of the champion
@@ -225,6 +232,16 @@ public abstract class Champion implements Purchasable, Cloneable {
 	}
 	
 	/**
+	 * Increases the champions regen
+	 * @param amount The amount to increase champions regen
+	 */
+	public void changeRegen(float amount)
+	{
+		regen += amount;
+	}
+	
+	
+	/**
 	 * Gets the offense stat
 	 * @return The offense stat
 	 */
@@ -316,8 +333,6 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 * Checks to see if currentXP > maxXP, if so, the champion levels up
 	 */
 	private void checkForLevelUp()
-	
-
 	{
 		if (currentXP > maxXP)
 		{
@@ -335,7 +350,26 @@ public abstract class Champion implements Purchasable, Cloneable {
 		
 		maxXP = maxXP * config.XP_INCREMENT_MODIFIER;
 		
-		System.out.println("TODO: Finish Level up Function");
+		manager.displayLevelUpDialogue(this);
+	}
+	
+	public void applyLevelUp(LevelUpStat stat)
+	{
+		switch (stat)
+		{
+		case STAMINA:
+			addMaxStamina(config.LEVEL_UP_STAMINA_INCREASE);
+			break;
+		case REGEN:
+			changeRegen(config.LEVEL_UP_REGEN_INCREASE);
+			break;
+		case OFFENSE:
+			changeOffense(config.LEVEL_UP_OFFENSE_INCREASE);
+			break;
+		case DEFENSE:
+			changeDefense(config.LEVEL_UP_DEFENSE_INCREASE);
+			break;
+		}
 		
 		// Check for level up again.
 		// This is to prevent edge cases in which a champion gains enough XP to level up multiple times.
@@ -427,6 +461,30 @@ public abstract class Champion implements Purchasable, Cloneable {
 		return image;
 	}
 
+	public void buy(Team team) throws InsufficientFundsException, FullTeamException, IllegalPurchaseException {
+		team.removeMoney(getPrice());
+		try {
+			if (team.isWeeklyChampionPurchased()) {
+				throw new IllegalPurchaseException(team.getName() + " already purchased a champion this week!");
+			}
+			team.addChampion(this);
+			team.setWeeklyChampionPurchased(true);
+		}
+		catch (FullTeamException e) {
+			team.addMoney(getPrice());
+			throw new FullTeamException(e.getMessage());
+		}
+		catch(IllegalPurchaseException e) {
+			team.addMoney(getPrice());
+			throw new IllegalPurchaseException(e.getMessage());
+		}
+	}
+	
+	public void sell(Team team) throws IncompleteTeamException {
+		team.removeChampion(this);
+		team.addMoney(getPrice());
+	}
+	
 	/**
 	 * Create a clone of the Champion with the same stats.
 	 */

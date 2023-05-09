@@ -8,7 +8,6 @@ import champions.*;
 import display.CommandLineTable;
 import display.DisplayStrategy;
 import display.DisplayType;
-import events.RandomEventInfo;
 import exception.FullTeamException;
 import exception.GameFinishedException;
 import exception.IllegalPurchaseException;
@@ -20,30 +19,13 @@ import match.MatchResult;
 import model.Champion;
 import model.Configuration;
 import model.GameEnvironment;
+import model.LevelUpStat;
 import model.Shop;
 import model.Team;
 import model.Weapon;
 import story.Cutscene;
-import weapons.Axe;
-import weapons.BaseballBat;
-import weapons.Chainsaw;
-import weapons.Dagger;
-import weapons.FryingPan;
-import weapons.GolfClub;
-import weapons.Katana;
-import weapons.Mace;
-import weapons.Machete;
-import weapons.Nunchucks;
-import weapons.Pickaxe;
-import weapons.Pitchfork;
-import weapons.Scythe;
-import weapons.Shield;
-import weapons.Shovel;
-import weapons.Shuriken;
-import weapons.Sledgehammer;
-import weapons.Spear;
-import weapons.Sword;
-import weapons.TennisRacket;
+import views.LevelUpView;
+import weapons.*;
 
 /**
  * The GameManager class is an abstract class that defines the basic functionality of a game manager.
@@ -328,7 +310,7 @@ public abstract class GameManager
 		setPlayerTeam(playerTeam);
 		teams.add(playerTeam);
 		
-		gameEnvironment.setDifficulty(difficulty);
+		config.setDifficulty(difficulty);
 		gameEnvironment.setMaxWeeks(numWeeks);
 	}
 
@@ -427,8 +409,8 @@ public abstract class GameManager
 		// Reset match and enemy team
 		setMatch(null);
 		setEnemyTeam(null);
-		// Go to next week
-		finishedWeek();
+		// Show end of week results and random events
+		displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
 	}
 
 	private void fightTeams(ArrayList<Team> teams) {
@@ -458,7 +440,7 @@ public abstract class GameManager
 		for (Team team : teams) {
 			try {
 				int championIndex = random.nextInt(championsLeft.size());
-				team.buy(championsLeft.get(championIndex));
+				championsLeft.get(championIndex).buy(team);
 				championsLeft.remove(championIndex);
 			}
 			catch (FullTeamException | InsufficientFundsException | IllegalPurchaseException e) {
@@ -468,10 +450,10 @@ public abstract class GameManager
 			}
 			try {
 				int weaponIndex = random.nextInt(weaponsLeft.size());
-				team.buy(weaponsLeft.get(weaponIndex));
+				weaponsLeft.get(weaponIndex).buy(team);
 				weaponsLeft.remove(weaponIndex);
 			}
-			catch (FullTeamException | InsufficientFundsException | IllegalPurchaseException e) {
+			catch (FullTeamException | InsufficientFundsException e) {
 				if (Configuration.DEBUG) {
 					System.out.println(team.getName() + " BUY WEAPON: " + e.getMessage());
 				}
@@ -486,7 +468,6 @@ public abstract class GameManager
 		try {
 			gameEnvironment.nextWeek();
 			shop.generateCatalogue();
-			displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
 			displayStrategy.displayTeam();
 		} catch (GameFinishedException e) {
 			finishedGame();
@@ -495,6 +476,28 @@ public abstract class GameManager
 
 	public void finishedGame() {
 		displayStrategy.displayGameResults();
+	}
+	
+	/**
+	 * Lets the view know that a champion has leveled up and the player
+	 * needs to be promtped for a stat to upgrade.
+	 * Called by champion.
+	 * @param champion The champion that has leveled up
+	 */
+	public void displayLevelUpDialogue(Champion champion)
+	{
+		LevelUpView.showLevelUpDialogue(champion);
+	}
+	
+	/**
+	 * Lets the champion know that the player has chosen their stat to level up
+	 * Called by LevelUpView
+	 * @param champion The champion to level up
+	 * @param stat The stat to increase
+	 */
+	public void levelUpChampion(Champion champion, LevelUpStat stat)
+	{
+		champion.applyLevelUp(stat);
 	}
 	
 }

@@ -1,25 +1,26 @@
 package views;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.Timer;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import display.GraphicalDisplay;
 import match.LiveMatch;
 import model.Champion;
-
-import javax.swing.JButton;
-import java.awt.CardLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import model.Configuration;
 
 public class MatchView extends JPanel {
 
@@ -64,11 +65,13 @@ public class MatchView extends JPanel {
 	public void setupCenter()
 	{
 		JPanel centerPanel = new JPanel();
+		centerPanel.setOpaque(false);
 		centerPanel.setBackground(new Color(192, 192, 192));
 		add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		
 		JPanel centerGrid = new JPanel();
+		centerGrid.setOpaque(false);
 		centerGrid.setBackground(new Color(192, 192, 192));
 		centerPanel.add(centerGrid);
 		centerGrid.setLayout(new GridLayout(4, 7, 0, 0));
@@ -108,15 +111,19 @@ public class MatchView extends JPanel {
 	public void setupBottomPanel()
 	{
 		JPanel bottomPanel = new JPanel();
+		bottomPanel.setOpaque(false);
 		add(bottomPanel, BorderLayout.SOUTH);
 		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 15));
 		
 		JPanel buttonPanel = new JPanel();
+		buttonPanel.setOpaque(false);
 		bottomPanel.add(buttonPanel);
 		buttonPanel.setLayout(new GridLayout(0, 6, 30, 0));
 		
 		selectedChampionLabel = new JLabel("<Champion Selected> :");
 		selectedChampionLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		selectedChampionLabel.setFont(Configuration.HEADER_FONT);
+		selectedChampionLabel.setForeground(Color.white);
 		buttonPanel.add(selectedChampionLabel);
 		
 		attackButton = new JButton("Move");
@@ -166,10 +173,12 @@ public class MatchView extends JPanel {
 	public void setupSides()
 	{
 		JPanel leftPanel = new JPanel();
+		leftPanel.setOpaque(false);
 		add(leftPanel, BorderLayout.WEST);
 		leftPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 		
 		JPanel rightPanel = new JPanel();
+		rightPanel.setOpaque(false);
 		add(rightPanel, BorderLayout.EAST);
 		rightPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 	}
@@ -180,25 +189,27 @@ public class MatchView extends JPanel {
 	public void setupHeader()
 	{
 		JPanel topPanel = new JPanel();
+		topPanel.setOpaque(false);
 		add(topPanel, BorderLayout.NORTH);
 		
 		JPanel topGridPanel = new JPanel();
+		topGridPanel.setOpaque(false);
 		topPanel.add(topGridPanel);
 		topGridPanel.setLayout(new GridLayout(3, 1, 0, 0));
 		
 		JLabel headerText = new JLabel(match.getTeam1().getName() + " vs " + match.getTeam2().getName());
 		headerText.setHorizontalAlignment(SwingConstants.CENTER);
-		headerText.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		headerText.setFont(Configuration.HEADER_FONT);
 		topGridPanel.add(headerText);
 		
 		JLabel subheader1 = new JLabel("Win by moving your flag bearer to the enemy side");
 		subheader1.setHorizontalAlignment(SwingConstants.CENTER);
-		subheader1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		subheader1.setFont(Configuration.HEADER_FONT);
 		topGridPanel.add(subheader1);
 		
 		JLabel subheader2 = new JLabel("Match Worth: "+ match.getScore() +" score");
 		subheader2.setHorizontalAlignment(SwingConstants.CENTER);
-		subheader2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		subheader2.setFont(Configuration.HEADER_FONT);
 		topGridPanel.add(subheader2);
 	}
 	
@@ -322,7 +333,14 @@ public class MatchView extends JPanel {
 		JOptionPane.showMessageDialog(null, message);
 	}
 
-	
-
+	@Override
+	protected void paintComponent(Graphics g) {
+	    super.paintComponent(g);
+	    ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "match.jpg");
+		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
+	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
+        g.drawImage(icon.getImage(), 0, yPos, null);
+	}
 
 }

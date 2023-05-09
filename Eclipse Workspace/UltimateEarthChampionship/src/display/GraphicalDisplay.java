@@ -14,16 +14,19 @@ import match.MatchResult;
 import story.Cutscene;
 import views.ChampionSetupView;
 import views.CutsceneView;
-import views.SetupView;
 import views.MatchView;
-import views.WeaponSetupView;
+import views.SetupView;
 import views.TabbedView;
+import views.WeaponSetupView;
 
 public class GraphicalDisplay implements DisplayStrategy {
 
 	private JFrame frame;
 
 	private GameManager gameManager = GameManager.getInstance();
+	
+	public static final int WIDTH = 1600;
+	public static final int HEIGHT = 900;
 
 	/**
 	 * Create the application.
@@ -42,7 +45,7 @@ public class GraphicalDisplay implements DisplayStrategy {
 		frame.setResizable(false);
 		frame.setFont(new Font("Ubuntu", Font.PLAIN, 12));
 		frame.setTitle("Ultimate Earth Championship");
-		frame.setBounds(100, 100, 1920, 1080);
+		frame.setBounds(100, 100, WIDTH, HEIGHT);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
