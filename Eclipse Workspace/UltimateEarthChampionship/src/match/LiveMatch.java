@@ -223,11 +223,6 @@ public class LiveMatch extends Match implements ActionListener{
 			nextTurn();
 		}
 		
-		if (currentChampion.isFlagCarrier())
-		{
-			CheckFlagHolderPosition(currentChampion);
-		}
-		
 		// Get card infront
 		ChampionMatchCard cardInfront = null;
 		
@@ -407,8 +402,11 @@ public class LiveMatch extends Match implements ActionListener{
 		// Update the cards
 		currentCard.updateCard();
 		nextCard.updateCard();
-		
-		System.out.println("Movement of " + champion.getName() + " finished!");
+
+		if (champion.isFlagCarrier())
+		{
+			CheckFlagHolderPosition(champion);
+		}
 	}
 	
 	/**
