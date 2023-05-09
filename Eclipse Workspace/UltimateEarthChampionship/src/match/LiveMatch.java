@@ -415,6 +415,13 @@ public class LiveMatch extends Match implements ActionListener{
 		float rawDamage = attacker.getDamage();
 		float adjustedDamage = rawDamage - defender.getDefense();
 		
+		if (!championIsOnPlayerTeam(attacker))
+		{
+			// If the attacker is on the enemy team
+			// Apply damage bonus
+			adjustedDamage = adjustedDamage * config.AI_DAMAGE_MULTIPLIER;
+		}
+		
 		// Find winner in the fight
 		Champion winner = combat(attacker, defender);
 		
