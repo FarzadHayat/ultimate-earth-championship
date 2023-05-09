@@ -58,10 +58,12 @@ import match.MatchResult;
 import model.Champion;
 import model.Configuration;
 import model.GameEnvironment;
+import model.LevelUpStat;
 import model.Shop;
 import model.Team;
 import model.Weapon;
 import story.Cutscene;
+import views.LevelUpView;
 import weapons.Axe;
 import weapons.BaseballBat;
 import weapons.Chainsaw;
@@ -532,6 +534,28 @@ public abstract class GameManager
 
 	public void finishedGame() {
 		displayStrategy.displayGameResults();
+	}
+	
+	/**
+	 * Lets the view know that a champion has leveled up and the player
+	 * needs to be promtped for a stat to upgrade.
+	 * Called by champion.
+	 * @param champion The champion that has leveled up
+	 */
+	public void displayLevelUpDialogue(Champion champion)
+	{
+		LevelUpView.showLevelUpDialogue(champion);
+	}
+	
+	/**
+	 * Lets the champion know that the player has chosen their stat to level up
+	 * Called by LevelUpView
+	 * @param champion The champion to level up
+	 * @param stat The stat to increase
+	 */
+	public void levelUpChampion(Champion champion, LevelUpStat stat)
+	{
+		champion.applyLevelUp(stat);
 	}
 	
 }
