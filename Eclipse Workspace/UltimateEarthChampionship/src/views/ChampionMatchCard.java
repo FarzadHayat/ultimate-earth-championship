@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 
 import model.Champion;
 import model.Configuration;
+import java.awt.Color;
 
 public class ChampionMatchCard extends JPanel{
 
@@ -40,19 +41,23 @@ public class ChampionMatchCard extends JPanel{
 	public ChampionMatchCard(JPanel centerGrid, int row, int column) {
 		
 		mainPanel = new JPanel();
+		mainPanel.setOpaque(false);
 		centerGrid.add(mainPanel);
 		mainPanel.setLayout(new CardLayout(10, 10));
 		
 		JPanel centerPanel = new JPanel();
+		centerPanel.setOpaque(false);
 		mainPanel.add(centerPanel, "name_205877267141400");
 		centerPanel.setLayout(new BorderLayout(0, 0));
 		
 		championNameText = new JLabel("Champion Name");
+		championNameText.setForeground(new Color(255, 255, 255));
 		championNameText.setHorizontalAlignment(SwingConstants.CENTER);
 		championNameText.setFont(Configuration.TEXT_FONT);
 		centerPanel.add(championNameText, BorderLayout.NORTH);
 		
 		panel = new JPanel();
+		panel.setOpaque(false);
 		centerPanel.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -63,6 +68,7 @@ public class ChampionMatchCard extends JPanel{
 		panel.add(championImage);
 		
 		championStaminaText = new JLabel("0/100 Stamina");
+		championStaminaText.setForeground(new Color(255, 255, 255));
 		championStaminaText.setHorizontalAlignment(SwingConstants.CENTER);
 		championStaminaText.setFont(Configuration.TEXT_FONT);
 		centerPanel.add(championStaminaText, BorderLayout.SOUTH);
