@@ -234,13 +234,13 @@ public class MatchView extends JPanel {
 	public void selectChampion(Champion champion)
 	{
 		selectedChampion = champion;
-		updateSelectedChampionPanel();
+		updateSelectedChampionPanel(champion);
 		updateButtons();
 	}
 
-	private void updateSelectedChampionPanel() {
+	public void updateSelectedChampionPanel(Champion champion) {
 		selectedChampionPanel.removeAll();
-		ChampionCard championCard = new ChampionCard(selectedChampion);
+		ChampionCard championCard = new ChampionCard(champion);
 		championCard.addStatsPanel();
 		selectedChampionPanel.add(championCard);
 		
