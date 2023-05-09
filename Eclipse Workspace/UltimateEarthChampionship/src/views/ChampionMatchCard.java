@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 import model.Champion;
 import model.Configuration;
 import java.awt.Color;
+import javax.swing.border.LineBorder;
 
 public class ChampionMatchCard extends JPanel{
 
@@ -46,6 +47,7 @@ public class ChampionMatchCard extends JPanel{
 		mainPanel.setLayout(new CardLayout(10, 10));
 		
 		JPanel centerPanel = new JPanel();
+		centerPanel.setBorder(new LineBorder(new Color(61, 56, 70)));
 		centerPanel.setOpaque(false);
 		mainPanel.add(centerPanel, "name_205877267141400");
 		centerPanel.setLayout(new BorderLayout(0, 0));

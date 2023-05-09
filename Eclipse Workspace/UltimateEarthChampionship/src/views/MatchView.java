@@ -22,6 +22,7 @@ import display.GraphicalDisplay;
 import match.LiveMatch;
 import model.Champion;
 import model.Configuration;
+import javax.swing.border.LineBorder;
 
 public class MatchView extends JPanel {
 
