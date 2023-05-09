@@ -1,10 +1,7 @@
 package manager;
 
-import java.util.ArrayList;
-
 import display.DisplayType;
 import display.GraphicalDisplay;
-import model.Champion;
 import story.OpeningCutscene;
 
 /**

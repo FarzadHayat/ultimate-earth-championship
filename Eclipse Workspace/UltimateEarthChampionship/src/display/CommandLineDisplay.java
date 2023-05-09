@@ -3,8 +3,6 @@ package display;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
-
 import events.RandomEventInfo;
 import exception.InputException;
 import manager.GameManager;

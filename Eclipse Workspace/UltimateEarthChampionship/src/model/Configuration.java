@@ -123,6 +123,11 @@ public class Configuration {
 	public static final String ICON_IMAGE_FOLDER_PATH = "src/images/icons/";
 	
 	/**
+	 *  Path to folder containing background images
+	 */
+	public static final String BACKGROUND_IMAGE_FOLDER_PATH = "src/images/backgrounds/";
+	
+	/**
 	 * Number of teams, including player team
 	 */
 	public final int NUM_TEAMS = 4;
@@ -140,12 +145,12 @@ public class Configuration {
 	/**
 	 * The multiplier of the prize money for the losing team
 	 */
-	public final float PRIZE_MONEY_FOR_LOSER = 0.40f;
+	public final float PRIZE_MONEY_FOR_LOSER = 0.80f;
 	
 	/**
 	 * The base amount of score given to the winning team
 	 */
-	public final int PRIZE_SCORE_BASE = 5;
+	public final int PRIZE_SCORE_BASE = 8;
 	
 	/**
 	 * The amount that the prize score of matches increases each week
@@ -207,12 +212,12 @@ public class Configuration {
 	/**
 	 * The font used for headers.
 	 */
-	public static final Font HEADER_FONT = new Font(FONT_FAMILY, Font.PLAIN, 20);
+	public static final Font HEADER_FONT = new Font(FONT_FAMILY, Font.PLAIN, 24);
 	
 	/**
 	 * The font used for regular text.
 	 */
-	public static final Font TEXT_FONT = new Font(FONT_FAMILY, Font.PLAIN, 14);
+	public static final Font TEXT_FONT = new Font(FONT_FAMILY, Font.BOLD, 14);
 	
 	/**
 	 * The lower bound of AI aggression, 
@@ -259,6 +264,16 @@ public class Configuration {
 	 * The amount that defense increases when a champion levels up
 	 */
 	public final int LEVEL_UP_DEFENSE_INCREASE = 1;
+
+	/**
+	 * Multiplier of AI damage, affected by difficulty
+	 */
+	public float AI_DAMAGE_MULTIPLIER;
+	
+	/**
+	 * Flat additive modifier to AI aggression factor
+	 */
+	public int AI_AGRESSION_BOOST;
 	
 	public float getDifficulty()
 	{
@@ -267,6 +282,11 @@ public class Configuration {
 	
 	public void setDifficulty(float newDifficulty)
 	{
+		System.out.println("Setting difficulty to " + newDifficulty);
 		difficulty = newDifficulty;
+		
+		AI_DAMAGE_MULTIPLIER = difficulty;
+		
+		AI_AGRESSION_BOOST = (int) (50f * (difficulty - 1f));
 	}
 }

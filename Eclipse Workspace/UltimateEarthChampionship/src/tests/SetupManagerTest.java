@@ -19,8 +19,6 @@ import model.SetupManager;
 
 
 class SetupManagerTest { 
-
-	private InputException inputException;
 	
 	@Test
 	void testPromptForTeamName() {

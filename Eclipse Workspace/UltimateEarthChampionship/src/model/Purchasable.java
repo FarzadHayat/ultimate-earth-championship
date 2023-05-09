@@ -2,6 +2,11 @@ package model;
 
 import javax.swing.ImageIcon;
 
+import exception.FullTeamException;
+import exception.IllegalPurchaseException;
+import exception.IncompleteTeamException;
+import exception.InsufficientFundsException;
+
 /**
  * Interface for objects that can be purchased in the game shop.
  */
@@ -24,4 +29,7 @@ public interface Purchasable {
      * @return The image of the object.
      */
     ImageIcon getImage();
+    
+    void buy(Team team) throws InsufficientFundsException, FullTeamException, IllegalPurchaseException;
+    void sell(Team team) throws IncompleteTeamException;
 }

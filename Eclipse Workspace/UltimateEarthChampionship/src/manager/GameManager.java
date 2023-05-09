@@ -45,10 +45,8 @@ import champions.SunTzu;
 import champions.TedKaczynski;
 import champions.TimBell;
 import champions.WilliamShakespeare;
-import display.CommandLineTable;
 import display.DisplayStrategy;
 import display.DisplayType;
-import events.RandomEventInfo;
 import exception.FullTeamException;
 import exception.GameFinishedException;
 import exception.IllegalPurchaseException;
@@ -370,7 +368,7 @@ public abstract class GameManager
 		setPlayerTeam(playerTeam);
 		teams.add(playerTeam);
 		
-		gameEnvironment.setDifficulty(difficulty);
+		config.setDifficulty(difficulty);
 		gameEnvironment.setMaxWeeks(numWeeks);
 	}
 
@@ -469,8 +467,8 @@ public abstract class GameManager
 		// Reset match and enemy team
 		setMatch(null);
 		setEnemyTeam(null);
-		// Go to next week
-		finishedWeek();
+		// Show end of week results and random events
+		displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
 	}
 
 	private void fightTeams(ArrayList<Team> teams) {
@@ -500,7 +498,7 @@ public abstract class GameManager
 		for (Team team : teams) {
 			try {
 				int championIndex = random.nextInt(championsLeft.size());
-				team.buy(championsLeft.get(championIndex));
+				championsLeft.get(championIndex).buy(team);
 				championsLeft.remove(championIndex);
 			}
 			catch (FullTeamException | InsufficientFundsException | IllegalPurchaseException e) {
@@ -510,10 +508,10 @@ public abstract class GameManager
 			}
 			try {
 				int weaponIndex = random.nextInt(weaponsLeft.size());
-				team.buy(weaponsLeft.get(weaponIndex));
+				weaponsLeft.get(weaponIndex).buy(team);
 				weaponsLeft.remove(weaponIndex);
 			}
-			catch (FullTeamException | InsufficientFundsException | IllegalPurchaseException e) {
+			catch (FullTeamException | InsufficientFundsException e) {
 				if (Configuration.DEBUG) {
 					System.out.println(team.getName() + " BUY WEAPON: " + e.getMessage());
 				}
@@ -528,7 +526,6 @@ public abstract class GameManager
 		try {
 			gameEnvironment.nextWeek();
 			shop.generateCatalogue();
-			displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
 			displayStrategy.displayTeam();
 		} catch (GameFinishedException e) {
 			finishedGame();

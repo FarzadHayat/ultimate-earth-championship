@@ -1,13 +1,12 @@
 package views;
 
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.management.ValueExp;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,8 +23,18 @@ public class StatLabel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	public StatLabel(String value) {
+		setLayout(new GridBagLayout());
+		setOpaque(false);
+		
+		addValueLabel(value);
+	}
+	
+	/**
+	 * Create the panel.
+	 */
 	public StatLabel(String imageFileName, String value) {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		setLayout(new GridBagLayout());
 		setOpaque(false);
 		
 		addImageLabel(imageFileName);
@@ -37,7 +46,9 @@ public class StatLabel extends JPanel {
 	 * @param value the value of the value label
 	 */
 	private void addValueLabel(String value) {
-		add(new JLabel(value));
+		JLabel label = new JLabel(value);
+		label.setFont(Configuration.TEXT_FONT);
+		add(label);
 	}
 
 	/**

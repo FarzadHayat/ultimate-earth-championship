@@ -14,8 +14,6 @@ import manager.GameManager;
 
 public class GameEnvironment {
 	
-	private Configuration config = Configuration.getInstance();
-	
 	/**
 	 * The current week, starting from 1
 	 */
@@ -26,10 +24,6 @@ public class GameEnvironment {
 	 */
 	private int maxWeek;
 	
-	/**
-	 * The difficulty of the game, should fall between the range of 0.1 and 2
-	 */
-	private float difficulty;
 	
 	/**
 	 * List of all random events in the game
@@ -65,7 +59,7 @@ public class GameEnvironment {
 	 * Constructor class
 	 */
 	public GameEnvironment() {
-		currentWeek = 0;
+		currentWeek = 1;
 		maxWeek = 99;
 		events = new ArrayList<RandomEvent>();
 		getAllEvents();
@@ -84,32 +78,6 @@ public class GameEnvironment {
 		events.add(new RampagingAnimalEvent());
 	}
 	
-	/**
-	 * Sets the difficulty by float. Difficulty value must be 0.1 < difficulty < 2. Will directly modify the config singleton
-	 *  to apply the difficulty.
-	 * @param difficulty The difficulty of the game.
-	 */
-	public void setDifficulty(float difficulty) // Private because this should only be accessed in the constructor
-	{
-		this.difficulty = difficulty;
-		
-		// Check within range:
-		if (difficulty < 0.5f || difficulty > 2f)
-		{
-			System.out.println("WARNING: Difficulty setting outside of expected range, aborting.");
-			return;
-		}
-		
-		//TODO: Fuck with the config using this difficulty setting!
-	}
-	
-	/**
-	 * Returns the value of difficulty
-	 * @return difficulty the value of difficulty
-	 */
-	public float getDifficulty() {
-		return difficulty;
-	}
 
 	/**
 	 * Goes through each event and checks for its chance of occurring,
