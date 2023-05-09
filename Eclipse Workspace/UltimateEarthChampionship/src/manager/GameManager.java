@@ -437,7 +437,9 @@ public abstract class GameManager
 	{
 		teams.addAll(generateAITeams()); 
 		shop.generateCatalogue();
-		displayStrategy.displayTeam();
+		//displayStrategy.displayTeam();
+	
+		finishedGame();
 	}
 	
 	public void startMatchSetup(Team team) {
@@ -534,7 +536,21 @@ public abstract class GameManager
 	}
 
 	public void finishedGame() {
-		displayStrategy.displayGameResults();
+		
+		// Debug
+		ArrayList<Team> teams = getTeams();
+		Random random = new Random();
+		for (Team team : teams)
+		{
+			team.addScore(random.nextInt(100));
+		}
+		// ----
+		
+		displayStrategy.displayGameResults(getTeams());
 	}
 	
+	public void quitApplication()
+	{
+		displayStrategy.quit();
+	}
 }

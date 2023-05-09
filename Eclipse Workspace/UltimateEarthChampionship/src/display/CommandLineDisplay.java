@@ -365,7 +365,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayGameResults() {
+	public void displayGameResults(ArrayList<Team> teams) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -374,6 +374,11 @@ public class CommandLineDisplay implements DisplayStrategy {
 	public void displayLiveMatch(LiveMatch match) {
 		System.out.println("TODO: Livematch in command line interface");
 		
+	}
+
+	@Override
+	public void quit() {
+		// TODO Auto-generated method stub
 	}
 	
 }

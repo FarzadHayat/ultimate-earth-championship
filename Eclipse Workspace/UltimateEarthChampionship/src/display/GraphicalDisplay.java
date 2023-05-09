@@ -11,9 +11,11 @@ import events.RandomEventInfo;
 import manager.GameManager;
 import match.LiveMatch;
 import match.MatchResult;
+import model.Team;
 import story.Cutscene;
 import views.ChampionSetupView;
 import views.CutsceneView;
+import views.EndingView;
 import views.SetupView;
 import views.MatchView;
 import views.WeaponSetupView;
@@ -136,9 +138,14 @@ public class GraphicalDisplay implements DisplayStrategy {
 	}
 
 	@Override
-	public void displayGameResults() {
-		// TODO Auto-generated method stub
-		
+	public void displayGameResults(ArrayList<Team> teams) {
+		EndingView endingView = new EndingView(teams);
+		displayView(endingView);
+	}
+
+	@Override
+	public void quit() {
+		frame.dispose();
 	}
 
 
