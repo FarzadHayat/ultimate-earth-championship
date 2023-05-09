@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -106,25 +107,25 @@ public class MatchView extends JPanel {
 	}
 	
 	/**
-	 * Sets up the botom panel
+	 * Sets up the bottom panel
 	 */
 	public void setupBottomPanel()
 	{
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setOpaque(false);
 		add(bottomPanel, BorderLayout.SOUTH);
-		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 15));
+		bottomPanel.setLayout(new GridLayout(0, 1, 15, 15));
 		
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setOpaque(false);
-		bottomPanel.add(buttonPanel);
-		buttonPanel.setLayout(new GridLayout(0, 6, 30, 0));
+		JPanel buttons = new JPanel();
+		buttons.setOpaque(false);
+		bottomPanel.add(buttons);
+		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 15));
 		
 		selectedChampionLabel = new JLabel("<Champion Selected> :");
 		selectedChampionLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		selectedChampionLabel.setFont(Configuration.HEADER_FONT);
 		selectedChampionLabel.setForeground(Color.white);
-		buttonPanel.add(selectedChampionLabel);
+		buttons.add(selectedChampionLabel);
 		
 		attackButton = new JButton("Move");
 		attackButton.addActionListener(new ActionListener() {
@@ -132,7 +133,7 @@ public class MatchView extends JPanel {
 				match.championAttack();
 			}
 		});
-		buttonPanel.add(attackButton);
+		buttons.add(attackButton);
 		
 		waitButton = new JButton("Wait");
 		waitButton.addActionListener(new ActionListener() {
@@ -140,7 +141,7 @@ public class MatchView extends JPanel {
 				match.championWait();
 			}
 		});
-		buttonPanel.add(waitButton);
+		buttons.add(waitButton);
 		
 		retreatButton = new JButton("Retreat");
 		retreatButton.addActionListener(new ActionListener() {
@@ -148,7 +149,7 @@ public class MatchView extends JPanel {
 				match.championRetreat();
 			}
 		});
-		buttonPanel.add(retreatButton);
+		buttons.add(retreatButton);
 		
 		attackUpButton = new JButton("AttackUp");
 		attackUpButton.addActionListener(new ActionListener() {
@@ -156,7 +157,7 @@ public class MatchView extends JPanel {
 				match.championAttackUp();
 			}
 		});
-		buttonPanel.add(attackUpButton);
+		buttons.add(attackUpButton);
 		
 		attackDownButton = new JButton("AttackDown");
 		attackDownButton.addActionListener(new ActionListener() {
@@ -164,7 +165,7 @@ public class MatchView extends JPanel {
 				match.championAttackDown();
 			}
 		});
-		buttonPanel.add(attackDownButton);
+		buttons.add(attackDownButton);
 	}
 	
 	/**
