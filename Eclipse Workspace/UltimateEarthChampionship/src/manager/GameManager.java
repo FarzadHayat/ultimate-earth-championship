@@ -399,18 +399,7 @@ public abstract class GameManager
 	
 	public void finishedMatch(MatchResult matchResult) {
 		displayStrategy.displayMatchResults(matchResult);
-		// Shop for all AI teams including the one that the player just fought
-		shopTeams(getAITeams());
-		// Fight for AI teams that haven't fought yet this week
-		ArrayList<Team> teamsLeft = new ArrayList<Team>(teams);
-		teamsLeft.remove(playerTeam);
-		teamsLeft.remove(enemyTeam);
-		fightTeams(teamsLeft);
-		// Reset match and enemy team
-		setMatch(null);
-		setEnemyTeam(null);
-		// Show end of week results and random events
-		displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
+		finishedWeek();
 	}
 
 	private void fightTeams(ArrayList<Team> teams) {
@@ -462,12 +451,28 @@ public abstract class GameManager
 	}
 	
 	public void finishedWeek() {
+		// Shop for all AI teams including the one that the player just fought
+		shopTeams(getAITeams());
+		// Fight for AI teams that haven't fought yet this week
+		ArrayList<Team> teamsLeft = new ArrayList<Team>(teams);
+		teamsLeft.remove(playerTeam);
+		teamsLeft.remove(enemyTeam);
+		fightTeams(teamsLeft);
+		// Reset match and enemy team
+		setMatch(null);
+		setEnemyTeam(null);
+		// Show end of week results and random events
+		displayStrategy.displayWeekResults(gameEnvironment.generateWeeklyEvents());
+		// Tell all teams to take a bye
 		for (Team team : getTeams()) {
-			team.takeABye();
+			team.rest();
 		}
 		try {
+			// Iterate the current week
 			gameEnvironment.nextWeek();
+			// Refresh the shop catalogue
 			shop.generateCatalogue();
+			// Show the next week
 			displayStrategy.displayTeam();
 		} catch (GameFinishedException e) {
 			finishedGame();

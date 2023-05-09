@@ -25,22 +25,48 @@ public class StadiumView extends JPanel {
 	
 	private GameManager gameManager = GameManager.getInstance();
 
+	private JPanel teamsPanel;
+
 	/**
 	 * Create the panel.
 	 */
 	public StadiumView() {
 		setName("Stadium");
-		setLayout(new FlowLayout(FlowLayout.CENTER, 200, 200));
+		setLayout(new BorderLayout());
 		
+		add(new HeaderPanel("Select a team to start a match against..."), BorderLayout.NORTH);
+		addTeamsPanel();
+		addBottomPanel();
+	}
+
+	private void addTeamsPanel() {
+		teamsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 200, 200));
+		teamsPanel.setOpaque(false);
+		add(teamsPanel, BorderLayout.CENTER);
 		for (Team team : gameManager.getAITeams()) {
-			addTeamPanel(team);
+			addTeamToPanel(team);
 		}
 	}
 	
+	public void addBottomPanel() {
+		JPanel bottomPanel = new JPanel(new FlowLayout());
+		bottomPanel.setOpaque(false);
+		add(bottomPanel, BorderLayout.SOUTH);
+		JButton byeButton = new JButton("Take a bye and go to next week");
+		byeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gameManager.finishedWeek();
+			}
+			
+		});
+		bottomPanel.add(byeButton);
+	}
+	
 	/**
-	 * Add the team as a panel to the match selection view
+	 * Add the team as a panel to the teams panel
 	 */
-	public void addTeamPanel(Team team) {
+	public void addTeamToPanel(Team team) {
 		JPanel panel = new JPanel();
 		panel.setOpaque(false);
 		panel.setLayout(new BorderLayout());
@@ -66,7 +92,7 @@ public class StadiumView extends JPanel {
 		});
 		panel.add(fightButton, BorderLayout.SOUTH);
 		
-		add(panel);
+		teamsPanel.add(panel);
 	}
 	
 	@Override
