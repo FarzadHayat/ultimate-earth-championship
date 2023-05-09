@@ -63,9 +63,9 @@ public class Configuration {
 	public final float MAX_STAMINA_DEFAULT = 100f;
 	
 	/**
-	 *  The default max regen of each champion, before skill points are accounted for 
+	 *  The default regen of each champion, before skill points are accounted for 
 	 */
-	public final float MAX_REGEN_DEFAULT = 30f;
+	public final float REGEN_DEFAULT = 5f;
 	
 	/**
 	 *  The amount that a skill point into stamina will increment maximum stamina of a champion
