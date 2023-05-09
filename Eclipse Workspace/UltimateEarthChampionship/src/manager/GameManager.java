@@ -521,7 +521,7 @@ public abstract class GameManager
 	
 	public void finishedWeek() {
 		for (Team team : getTeams()) {
-			team.rest();
+			team.takeABye();
 		}
 		try {
 			gameEnvironment.nextWeek();

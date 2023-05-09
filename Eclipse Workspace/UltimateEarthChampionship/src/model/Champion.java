@@ -485,6 +485,10 @@ public abstract class Champion implements Purchasable, Cloneable {
 		team.addMoney(getPrice());
 	}
 	
+	public void rest() {
+		setStamina(getMaxStamina());
+	}
+	
 	/**
 	 * Create a clone of the Champion with the same stats.
 	 */

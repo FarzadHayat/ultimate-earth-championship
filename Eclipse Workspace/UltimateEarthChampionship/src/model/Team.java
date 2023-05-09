@@ -395,10 +395,10 @@ public class Team {
 		}
 	}
 	
-	public void rest() {
+	public void takeABye() {
 		setWeeklyChampionPurchased(false);
 		for (Champion champion : champions) {
-			champion.addStamina(champion.getRegen());
+			champion.rest();
 		}
 	}
 	
