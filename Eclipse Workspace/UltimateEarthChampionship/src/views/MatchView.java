@@ -29,7 +29,7 @@ public class MatchView extends JPanel {
 
 	private LiveMatch match;
 	
-	private JLabel selectedChampionLabel;
+	private JPanel selectedChampionPanel;
 	
 	private Champion selectedChampion;
 	
@@ -140,6 +140,22 @@ public class MatchView extends JPanel {
 	}
 	
 	/**
+	 * Sets up the side panel
+	 */
+	public void setupSides()
+	{
+		JPanel leftPanel = new JPanel();
+		leftPanel.setOpaque(false);
+		add(leftPanel, BorderLayout.WEST);
+		leftPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+		
+		JPanel rightPanel = new JPanel();
+		rightPanel.setOpaque(false);
+		add(rightPanel, BorderLayout.EAST);
+		rightPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+	}
+
+	/**
 	 * Sets up the bottom panel
 	 */
 	public void setupBottomPanel()
@@ -147,18 +163,28 @@ public class MatchView extends JPanel {
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setOpaque(false);
 		add(bottomPanel, BorderLayout.SOUTH);
-		bottomPanel.setLayout(new GridLayout(0, 1, 15, 15));
+		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
 		
+		// Selected champion title
+		JPanel selectedHeaderPanel = new JPanel(new FlowLayout());
+		selectedHeaderPanel.setOpaque(false);
+		bottomPanel.add(selectedHeaderPanel);
+		
+		JLabel selectedChampionLabel = new JLabel("Currently selected champion:");
+		selectedChampionLabel.setFont(Configuration.HEADER_FONT);
+		selectedChampionLabel.setForeground(Color.white);
+		selectedHeaderPanel.add(selectedChampionLabel);
+		
+		// Selected champion panel
+		selectedChampionPanel = new JPanel(new FlowLayout());
+		selectedChampionPanel.setOpaque(false);
+		bottomPanel.add(selectedChampionPanel);
+		
+		// Selected champion action buttons
 		JPanel buttons = new JPanel();
 		buttons.setOpaque(false);
 		bottomPanel.add(buttons);
-		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 15));
-		
-		selectedChampionLabel = new JLabel("<Champion Selected> :");
-		selectedChampionLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		selectedChampionLabel.setFont(Configuration.HEADER_FONT);
-		selectedChampionLabel.setForeground(Color.white);
-		buttons.add(selectedChampionLabel);
+		buttons.setLayout(new FlowLayout());
 		
 		attackButton = new JButton("Move");
 		attackButton.addActionListener(new ActionListener() {
@@ -202,37 +228,28 @@ public class MatchView extends JPanel {
 	}
 	
 	/**
-	 * Sets up the side panel
-	 */
-	public void setupSides()
-	{
-		JPanel leftPanel = new JPanel();
-		leftPanel.setOpaque(false);
-		add(leftPanel, BorderLayout.WEST);
-		leftPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
-		
-		JPanel rightPanel = new JPanel();
-		rightPanel.setOpaque(false);
-		add(rightPanel, BorderLayout.EAST);
-		rightPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
-	}
-	
-	/**
 	 * Selects a champion as the champion whose turn is currently undergoing
 	 * @param champion Champion to be selected
 	 */
 	public void selectChampion(Champion champion)
 	{
-		selectedChampionLabel.setText(champion.getName() + ": " );
 		selectedChampion = champion;
-		
+		updateSelectedChampionPanel();
 		updateButtons();
+	}
+
+	private void updateSelectedChampionPanel() {
+		selectedChampionPanel.removeAll();
+		ChampionCard championCard = new ChampionCard(selectedChampion);
+		championCard.addStatsPanel();
+		selectedChampionPanel.add(championCard);
+		
 	}
 
 	/**
 	 * Enables and disables the buttons based upon whether the champion is allowed to make a certain action
 	 */
-	public void updateButtons()
+	private void updateButtons()
 	{
 		// Enable the move button
 		waitButton.setEnabled(true);
