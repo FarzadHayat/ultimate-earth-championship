@@ -61,6 +61,39 @@ public class MatchView extends JPanel {
 	}
 
 	/**
+	 * Sets up the header
+	 */
+	public void setupHeader()
+	{
+		JPanel topPanel = new JPanel();
+		topPanel.setOpaque(false);
+		add(topPanel, BorderLayout.NORTH);
+		
+		JPanel topGridPanel = new JPanel();
+		topGridPanel.setOpaque(false);
+		topPanel.add(topGridPanel);
+		topGridPanel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JLabel headerText = new JLabel(match.getTeam1().getName() + " vs " + match.getTeam2().getName());
+		headerText.setHorizontalAlignment(SwingConstants.CENTER);
+		headerText.setFont(Configuration.HEADER_FONT);
+		headerText.setForeground(Color.white);
+		topGridPanel.add(headerText);
+		
+		JLabel subheader1 = new JLabel("Win by moving your flag bearer to the enemy side");
+		subheader1.setHorizontalAlignment(SwingConstants.CENTER);
+		subheader1.setFont(Configuration.HEADER_FONT);
+		subheader1.setForeground(Color.white);
+		topGridPanel.add(subheader1);
+		
+		JLabel subheader2 = new JLabel("Match Worth: "+ match.getScore() +" score");
+		subheader2.setHorizontalAlignment(SwingConstants.CENTER);
+		subheader2.setFont(Configuration.HEADER_FONT);
+		subheader2.setForeground(Color.white);
+		topGridPanel.add(subheader2);
+	}
+
+	/**
 	 * Sets up the center panel
 	 */
 	public void setupCenter()
@@ -182,36 +215,6 @@ public class MatchView extends JPanel {
 		rightPanel.setOpaque(false);
 		add(rightPanel, BorderLayout.EAST);
 		rightPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
-	}
-	
-	/**
-	 * Sets up the header
-	 */
-	public void setupHeader()
-	{
-		JPanel topPanel = new JPanel();
-		topPanel.setOpaque(false);
-		add(topPanel, BorderLayout.NORTH);
-		
-		JPanel topGridPanel = new JPanel();
-		topGridPanel.setOpaque(false);
-		topPanel.add(topGridPanel);
-		topGridPanel.setLayout(new GridLayout(3, 1, 0, 0));
-		
-		JLabel headerText = new JLabel(match.getTeam1().getName() + " vs " + match.getTeam2().getName());
-		headerText.setHorizontalAlignment(SwingConstants.CENTER);
-		headerText.setFont(Configuration.HEADER_FONT);
-		topGridPanel.add(headerText);
-		
-		JLabel subheader1 = new JLabel("Win by moving your flag bearer to the enemy side");
-		subheader1.setHorizontalAlignment(SwingConstants.CENTER);
-		subheader1.setFont(Configuration.HEADER_FONT);
-		topGridPanel.add(subheader1);
-		
-		JLabel subheader2 = new JLabel("Match Worth: "+ match.getScore() +" score");
-		subheader2.setHorizontalAlignment(SwingConstants.CENTER);
-		subheader2.setFont(Configuration.HEADER_FONT);
-		topGridPanel.add(subheader2);
 	}
 	
 	/**
