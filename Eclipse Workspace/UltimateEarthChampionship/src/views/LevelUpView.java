@@ -53,6 +53,6 @@ public class LevelUpView extends JPanel {
 		
 		System.out.println("chosen: " + statChosen);
 		
-		GameManager.getInstance().levelUpChampion(champion, statChosen);
+		GameManager.getInstance().applyLevelUp(champion, statChosen);
 	}
 }
