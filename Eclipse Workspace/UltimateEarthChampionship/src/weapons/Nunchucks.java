@@ -12,8 +12,8 @@ public class Nunchucks extends Weapon {
 	
 	// Stat Boosts
 	private static final float damageMultiplier = 0.8f;
-	private static final int offenseBoost = 1;
-	private static final int defenseBoost = 1;
+	private static final int offenseBoost = 2;
+	private static final int defenseBoost = 2;
 	
 	// Price
 	private static final float startingPrice = 25f;

@@ -55,12 +55,12 @@ public class Configuration {
 	/**
 	 *  Modifier of XP gained, Multiplied by damage done and damaged blocked to find xp gained.
 	 */
-	public final float XP_GAIN_MODIFIER = 0.5f;
+	public final float XP_GAIN_MODIFIER = 0.4f;
 	
 	/**
 	 *  The default max stamina of each champion, before skill points are accounted for
 	 */
-	public final float MAX_STAMINA_DEFAULT = 100f;
+	public final float MAX_STAMINA_DEFAULT = 80f;
 	
 	/**
 	 *  The default regen of each champion, before skill points are accounted for 
@@ -135,12 +135,12 @@ public class Configuration {
 	/**
 	 * The base amount of money given as a prize to the winning team
 	 */
-	public final float PRIZE_MONEY_BASE = 25f;
+	public final float PRIZE_MONEY_BASE = 50f;
 	
 	/**
 	 * The amount that both teams score increases the prize money allotted
 	 */
-	public final float PRIZE_MONEY_SCORE_SCALE_FACTOR = 0.25f;
+	public final float PRIZE_MONEY_SCORE_SCALE_FACTOR = 0.80f;
 	
 	/**
 	 * The multiplier of the prize money for the losing team
@@ -155,7 +155,7 @@ public class Configuration {
 	/**
 	 * The amount that the prize score of matches increases each week
 	 */
-	public final int PRIZE_SCORE_WEEKLY_MODIFIER = 2;
+	public final int PRIZE_SCORE_WEEKLY_MODIFIER = 5;
 
 	/**
 	 * Number of champions a team can hold as chosen.
