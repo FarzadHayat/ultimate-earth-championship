@@ -3,10 +3,13 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -40,7 +43,8 @@ public class StadiumView extends JPanel {
 	}
 
 	private void addTeamsPanel() {
-		teamsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 200, 200));
+		teamsPanel = new JPanel();
+		teamsPanel.setLayout(new GridLayout(0, 1, 0, 50));
 		teamsPanel.setOpaque(false);
 		add(teamsPanel, BorderLayout.CENTER);
 		for (Team team : gameManager.getAITeams()) {
@@ -49,7 +53,7 @@ public class StadiumView extends JPanel {
 	}
 	
 	public void addBottomPanel() {
-		JPanel bottomPanel = new JPanel(new FlowLayout());
+		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		bottomPanel.setOpaque(false);
 		add(bottomPanel, BorderLayout.SOUTH);
 		JButton byeButton = new JButton("Take a bye and go to next week");
@@ -71,18 +75,32 @@ public class StadiumView extends JPanel {
 		panel.setOpaque(false);
 		panel.setLayout(new BorderLayout());
 		
+		// Team name
 		HeaderPanel nameLabel = new HeaderPanel(team.getName());
 		panel.add(nameLabel, BorderLayout.NORTH);
 		
-		DefaultListModel<String> model = new DefaultListModel<>();
-		for (int i = 0; i < team.getChampions().size(); i++) {
-			Champion champion = team.getChampions().get(i);
-			model.add(i, String.format("%s (%s)", champion.getName(), champion.getWeapon().getName()));
+		// Team champions
+		JPanel championsPanel = new JPanel(new FlowLayout());
+		championsPanel.setOpaque(false);
+		ArrayList<Champion> champions = gameManager.getPlayerTeam().getChampions();
+		for (int i = 0; i < Configuration.getInstance().NUM_CHAMPIONS; i++) {
+			PurchasableCard card;
+			if (champions.size() > i) {
+				Champion champion = champions.get(i);
+				card = new ChampionCard(champion);
+				card.addStatsPanel();
+			} else {
+				card = new ChampionCard();
+			}
+			championsPanel.add(card);
 		}
-		JList<String> championList = new JList<String>(model);
-		panel.add(championList, BorderLayout.CENTER);
+		panel.add(championsPanel, BorderLayout.CENTER);
 		
-		JButton fightButton = new JButton("Fight");
+		// Fight team button
+		JPanel fightPanel = new JPanel();
+		fightPanel.setOpaque(false);
+		panel.add(fightPanel, BorderLayout.SOUTH);
+		JButton fightButton = new JButton("Fight " + team.getName());
 		fightButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -90,7 +108,7 @@ public class StadiumView extends JPanel {
 				gameManager.startMatchSetup(team);
 			}
 		});
-		panel.add(fightButton, BorderLayout.SOUTH);
+		fightPanel.add(fightButton);
 		
 		teamsPanel.add(panel);
 	}
