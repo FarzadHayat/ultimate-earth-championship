@@ -82,7 +82,7 @@ public class StadiumView extends JPanel {
 		// Team champions
 		JPanel championsPanel = new JPanel(new FlowLayout());
 		championsPanel.setOpaque(false);
-		ArrayList<Champion> champions = gameManager.getPlayerTeam().getChampions();
+		ArrayList<Champion> champions = team.getChampions();
 		for (int i = 0; i < Configuration.getInstance().NUM_CHAMPIONS; i++) {
 			PurchasableCard card;
 			if (champions.size() > i) {
