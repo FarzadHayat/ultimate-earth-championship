@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -69,10 +70,13 @@ public class WeaponSetupView extends JPanel {
 	}
 
 	private void addWeaponsPanel() {
+		JPanel outerPanel = new JPanel(new GridBagLayout());
+		outerPanel.setOpaque(false);
 		JPanel weaponsPanel = new JPanel(new GridLayout(3, 3, 20, 20));
 		weaponsPanel.setOpaque(false);
-		ArrayList<Weapon> weapons = gameManager.getPlayerTeam().getWeapons(); 
-		add(weaponsPanel, BorderLayout.WEST);
+		ArrayList<Weapon> weapons = gameManager.getPlayerTeam().getWeapons();
+		outerPanel.add(weaponsPanel);
+		add(outerPanel, BorderLayout.WEST);
 		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
 			if (weapons.size() > i) {
 				addWeaponToPanel(weapons.get(i), weaponsPanel);

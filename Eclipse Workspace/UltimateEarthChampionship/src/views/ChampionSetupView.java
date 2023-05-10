@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -61,10 +62,13 @@ public class ChampionSetupView extends JPanel {
 	}
 
 	private void addChampionsPanel() {
+		JPanel outerPanel = new JPanel(new GridBagLayout());
+		outerPanel.setOpaque(false);
 		JPanel championsPanel = new JPanel(new GridLayout(3, 3, 20, 20));
 		championsPanel.setOpaque(false);
-		ArrayList<Champion> champions = gameManager.getPlayerTeam().getChampions(); 
-		add(championsPanel, BorderLayout.WEST);
+		ArrayList<Champion> champions = gameManager.getPlayerTeam().getChampions();
+		outerPanel.add(championsPanel);
+		add(outerPanel, BorderLayout.WEST);
 		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
 			if (champions.size() > i) {
 				addChampionToPanel(champions.get(i), championsPanel);

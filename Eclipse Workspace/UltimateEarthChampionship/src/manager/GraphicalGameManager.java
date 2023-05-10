@@ -32,7 +32,6 @@ public class GraphicalGameManager extends GameManager
 		displayStrategy.displayChampionSetup();
 	}
 	
-	//TODO: Fix this mess
 	public void repaintTeam() {
 		displayStrategy.displayTeam();
 	}
