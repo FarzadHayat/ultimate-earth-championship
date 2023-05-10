@@ -65,6 +65,7 @@ public class CutsceneView extends JPanel {
 		
 		// Button...
 		continueButton = new JButton("Continue...");
+		continueButton.setFont(Configuration.HEADER_FONT);
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{

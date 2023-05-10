@@ -188,6 +188,7 @@ public class MatchView extends JPanel {
 		buttons.setLayout(new FlowLayout());
 		
 		attackButton = new JButton("Move");
+		attackButton.setFont(Configuration.HEADER_FONT);
 		attackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				match.championAttack();
@@ -196,6 +197,7 @@ public class MatchView extends JPanel {
 		buttons.add(attackButton);
 		
 		waitButton = new JButton("Wait");
+		waitButton.setFont(Configuration.HEADER_FONT);
 		waitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				match.championWait();
@@ -204,6 +206,7 @@ public class MatchView extends JPanel {
 		buttons.add(waitButton);
 		
 		retreatButton = new JButton("Retreat");
+		retreatButton.setFont(Configuration.HEADER_FONT);
 		retreatButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				match.championRetreat();
@@ -212,6 +215,7 @@ public class MatchView extends JPanel {
 		buttons.add(retreatButton);
 		
 		attackUpButton = new JButton("AttackUp");
+		attackUpButton.setFont(Configuration.HEADER_FONT);
 		attackUpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				match.championAttackUp();
@@ -220,6 +224,7 @@ public class MatchView extends JPanel {
 		buttons.add(attackUpButton);
 		
 		attackDownButton = new JButton("AttackDown");
+		attackDownButton.setFont(Configuration.HEADER_FONT);
 		attackDownButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				match.championAttackDown();

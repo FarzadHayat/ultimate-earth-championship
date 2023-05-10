@@ -4,6 +4,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import model.Configuration;
+
 public class TabbedView extends JPanel {
 
 	private static final long serialVersionUID = 8081074315449639244L;
@@ -26,6 +28,7 @@ public class TabbedView extends JPanel {
 		add(infoPanel);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setFont(Configuration.HEADER_FONT);
 		add(tabbedPane);
 		
 		teamView = new TeamView();

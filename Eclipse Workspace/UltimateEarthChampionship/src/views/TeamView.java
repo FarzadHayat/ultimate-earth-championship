@@ -2,6 +2,7 @@ package views;
 
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.util.ArrayList;
 
@@ -22,16 +23,22 @@ public class TeamView extends JPanel {
 	private GameManager gameManager = GameManager.getInstance();
 	private Configuration config = Configuration.getInstance();
 	
+	private JPanel mainPanel;
+	
 	/**
 	 * Create the panel.
 	 */
 	public TeamView() {
 		setName("Team");
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new GridBagLayout());
+		mainPanel = new JPanel();
+		mainPanel.setOpaque(false);
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		add(mainPanel);
 		
-		add(new HeaderPanel("Champions"));
+		mainPanel.add(new HeaderPanel("Champions"));
 		addChampionsPanel();
-		add(new HeaderPanel("Weapons"));
+		mainPanel.add(new HeaderPanel("Weapons"));
 		addAllWeaponsPanel();
 	}
 
@@ -54,7 +61,7 @@ public class TeamView extends JPanel {
 			}
 			championsPanel.add(card);
 		}
-		add(championsPanel);
+		mainPanel.add(championsPanel);
 	}
 	
 	/**
@@ -76,7 +83,7 @@ public class TeamView extends JPanel {
 			}
 			weaponsPanel.add(card);
 		}
-		add(weaponsPanel);
+		mainPanel.add(weaponsPanel);
 	}
 	
 	@Override

@@ -3,6 +3,7 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -43,28 +44,16 @@ public class StadiumView extends JPanel {
 	}
 
 	private void addTeamsPanel() {
+		JPanel outerPanel = new JPanel(new GridBagLayout());
+		outerPanel.setOpaque(false);
 		teamsPanel = new JPanel();
-		teamsPanel.setLayout(new GridLayout(0, 1, 0, 50));
+		teamsPanel.setLayout(new BoxLayout(teamsPanel, BoxLayout.Y_AXIS));
 		teamsPanel.setOpaque(false);
-		add(teamsPanel, BorderLayout.CENTER);
+		outerPanel.add(teamsPanel);
+		add(outerPanel, BorderLayout.CENTER);
 		for (Team team : gameManager.getAITeams()) {
 			addTeamToPanel(team);
 		}
-	}
-	
-	public void addBottomPanel() {
-		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		bottomPanel.setOpaque(false);
-		add(bottomPanel, BorderLayout.SOUTH);
-		JButton byeButton = new JButton("Take a bye and go to next week");
-		byeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				gameManager.finishedWeek();
-			}
-			
-		});
-		bottomPanel.add(byeButton);
 	}
 	
 	/**
@@ -101,6 +90,7 @@ public class StadiumView extends JPanel {
 		fightPanel.setOpaque(false);
 		panel.add(fightPanel, BorderLayout.SOUTH);
 		JButton fightButton = new JButton("Fight " + team.getName());
+		fightButton.setFont(Configuration.HEADER_FONT);
 		fightButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -113,6 +103,22 @@ public class StadiumView extends JPanel {
 		teamsPanel.add(panel);
 	}
 	
+	public void addBottomPanel() {
+		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		bottomPanel.setOpaque(false);
+		add(bottomPanel, BorderLayout.SOUTH);
+		JButton byeButton = new JButton("Take a bye and go to next week");
+		byeButton.setFont(Configuration.HEADER_FONT);
+		byeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gameManager.finishedWeek();
+			}
+			
+		});
+		bottomPanel.add(byeButton);
+	}
+
 	@Override
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);

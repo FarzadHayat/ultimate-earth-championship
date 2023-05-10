@@ -2,6 +2,7 @@ package views;
 
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 
 import javax.swing.BoxLayout;
@@ -20,16 +21,22 @@ public class ShopView extends JPanel {
 	
 	private GameManager gameManager = GameManager.getInstance();
 
+	private JPanel mainPanel;
+	
 	/**
 	 * Create the panel.
 	 */
 	public ShopView() {
 		setName("Shop");
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new GridBagLayout());
+		mainPanel = new JPanel();
+		mainPanel.setOpaque(false);
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		add(mainPanel);
 		
-		add(new HeaderPanel("Champions"));
+		mainPanel.add(new HeaderPanel("Champions"));
 		addAvailableChampionsPanel();
-		add(new HeaderPanel("Weapons"));
+		mainPanel.add(new HeaderPanel("Weapons"));
 		addAvailableWeaponsPanel();
 	}
 
@@ -52,7 +59,7 @@ public class ShopView extends JPanel {
 				}
 			}
 		}
-		add(championsPanel);
+		mainPanel.add(championsPanel);
 	}
 
 	/**
@@ -67,7 +74,7 @@ public class ShopView extends JPanel {
 			card.addBuyButton();
 			weaponsPanel.add(card);
 		}
-		add(weaponsPanel);
+		mainPanel.add(weaponsPanel);
 	}
 
 	@Override

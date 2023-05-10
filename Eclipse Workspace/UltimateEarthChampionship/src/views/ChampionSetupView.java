@@ -50,6 +50,7 @@ public class ChampionSetupView extends JPanel {
 		JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		backButtonPanel.setOpaque(false);
 		JButton backButton = new JButton("Go back to the Stadium");
+		backButton.setFont(Configuration.HEADER_FONT);
 		backButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -158,6 +159,7 @@ public class ChampionSetupView extends JPanel {
 		JPanel nextButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		nextButtonPanel.setOpaque(false);
 		JButton startButton = new JButton("Go to Weapon Setup");
+		startButton.setFont(Configuration.HEADER_FONT);
 		startButton.addActionListener(new ActionListener() {
 			
 			@Override

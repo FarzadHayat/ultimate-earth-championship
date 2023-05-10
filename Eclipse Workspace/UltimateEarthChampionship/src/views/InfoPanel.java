@@ -24,20 +24,30 @@ public class InfoPanel extends JPanel {
 		setMaximumSize(new Dimension(GraphicalDisplay.WIDTH, 100));
 		
 		String nameString = "Team name: " + String.valueOf(gameManager.getPlayerTeam().getName());
-		add(new StatLabel(nameString));
+		StatLabel nameLabel = new StatLabel(nameString);
+		nameLabel.getValueLabel().setFont(Configuration.HEADER_FONT);
+		add(nameLabel);
 		
 		String moneyString = "Money: " + String.valueOf(gameManager.getPlayerTeam().getMoney());
-		add(new StatLabel("money", moneyString));
+		StatLabel moneyLabel = new StatLabel("money", moneyString);
+		moneyLabel.getValueLabel().setFont(Configuration.HEADER_FONT);
+		add(moneyLabel);
 		
 		String scoreString = "Score: " + String.valueOf(gameManager.getPlayerTeam().getScore());
-		add(new StatLabel("score", scoreString));
+		StatLabel scoreLabel = new StatLabel("score", scoreString);
+		scoreLabel.getValueLabel().setFont(Configuration.HEADER_FONT);
+		add(scoreLabel);
 		
 		String weekString = "Week: " + String.valueOf(gameManager.getGameEnvironment().getCurrentWeek())
 		+ " out of " + String.valueOf(gameManager.getGameEnvironment().getMaxWeeks()); 
-		add(new StatLabel(weekString));
+		StatLabel weekLabel = new StatLabel(weekString);
+		weekLabel.getValueLabel().setFont(Configuration.HEADER_FONT);
+		add(weekLabel);
 		
 		String difficultyString = "Difficulty: " + String.valueOf(config.getDifficulty());
-		add(new StatLabel(difficultyString));
+		StatLabel difficultyLabel = new StatLabel(difficultyString);
+		difficultyLabel.getValueLabel().setFont(Configuration.HEADER_FONT);
+		add(difficultyLabel);
 		
 	}
 

@@ -247,6 +247,7 @@ public class SetupView extends JPanel {
 		add(panel, BorderLayout.SOUTH);
 		
 		JButton submitButton = new JButton("Submit");
+		submitButton.setFont(Configuration.HEADER_FONT);
 		submitButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
