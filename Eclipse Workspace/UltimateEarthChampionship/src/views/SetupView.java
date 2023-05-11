@@ -97,6 +97,7 @@ public class SetupView extends JPanel {
 		addNamePanel();
 		addWeeksPanel();
 		addDifficultyPanel();
+		addStartingChampionsHeader();
 	}
 
 	private void addHeaderPanel() {
@@ -191,8 +192,18 @@ public class SetupView extends JPanel {
 		bottomPanel.add(difficultyText);
 	}
 	
+	private void addStartingChampionsHeader() {
+		JPanel panel = new JPanel(new GridBagLayout());
+		panel.setOpaque(false);
+		JLabel label = new JLabel("Choose four starting champions:");
+		label.setFont(Configuration.HEADER_FONT);
+		label.setForeground(Color.white);
+		panel.add(label);
+		formPanel.add(panel);
+	}
+	
 	private void addStartingChampionsPanel() {
-		JPanel outerPanel = new JPanel(new GridBagLayout());
+		JPanel outerPanel = new JPanel();
 		outerPanel.setOpaque(false);
 		add(outerPanel, BorderLayout.CENTER);
 		championsPanel = new JPanel(new GridLayout(2, 4, 50, 50));
