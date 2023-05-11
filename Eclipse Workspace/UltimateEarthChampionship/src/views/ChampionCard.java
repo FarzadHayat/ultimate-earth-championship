@@ -1,13 +1,12 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
 import model.Champion;
-import model.Configuration;
-import model.Weapon;
 
 public class ChampionCard extends PurchasableCard {
 
@@ -37,8 +36,8 @@ public class ChampionCard extends PurchasableCard {
 		statsPanel.setOpaque(false);
 		mainPanel.add(statsPanel, BorderLayout.EAST);
 		
-    	String staminaString = String.valueOf(champion.getStamina());
-    	String regenString = String.valueOf(champion.getRegen());
+    	String staminaString = String.valueOf((int) champion.getStamina());
+    	String regenString = String.valueOf((int) champion.getRegen());
     	String offenseString = String.valueOf(champion.getOffense());
     	String defenseString = String.valueOf(champion.getDefense());
     	
@@ -53,18 +52,18 @@ public class ChampionCard extends PurchasableCard {
 		
 		int offenseBoost = champion.getWeapon().getOffenseBoost();
 		if (offenseBoost > 0) {
-			offenseLabel.getValueLabel().setForeground(Configuration.GREEN);
+			offenseLabel.getValueLabel().setForeground(Color.green);
 		}
 		if (offenseBoost < 0) {
-			offenseLabel.getValueLabel().setForeground(Configuration.RED);
+			offenseLabel.getValueLabel().setForeground(Color.red);
 		}
 		
 		int defenseBoost = champion.getWeapon().getDefenseBoost();
 		if (defenseBoost > 0) {
-			defenseLabel.getValueLabel().setForeground(Configuration.GREEN);
+			defenseLabel.getValueLabel().setForeground(Color.green);
 		}
 		if (defenseBoost < 0) {
-			defenseLabel.getValueLabel().setForeground(Configuration.RED);
+			defenseLabel.getValueLabel().setForeground(Color.red);
 		}
 	}
 	

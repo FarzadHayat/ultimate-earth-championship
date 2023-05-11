@@ -115,7 +115,7 @@ public class DumbMatch extends Match {
 				defender.addStamina(-damage);
 				
 				// Check for stamina
-				if (defender.getStamina() < 0)
+				if (defender.getStamina() <= 0)
 				{
 					if (Configuration.DEBUG) {
 						System.out.println("DEBUG" + defender.getName() + " has been knocked out!");
