@@ -225,7 +225,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 		}
 	}
 	
-	public void sell(Team team) throws IncompleteTeamException {
+	public void sell(Team team) {
 		team.removeWeapon(this);
 		team.addMoney(getPrice());
 	}

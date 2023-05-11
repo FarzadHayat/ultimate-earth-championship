@@ -31,5 +31,5 @@ public interface Purchasable {
     ImageIcon getImage();
     
     void buy(Team team) throws InsufficientFundsException, FullTeamException, IllegalPurchaseException;
-    void sell(Team team) throws IncompleteTeamException;
+    void sell(Team team);
 }

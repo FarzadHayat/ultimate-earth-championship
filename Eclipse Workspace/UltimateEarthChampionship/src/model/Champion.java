@@ -480,7 +480,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 		}
 	}
 	
-	public void sell(Team team) throws IncompleteTeamException {
+	public void sell(Team team) {
 		team.removeChampion(this);
 		team.addMoney(getPrice());
 	}

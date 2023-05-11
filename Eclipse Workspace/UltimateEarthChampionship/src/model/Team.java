@@ -176,36 +176,24 @@ public class Team {
 	
 	/**
 	 * Add a champion to the team.
-	 * @param newChampion the new champion to be added
+	 * @param champion the new champion to be added
 	 * @throws FullTeamException if team champions list are already full
 	 */
-	public void addChampion(Champion newChampion) throws FullTeamException
+	public void addChampion(Champion champion) throws FullTeamException
 	{
 		if (champions.size() >= config.NUM_CHAMPIONS) {
 			throw new FullTeamException("Reached team max champions limit!");
 		}
-		champions.add(newChampion);
+		champions.add(champion);
 	}
 
 	/**
 	 * Removes a champion from the team
-	 * @param toRemove the champion to remove
-	 * @throws IncompleteTeamException if the team is already at the minimum number of champions allowed
+	 * @param champion the champion to remove
 	 */
-	public void removeChampion(Champion toRemove) throws IncompleteTeamException
+	public void removeChampion(Champion champion)
 	{
-		if (champions.size() <= config.NUM_CHOSEN_CHAMPIONS) {
-			throw new IncompleteTeamException("Must have at least " + config.NUM_CHOSEN_CHAMPIONS + " champions in your team!");
-		}
-		if (champions.contains(toRemove))
-		{
-			champions.remove(toRemove);
-		}
-		else {
-			System.out.println("EXCEPTION: Champion to remove not in team!");
-			//TODO: Throw an exception
-			return;
-		}
+		champions.remove(champion);
 	}
 
 	public ArrayList<Champion> getChosenChampions() {
