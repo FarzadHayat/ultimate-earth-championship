@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 import model.Champion;
+import model.Configuration;
 
 public class ChampionCard extends PurchasableCard {
 
@@ -52,18 +53,18 @@ public class ChampionCard extends PurchasableCard {
 		
 		int offenseBoost = champion.getWeapon().getOffenseBoost();
 		if (offenseBoost > 0) {
-			offenseLabel.getValueLabel().setForeground(Color.green);
+			offenseLabel.getValueLabel().setForeground(Configuration.GREEN);
 		}
 		if (offenseBoost < 0) {
-			offenseLabel.getValueLabel().setForeground(Color.red);
+			offenseLabel.getValueLabel().setForeground(Configuration.RED);
 		}
 		
 		int defenseBoost = champion.getWeapon().getDefenseBoost();
 		if (defenseBoost > 0) {
-			defenseLabel.getValueLabel().setForeground(Color.green);
+			defenseLabel.getValueLabel().setForeground(Configuration.GREEN);
 		}
 		if (defenseBoost < 0) {
-			defenseLabel.getValueLabel().setForeground(Color.red);
+			defenseLabel.getValueLabel().setForeground(Configuration.RED);
 		}
 	}
 	

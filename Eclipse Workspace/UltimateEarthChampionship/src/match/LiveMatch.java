@@ -11,6 +11,7 @@ import model.Champion;
 import model.Team;
 import views.ChampionMatchCard;
 import views.MatchView;
+import weapons.Fists;
 
 public class LiveMatch extends Match implements ActionListener{
 
@@ -444,7 +445,7 @@ public class LiveMatch extends Match implements ActionListener{
 		else
 		{
 			String hitString = "";
-			if (attacker.getWeapon().getName() == "Fists")
+			if (Fists.class.isInstance(attacker.getWeapon()))
 			{
 				hitString = attacker.getName() + " succesfully hits " + defender.getName() + " for " + (int) adjustedDamage + " damage!";
 			}

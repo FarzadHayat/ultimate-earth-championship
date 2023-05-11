@@ -278,7 +278,7 @@ public class Configuration {
 	
 	public static final Color RED = new Color(237, 51, 59);
 	public static final Color ORANGE = new Color(255, 120, 0);
-	public static final Color GREEN = new Color(46, 194, 126);
+	public static final Color GREEN = new Color(38, 162, 105);
 	
 	public float getDifficulty()
 	{
