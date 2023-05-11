@@ -80,14 +80,8 @@ public class Shop {
 	 * If there is not enough unique champions to populate the shop, then populate with any champion.
 	 */
 	public void generateChampions() {
-		ArrayList<Champion> championsLeft = new ArrayList<Champion>(gameManager.getAllChampions());
-		for (Team team : gameManager.getTeams()) {
-			for (Champion champion : team.getChampions()) {
-				if (championsLeft.contains(champion)) {
-					championsLeft.remove(champion);
-				}
-			}
-		}
+		ArrayList<Champion> championsLeft = getRemainingChampions();
+		
 		availableChampions = new ArrayList<Champion>();
 		if (championsLeft.size() < config.NUM_TEAMS) {
 			championsLeft = new ArrayList<Champion>(gameManager.getAllChampions());
@@ -98,6 +92,24 @@ public class Shop {
 			availableChampions.add(randomChampion);
 			championsLeft.remove(randomChampion);
 		}
+	}
+	
+	/**
+	 * Gets all remaining unique champions in the game
+	 * @return The remaining unique champions in the game
+	 */
+	public ArrayList<Champion> getRemainingChampions()
+	{
+		ArrayList<Champion> championsLeft = new ArrayList<Champion>(gameManager.getAllChampions());
+		for (Team team : gameManager.getTeams()) {
+			for (Champion champion : team.getChampions()) {
+				if (championsLeft.contains(champion)) {
+					championsLeft.remove(champion);
+				}
+			}
+		}
+		
+		return championsLeft;
 	}
 	
 	/**

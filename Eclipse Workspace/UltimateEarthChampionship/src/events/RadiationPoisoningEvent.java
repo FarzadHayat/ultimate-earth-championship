@@ -8,7 +8,7 @@ public class RadiationPoisoningEvent extends RandomEvent {
 	/**
 	 * Percentage chance of this event happening every week
 	 */
-	private static int occurrenceChance = 2; 
+	private static int occurrenceChance = 40; 
 	
 	public RadiationPoisoningEvent() {
 		super(occurrenceChance);

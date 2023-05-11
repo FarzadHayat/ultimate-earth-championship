@@ -8,7 +8,7 @@ public class RampagingAnimalEvent extends RandomEvent {
 	/**
 	 * Percentage chance of this event happening every week
 	 */
-	private static int occurrenceChance = 3; 
+	private static int occurrenceChance = 60; 
 	
 	public RampagingAnimalEvent() {
 		super(occurrenceChance);
@@ -21,20 +21,16 @@ public class RampagingAnimalEvent extends RandomEvent {
 		Champion champ = team.randomChampion();
 		String c = champ.getName();
 		
-		champ.addStamina(-30);
+		champ.addMaxStamina(-15);
+		champ.setStamina(champ.getMaxStamina());
 		
-		// Ensure stamina doesn't fall below 10
-		if (champ.getStamina() < 10)
-		{
-			champ.setStamina(10);
-		}
 		
 		// Generate GUI Info:
 		
 		String name = "A rampage through the dojo";
 		String description = "A rampaging purple catbull from the planet Vargoth broke into the team's dojo and chased " + c + ". " +
 		"Luckily nobody was hurt, but " + c + " was left severely exerted";
-		String effectString = c + ": -30 Stamina";
+		String effectString = c + ": -15 max Stamina";
 		
 		// Return it
 		
