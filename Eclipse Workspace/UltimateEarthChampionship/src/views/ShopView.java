@@ -29,7 +29,7 @@ public class ShopView extends JPanel {
 	 * Create the panel.
 	 */
 	public ShopView() {
-		setName("Shop");
+		setName("Market");
 		setLayout(new GridBagLayout());
 		
 		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "shop.jpg");

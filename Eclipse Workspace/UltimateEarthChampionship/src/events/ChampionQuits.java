@@ -28,11 +28,7 @@ public class ChampionQuits extends RandomEvent {
 		
 		team.addMoney(50);
 		
-		try {
-			team.removeChampion(quittingChampion);
-		} catch (IncompleteTeamException e) {
-			// In theory this will never occur
-		}
+		team.removeChampion(quittingChampion);
 		
 		// Generate GUI Info:
 		

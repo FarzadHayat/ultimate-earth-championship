@@ -31,7 +31,7 @@ public class TeamView extends JPanel {
 	 * Create the panel.
 	 */
 	public TeamView() {
-		setName("Team");
+		setName("Club");
 		setLayout(new GridBagLayout());
 		
 		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "team.jpg");
