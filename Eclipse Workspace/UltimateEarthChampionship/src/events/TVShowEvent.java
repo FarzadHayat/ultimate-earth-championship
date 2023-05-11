@@ -7,7 +7,7 @@ public class TVShowEvent extends RandomEvent {
 	/**
 	 * Percentage chance of this event happening every week
 	 */
-	private static int occurrenceChance = 6; 
+	private static int occurrenceChance = 90; 
 	
 	public TVShowEvent() {
 		super(occurrenceChance);
