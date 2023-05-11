@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
+import events.ChampionJoins;
+import events.ChampionQuits;
 import events.DonationEvent;
 import events.FreeWeaponEvent;
 import events.RadiationPoisoningEvent;
@@ -80,6 +82,8 @@ public class GameEnvironment {
 		events.add(new RampagingAnimalEvent());
 		events.add(new ThiefEvent());
 		events.add(new FreeWeaponEvent());
+		events.add(new ChampionJoins());
+		events.add(new ChampionQuits());
 	}
 	
 

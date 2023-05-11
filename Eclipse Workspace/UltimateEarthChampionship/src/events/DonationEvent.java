@@ -7,7 +7,7 @@ public class DonationEvent extends RandomEvent {
 	/**
 	 * Percentage chance of this event happening every week
 	 */
-	private static int occurrenceChance = 3; 
+	private static int occurrenceChance = 80; 
 	
 	public DonationEvent() {
 		super(occurrenceChance);
