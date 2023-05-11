@@ -33,6 +33,8 @@ public class CutsceneView extends JPanel {
 	
 	private JTextPane mainText;
 	private JButton continueButton;
+
+	private ImageIcon icon;
 	
 	public CutsceneView(Cutscene cutscene) {
 		this.cutscene = cutscene;
@@ -80,6 +82,9 @@ public class CutsceneView extends JPanel {
 		CutsceneSlide slide = cutscene.nextSlide();
 		slideText = slide.getText();
 		slideImagePath = slide.getImage();
+		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + slideImagePath);
+		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 		
 		if (cutscene.checkNextSlide() == null)
 		{
@@ -103,9 +108,6 @@ public class CutsceneView extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
-	    ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + slideImagePath);
-		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
-								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
         g.drawImage(icon.getImage(), 0, yPos, null);
 	}

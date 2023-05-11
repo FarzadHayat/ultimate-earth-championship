@@ -66,6 +66,8 @@ public class SetupView extends JPanel {
 	private JPanel formPanel;
 
 	private JPanel championsPanel;
+
+	private ImageIcon icon;
 	
 	/**
 	 * Constructor, sets up this class
@@ -73,6 +75,9 @@ public class SetupView extends JPanel {
 	public SetupView()
 	{
 		setLayout(new BorderLayout());
+		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "setup.jpg");
+		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 		
 		addFormPanel();
 		addStartingChampionsPanel();
@@ -336,9 +341,6 @@ public class SetupView extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
-	    ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "setup.jpg");
-		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
-								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
         g.drawImage(icon.getImage(), 0, yPos, null);
 	}

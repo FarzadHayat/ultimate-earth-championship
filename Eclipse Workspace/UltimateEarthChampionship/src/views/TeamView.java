@@ -24,6 +24,8 @@ public class TeamView extends JPanel {
 	private Configuration config = Configuration.getInstance();
 	
 	private JPanel mainPanel;
+
+	private ImageIcon icon;
 	
 	/**
 	 * Create the panel.
@@ -31,6 +33,11 @@ public class TeamView extends JPanel {
 	public TeamView() {
 		setName("Team");
 		setLayout(new GridBagLayout());
+		
+		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "team.jpg");
+		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
+		
 		mainPanel = new JPanel();
 		mainPanel.setOpaque(false);
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -89,9 +96,6 @@ public class TeamView extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
-	    ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "team.jpg");
-		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
-								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
         g.drawImage(icon.getImage(), 0, yPos, null);
 	}

@@ -36,12 +36,19 @@ public class WeaponSetupView extends JPanel {
 	private Configuration config = Configuration.getInstance();
 	
 	private JPanel chosenPanel;
+
+	private ImageIcon icon;
 	
 	/**
 	 * Create the panel.
 	 */
 	public WeaponSetupView() {
 		setLayout(new BorderLayout());
+		
+		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "weaponsetup.jpg");
+		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
+		
 		chosenPanel = new JPanel(new GridLayout(0, 2));
 		chosenPanel.setOpaque(false);
 		add(chosenPanel, BorderLayout.EAST);
@@ -204,9 +211,6 @@ public class WeaponSetupView extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
-	    ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "weaponsetup.jpg");
-		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
-								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
         g.drawImage(icon.getImage(), 0, yPos, null);
 	}

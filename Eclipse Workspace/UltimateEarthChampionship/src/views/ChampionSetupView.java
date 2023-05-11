@@ -32,12 +32,17 @@ public class ChampionSetupView extends JPanel {
 	
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 	private Configuration config = Configuration.getInstance();
+
+	private ImageIcon icon;
 	
 	/**
 	 * Create the panel.
 	 */
 	public ChampionSetupView() {
 		setLayout(new BorderLayout());
+		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "championsetup.jpg");
+		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
+								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 		
 		addBackButton();
 		addChampionsPanel();
@@ -179,9 +184,6 @@ public class ChampionSetupView extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
-	    ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "championsetup.jpg");
-		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
-								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
         g.drawImage(icon.getImage(), 0, yPos, null);
 	}
