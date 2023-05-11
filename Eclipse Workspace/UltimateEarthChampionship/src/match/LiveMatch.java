@@ -187,6 +187,8 @@ public class LiveMatch extends Match implements ActionListener{
 			// Regen health
 			ChampionHealthRegen(currentChampion);
 			
+			matchView.updateSelectedChampionPanel(currentChampion);
+			
 			matchView.selectChampion(currentChampion);
 		}
 		else

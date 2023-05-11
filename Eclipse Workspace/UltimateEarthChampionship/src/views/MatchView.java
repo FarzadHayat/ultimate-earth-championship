@@ -240,7 +240,6 @@ public class MatchView extends JPanel {
 	public void selectChampion(Champion champion)
 	{
 		selectedChampion = champion;
-		updateSelectedChampionPanel(champion);
 		updateButtons();
 	}
 
@@ -249,6 +248,8 @@ public class MatchView extends JPanel {
 		ChampionCard championCard = new ChampionCard(champion);
 		championCard.addStatsPanel();
 		selectedChampionPanel.add(championCard);
+		selectedChampionPanel.revalidate();
+		selectedChampionPanel.repaint();
 		
 	}
 
