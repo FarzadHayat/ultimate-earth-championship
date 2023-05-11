@@ -43,10 +43,15 @@ public class TeamView extends JPanel {
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		add(mainPanel);
 		
-		mainPanel.add(new HeaderPanel("Champions"));
+		addChampionsHeader();
 		addChampionsPanel();
-		mainPanel.add(new HeaderPanel("Weapons"));
+		addWeaponsHeader();
 		addAllWeaponsPanel();
+	}
+
+	private void addChampionsHeader() {
+		mainPanel.add(new HeaderPanel("Your champions", true));
+		mainPanel.add(new HeaderPanel("You need at least four champions to start a match", false));
 	}
 
 	/**
@@ -71,6 +76,11 @@ public class TeamView extends JPanel {
 		mainPanel.add(championsPanel);
 	}
 	
+	private void addWeaponsHeader() {
+		mainPanel.add(new HeaderPanel("Your weapons", true));
+		mainPanel.add(new HeaderPanel("You can assign your weapons to champions during match setup", false));
+	}
+
 	/**
 	 * Add a purchasable panel to display all the team's weapons.
 	 */

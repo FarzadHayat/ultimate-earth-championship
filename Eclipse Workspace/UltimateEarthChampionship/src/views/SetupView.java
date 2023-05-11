@@ -101,7 +101,7 @@ public class SetupView extends JPanel {
 	}
 
 	private void addHeaderPanel() {
-		formPanel.add(new HeaderPanel("Welcome to Ultimate Earth Championship!"));
+		formPanel.add(new HeaderPanel("Welcome to Ultimate Earth Championship!", true));
 	}
 
 	private void addNamePanel() {
@@ -193,13 +193,7 @@ public class SetupView extends JPanel {
 	}
 	
 	private void addStartingChampionsHeader() {
-		JPanel panel = new JPanel(new GridBagLayout());
-		panel.setOpaque(false);
-		JLabel label = new JLabel("Choose four starting champions:");
-		label.setFont(Configuration.HEADER_FONT);
-		label.setForeground(Color.white);
-		panel.add(label);
-		formPanel.add(panel);
+		formPanel.add(new HeaderPanel("Choose four starting champions:", false));
 	}
 	
 	private void addStartingChampionsPanel() {

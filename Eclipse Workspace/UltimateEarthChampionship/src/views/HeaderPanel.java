@@ -15,14 +15,16 @@ public class HeaderPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public HeaderPanel(String header) {
+	public HeaderPanel(String header, boolean hasBackground) {
 		setLayout(new GridBagLayout());
 		setOpaque(false);
 		JLabel label = new JLabel(header);
 		label.setFont(Configuration.HEADER_FONT);
 		label.setForeground(Color.white);
-		label.setBackground(Color.darkGray);
-		label.setOpaque(true);
+		if (hasBackground) {
+			label.setBackground(Color.darkGray);
+			label.setOpaque(true);
+		}
 		add(label);
 	}
 

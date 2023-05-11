@@ -44,7 +44,7 @@ public class StadiumView extends JPanel {
 		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
 								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 		
-		add(new HeaderPanel("Select a team to start a match against..."), BorderLayout.NORTH);
+		add(new HeaderPanel("Select a team to start a match against", true), BorderLayout.NORTH);
 		addTeamsPanel();
 		addBottomPanel();
 	}
@@ -71,7 +71,7 @@ public class StadiumView extends JPanel {
 		panel.setLayout(new BorderLayout());
 		
 		// Team name
-		HeaderPanel nameLabel = new HeaderPanel(team.getName());
+		HeaderPanel nameLabel = new HeaderPanel(team.getName(), true);
 		panel.add(nameLabel, BorderLayout.NORTH);
 		
 		// Team champions

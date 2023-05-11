@@ -41,10 +41,20 @@ public class ShopView extends JPanel {
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		add(mainPanel);
 		
-		mainPanel.add(new HeaderPanel("Champions"));
+		addChampionsHeader();
 		addAvailableChampionsPanel();
-		mainPanel.add(new HeaderPanel("Weapons"));
+		addWeaponsHeader();
 		addAvailableWeaponsPanel();
+	}
+
+	private void addChampionsHeader() {
+		mainPanel.add(new HeaderPanel("Shop champions", true));
+		mainPanel.add(new HeaderPanel("You can only buy one champion per week", false));
+	}
+
+	private void addWeaponsHeader() {
+		mainPanel.add(new HeaderPanel("Shop weapons", true));
+		mainPanel.add(new HeaderPanel("You can buy as many weapons as you want", false));
 	}
 
 	/**
