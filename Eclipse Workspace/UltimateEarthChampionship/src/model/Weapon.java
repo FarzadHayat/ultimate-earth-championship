@@ -7,7 +7,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import exception.FullTeamException;
-import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
 
 /**

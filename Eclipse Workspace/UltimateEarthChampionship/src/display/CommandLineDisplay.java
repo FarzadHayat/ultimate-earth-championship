@@ -261,7 +261,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 		ArrayList<Champion> chosenChampions = new ArrayList<Champion>();  
 		ArrayList<Champion> championsLeft = new ArrayList<Champion>();
 		championsLeft.addAll(gameManager.getPlayerTeam().getChampions());
-		while (chosenChampions.size() < Configuration.getInstance().NUM_CHOSEN_CHAMPIONS) {
+		while (chosenChampions.size() < Configuration.NUM_CHOSEN_CHAMPIONS) {
 			CommandLineUtilities.printHeader("CHAMPION SETUP");
 			CommandLineTable.printChampions(chosenChampions);
 			CommandLineUtilities.printChampionOptions("SELECT", championsLeft);
@@ -305,7 +305,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 		ArrayList<Weapon> chosenWeapons = new ArrayList<Weapon>();  
 		ArrayList<Weapon> WeaponsLeft = new ArrayList<Weapon>();
 		WeaponsLeft.addAll(gameManager.getPlayerTeam().getWeapons());
-		while (chosenWeapons.size() < Configuration.getInstance().NUM_CHOSEN_CHAMPIONS) {
+		while (chosenWeapons.size() < Configuration.NUM_CHOSEN_CHAMPIONS) {
 			CommandLineUtilities.printHeader("WEAPON SETUP");
 			CommandLineTable.printWeapons(chosenWeapons);
 			CommandLineUtilities.printWeaponOptions("SELECT", WeaponsLeft);

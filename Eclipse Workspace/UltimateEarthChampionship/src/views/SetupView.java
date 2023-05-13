@@ -2,13 +2,12 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -27,6 +26,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
 import display.GraphicalDisplay;
 import exception.InputException;
 import manager.GameManager;
@@ -34,7 +34,6 @@ import manager.GraphicalGameManager;
 import model.Champion;
 import model.Configuration;
 import model.SetupManager;
-import java.awt.ComponentOrientation;
 
 public class SetupView extends JPanel {
 	
@@ -218,7 +217,7 @@ public class SetupView extends JPanel {
 				if (chosenChampions.contains(champion)) {
 					chosenChampions.remove(champion);
 				} else {
-					if (chosenChampions.size() < config.NUM_CHOSEN_CHAMPIONS) {
+					if (chosenChampions.size() < Configuration.NUM_CHOSEN_CHAMPIONS) {
 						chosenChampions.add(champion);
 					}
 				}

@@ -2,12 +2,12 @@ package views;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import model.Configuration;
 
 import javax.swing.JPanel;
 
 import display.GraphicalDisplay;
 import manager.GameManager;
+import model.Configuration;
 
 public class InfoPanel extends JPanel {
 

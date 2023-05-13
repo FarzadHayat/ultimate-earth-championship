@@ -2,6 +2,7 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Image;
 
@@ -10,11 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import model.Champion;
 import model.Configuration;
-import java.awt.Color;
-import javax.swing.border.LineBorder;
 
 public class ChampionMatchCard extends JPanel{
 

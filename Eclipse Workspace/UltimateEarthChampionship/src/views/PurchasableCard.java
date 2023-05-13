@@ -20,7 +20,6 @@ import javax.swing.border.LineBorder;
 
 import exception.FullTeamException;
 import exception.IllegalPurchaseException;
-import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
 import manager.GameManager;
 import manager.GraphicalGameManager;
@@ -148,7 +147,7 @@ public abstract class PurchasableCard extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (gameManager.getPlayerTeam().getChampions().size() <= Configuration.getInstance().NUM_CHOSEN_CHAMPIONS) {
+				if (gameManager.getPlayerTeam().getChampions().size() <= Configuration.NUM_CHOSEN_CHAMPIONS) {
 					JOptionPane.showMessageDialog(getParent(),
 							"You will not have enough champions to start a match after this!",
 							"INCOMPLETE TEAM WARNING",

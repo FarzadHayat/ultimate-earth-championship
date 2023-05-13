@@ -3,7 +3,6 @@ package views;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -21,7 +20,6 @@ public class TeamView extends JPanel {
 	private static final long serialVersionUID = -8010724197066539267L;
 	
 	private GameManager gameManager = GameManager.getInstance();
-	private Configuration config = Configuration.getInstance();
 	
 	private JPanel mainPanel;
 
@@ -57,7 +55,7 @@ public class TeamView extends JPanel {
 		JPanel championsPanel = new JPanel(new FlowLayout());
 		championsPanel.setOpaque(false);
 		ArrayList<Champion> champions = gameManager.getPlayerTeam().getChampions();
-		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
+		for (int i = 0; i < Configuration.NUM_CHAMPIONS; i++) {
 			PurchasableCard card;
 			if (champions.size() > i) {
 				Champion champion = champions.get(i);
@@ -84,7 +82,7 @@ public class TeamView extends JPanel {
 		JPanel weaponsPanel = new JPanel(new FlowLayout());
 		weaponsPanel.setOpaque(false);
 		ArrayList<Weapon> weapons = gameManager.getPlayerTeam().getWeapons();
-		for (int i = 0; i < config.NUM_WEAPONS; i++) {
+		for (int i = 0; i < Configuration.NUM_WEAPONS; i++) {
 			PurchasableCard card;
 			if (weapons.size() > i) {
 				Weapon weapon = weapons.get(i);

@@ -4,17 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JPanel;
 
 import display.GraphicalDisplay;
@@ -74,7 +70,7 @@ public class StadiumView extends JPanel {
 		JPanel championsPanel = new JPanel(new FlowLayout());
 		championsPanel.setOpaque(false);
 		ArrayList<Champion> champions = team.getChampions();
-		for (int i = 0; i < Configuration.getInstance().NUM_CHAMPIONS; i++) {
+		for (int i = 0; i < Configuration.NUM_CHAMPIONS; i++) {
 			PurchasableCard card;
 			if (champions.size() > i) {
 				Champion champion = champions.get(i);

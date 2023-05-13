@@ -3,7 +3,6 @@ package events;
 import java.util.Random;
 
 import exception.FullTeamException;
-import exception.IncompleteTeamException;
 import manager.GameManager;
 import model.Champion;
 import model.Shop;

@@ -6,11 +6,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import manager.GameManager;
 import exception.FullTeamException;
 import exception.IllegalPurchaseException;
-import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
+import manager.GameManager;
 import weapons.Fists;
 
 /**

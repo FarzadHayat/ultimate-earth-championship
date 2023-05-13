@@ -1,16 +1,19 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import champions.CharlesDarwin;
+import champions.KingGeorge;
+import champions.QueenVictoria;
+import champions.StephenHawking;
 import manager.GameManager;
 import manager.GraphicalGameManager;
 import model.Champion;
 import model.Team;
-import champions.*;
 
 class AIGenerationTest {
 
@@ -40,7 +43,7 @@ class AIGenerationTest {
 			
 			ArrayList<Team> AITeams = manager.generateAITeams();
 			
-			ArrayList<Champion> uniqueChampions = new ArrayList();
+			ArrayList<Champion> uniqueChampions = new ArrayList<Champion>();
 			
 			for (Team team : AITeams)
 			{

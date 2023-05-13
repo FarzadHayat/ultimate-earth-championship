@@ -6,7 +6,6 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -26,14 +25,12 @@ import manager.GraphicalGameManager;
 import model.Champion;
 import model.Configuration;
 import model.Weapon;
-import weapons.Fists;
 
 public class WeaponSetupView extends JPanel {
 
 	private static final long serialVersionUID = -1352915737619575543L;
 	
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
-	private Configuration config = Configuration.getInstance();
 	
 	private JPanel chosenPanel;
 
@@ -81,7 +78,7 @@ public class WeaponSetupView extends JPanel {
 		ArrayList<Weapon> weapons = gameManager.getPlayerTeam().getWeapons();
 		outerPanel.add(weaponsPanel);
 		add(outerPanel, BorderLayout.WEST);
-		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
+		for (int i = 0; i < Configuration.NUM_CHAMPIONS; i++) {
 			if (weapons.size() > i) {
 				addWeaponToPanel(weapons.get(i), weaponsPanel);
 			} else {
@@ -142,7 +139,7 @@ public class WeaponSetupView extends JPanel {
 		JPanel lanesPanel = new JPanel(new GridLayout(0, 1, 20, 20));
 		lanesPanel.setOpaque(false);
 		add(lanesPanel, BorderLayout.CENTER);
-		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
+		for (int i = 0; i < Configuration.NUM_CHOSEN_CHAMPIONS; i++) {
 			JLabel label = new JLabel("Lane " + String.valueOf(i+1), JLabel.RIGHT);
 			label.setFont(Configuration.HEADER_FONT);
 			label.setForeground(Color.white);
@@ -155,7 +152,7 @@ public class WeaponSetupView extends JPanel {
 		chosenChampionsPanel.setOpaque(false);
 		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions(); 
 		chosenPanel.add(chosenChampionsPanel);
-		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
+		for (int i = 0; i < Configuration.NUM_CHOSEN_CHAMPIONS; i++) {
 			PurchasableCard card;
 			if (chosenChampions.size() > i) {
 				Champion champion = chosenChampions.get(i);
@@ -174,7 +171,7 @@ public class WeaponSetupView extends JPanel {
 		chosenWeaponsPanel.setOpaque(false);
 		ArrayList<Weapon> chosenWeapons = gameManager.getPlayerTeam().getChosenWeapons(); 
 		chosenPanel.add(chosenWeaponsPanel);
-		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
+		for (int i = 0; i < Configuration.NUM_CHOSEN_CHAMPIONS; i++) {
 			PurchasableCard card;
 			if (chosenWeapons.size() > i) {
 				Weapon weapon = chosenWeapons.get(i);

@@ -159,19 +159,19 @@ public class Configuration {
 	public final int PRIZE_SCORE_WEEKLY_MODIFIER = 5;
 
 	/**
-	 * Number of champions a team can hold as chosen.
+	 * Number of champions a team can hold.
 	 */
-	public final int NUM_CHAMPIONS = 9;
+	public static final int NUM_CHAMPIONS = 9;
 	
 	/**
-	 * Number of champions a team can hold as chosen.
+	 * Number of champions a team can select for a match.
 	 */
-	public final int NUM_CHOSEN_CHAMPIONS = 4;
+	public static final int NUM_CHOSEN_CHAMPIONS = 4;
 	
 	/**
 	 * Number of weapons a team can hold.
 	 */
-	public final int NUM_WEAPONS = 9;
+	public static final int NUM_WEAPONS = 9;
 	
 	/**
 	 * The starting money for each team.

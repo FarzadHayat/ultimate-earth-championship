@@ -1,10 +1,7 @@
 package views;
 
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 import manager.GameManager;
 import model.Champion;
@@ -12,6 +9,8 @@ import model.LevelUpStat;
 
 public class LevelUpView extends JPanel {
 	
+	private static final long serialVersionUID = -6049198470080468548L;
+
 	public static void showLevelUpDialogue(Champion champion)
 	{
 		String header = champion.getName() + " has leveled up!";

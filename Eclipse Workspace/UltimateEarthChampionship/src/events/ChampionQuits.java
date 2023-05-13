@@ -2,7 +2,6 @@ package events;
 
 import java.util.Random;
 
-import exception.IncompleteTeamException;
 import model.Champion;
 import model.Team;
 

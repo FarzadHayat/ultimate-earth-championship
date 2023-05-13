@@ -6,7 +6,6 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -31,7 +30,6 @@ public class ChampionSetupView extends JPanel {
 	private static final long serialVersionUID = -1352915737619575543L;
 	
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
-	private Configuration config = Configuration.getInstance();
 
 	private ImageIcon icon;
 	
@@ -73,7 +71,7 @@ public class ChampionSetupView extends JPanel {
 		ArrayList<Champion> champions = gameManager.getPlayerTeam().getChampions();
 		outerPanel.add(championsPanel);
 		add(outerPanel, BorderLayout.WEST);
-		for (int i = 0; i < config.NUM_CHAMPIONS; i++) {
+		for (int i = 0; i < Configuration.NUM_CHAMPIONS; i++) {
 			if (champions.size() > i) {
 				addChampionToPanel(champions.get(i), championsPanel);
 			} else {
@@ -131,7 +129,7 @@ public class ChampionSetupView extends JPanel {
 		JPanel lanesPanel = new JPanel(new GridLayout(0, 1, 20, 20));
 		lanesPanel.setOpaque(false);
 		add(lanesPanel, BorderLayout.CENTER);
-		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
+		for (int i = 0; i < Configuration.NUM_CHOSEN_CHAMPIONS; i++) {
 			JLabel label = new JLabel("Lane " + String.valueOf(i+1), JLabel.RIGHT);
 			label.setFont(Configuration.HEADER_FONT);
 			label.setForeground(Color.white);
@@ -144,7 +142,7 @@ public class ChampionSetupView extends JPanel {
 		chosenChampionsPanel.setOpaque(false);
 		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions(); 
 		add(chosenChampionsPanel, BorderLayout.EAST);
-		for (int i = 0; i < config.NUM_CHOSEN_CHAMPIONS; i++) {
+		for (int i = 0; i < Configuration.NUM_CHOSEN_CHAMPIONS; i++) {
 			PurchasableCard card;
 			if (chosenChampions.size() > i) {
 				Champion champion = chosenChampions.get(i);
@@ -167,7 +165,7 @@ public class ChampionSetupView extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (gameManager.getPlayerTeam().getChosenChampions().size() < config.NUM_CHOSEN_CHAMPIONS) {
+				if (gameManager.getPlayerTeam().getChosenChampions().size() < Configuration.NUM_CHOSEN_CHAMPIONS) {
 					JOptionPane.showMessageDialog(getParent(), "Team roster is not complete!\nSelect more champions to continue.");
 				} else {
 					gameManager.finishedChampionSetup();

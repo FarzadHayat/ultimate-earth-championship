@@ -4,7 +4,6 @@ import javax.swing.ImageIcon;
 
 import exception.FullTeamException;
 import exception.IllegalPurchaseException;
-import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
 
 /**
