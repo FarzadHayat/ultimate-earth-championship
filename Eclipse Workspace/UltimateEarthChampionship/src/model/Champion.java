@@ -1,9 +1,5 @@
 package model;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import exception.FullTeamException;
@@ -13,52 +9,53 @@ import manager.GameManager;
 import weapons.Fists;
 
 /**
-*
-*@author Oliver Coates
-*
-*Champion Class, responsible for data and functionality related to each individual champion competing.
-*
-*/
+ *
+ * @author Oliver Coates
+ *
+ *         Champion Class, responsible for data and functionality related to
+ *         each individual champion competing.
+ *
+ */
 public abstract class Champion implements Purchasable, Cloneable {
 
 	private Configuration config = Configuration.getInstance();
 	private GameManager manager = GameManager.getInstance();
-	
+
 	/**
 	 * Name of the champion
 	 */
 	private String name;
-	
+
 	/**
 	 * Stamina of the champion
 	 */
 	private float stamina;
-	
+
 	/**
 	 * The maximum stamina of the champion
 	 */
 	private float maxStamina;
-	
+
 	/**
 	 * The champions regen
 	 */
 	private float regen;
-	
+
 	/**
 	 * The Offense stat
 	 */
 	private int offense;
-	
+
 	/**
 	 * The Defense stat
 	 */
 	private int defense;
-	
+
 	/**
 	 * The champions level
 	 */
 	private int level;
-	
+
 	/*
 	 * The champions current XP
 	 */
@@ -67,22 +64,22 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 * The XP required for the champion to progress to the next level
 	 */
 	private float maxXP;
-	
+
 	/**
 	 * The buy/sell price of the champion
 	 */
 	private float price;
-	
+
 	/**
 	 * The amount that the price changes each week
 	 */
 	private float priceChangeWeekly;
-	
+
 	/**
 	 * The weapon currently assigned to the champion, fists if null
 	 */
 	private Weapon weapon;
-	
+
 	/**
 	 * The image icon for the champion
 	 */
@@ -92,270 +89,248 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 * The lane that the champion is position in, used during LiveMatches
 	 */
 	private int lane;
-	
+
 	/**
 	 * The position that the champion is in, used during Live Matches
 	 */
 	private int position;
-	
+
 	/**
 	 * Whether this champion is carrying the flag for a liveMatch
 	 */
 	private boolean flagCarrier;
-	
+
 	// Constructor:
 	/**
 	 * Constructor for champion Class
-	 * @param name The name of the champion
-	 * @param staminaBoost Stat which modifies the maximum stamina of the champion
-	 * @param regenBoost Stat which modifies the regen of the champion
-	 * @param offense Modifies the offense stat of the champion
-	 * @param defense Modifies the defense stat of the champion
-	 * @param price The champions price
-	 * @param priceChangeWeekly The amount at which the champion's price changes each week once purchased
+	 * 
+	 * @param name              The name of the champion
+	 * @param staminaBoost      Stat which modifies the maximum stamina of the
+	 *                          champion
+	 * @param regenBoost        Stat which modifies the regen of the champion
+	 * @param offense           Modifies the offense stat of the champion
+	 * @param defense           Modifies the defense stat of the champion
+	 * @param price             The champions price
+	 * @param priceChangeWeekly The amount at which the champion's price changes
+	 *                          each week once purchased
 	 */
-	public Champion (String name, int staminaBoost, int regenBoost, int offenseBoost, int defenseBoost, float price, float priceChangeWeekly )
-	{
+	public Champion(String name, int staminaBoost, int regenBoost, int offenseBoost, int defenseBoost, float price,
+			float priceChangeWeekly) {
 		this.name = name;
-				
+
 		this.maxStamina = config.MAX_STAMINA_DEFAULT + (config.SKILL_STAMINA_INCREMENT * staminaBoost);
 		this.stamina = this.maxStamina;
-		
+
 		this.regen = config.REGEN_DEFAULT + (config.SKILL_REGEN_INCREMENT * regenBoost);
-		
+
 		this.offense = config.SKILL_DEFAULT_OFFENSE + (1 * offenseBoost);
 		this.defense = config.SKILL_DEFAULT_OFFENSE + (1 * defenseBoost);
-		
+
 		this.price = price * config.CHAMPION_PRICE_MODIFIER;
 		this.priceChangeWeekly = priceChangeWeekly * config.CHAMPION_PRICE_WEEKLY_CHANGE_MODIFIER;
-		
-		this.weapon = new Fists(); // Created champions should start with the fists weapon
-		
-		try {
-			String path = Configuration.CHAMPION_IMAGE_FOLDER_PATH 
-					+ String.valueOf(getClass().getSimpleName()) + ".png";
-            image = new ImageIcon(ImageIO.read(new File(path)));
 
-        } catch (IOException e) {
-        	if (Configuration.DEBUG) {
-        		System.out.println("Could not find image file for " + getClass().getSimpleName() + " object!");
-        	}
-        }
-		
+		this.weapon = new Fists(); // Created champions should start with the fists weapon
+
+		String path = Configuration.CHAMPION_IMAGE_FOLDER_PATH + String.valueOf(getClass().getSimpleName()) + ".png";
+		image = new ImageIcon(path);
+
 		level = 1;
 		currentXP = 0f;
-		
+
 		maxXP = config.XP_DEFAULT_MAX;
 	}
 
-	
-	
 	// GETTERS/SETTERS:
-	
+
 	/**
 	 * Gets name of champion
+	 * 
 	 * @return the name of the champion
 	 */
-	public String getName()
-	{
+	@Override
+	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * Sets the name of the champion
+	 * 
 	 * @param name the new name
 	 */
-	public void setName(String name)
-	{
+	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
 	/**
 	 * Gets the stamina of the champion
+	 * 
 	 * @return the stamina of the champion
 	 */
-	public float getStamina()
-	{
+	public float getStamina() {
 		return stamina;
 	}
-	
+
 	/**
 	 * Sets the stamina of the champion to a specific amount
+	 * 
 	 * @param newStamina the value stamina should be updated to
 	 */
-	public void setStamina(float newStamina)
-	{
+	public void setStamina(float newStamina) {
 		stamina = newStamina;
 	}
-	
+
 	/**
 	 * Changes the stamina of the champion by a specific amount
+	 * 
 	 * @param staminaChange the amount added to stamina, clamped by maxStamina
 	 */
-	public void addStamina(float staminaChange)
-	{
+	public void addStamina(float staminaChange) {
 		stamina += staminaChange;
-		
-		if (stamina > maxStamina)
-		{
+
+		if (stamina > maxStamina) {
 			stamina = maxStamina;
 		}
 	}
-	
+
 	/**
 	 * Gets the maximum stamina of the champion
+	 * 
 	 * @return the maximum stamina of the champion
 	 */
-	public float getMaxStamina()
-	{
+	public float getMaxStamina() {
 		return maxStamina;
 	}
-	
+
 	/**
 	 * Adds to the champions maximum stamina by a provided amount
+	 * 
 	 * @param staminaChange amount to be added to the maximum stamina
 	 */
-	public void addMaxStamina(float staminaChange)
-	{
+	public void addMaxStamina(float staminaChange) {
 		maxStamina += staminaChange;
 	}
-	
+
 	/**
 	 * Gets the champions regen
+	 * 
 	 * @return the champions regen
 	 */
-	public float getRegen()
-	{
+	public float getRegen() {
 		return regen;
 	}
-	
+
 	/**
 	 * Increases the champions regen
+	 * 
 	 * @param amount The amount to increase champions regen
 	 */
-	public void changeRegen(float amount)
-	{
+	public void changeRegen(float amount) {
 		regen += amount;
 	}
-	
-	
+
 	/**
 	 * Gets the offense stat
+	 * 
 	 * @return The offense stat
 	 */
-	public int getOffense()
-	{
+	public int getOffense() {
 		return offense + weapon.getOffenseBoost();
 	}
-	
+
 	/**
 	 * Changes the offense stat
+	 * 
 	 * @param change amount to add to the offense stat
 	 */
-	public void changeOffense(int change)
-	{
+	public void changeOffense(int change) {
 		offense += change;
 	}
-	
+
 	/**
 	 * Gets the defense stat
+	 * 
 	 * @return the defense stat
 	 */
-	public int getDefense()
-	{
+	public int getDefense() {
 		return defense + weapon.getDefenseBoost();
 	}
-	
+
 	/**
 	 * Adds to the defense stat
+	 * 
 	 * @param change the amount to add to the defense stat
 	 */
-	public void changeDefense(int change)
-	{
+	public void changeDefense(int change) {
 		defense += change;
 	}
-	
+
 	/**
 	 * Gets the champions current level
+	 * 
 	 * @return the champions level
 	 */
-	public int getLevel()
-	{
+	public int getLevel() {
 		return level;
 	}
-	
+
 	/**
-	 * Gives the champion a certain amount of XP, then checks if the champion has leveled up
+	 * Gives the champion a certain amount of XP, then checks if the champion has
+	 * leveled up
+	 * 
 	 * @param amount XP to add
 	 */
-	public void giveXP(float amount)
-	{
+	public void giveXP(float amount) {
 		currentXP += amount;
 		checkForLevelUp();
 	}
-	
-	public void setLane(int lane)
-	{
-		this.lane = lane; 
+
+	public void setLane(int lane) {
+		this.lane = lane;
 	}
-	
-	public int getLane()
-	{
+
+	public int getLane() {
 		return lane;
 	}
-	
-	public void setPosition(int position)
-	{
+
+	public void setPosition(int position) {
 		this.position = position;
 	}
-	
-	public int getPosition()
-	{
+
+	public int getPosition() {
 		return position;
 	}
-	
-	public boolean isFlagCarrier()
-	{
+
+	public boolean isFlagCarrier() {
 		return flagCarrier;
 	}
-	
-	public void setFlagCarrier(boolean flagCarrier)
-	{
+
+	public void setFlagCarrier(boolean flagCarrier) {
 		this.flagCarrier = flagCarrier;
 	}
-	
-	
-	
-	
+
 	/**
 	 * Checks to see if currentXP > maxXP, if so, the champion levels up
 	 */
-	private void checkForLevelUp()
-	{
-		if (currentXP > maxXP)
-		{
+	private void checkForLevelUp() {
+		if (currentXP > maxXP) {
 			levelUp();
 		}
 	}
-	
+
 	/**
 	 * Levels up the champion
 	 */
-	private void levelUp()
-	{
+	private void levelUp() {
 		level++;
 		currentXP -= maxXP;
-		
+
 		maxXP = maxXP * config.XP_INCREMENT_MODIFIER;
-		
+
 		manager.championLevelUp(this);
 	}
-	
-	public void applyLevelUp(LevelUpStat stat)
-	{
-		switch (stat)
-		{
+
+	public void applyLevelUp(LevelUpStat stat) {
+		switch (stat) {
 		case STAMINA:
 			addMaxStamina(config.LEVEL_UP_STAMINA_INCREASE);
 			break;
@@ -369,97 +344,100 @@ public abstract class Champion implements Purchasable, Cloneable {
 			changeDefense(config.LEVEL_UP_DEFENSE_INCREASE);
 			break;
 		}
-		
+
 		// Check for level up again.
-		// This is to prevent edge cases in which a champion gains enough XP to level up multiple times.
-		checkForLevelUp(); 
+		// This is to prevent edge cases in which a champion gains enough XP to level up
+		// multiple times.
+		checkForLevelUp();
 	}
-	
-	//TODO: Move the following functions to purchasable interface:
-	public float getPrice()
-	{
+
+	// TODO: Move the following functions to purchasable interface:
+	@Override
+	public float getPrice() {
 		return price;
 	}
-	public void changePrice(float newPrice)
-	{
+
+	public void changePrice(float newPrice) {
 		price = newPrice;
 	}
-	public float getPriceChangeWeekly()
-	{
+
+	public float getPriceChangeWeekly() {
 		return priceChangeWeekly;
-	}	
-	public void setPriceChangeWeekly(float newWeeklyPrice)
-	{
+	}
+
+	public void setPriceChangeWeekly(float newWeeklyPrice) {
 		priceChangeWeekly = newWeeklyPrice;
 	}
-	public void applyWeeklyPriceChange()
-	{
+
+	public void applyWeeklyPriceChange() {
 		price = price * priceChangeWeekly;
 	}
 	// ---------
-	
+
 	/**
 	 * Returns the damage dealt by the champion in an attack
+	 * 
 	 * @return the damage dealt by the champion in an attack
 	 */
-	public float getDamage()
-	{
-		return (((getOffense() * config.OFFENSE_STAT_DAMAGE_MULTIPLER )
-				+ config.DAMAGE_BASE)
+	public float getDamage() {
+		return (((getOffense() * config.OFFENSE_STAT_DAMAGE_MULTIPLER) + config.DAMAGE_BASE)
 				* weapon.getDamageMultiplier());
 	}
-	
+
 	/**
 	 * Returns the champions weapon
+	 * 
 	 * @return The champions weapon
 	 */
-	public Weapon getWeapon()
-	{
+	public Weapon getWeapon() {
 		return weapon;
 	}
-	
+
 	/**
 	 * Set the champion weapon to the given weapon
+	 * 
 	 * @return weapon the new weapon to set
 	 */
-	public void setWeapon(Weapon weapon)
-	{
+	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
 	}
-	
+
 	/**
 	 * Removes the champions weapon, replacing it with their fists
 	 */
-	public void removeWeapon()
-	{
+	public void removeWeapon() {
 		weapon = new Fists();
 	}
-	
+
 	/**
 	 * Gives the champion a new weapon
+	 * 
 	 * @param newWeapon The weapon given to this champion
 	 */
-	public void addWeapon(Weapon newWeapon)
-	{
+	public void addWeapon(Weapon newWeapon) {
 		weapon = newWeapon;
 	}
-    
-    /**
+
+	/**
 	 * Set the value of image
+	 * 
 	 * @param newImage the new value of image
-	 */	
+	 */
 	public void setImage(ImageIcon newImage) {
 		image = newImage;
 	}
-	
+
 	/**
 	 * Get the value of image
+	 * 
 	 * @return the value of image
 	 */
+	@Override
 	public ImageIcon getImage() {
 		return image;
 	}
 
+	@Override
 	public void buy(Team team) throws InsufficientFundsException, FullTeamException, IllegalPurchaseException {
 		team.removeMoney(getPrice());
 		try {
@@ -468,43 +446,42 @@ public abstract class Champion implements Purchasable, Cloneable {
 			}
 			team.addChampion(this);
 			team.setWeeklyChampionPurchased(true);
-		}
-		catch (FullTeamException e) {
+		} catch (FullTeamException e) {
 			team.addMoney(getPrice());
 			throw new FullTeamException(e.getMessage());
-		}
-		catch(IllegalPurchaseException e) {
+		} catch (IllegalPurchaseException e) {
 			team.addMoney(getPrice());
 			throw new IllegalPurchaseException(e.getMessage());
 		}
 	}
-	
+
+	@Override
 	public void sell(Team team) {
 		team.removeChampion(this);
 		team.addMoney(getPrice());
 	}
-	
+
 	/**
 	 * Create a clone of the Champion with the same stats.
 	 */
 	@Override
 	public Champion clone() {
-        try {
-        	Champion champion = (Champion) super.clone();
-        	champion.setWeapon(champion.getWeapon().clone());
-            return champion;
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-	
+		try {
+			Champion champion = (Champion) super.clone();
+			champion.setWeapon(champion.getWeapon().clone());
+			return champion;
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	@Override
 	public String toString() {
 		return String.format(
 				"Champion [name=%s, stamina=%s, maxStamina=%s, regen=%s, offense=%s, defense=%s, level=%s, currentXP=%s, maxXP=%s, price=%s, priceChangeWeekly=%s, weapon=%s]",
-				name, stamina, maxStamina, regen, offense, defense, level, currentXP, maxXP, price,
-				priceChangeWeekly, weapon);
+				name, stamina, maxStamina, regen, offense, defense, level, currentXP, maxXP, price, priceChangeWeekly,
+				weapon);
 	}
-	
+
 }
