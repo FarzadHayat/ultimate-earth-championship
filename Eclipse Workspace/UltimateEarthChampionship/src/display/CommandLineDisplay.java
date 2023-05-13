@@ -18,52 +18,51 @@ import story.Cutscene;
 import story.CutsceneSlide;
 
 public class CommandLineDisplay implements DisplayStrategy {
-	
+
 	private Scanner scanner;
-	
+
 	private Configuration config = Configuration.getInstance();
-	
+
 	private GameManager gameManager = GameManager.getInstance();
-	
+
 	/**
 	 * Create a new CommandLineDisplay object.
 	 */
 	public CommandLineDisplay() {
 		scanner = new Scanner(System.in);
 	}
-	
+
 	/**
 	 * Prompts the user for input.
+	 *
 	 * @return The user's input.
 	 */
 	private String promptForInput() {
 		System.out.print("> ");
 		return scanner.nextLine();
 	}
-	
+
 	/**
 	 * Closes the scanner used to receive input from the user.
 	 */
 	public void closeScanner() {
 		scanner.close();
 	}
-	
+
 	@Override
 	public void displayCutscene(Cutscene cutscene) {
-		while (true)
-		{
+		while (true) {
 			// Get the next cutscene slide
 			CutsceneSlide slide = cutscene.nextSlide();
-			
+
 			// If a null has returned, the cutscene has finished
-			if (slide == null)
-			{
+			if (slide == null) {
 				break;
 			}
-			
+
 			// else print the cutscene next and prompt for input before continuing
 			System.out.println(slide.getText());
-			
+
 			promptForInput();
 		}
 
@@ -71,143 +70,118 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	/**
-	 * Displays all the text related to setting up the game,
-	 )* Requires the player to input a team name,
-	 * Weeks of championship,
-	 * Choose their starting team,
+	 * Displays all the text related to setting up the game, )* Requires the player
+	 * to input a team name, Weeks of championship, Choose their starting team,
 	 * Choose a difficulty
 	 */
 	@Override
 	public void displaySetup() {
 		System.out.println("Welcome to Ultimate Earth Championship!\n");
-		
+
 		// Data requested:
 		String teamName = null;
 		int gameWeeks = 0;
-		ArrayList<Champion> chosenChampions = new ArrayList<Champion>();
+		ArrayList<Champion> chosenChampions = new ArrayList<>();
 		float difficulty = 0;
-		
+
 		// Prompt for team name
-		while (teamName == null)
-		{
+		while (teamName == null) {
 			System.out.println("Name your team:");
-			System.out.println(" - Must be between " + config.MIN_TEAM_NAME_CHARS + " and "+config.MAX_TEAM_NAME_CHARS+" characters");
+			System.out.println(" - Must be between " + config.MIN_TEAM_NAME_CHARS + " and " + config.MAX_TEAM_NAME_CHARS
+					+ " characters");
 			System.out.println(" - Cannot contain special characters \n");
-			
-			try 
-			{
+
+			try {
 				teamName = SetupManager.PromptForTeamName(promptForInput());
-			} 
-			catch (InputException e) 
-			{
+			} catch (InputException e) {
 				System.out.println(e.getMessage() + " \n");
 			}
 		}
 		System.out.println("Team name of " + teamName + " accepted. \n");
-		
+
 		// Prompt for game weeks
-		while (gameWeeks == 0)
-		{
+		while (gameWeeks == 0) {
 			System.out.println("How many weeks will the tournament be?");
-			System.out.println(" - Must be between " + config.MIN_NUM_GAME_WEEKS + " and " + config.MAX_NUM_GAME_WEEKS + "\n");
-			
-			try 
-			{
+			System.out.println(
+					" - Must be between " + config.MIN_NUM_GAME_WEEKS + " and " + config.MAX_NUM_GAME_WEEKS + "\n");
+
+			try {
 				gameWeeks = SetupManager.PromptForNumWeeks(promptForInput());
-			} 
-			catch (InputException e) 
-			{
+			} catch (InputException e) {
 				System.out.println(e.getMessage() + " \n");
 			}
 		}
 		System.out.println(gameWeeks + " weeks have been chosen");
-		
+
 		// Get champions that they can choose from:
 		ArrayList<Champion> availChampions = gameManager.getShop().getStartingChampions();
-		
+
 		// Prompt for starting champions
-		while (chosenChampions.size() < 4)
-		{
+		while (chosenChampions.size() < 4) {
 			System.out.println("Chosen champions:");
-			for (Champion champ : chosenChampions)
-			{
+			for (Champion champ : chosenChampions) {
 				System.out.println(champ.getName());
 			}
-			
+
 			System.out.println("\nChoose a champion:");
 			// Print each champion with a corresponding number and their stats:
 			int i = 1;
-			for (Champion champ : availChampions)
-			{
-				System.out.println("["+i+"] " + champ.getName() + 
-						" | Stamina: " + champ.getMaxStamina() +
-						" | Regen: " + champ.getRegen() +
-						" | Offense: " + champ.getOffense() + 
-						" | Defense: " + champ.getDefense());
+			for (Champion champ : availChampions) {
+				System.out.println("[" + i + "] " + champ.getName() + " | Stamina: " + champ.getMaxStamina()
+						+ " | Regen: " + champ.getRegen() + " | Offense: " + champ.getOffense() + " | Defense: "
+						+ champ.getDefense());
 				i++;
 			}
 			System.out.println("\nSelect the champion you would like:");
-			
+
 			Champion chosenChamp = null;
-			try 
-			{
+			try {
 				chosenChamp = SetupManager.ChooseChampionFrom(availChampions, promptForInput());
 				chosenChampions.add(chosenChamp);
-			} 
-			catch (InputException e) 
-			{
+			} catch (InputException e) {
 				System.out.println(e.getMessage() + " \n");
 			}
 		}
-		
+
 		System.out.println("\n Your Team:");
-		for (Champion champ : chosenChampions)
-		{
+		for (Champion champ : chosenChampions) {
 			System.out.println(" -> " + champ.getName());
 		}
 		System.out.println("\n");
-		
+
 		// Prompt for difficulty:
-		while (difficulty == 0)
-		{
+		while (difficulty == 0) {
 			System.out.println("Choose a difficulty:");
 			System.out.println("- Difficulty can range from anywhere between 0.5 (easiest) to 2 (hardest)");
-			try 
-			{
+			try {
 				difficulty = SetupManager.PromptForDifficulty(promptForInput());
-			} 
-			catch (InputException e) 
-			{
+			} catch (InputException e) {
 				System.out.println(e.getMessage() + " \n");
 			}
 		}
 		System.out.println("\n You have chosen a difficulty of " + difficulty);
-		
+
 		System.out.println("\n \n To Review:");
 		System.out.println("Team name: " + teamName);
 		System.out.println("Weeks in season: " + gameWeeks);
 		System.out.println("Your Team:");
-		for (Champion champ : chosenChampions)
-		{
+		for (Champion champ : chosenChampions) {
 			System.out.println(" -> " + champ.getName());
 		}
 		System.out.println("Game difficulty: " + difficulty + "\n");
-		
+
 		System.out.println("Are you happy with this? [y/n]");
 		System.out.println(" - Answering 'n' will restart the setup process");
-		
-		while(true)
-		{
+
+		while (true) {
 			String in = promptForInput();
-			
-			if (in.equals("y"))
-			{
+
+			if (in.equals("y")) {
 				// Setup complete, pass on data to gameManager
 				gameManager.setupPlayerTeam(teamName, gameWeeks, availChampions, difficulty);
 				break;
 			}
-			if (in.equals("n"))
-			{
+			if (in.equals("n")) {
 				// Restart
 				displaySetup();
 				return;
@@ -219,47 +193,49 @@ public class CommandLineDisplay implements DisplayStrategy {
 	@Override
 	public void displayTeam() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
 	 * Displays the shop to the console.
+	 *
 	 * @param shop The shop to display.
 	 */
+	@Override
 	public void displayShop() {
 		Shop shop = gameManager.getShop();
-		
+
 		CommandLineUtilities.printHeader("Shop");
-		
+
 		CommandLineTable.printChampions(shop.getAvailableChampions());
 		CommandLineUtilities.printLine();
 		CommandLineTable.printWeapons(shop.getAvailableWeapons());
 		CommandLineUtilities.printLine();
-		
+
 		CommandLineUtilities.printChampionOptions("BUY", shop.getAvailableChampions());
 		CommandLineUtilities.printWeaponOptions("BUY", shop.getAvailableWeapons());
-	
+
 		System.out.println(promptForInput());
 	}
 
 	@Override
 	public void displayStadium() {
 		ArrayList<Team> teams = gameManager.getAITeams();
-		
+
 		CommandLineUtilities.printHeader("Stadium");
-		
+
 		CommandLineUtilities.printTeams(teams);
 		CommandLineUtilities.printLine();
-		
+
 		CommandLineUtilities.printTeamOptions(teams);
-		
+
 		System.out.println(promptForInput());
 	}
 
 	@Override
 	public void displayChampionSetup() {
-		ArrayList<Champion> chosenChampions = new ArrayList<Champion>();  
-		ArrayList<Champion> championsLeft = new ArrayList<Champion>();
+		ArrayList<Champion> chosenChampions = new ArrayList<>();
+		ArrayList<Champion> championsLeft = new ArrayList<>();
 		championsLeft.addAll(gameManager.getPlayerTeam().getChampions());
 		while (chosenChampions.size() < Configuration.NUM_CHOSEN_CHAMPIONS) {
 			CommandLineUtilities.printHeader("CHAMPION SETUP");
@@ -272,25 +248,22 @@ public class CommandLineDisplay implements DisplayStrategy {
 				System.out.println(e.getMessage() + " \n");
 			}
 		}
-		
+
 		CommandLineUtilities.printHeader("CHAMPION SETUP");
 		CommandLineTable.printChampions(chosenChampions);
-		
-		while(true)
-		{
+
+		while (true) {
 			System.out.println("Are you happy with this? [y/n]");
 			System.out.println(" - Answering 'n' will restart the champion setup process");
-			
+
 			String in = promptForInput();
-			
-			if (in.equals("y"))
-			{
+
+			if (in.equals("y")) {
 				// Weapon setup complete, assign chosen champions to the player team
 				gameManager.getPlayerTeam().setChosenChampions(chosenChampions);
 				break;
 			}
-			if (in.equals("n"))
-			{
+			if (in.equals("n")) {
 				// Restart
 				displayChampionSetup();
 				return;
@@ -298,33 +271,30 @@ public class CommandLineDisplay implements DisplayStrategy {
 		}
 		gameManager.finishedChampionSetup();
 	}
-	
 
 	@Override
 	public void displayWeaponSetup() {
-		ArrayList<Weapon> chosenWeapons = new ArrayList<Weapon>();  
-		ArrayList<Weapon> WeaponsLeft = new ArrayList<Weapon>();
+		ArrayList<Weapon> chosenWeapons = new ArrayList<>();
+		ArrayList<Weapon> WeaponsLeft = new ArrayList<>();
 		WeaponsLeft.addAll(gameManager.getPlayerTeam().getWeapons());
 		while (chosenWeapons.size() < Configuration.NUM_CHOSEN_CHAMPIONS) {
 			CommandLineUtilities.printHeader("WEAPON SETUP");
 			CommandLineTable.printWeapons(chosenWeapons);
 			CommandLineUtilities.printWeaponOptions("SELECT", WeaponsLeft);
-			
+
 			System.out.println("Are you happy with this? [y/n]");
 			System.out.println(" - You can continue to select more weapons or continue with the current selection");
 			System.out.println(" - Answering 'y' will start the match");
 			System.out.println(" - Answering 'n' will restart the weapon setup process");
-			
+
 			String in = promptForInput();
-			
-			if (in.equals("y"))
-			{
+
+			if (in.equals("y")) {
 				// Weapon setup complete, assign chosen weapons to the player team
 				gameManager.getPlayerTeam().setChosenWeapons(chosenWeapons);
 				break;
 			}
-			if (in.equals("n"))
-			{
+			if (in.equals("n")) {
 				// Restart
 				displayWeaponSetup();
 				return;
@@ -338,29 +308,29 @@ public class CommandLineDisplay implements DisplayStrategy {
 		}
 		gameManager.finishedWeaponSetup();
 	}
-	
+
 	@Override
 	public void displayMatchResults(MatchResult matchResult) {
-		String text = "";
+		StringBuilder text = new StringBuilder();
 		if (matchResult.winningTeam == gameManager.getPlayerTeam()) {
 			double winningMoneyRounded = Math.round(matchResult.winningTeamMoney * 100.0) / 100.0;
 			double winningScoreRounded = Math.round(matchResult.winningTeamScore * 100.0) / 100.0;
-			text += "You have won the match! Money awarded: " + winningMoneyRounded
-					+ " Score awarded: " + winningScoreRounded;
-		}
-		else {
+			text.append("You have won the match! Money awarded: ").append(winningMoneyRounded)
+					.append(" Score awarded: ").append(winningScoreRounded);
+		} else {
 			double losingMoneyRounded = Math.round(matchResult.losingTeamMoney * 100.0) / 100.0;
 			double losingScoreRounded = Math.round(matchResult.losingTeamScore * 100.0) / 100.0;
-			text += "You have lost the match! Money awarded: " + losingMoneyRounded
-					+ " Score awarded: " + losingScoreRounded;
+			text.append("You have lost the match! Money awarded: ").append(losingMoneyRounded)
+					.append(" Score awarded: ").append(losingScoreRounded);
 		}
-		System.out.println(text);
+		System.out.println(text.toString());
 	}
-	
+
 	@Override
 	public void displayWeekResults(ArrayList<RandomEventInfo> randomEvents) {
 		for (RandomEventInfo randomEvent : randomEvents) {
-			System.out.println(String.format("%s: %s (%s)", randomEvent.name, randomEvent.description, randomEvent.effectString));
+			System.out.println(
+					String.format("%s: %s (%s)", randomEvent.name, randomEvent.description, randomEvent.effectString));
 			promptForInput();
 		}
 		GameManager.getInstance().finishedWeek();
@@ -369,13 +339,13 @@ public class CommandLineDisplay implements DisplayStrategy {
 	@Override
 	public void displayGameResults() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void displayLiveMatch(LiveMatch match) {
 		System.out.println("TODO: Livematch in command line interface");
-		
+
 	}
-	
+
 }

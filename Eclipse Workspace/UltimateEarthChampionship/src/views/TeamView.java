@@ -18,25 +18,25 @@ import model.Weapon;
 public class TeamView extends JPanel {
 
 	private static final long serialVersionUID = -8010724197066539267L;
-	
+
 	private GameManager gameManager = GameManager.getInstance();
-	
+
 	private JPanel mainPanel;
 
 	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "team.jpg");
-	
+
 	/**
 	 * Create the panel.
 	 */
 	public TeamView() {
 		setName("Club");
 		setLayout(new GridBagLayout());
-		
+
 		mainPanel = new JPanel();
 		mainPanel.setOpaque(false);
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		add(mainPanel);
-		
+
 		addChampionsHeader();
 		addChampionsPanel();
 		addWeaponsHeader();
@@ -69,7 +69,7 @@ public class TeamView extends JPanel {
 		}
 		mainPanel.add(championsPanel);
 	}
-	
+
 	private void addWeaponsHeader() {
 		mainPanel.add(new HeaderPanel("Your weapons", true));
 		mainPanel.add(new HeaderPanel("You can assign your weapons to champions during match setup", false));
@@ -96,12 +96,12 @@ public class TeamView extends JPanel {
 		}
 		mainPanel.add(weaponsPanel);
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
-	    super.paintComponent(g);
-	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
-        g.drawImage(icon.getImage(), 0, yPos, null);
+		super.paintComponent(g);
+		int yPos = (GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2;
+		g.drawImage(icon.getImage(), 0, yPos, null);
 	}
 
 }

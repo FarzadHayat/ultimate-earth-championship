@@ -86,61 +86,61 @@ import weapons.Sword;
 import weapons.TennisRacket;
 
 /**
- * The GameManager class is an abstract class that defines the basic functionality of a game manager.
- * The GameManager is implemented as a Singleton using the getInstance() method.
+ * The GameManager class is an abstract class that defines the basic
+ * functionality of a game manager. The GameManager is implemented as a
+ * Singleton using the getInstance() method.
  */
-public abstract class GameManager
-{
+public abstract class GameManager {
 	private static DisplayType displayType = DisplayType.CLI;
 	private static GameManager instance;
 	protected DisplayStrategy displayStrategy;
 	private Configuration config = Configuration.getInstance();
-	
+
 	/**
 	 * The GameEnvironment instance for this GameManager.
 	 */
 	protected GameEnvironment gameEnvironment;
-	
+
 	/**
 	 * The Shop instance for this GameManager.
 	 */
 	protected Shop shop;
-	
+
 	/**
 	 * The list of all available champions.
 	 */
-	protected ArrayList<Champion> allChampions; 
-	
+	protected ArrayList<Champion> allChampions;
+
 	/**
 	 * The list of all available weapons.
 	 */
 	protected ArrayList<Weapon> allWeapons;
-	
+
 	/**
 	 * The player's team for ease of access.
 	 */
 	protected Team playerTeam;
-	
+
 	/**
 	 * All the teams including the player team.
 	 */
-	protected ArrayList<Team> teams = new ArrayList<Team>();
-	
+	protected ArrayList<Team> teams = new ArrayList<>();
+
 	/**
 	 * The currently selected enemy team.
 	 */
 	protected Team enemyTeam;
-	
+
 	/**
 	 * The currently active match.
 	 */
 	protected Match match;
-	
+
 	/**
 	 * The current cutscene for the game.
 	 */
 	protected Cutscene cutscene;
-	
+
 	/**
 	 * Starts the game.
 	 */
@@ -149,47 +149,45 @@ public abstract class GameManager
 		instance.initialize();
 		instance.play();
 	}
-	
+
 	/**
 	 * Initialize the necessary starting objects for the game.
 	 */
 	public void initialize() {
 		// All champions
-		allChampions = new ArrayList<Champion>(List.of(
-				new CharlesDarwin(), new ElvisPresley(), new JoeRogan(), new JosefStalin(),
-    			new KingGeorge(), new MarcusAurelius(), new MargaretThatcher(), new MarieCurie(), new SimonHoermann(),
-    			new MatthiasGalster(), new MikolosHorthy(), new NapoleonBonaparte(), new NeilArmstrong(), new NikitaKrustchev(),
-    			new PhilGarland(), new PhilippePetain(), new QueenVictoria(), new RobertMuldoon(), new RudyardKipling(),
-    			new ShokoAsahara(), new StephenHawking(), new SunTzu(), new TedKaczynski(), new TimBell(), new WilliamShakespeare(),
-    			new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery(),
-    			new JohnBrowning(), new JohnDoe(), new JohnFKennedy(), new JohnMaynardKeynes(),
-    			new FranzFerdinand(), new GeorgeWashington(), new GhengisKhan(), new HarryTruman(),
-    			new Confucius(), new DavidLange(), new DouglasMacArthur(), new DwightEisenhower()
-    			));
-		
+		allChampions = new ArrayList<>(List.of(new CharlesDarwin(), new ElvisPresley(), new JoeRogan(),
+				new JosefStalin(), new KingGeorge(), new MarcusAurelius(), new MargaretThatcher(), new MarieCurie(),
+				new SimonHoermann(), new MatthiasGalster(), new MikolosHorthy(), new NapoleonBonaparte(),
+				new NeilArmstrong(), new NikitaKrustchev(), new PhilGarland(), new PhilippePetain(),
+				new QueenVictoria(), new RobertMuldoon(), new RudyardKipling(), new ShokoAsahara(),
+				new StephenHawking(), new SunTzu(), new TedKaczynski(), new TimBell(), new WilliamShakespeare(),
+				new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery(),
+				new JohnBrowning(), new JohnDoe(), new JohnFKennedy(), new JohnMaynardKeynes(), new FranzFerdinand(),
+				new GeorgeWashington(), new GhengisKhan(), new HarryTruman(), new Confucius(), new DavidLange(),
+				new DouglasMacArthur(), new DwightEisenhower()));
+
 		// All weapons
-		allWeapons = new ArrayList<Weapon>(List.of(
-    			new Axe(), new BaseballBat(), new Chainsaw(), new Dagger(), new FryingPan(),
-    			new GolfClub(), new Katana(), new Mace(), new Machete(), new Nunchucks(),
-    			new Pickaxe(), new Pitchfork(), new Scythe(), new Shield(), new Shovel(),
-    			new Shuriken(), new Sledgehammer(), new Spear(), new Sword(), new TennisRacket()
-    			));
+		allWeapons = new ArrayList<>(List.of(new Axe(), new BaseballBat(), new Chainsaw(), new Dagger(),
+				new FryingPan(), new GolfClub(), new Katana(), new Mace(), new Machete(), new Nunchucks(),
+				new Pickaxe(), new Pitchfork(), new Scythe(), new Shield(), new Shovel(), new Shuriken(),
+				new Sledgehammer(), new Spear(), new Sword(), new TennisRacket()));
 
 		// Game environment
 		gameEnvironment = new GameEnvironment();
-		
-    	// Shop
-    	shop = new Shop();
+
+		// Shop
+		shop = new Shop();
 	}
-	
+
 	/**
 	 * Starts the game. Handles individually by the GameManager subclasses.
 	 */
 	public abstract void play();
 
 	/**
-	 * Gets the GameManager instance.
-	 * If the instance is null, creates a new instance based on the DisplayType specified in GameInitializer.
+	 * Gets the GameManager instance. If the instance is null, creates a new
+	 * instance based on the DisplayType specified in GameInitializer.
+	 *
 	 * @return the GameManager instance.
 	 */
 	public static GameManager getInstance() {
@@ -232,6 +230,7 @@ public abstract class GameManager
 
 	/**
 	 * Gets the Shop instance.
+	 *
 	 * @return the Shop instance.
 	 */
 	public Shop getShop() {
@@ -240,6 +239,7 @@ public abstract class GameManager
 
 	/**
 	 * Sets the Shop instance.
+	 *
 	 * @param shop the Shop instance to set.
 	 */
 	public void setShop(Shop shop) {
@@ -248,6 +248,7 @@ public abstract class GameManager
 
 	/**
 	 * Gets the list of all champions.
+	 *
 	 * @return the list of all champions.
 	 */
 	public ArrayList<Champion> getAllChampions() {
@@ -256,6 +257,7 @@ public abstract class GameManager
 
 	/**
 	 * Sets the list of all champions.
+	 *
 	 * @param allChampions the list of all champions to set.
 	 */
 	public void setAllChampions(ArrayList<Champion> allChampions) {
@@ -264,6 +266,7 @@ public abstract class GameManager
 
 	/**
 	 * Gets the list of all weapons.
+	 *
 	 * @return the list of all weapons.
 	 */
 	public ArrayList<Weapon> getAllWeapons() {
@@ -272,6 +275,7 @@ public abstract class GameManager
 
 	/**
 	 * Sets the list of all weapons.
+	 *
 	 * @param allWeapons the list of all weapons to set.
 	 */
 	public void setAllWeapons(ArrayList<Weapon> allWeapons) {
@@ -280,6 +284,7 @@ public abstract class GameManager
 
 	/**
 	 * gets the player's team.
+	 *
 	 * @return the playerTeam
 	 */
 	public Team getPlayerTeam() {
@@ -288,6 +293,7 @@ public abstract class GameManager
 
 	/**
 	 * Sets the player's team to the given team.
+	 *
 	 * @param playerTeam the playerTeam to set
 	 */
 	public void setPlayerTeam(Team playerTeam) {
@@ -296,6 +302,7 @@ public abstract class GameManager
 
 	/**
 	 * Get list of all the teams in the game.
+	 *
 	 * @return teams the list of teams
 	 */
 	public ArrayList<Team> getTeams() {
@@ -303,13 +310,14 @@ public abstract class GameManager
 	}
 
 	/**
-	 * set  list of all the teams in the game.
+	 * set list of all the teams in the game.
+	 *
 	 * @param teams the list of teams to set
 	 */
 	public void setTeams(ArrayList<Team> teams) {
 		this.teams = teams;
 	}
-	
+
 	/**
 	 * @return the enemyTeam
 	 */
@@ -342,118 +350,113 @@ public abstract class GameManager
 
 	/**
 	 * Get list of all AI teams in the game.
+	 *
 	 * @return teams the list of AI teams
 	 */
 	public ArrayList<Team> getAITeams() {
-		ArrayList<Team> AITeams = new ArrayList<Team>();
+		ArrayList<Team> AITeams = new ArrayList<>();
 		AITeams.remove(playerTeam);
 		for (Team team : teams) {
 			if (!team.isPlayerTeam()) {
-				AITeams.add(team); 	
+				AITeams.add(team);
 			}
 		}
 		return AITeams;
 	}
-	
+
 	/**
-	 * Sets up the playerTeam, the difficulty and the number of weeks, should be called by the setup
-	 * @param teamName The team name
-	 * @param numWeeks The number of weeks in the season
-	 * @param champions List of champions in the player team
+	 * Sets up the playerTeam, the difficulty and the number of weeks, should be
+	 * called by the setup
+	 *
+	 * @param teamName   The team name
+	 * @param numWeeks   The number of weeks in the season
+	 * @param champions  List of champions in the player team
 	 * @param difficulty The difficulty of the game
 	 */
-	public void setupPlayerTeam(String teamName, int numWeeks, ArrayList<Champion> champions, float difficulty)
-	{
+	public void setupPlayerTeam(String teamName, int numWeeks, ArrayList<Champion> champions, float difficulty) {
 		Team playerTeam = new Team(true, teamName, champions);
 		setPlayerTeam(playerTeam);
 		teams.add(playerTeam);
-		
+
 		config.setDifficulty(difficulty);
 		gameEnvironment.setMaxWeeks(numWeeks);
 	}
 
-
 	/**
 	 * Generates all the AI teams
+	 *
 	 * @return A list of 3 AI teams
 	 */
-	public ArrayList<Team> generateAITeams()
-	{
-		ArrayList<Team> teams = new ArrayList<Team>();
-		
+	public ArrayList<Team> generateAITeams() {
+		ArrayList<Team> teams = new ArrayList<>();
 
 		// List of champions in use by the AI
-		// We use this to make sure that duplicate champions are not chosen for the teams
-		ArrayList<Champion> setupChampionsInUse = new ArrayList<Champion>();
+		// We use this to make sure that duplicate champions are not chosen for the
+		// teams
+		ArrayList<Champion> setupChampionsInUse = new ArrayList<>();
 		// Add the player champions to list to ensure they are not chosen by then AI.
 		setupChampionsInUse.addAll(playerTeam.getChampions());
-		
-		ArrayList<String> possibleTeamNames = new ArrayList<String>(config.AI_TEAM_NAMES);
-		
+
+		ArrayList<String> possibleTeamNames = new ArrayList<>(config.AI_TEAM_NAMES);
+
 		Random rand = new Random();
-		
+
 		int teamNum = 0;
-		while (teamNum < 3)
-		{
+		while (teamNum < 3) {
 			// get team name
 			String name = possibleTeamNames.get(rand.nextInt(possibleTeamNames.size()));
 			possibleTeamNames.remove(name);
-			
+
 			// get team champions
-			ArrayList<Champion> champions = new ArrayList<Champion>();
-			
+			ArrayList<Champion> champions = new ArrayList<>();
+
 			int championNum = 0;
-			while (championNum < 4)
-			{
+			while (championNum < 4) {
 				// Get champion
 				@SuppressWarnings("static-access")
-				Champion newChamp = shop.getRandomChampion(getAllChampions());
-				
-				if (!setupChampionsInUse.contains(newChamp))
-				{
+				Champion newChamp = Shop.getRandomChampion(getAllChampions());
+
+				if (!setupChampionsInUse.contains(newChamp)) {
 					// Remember that this champion is in-use
 					setupChampionsInUse.add(newChamp);
-					
+
 					champions.add(newChamp);
 					championNum++;
 				}
 			}
-			
+
 			teams.add(new Team(false, name, champions));
 			teamNum++;
-			
+
 		}
-		
+
 		return teams;
 	}
-	
 
-	public void finishedCutscene()
-	{
+	public void finishedCutscene() {
 		displayStrategy.displaySetup();
 	}
-	
-	public void finishedSetup()
-	{
-		teams.addAll(generateAITeams()); 
+
+	public void finishedSetup() {
+		teams.addAll(generateAITeams());
 		shop.generateCatalogue();
 		displayStrategy.displayTeam();
 	}
-	
+
 	public void startMatchSetup(Team team) {
 		enemyTeam = team;
 		displayStrategy.displayChampionSetup();
 	}
-	
+
 	public void finishedChampionSetup() {
 		displayStrategy.displayWeaponSetup();
 	}
-	
+
 	public void finishedWeaponSetup() {
 		setMatch(new LiveMatch(getPlayerTeam(), getEnemyTeam()));
 		displayStrategy.displayLiveMatch((LiveMatch) getMatch());
 	}
-	
+
 	public void finishedMatch(MatchResult matchResult) {
 		displayStrategy.displayMatchResults(matchResult);
 		finishedWeek();
@@ -470,15 +473,15 @@ public abstract class GameManager
 			new DumbMatch(team1, team2).getMatchResult();
 		}
 	}
-	
+
 	private void shopTeams(ArrayList<Team> teams) {
 		// Get all shop champions except the one(s) player has already bought
-		ArrayList<Champion> championsLeft = new ArrayList<Champion>(shop.getAvailableChampions());
+		ArrayList<Champion> championsLeft = new ArrayList<>(shop.getAvailableChampions());
 		for (Champion champion : playerTeam.getChampions()) {
 			championsLeft.remove(champion);
 		}
 		// Get all shop weapons except the one(s) player has already bought
-		ArrayList<Weapon> weaponsLeft = new ArrayList<Weapon>(shop.getAvailableWeapons());
+		ArrayList<Weapon> weaponsLeft = new ArrayList<>(shop.getAvailableWeapons());
 		for (Weapon weapon : playerTeam.getWeapons()) {
 			weaponsLeft.remove(weapon);
 		}
@@ -488,8 +491,7 @@ public abstract class GameManager
 				int championIndex = random.nextInt(championsLeft.size());
 				championsLeft.get(championIndex).buy(team);
 				championsLeft.remove(championIndex);
-			}
-			catch (FullTeamException | InsufficientFundsException | IllegalPurchaseException e) {
+			} catch (FullTeamException | InsufficientFundsException | IllegalPurchaseException e) {
 				if (Configuration.DEBUG) {
 					System.out.println(team.getName() + " BUY CHAMPION: " + e.getMessage());
 				}
@@ -498,20 +500,19 @@ public abstract class GameManager
 				int weaponIndex = random.nextInt(weaponsLeft.size());
 				weaponsLeft.get(weaponIndex).buy(team);
 				weaponsLeft.remove(weaponIndex);
-			}
-			catch (FullTeamException | InsufficientFundsException e) {
+			} catch (FullTeamException | InsufficientFundsException e) {
 				if (Configuration.DEBUG) {
 					System.out.println(team.getName() + " BUY WEAPON: " + e.getMessage());
 				}
 			}
 		}
 	}
-	
+
 	public void finishedWeek() {
 		// Shop for all AI teams including the one that the player just fought
 		shopTeams(getAITeams());
 		// Fight for AI teams that haven't fought yet this week
-		ArrayList<Team> teamsLeft = new ArrayList<Team>(teams);
+		ArrayList<Team> teamsLeft = new ArrayList<>(teams);
 		teamsLeft.remove(playerTeam);
 		teamsLeft.remove(enemyTeam);
 		fightTeams(teamsLeft);
@@ -539,63 +540,57 @@ public abstract class GameManager
 	public void finishedGame() {
 		displayStrategy.displayGameResults();
 	}
-	
-	
+
 	/**
-	 * Levels up a champion depending on whether the champion
-	 * is on the players team or not
+	 * Levels up a champion depending on whether the champion is on the players team
+	 * or not
+	 *
 	 * @param champion The champion to level up
 	 */
-	public void championLevelUp(Champion champion)
-	{
-		if (playerTeam.getChampions().contains(champion))
-		{
+	public void championLevelUp(Champion champion) {
+		if (playerTeam.getChampions().contains(champion)) {
 			// The champion is on the player team
-			
+
 			displayLevelUpDialogue(champion);
-		}
-		else
-		{
+		} else {
 			LevelUpStat stat = getRandomLevelUpStat();
 			applyLevelUp(champion, stat);
 		}
 	}
-	
+
 	/**
-	 * Lets the view know that a champion has leveled up and the player
-	 * needs to be promtped for a stat to upgrade.
-	 * Called by champion.
+	 * Lets the view know that a champion has leveled up and the player needs to be
+	 * promtped for a stat to upgrade. Called by champion.
+	 *
 	 * @param champion The champion that has leveled up
 	 */
-	public void displayLevelUpDialogue(Champion champion)
-	{
+	public void displayLevelUpDialogue(Champion champion) {
 		LevelUpView.showLevelUpDialogue(champion);
 	}
-	
+
 	/**
 	 * Lets the champion know that the player has chosen their stat to level up
 	 * Called by LevelUpView
+	 *
 	 * @param champion The champion to level up
-	 * @param stat The stat to increase
+	 * @param stat     The stat to increase
 	 */
-	public void applyLevelUp(Champion champion, LevelUpStat stat)
-	{
+	public void applyLevelUp(Champion champion, LevelUpStat stat) {
 		champion.applyLevelUp(stat);
 	}
-	
+
 	/**
 	 * Returns a random LevelUpStat
+	 *
 	 * @return A random levelUpStat
 	 */
-	private LevelUpStat getRandomLevelUpStat()
-	{
+	private LevelUpStat getRandomLevelUpStat() {
 		Random random = new Random();
 		int randInt = random.nextInt(4);
-		
+
 		LevelUpStat out = LevelUpStat.STAMINA;
-		
-		switch (randInt)
-		{
+
+		switch (randInt) {
 		case 0:
 			out = LevelUpStat.STAMINA;
 			break;
@@ -609,8 +604,8 @@ public abstract class GameManager
 			out = LevelUpStat.DEFENSE;
 			break;
 		}
-		
+
 		return out;
 	}
-	
+
 }

@@ -22,7 +22,7 @@ import model.Team;
 public class StadiumView extends JPanel {
 
 	private static final long serialVersionUID = 6012771276554788813L;
-	
+
 	private GameManager gameManager = GameManager.getInstance();
 
 	private JPanel teamsPanel;
@@ -35,7 +35,7 @@ public class StadiumView extends JPanel {
 	public StadiumView() {
 		setName("Stadium");
 		setLayout(new BorderLayout());
-		
+
 		add(new HeaderPanel("Select a team to start a match against", true), BorderLayout.NORTH);
 		addTeamsPanel();
 		addBottomPanel();
@@ -53,7 +53,7 @@ public class StadiumView extends JPanel {
 			addTeamToPanel(team);
 		}
 	}
-	
+
 	/**
 	 * Add the team as a panel to the teams panel
 	 */
@@ -61,11 +61,11 @@ public class StadiumView extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setOpaque(false);
 		panel.setLayout(new BorderLayout());
-		
+
 		// Team name
 		HeaderPanel nameLabel = new HeaderPanel(team.getName(), true);
 		panel.add(nameLabel, BorderLayout.NORTH);
-		
+
 		// Team champions
 		JPanel championsPanel = new JPanel(new FlowLayout());
 		championsPanel.setOpaque(false);
@@ -82,7 +82,7 @@ public class StadiumView extends JPanel {
 			championsPanel.add(card);
 		}
 		panel.add(championsPanel, BorderLayout.CENTER);
-		
+
 		// Fight team button
 		JPanel fightPanel = new JPanel();
 		fightPanel.setOpaque(false);
@@ -90,17 +90,17 @@ public class StadiumView extends JPanel {
 		JButton fightButton = new JButton("Fight " + team.getName());
 		fightButton.setFont(Configuration.HEADER_FONT);
 		fightButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gameManager.startMatchSetup(team);
 			}
 		});
 		fightPanel.add(fightButton);
-		
+
 		teamsPanel.add(panel);
 	}
-	
+
 	public void addBottomPanel() {
 		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		bottomPanel.setOpaque(false);
@@ -112,16 +112,16 @@ public class StadiumView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				gameManager.finishedWeek();
 			}
-			
+
 		});
 		bottomPanel.add(byeButton);
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
-	    super.paintComponent(g);
-	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
-        g.drawImage(icon.getImage(), 0, yPos, null);
+		super.paintComponent(g);
+		int yPos = (GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2;
+		g.drawImage(icon.getImage(), 0, yPos, null);
 	}
 
 }

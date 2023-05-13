@@ -19,36 +19,35 @@ import model.Team;
 class TeamTest {
 
 	private Team testTeam;
-	
+
 	@BeforeEach
-	void setup()
-	{
+	void setup() {
 		// Reset test team
-		
-		ArrayList<Champion> champions = new ArrayList<Champion>();
-		
+
+		ArrayList<Champion> champions = new ArrayList<>();
+
 		champions.add(new CharlesDarwin());
 		champions.add(new SunTzu());
 		champions.add(new QueenVictoria());
 		champions.add(new StephenHawking());
-		
+
 		testTeam = new Team(false, "", champions);
 	}
-	
+
 	@Test
 	void testAddMoney() {
-		
+
 		assertEquals(testTeam.getMoney(), 100f);
-		
+
 		testTeam.addMoney(50f);
-		
+
 		assertEquals(testTeam.getMoney(), 150f);
 	}
 
 	@Test
 	void testAddScore() {
 		assertEquals(testTeam.getScore(), 0);
-		
+
 		testTeam.addScore(7);
 
 		assertEquals(testTeam.getScore(), 7);
@@ -68,9 +67,9 @@ class TeamTest {
 	void testHasMoney() {
 
 		// Assumes starting with 100 money
-		
+
 		assertEquals(testTeam.hasMoney(10), true);
-		
+
 		assertEquals(testTeam.hasMoney(100), true);
 
 		assertEquals(testTeam.hasMoney(10000), false);
@@ -79,28 +78,26 @@ class TeamTest {
 	@Test
 	void testGetChampions3() {
 		assertEquals(testTeam.getChampions().size(), 4);
-		
+
 		try {
 			testTeam.addChampion(new Confucius());
-		}
-		catch (FullTeamException e) {
+		} catch (FullTeamException e) {
 			e.printStackTrace();
 		}
-		
+
 		assertEquals(testTeam.getChampions().size(), 5);
 	}
 
 	@Test
 	void testAddChampion() {
 		assertEquals(testTeam.getChampions().size(), 4);
-		
+
 		try {
 			testTeam.addChampion(new Confucius());
-		}
-		catch (FullTeamException e) {
+		} catch (FullTeamException e) {
 			e.printStackTrace();
 		}
-		
+
 		assertEquals(testTeam.getChampions().size(), 5);
 	}
 

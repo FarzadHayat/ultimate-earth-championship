@@ -103,7 +103,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 	// Constructor:
 	/**
 	 * Constructor for champion Class
-	 * 
+	 *
 	 * @param name              The name of the champion
 	 * @param staminaBoost      Stat which modifies the maximum stamina of the
 	 *                          champion
@@ -144,7 +144,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Gets name of champion
-	 * 
+	 *
 	 * @return the name of the champion
 	 */
 	@Override
@@ -154,7 +154,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Sets the name of the champion
-	 * 
+	 *
 	 * @param name the new name
 	 */
 	public void setName(String name) {
@@ -163,7 +163,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Gets the stamina of the champion
-	 * 
+	 *
 	 * @return the stamina of the champion
 	 */
 	public float getStamina() {
@@ -172,7 +172,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Sets the stamina of the champion to a specific amount
-	 * 
+	 *
 	 * @param newStamina the value stamina should be updated to
 	 */
 	public void setStamina(float newStamina) {
@@ -181,7 +181,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Changes the stamina of the champion by a specific amount
-	 * 
+	 *
 	 * @param staminaChange the amount added to stamina, clamped by maxStamina
 	 */
 	public void addStamina(float staminaChange) {
@@ -194,7 +194,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Gets the maximum stamina of the champion
-	 * 
+	 *
 	 * @return the maximum stamina of the champion
 	 */
 	public float getMaxStamina() {
@@ -203,7 +203,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Adds to the champions maximum stamina by a provided amount
-	 * 
+	 *
 	 * @param staminaChange amount to be added to the maximum stamina
 	 */
 	public void addMaxStamina(float staminaChange) {
@@ -212,7 +212,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Gets the champions regen
-	 * 
+	 *
 	 * @return the champions regen
 	 */
 	public float getRegen() {
@@ -221,7 +221,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Increases the champions regen
-	 * 
+	 *
 	 * @param amount The amount to increase champions regen
 	 */
 	public void changeRegen(float amount) {
@@ -230,7 +230,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Gets the offense stat
-	 * 
+	 *
 	 * @return The offense stat
 	 */
 	public int getOffense() {
@@ -239,7 +239,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Changes the offense stat
-	 * 
+	 *
 	 * @param change amount to add to the offense stat
 	 */
 	public void changeOffense(int change) {
@@ -248,7 +248,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Gets the defense stat
-	 * 
+	 *
 	 * @return the defense stat
 	 */
 	public int getDefense() {
@@ -257,7 +257,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Adds to the defense stat
-	 * 
+	 *
 	 * @param change the amount to add to the defense stat
 	 */
 	public void changeDefense(int change) {
@@ -266,7 +266,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Gets the champions current level
-	 * 
+	 *
 	 * @return the champions level
 	 */
 	public int getLevel() {
@@ -276,7 +276,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 	/**
 	 * Gives the champion a certain amount of XP, then checks if the champion has
 	 * leveled up
-	 * 
+	 *
 	 * @param amount XP to add
 	 */
 	public void giveXP(float amount) {
@@ -376,7 +376,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Returns the damage dealt by the champion in an attack
-	 * 
+	 *
 	 * @return the damage dealt by the champion in an attack
 	 */
 	public float getDamage() {
@@ -386,7 +386,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Returns the champions weapon
-	 * 
+	 *
 	 * @return The champions weapon
 	 */
 	public Weapon getWeapon() {
@@ -395,7 +395,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Set the champion weapon to the given weapon
-	 * 
+	 *
 	 * @return weapon the new weapon to set
 	 */
 	public void setWeapon(Weapon weapon) {
@@ -411,7 +411,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Gives the champion a new weapon
-	 * 
+	 *
 	 * @param newWeapon The weapon given to this champion
 	 */
 	public void addWeapon(Weapon newWeapon) {
@@ -420,7 +420,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Set the value of image
-	 * 
+	 *
 	 * @param newImage the new value of image
 	 */
 	public void setImage(ImageIcon newImage) {
@@ -429,7 +429,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 	/**
 	 * Get the value of image
-	 * 
+	 *
 	 * @return the value of image
 	 */
 	@Override

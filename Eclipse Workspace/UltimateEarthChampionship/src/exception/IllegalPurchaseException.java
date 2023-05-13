@@ -7,8 +7,8 @@ public class IllegalPurchaseException extends Exception {
 	public IllegalPurchaseException() {
 		super();
 	}
-	
+
 	public IllegalPurchaseException(String message) {
 		super(message);
-	} 
+	}
 }

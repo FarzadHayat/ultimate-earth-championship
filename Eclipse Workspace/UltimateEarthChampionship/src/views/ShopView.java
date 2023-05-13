@@ -17,25 +17,25 @@ import model.Weapon;
 public class ShopView extends JPanel {
 
 	private static final long serialVersionUID = 2101264902458190410L;
-	
+
 	private GameManager gameManager = GameManager.getInstance();
 
 	private JPanel mainPanel;
 
 	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "shop.jpg");
-	
+
 	/**
 	 * Create the panel.
 	 */
 	public ShopView() {
 		setName("Market");
 		setLayout(new GridBagLayout());
-		
+
 		mainPanel = new JPanel();
 		mainPanel.setOpaque(false);
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		add(mainPanel);
-		
+
 		addChampionsHeader();
 		addAvailableChampionsPanel();
 		addWeaponsHeader();
@@ -91,9 +91,9 @@ public class ShopView extends JPanel {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-	    super.paintComponent(g);
-	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
-        g.drawImage(icon.getImage(), 0, yPos, null);
+		super.paintComponent(g);
+		int yPos = (GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2;
+		g.drawImage(icon.getImage(), 0, yPos, null);
 	}
-	
+
 }

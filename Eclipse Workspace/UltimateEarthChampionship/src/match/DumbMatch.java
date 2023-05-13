@@ -9,123 +9,108 @@ import model.Team;
 
 public class DumbMatch extends Match {
 
-	public DumbMatch(Team team1, Team team2)
-	{
+	public DumbMatch(Team team1, Team team2) {
 		super(team1, team2);
 	}
-	
+
 	@Override
 	public MatchResult getMatchResult() {
-		
+
 		ArrayList<Champion> team1Champs = team1.getChampions();
 		ArrayList<Champion> team2Champs = team2.getChampions();
-		
+
 		// Prepare a best of 3 match...
 		int team1Score = 0;
 		int team2Score = 0;
-		
+
 		int roundNumber = -1;
-		
+
 		boolean matchRunning = true;
-		
-		while (matchRunning)
-		{
+
+		while (matchRunning) {
 			roundNumber += 1;
-			
-			if (team1Score == 2)
-			{
+
+			if (team1Score == 2) {
 				// team 1 wins match
 				return matchOver(team1, team2);
 			}
-			
-			if (team2Score == 2)
-			{
+
+			if (team2Score == 2) {
 				// team2 wins match
 				return matchOver(team2, team1);
 			}
-			
+
 			Champion team1Champ = team1Champs.get(roundNumber);
 			Champion team2Champ = team2Champs.get(roundNumber);
-			
+
 			Champion winner = fight(team1Champ, team2Champ);
-			
-			if (winner == team1Champ)
-			{
+
+			if (winner == team1Champ) {
 				// team 1 wins round
 				team1Score += 1;
-			}
-			else
-			{
+			} else {
 				// team 2 wins round
 				team2Score += 1;
 			}
 		}
-		
+
 		return null;
 	}
-	
-	private Champion fight(Champion champ1, Champion champ2)
-	{
+
+	private Champion fight(Champion champ1, Champion champ2) {
 		boolean fighting = true;
-		
+
 		Random rand = new Random();
 		boolean team1Attacker = rand.nextBoolean(); // Get random boolean
-		
-		while(fighting)
-		{
+
+		while (fighting) {
 			Champion attacker = null;
 			Champion defender = null;
-			
-			if (team1Attacker)
-			{
+
+			if (team1Attacker) {
 				team1Attacker = false;
 				// team 1 champion attacks
 				attacker = champ1;
 				defender = champ2;
-			}
-			else
-			{
+			} else {
 				team1Attacker = true;
 				// team 2 champion attacks
 				attacker = champ2;
 				defender = champ1;
 			}
-			
+
 			// Find possible damage if the attacker wins
 			float damage = attacker.getDamage();
-			
+
 			// Find winner in the fight
 			Champion winner = combat(attacker, defender);
-			
-			
-			if (winner == defender)
-			{
+
+			if (winner == defender) {
 				if (Configuration.DEBUG) {
-					System.out.println("DEBUG: " + defender.getName() + " succesfully dodges " + attacker.getName() + "'s attack!");
+					System.out.println("DEBUG: " + defender.getName() + " succesfully dodges " + attacker.getName()
+							+ "'s attack!");
 				}
 				// Defender dodges!
 				defender.giveXP(damage);
-			}
-			else
-			{
+			} else {
 				if (Configuration.DEBUG) {
-					System.out.println("DEBUG: " + attacker.getName() + " succesfully hits " + defender.getName() + " for " + damage + " damage!");
+					System.out.println("DEBUG: " + attacker.getName() + " succesfully hits " + defender.getName()
+							+ " for " + damage + " damage!");
 				}
 				attacker.giveXP(damage);
 				defender.addStamina(-damage);
-				
+
 				// Check for stamina
-				if (defender.getStamina() <= 0)
-				{
+				if (defender.getStamina() <= 0) {
 					if (Configuration.DEBUG) {
 						System.out.println("DEBUG" + defender.getName() + " has been knocked out!");
 					}
 					return attacker;
 				}
 			}
-			
+
 		}
-		
+
 		return null;
 	}
 

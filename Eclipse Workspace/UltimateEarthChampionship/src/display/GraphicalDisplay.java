@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 import events.RandomEventInfo;
 import manager.GameManager;
@@ -24,37 +25,36 @@ public class GraphicalDisplay implements DisplayStrategy {
 	private JFrame frame;
 
 	private GameManager gameManager = GameManager.getInstance();
-	
+
 	public static final int WIDTH = 1600;
 	public static final int HEIGHT = 900;
 
 	/**
 	 * Create the application.
 	 */
-	public GraphicalDisplay()
-	{
+	public GraphicalDisplay() {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize()
-	{
+	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setFont(new Font("Ubuntu", Font.PLAIN, 12));
 		frame.setTitle("Ultimate Earth Championship");
 		frame.setBounds(100, 100, WIDTH, HEIGHT);
 		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
-	
+
 	/**
 	 * Paint the given view onto the frame's content pane.
+	 *
 	 * @param view the view to display on the screen
 	 */
-	public void displayView(Container view) {		
+	public void displayView(Container view) {
 		frame.setContentPane(view);
 		frame.setVisible(true);
 	}
@@ -83,7 +83,7 @@ public class GraphicalDisplay implements DisplayStrategy {
 		TabbedView tabbedView = new TabbedView();
 		displayView(tabbedView);
 		tabbedView.showShopView();
-	
+
 	}
 
 	@Override
@@ -98,7 +98,6 @@ public class GraphicalDisplay implements DisplayStrategy {
 		ChampionSetupView championSetupView = new ChampionSetupView();
 		displayView(championSetupView);
 	}
-	
 
 	@Override
 	public void displayWeaponSetup() {
@@ -109,48 +108,45 @@ public class GraphicalDisplay implements DisplayStrategy {
 	@Override
 
 	public void displayLiveMatch(LiveMatch match) {
-		
+
 		MatchView matchView = new MatchView(match);
 		displayView(matchView);
-		
+
 	}
 
 	@Override
 	public void displayMatchResults(MatchResult matchResult) {
-		String text = "";
+		StringBuilder text = new StringBuilder();
 		if (matchResult.winningTeam == gameManager.getPlayerTeam()) {
 			double winningMoneyRounded = Math.round(matchResult.winningTeamMoney * 100.0) / 100.0;
 			double winningScoreRounded = Math.round(matchResult.winningTeamScore * 100.0) / 100.0;
-			text += "You have won the match! Money awarded: " + winningMoneyRounded
-					+ " Score awarded: " + winningScoreRounded;
-		}
-		else {
+			text.append("You have won the match! Money awarded: ").append(winningMoneyRounded)
+					.append(" Score awarded: ").append(winningScoreRounded);
+		} else {
 			double losingMoneyRounded = Math.round(matchResult.losingTeamMoney * 100.0) / 100.0;
 			double losingScoreRounded = Math.round(matchResult.losingTeamScore * 100.0) / 100.0;
-			text += "You have lost the match! Money awarded: " + losingMoneyRounded
-					+ " Score awarded: " + losingScoreRounded;
+			text.append("You have lost the match! Money awarded: ").append(losingMoneyRounded)
+					.append(" Score awarded: ").append(losingScoreRounded);
 		}
-		JOptionPane.showMessageDialog(frame, text);
+		JOptionPane.showMessageDialog(frame, text.toString());
 	}
 
 	@Override
 	public void displayWeekResults(ArrayList<RandomEventInfo> randomEvents) {
-		String weekResults = String.format("You have reached the end of week %s.\n"
-				+ "Your team will now rest back to full stamina.",
+		String weekResults = String.format(
+				"You have reached the end of week %s.\n" + "Your team will now rest back to full stamina.",
 				String.valueOf(gameManager.getGameEnvironment().getCurrentWeek()));
 		JOptionPane.showMessageDialog(frame, weekResults, "WEEK RESULTS", JOptionPane.INFORMATION_MESSAGE);
 		for (RandomEventInfo randomEvent : randomEvents) {
-			JOptionPane.showMessageDialog(frame, randomEvent.description + "\n"
-					+ randomEvent.effectString, randomEvent.name, JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, randomEvent.description + "\n" + randomEvent.effectString,
+					randomEvent.name, JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
 	@Override
 	public void displayGameResults() {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
 
 }

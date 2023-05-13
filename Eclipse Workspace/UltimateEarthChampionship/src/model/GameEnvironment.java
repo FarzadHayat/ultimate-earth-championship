@@ -17,47 +17,43 @@ import exception.GameFinishedException;
 import manager.GameManager;
 
 public class GameEnvironment {
-	
+
 	/**
 	 * The current week, starting from 1
 	 */
 	private int currentWeek;
-	
+
 	/**
-	 * The maximum number of weeks, current week is greater than maxWeek, the game is over
+	 * The maximum number of weeks, current week is greater than maxWeek, the game
+	 * is over
 	 */
 	private int maxWeek;
-	
-	
+
 	/**
 	 * List of all random events in the game
 	 */
 	private ArrayList<RandomEvent> events;
-	
-	public int getCurrentWeek()
-	{
+
+	public int getCurrentWeek() {
 		return currentWeek;
 	}
-	
-	public int getMaxWeeks()
-	{
+
+	public int getMaxWeeks() {
 		return maxWeek;
 	}
-	
-	public void setMaxWeeks(int weekNum)
-	{
+
+	public void setMaxWeeks(int weekNum) {
 		maxWeek = weekNum;
 	}
-	
+
 	/**
 	 * Finds the number of weeks remaining, will return a 0 on the last week
+	 *
 	 * @return The number of weeks remaining
 	 */
-	public int getWeeksRemaining()
-	{
+	public int getWeeksRemaining() {
 		return maxWeek - currentWeek;
 	}
-	
 
 	/**
 	 * Constructor class
@@ -65,16 +61,15 @@ public class GameEnvironment {
 	public GameEnvironment() {
 		currentWeek = 1;
 		maxWeek = 99;
-		events = new ArrayList<RandomEvent>();
+		events = new ArrayList<>();
 		getAllEvents();
 	}
-	
+
 	/**
 	 * Gets all the events in the game
 	 */
-	private void getAllEvents()
-	{
-		events = new ArrayList<RandomEvent>();
+	private void getAllEvents() {
+		events = new ArrayList<>();
 		// For now: Just manually add them :(
 		events.add(new DonationEvent());
 		events.add(new TVShowEvent());
@@ -85,71 +80,64 @@ public class GameEnvironment {
 		events.add(new ChampionJoins());
 		events.add(new ChampionQuits());
 	}
-	
 
 	/**
-	 * Goes through each event and checks for its chance of occurring,
-	 * If so the event if run and if the event occurs on the player team,
-	 * it is added to the returned list which can then be passed onto the GUI.
+	 * Goes through each event and checks for its chance of occurring, If so the
+	 * event if run and if the event occurs on the player team, it is added to the
+	 * returned list which can then be passed onto the GUI.
+	 *
 	 * @return
 	 */
-	public ArrayList<RandomEventInfo> generateWeeklyEvents()
-	{
-		ArrayList<RandomEventInfo> weeklyEvents = new ArrayList<RandomEventInfo>();
-		
-		for(RandomEvent event : events)
-		{
-			if (chanceCheck(event.getChanceOfOccuring()))
-			{
+	public ArrayList<RandomEventInfo> generateWeeklyEvents() {
+		ArrayList<RandomEventInfo> weeklyEvents = new ArrayList<>();
+
+		for (RandomEvent event : events) {
+			if (chanceCheck(event.getChanceOfOccuring())) {
 				// Event occurs:
 				Team randomTeam = getRandomTeam();
 				RandomEventInfo newEvent = event.runEvent(randomTeam);
 				// We run the event to cause the logic to occur
-				
-				if (randomTeam.isPlayerTeam())
-				{
+
+				if (randomTeam.isPlayerTeam()) {
 					// If this event happens to the player team...
 					// Note it down
 					weeklyEvents.add(newEvent);
 				}
-			}
-			else 
-			{
+			} else {
 				// Event doesn't occur
 			}
 		}
-		
+
 		return weeklyEvents;
 	}
-	
+
 	/**
-	 * Gets a random team 
+	 * Gets a random team
+	 *
 	 * @return a random team
 	 */
-	public Team getRandomTeam()
-	{
+	public Team getRandomTeam() {
 		Random random = new Random();
 		int teamInt = random.nextInt(GameManager.getInstance().getTeams().size());
 		return GameManager.getInstance().getTeams().get(teamInt);
 	}
-	
+
 	/**
 	 * Returns true or false depending on the provided percentage chance
+	 *
 	 * @param chance the percent chance of true being returned
 	 * @return True or False
 	 */
-	private boolean chanceCheck(int chance)
-	{
+	private boolean chanceCheck(int chance) {
 		int random = (int) (Math.random() * 100);
-		
+
 		return (chance >= random);
 	}
-	
+
 	public void nextWeek() throws GameFinishedException {
 		if (currentWeek == maxWeek) {
 			throw new GameFinishedException();
-		}
-		else {
+		} else {
 			currentWeek += 1;
 		}
 	}

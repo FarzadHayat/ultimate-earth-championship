@@ -21,31 +21,30 @@ import story.Cutscene;
 import story.CutsceneSlide;
 
 public class CutsceneView extends JPanel {
-	
+
 	private static final long serialVersionUID = -3705567359135004719L;
 
 	private String slideText;
 	private String slideImagePath;
-	
+
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 	private Cutscene cutscene;
-	
+
 	private JTextPane mainText;
 	private JButton continueButton;
 
 	private ImageIcon icon;
-	
+
 	public CutsceneView(Cutscene cutscene) {
 		this.cutscene = cutscene;
-		
+
 		initialize();
 		redrawPanel();
 	}
 
-	private void initialize()
-	{
+	private void initialize() {
 		setLayout(new BorderLayout(0, 0));
-		
+
 		// Text Area:
 		JPanel textPanel = new JPanel(new GridBagLayout());
 		mainText = new JTextPane();
@@ -54,76 +53,68 @@ public class CutsceneView extends JPanel {
 		mainText.setForeground(Color.white);
 		mainText.setOpaque(true);
 		mainText.setBackground(Color.darkGray);
-		mainText.setPreferredSize(new Dimension((int) (GraphicalDisplay.WIDTH / 2), 100));
+		mainText.setPreferredSize(new Dimension(GraphicalDisplay.WIDTH / 2, 100));
 		textPanel.add(mainText);
 		textPanel.setOpaque(false);
 		add(textPanel, BorderLayout.CENTER);
-		
+
 		// Panel to push button to bottom center of screen
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setOpaque(false);
 		add(bottomPanel, BorderLayout.SOUTH);
-		
+
 		// Button...
 		continueButton = new JButton("Continue...");
 		continueButton.setFont(Configuration.HEADER_FONT);
 		continueButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				buttonPressed();
 			}
 		});
 		bottomPanel.add(continueButton);
 	}
-	
-	public void getNextSlide()
-	{
+
+	public void getNextSlide() {
 		CutsceneSlide slide = cutscene.nextSlide();
 		slideText = slide.getText();
 		slideImagePath = slide.getImagePath();
 		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + slideImagePath);
-		
-		if (cutscene.checkNextSlide() == null)
-		{
+
+		if (cutscene.checkNextSlide() == null) {
 			continueButton.setText("Go to setup");
-		}
-		else {
+		} else {
 			continueButton.setText("Continue...");
 		}
 	}
-	
+
 	/**
 	 * Updates the text and images on the panel
 	 */
-	public void redrawPanel()
-	{
+	public void redrawPanel() {
 		getNextSlide();
-		
+
 		mainText.setText(slideText);
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
-	    super.paintComponent(g);
-	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
-        g.drawImage(icon.getImage(), 0, yPos, null);
+		super.paintComponent(g);
+		int yPos = (GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2;
+		g.drawImage(icon.getImage(), 0, yPos, null);
 	}
 
-	private void buttonPressed()
-	{
+	private void buttonPressed() {
 		// check if next slide is null
-		if (cutscene.checkNextSlide() == null)
-		{
+		if (cutscene.checkNextSlide() == null) {
 			// Cutscene finished, tell manager
 			gameManager.finishedCutscene();
 			cutscene.nextSlide(); // Make the cutscene iterate again (to reset it back to 0)
-		}
-		else 
-		{
+		} else {
 			// Tell manager to redraw me
 			gameManager.repaintCutscene();
 		}
-		
+
 	}
-	
+
 }

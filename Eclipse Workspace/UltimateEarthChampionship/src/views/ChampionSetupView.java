@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import display.GraphicalDisplay;
 import exception.FullTeamException;
@@ -28,18 +29,18 @@ import model.Configuration;
 public class ChampionSetupView extends JPanel {
 
 	private static final long serialVersionUID = -1352915737619575543L;
-	
+
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 
 	private ImageIcon icon;
-	
+
 	/**
 	 * Create the panel.
 	 */
 	public ChampionSetupView() {
 		setLayout(new BorderLayout());
 		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "championsetup.jpg");
-		
+
 		addBackButton();
 		addChampionsPanel();
 		addLanesPanel();
@@ -53,7 +54,7 @@ public class ChampionSetupView extends JPanel {
 		JButton backButton = new JButton("Go back to the Stadium");
 		backButton.setFont(Configuration.HEADER_FONT);
 		backButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gameManager.backFromChampionSetup();
@@ -79,15 +80,16 @@ public class ChampionSetupView extends JPanel {
 			}
 		}
 	}
-	
+
 	private void addChampionToPanel(Champion champion, JPanel panel) {
 		PurchasableCard card = new ChampionCard(champion);
 		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions();
 		card.addStatsPanel();
 		card.addMouseListener(new MouseListener() {
 			@Override
-			public void mouseReleased(MouseEvent e) {}
-			
+			public void mouseReleased(MouseEvent e) {
+			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (chosenChampions.contains(champion)) {
@@ -97,11 +99,11 @@ public class ChampionSetupView extends JPanel {
 						gameManager.getPlayerTeam().addChosenChampion(champion);
 					} catch (FullTeamException e1) {
 						JOptionPane.showMessageDialog(getParent(), e1.getMessage());
-					};
+					}
 				}
 				gameManager.repaintChampionSetup();
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if (chosenChampions.contains(champion)) {
@@ -110,14 +112,15 @@ public class ChampionSetupView extends JPanel {
 					card.unselected();
 				}
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				card.hovered();
 			}
-			
+
 			@Override
-			public void mouseClicked(MouseEvent e) {}
+			public void mouseClicked(MouseEvent e) {
+			}
 		});
 		if (chosenChampions.contains(champion)) {
 			card.selected();
@@ -130,17 +133,17 @@ public class ChampionSetupView extends JPanel {
 		lanesPanel.setOpaque(false);
 		add(lanesPanel, BorderLayout.CENTER);
 		for (int i = 0; i < Configuration.NUM_CHOSEN_CHAMPIONS; i++) {
-			JLabel label = new JLabel("Lane " + String.valueOf(i+1), JLabel.RIGHT);
+			JLabel label = new JLabel("Lane " + String.valueOf(i + 1), SwingConstants.RIGHT);
 			label.setFont(Configuration.HEADER_FONT);
 			label.setForeground(Color.white);
 			lanesPanel.add(label);
 		}
 	}
-	
+
 	private void addChosenChampionsPanel() {
 		JPanel chosenChampionsPanel = new JPanel(new GridLayout(0, 1, 20, 20));
 		chosenChampionsPanel.setOpaque(false);
-		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions(); 
+		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions();
 		add(chosenChampionsPanel, BorderLayout.EAST);
 		for (int i = 0; i < Configuration.NUM_CHOSEN_CHAMPIONS; i++) {
 			PurchasableCard card;
@@ -155,33 +158,34 @@ public class ChampionSetupView extends JPanel {
 			chosenChampionsPanel.add(card);
 		}
 	}
-	
+
 	private void addNextButton() {
 		JPanel nextButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		nextButtonPanel.setOpaque(false);
 		JButton startButton = new JButton("Go to Weapon Setup");
 		startButton.setFont(Configuration.HEADER_FONT);
 		startButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (gameManager.getPlayerTeam().getChosenChampions().size() < Configuration.NUM_CHOSEN_CHAMPIONS) {
-					JOptionPane.showMessageDialog(getParent(), "Team roster is not complete!\nSelect more champions to continue.");
+					JOptionPane.showMessageDialog(getParent(),
+							"Team roster is not complete!\nSelect more champions to continue.");
 				} else {
 					gameManager.finishedChampionSetup();
 				}
-				
+
 			}
 		});
 		nextButtonPanel.add(startButton);
 		add(nextButtonPanel, BorderLayout.SOUTH);
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
-	    super.paintComponent(g);
-	    int yPos = (int) ((GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2);
-        g.drawImage(icon.getImage(), 0, yPos, null);
+		super.paintComponent(g);
+		int yPos = (GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2;
+		g.drawImage(icon.getImage(), 0, yPos, null);
 	}
 
 }

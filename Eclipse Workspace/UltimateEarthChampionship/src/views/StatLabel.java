@@ -50,7 +50,7 @@ public class StatLabel extends JPanel {
 
 	/**
 	 * Add a value label to the stat label.
-	 * 
+	 *
 	 * @param value the value of the value label
 	 */
 	private void addValueLabel(String value) {
@@ -62,7 +62,7 @@ public class StatLabel extends JPanel {
 	/**
 	 * Add an image label to the stat label if the image file is found or an empty
 	 * image otherwise.
-	 * 
+	 *
 	 * @param imageFileName the name of the image file including the file extension
 	 *                      located in Configuration.ICON_IMAGE_FOLDER_PATH
 	 */

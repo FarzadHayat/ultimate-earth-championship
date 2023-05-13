@@ -48,7 +48,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Creates a new Weapon object with the specified attributes.
-	 * 
+	 *
 	 * @param name              the name of the weapon
 	 * @param damageMultiplier  the amount that damage dealt is multiplied by
 	 * @param offenseBoost      the amount of offense boost the weapon provides
@@ -80,7 +80,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Set the value of name
-	 * 
+	 *
 	 * @param newName the new value of name
 	 */
 	public void setName(String newName) {
@@ -89,7 +89,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Get the value of name
-	 * 
+	 *
 	 * @return the value of name
 	 */
 	@Override
@@ -99,7 +99,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Set the value of damageMultiplier
-	 * 
+	 *
 	 * @param newDamageBoost the new value of damageMultiplier
 	 */
 	public void setDamageMultiplier(int newDamageBoost) {
@@ -108,7 +108,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Get the value of damageMultiplier
-	 * 
+	 *
 	 * @return the value of damageMultiplier
 	 */
 	public float getDamageMultiplier() {
@@ -117,7 +117,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Set the value of offenseBoost
-	 * 
+	 *
 	 * @param newOffenseBoost the new value of offenseBoost
 	 */
 	public void setOffenseBoost(int newOffenseBoost) {
@@ -126,7 +126,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Get the value of offenseBoost
-	 * 
+	 *
 	 * @return the value of offenseBoost
 	 */
 	public int getOffenseBoost() {
@@ -135,7 +135,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Set the value of defenseBoost
-	 * 
+	 *
 	 * @param newDefenseBoost the new value of defenseBoost
 	 */
 	public void setdefenseBoost(int newDefenseBoost) {
@@ -144,7 +144,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Get the value of defenseBoost
-	 * 
+	 *
 	 * @return the value of defenseBoost
 	 */
 	public int getDefenseBoost() {
@@ -153,7 +153,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Set the value of price
-	 * 
+	 *
 	 * @param newPrice the new value of price
 	 */
 	public void setPrice(float newPrice) {
@@ -162,7 +162,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Get the value of price
-	 * 
+	 *
 	 * @return the value of price
 	 */
 	@Override
@@ -172,7 +172,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Set the value of priceChangeWeekly
-	 * 
+	 *
 	 * @param newPriceChangeWeekly the new value of priceChangeWeekly
 	 */
 	public void setPriceChangeWeekly(float newPriceChangeWeekly) {
@@ -181,7 +181,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Get the value of priceChangeWeekly
-	 * 
+	 *
 	 * @return the value of priceChangeWeekly
 	 */
 	public float getPriceChangeWeekly() {
@@ -190,7 +190,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Set the value of image
-	 * 
+	 *
 	 * @param newImage the new value of image
 	 */
 	public void setImage(ImageIcon newImage) {
@@ -199,7 +199,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Get the value of image
-	 * 
+	 *
 	 * @return the value of image
 	 */
 	@Override
@@ -214,7 +214,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	/**
 	 * returns true if this is the default weapon that all champions should equip on
 	 * creation.
-	 * 
+	 *
 	 * @return true if this is the default weapon for champions on creation
 	 */
 	public boolean isDefault() {
@@ -240,7 +240,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Returns a string representation of the Weapon.
-	 * 
+	 *
 	 * @return a string containing the weapon attributes
 	 */
 	@Override

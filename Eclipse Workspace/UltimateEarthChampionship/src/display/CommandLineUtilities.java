@@ -10,10 +10,11 @@ public abstract class CommandLineUtilities {
 
 	public static final String FILLER = "=";
 	public static final int LINE_WIDTH = 114;
-	
+
 	/**
 	 * Prints a view to the console.
-	 * @param title The title of the view.
+	 *
+	 * @param title   The title of the view.
 	 * @param content The content of the view.
 	 * @param options The options available in the view.
 	 */
@@ -23,38 +24,39 @@ public abstract class CommandLineUtilities {
 		printLine();
 		printOptions(options);
 	}
-	
+
 	/**
 	 * Prints a line of fillers to the console.
 	 */
 	public static void printLine() {
-		String text = "";
+		StringBuilder text = new StringBuilder();
 		for (int i = 0; i < LINE_WIDTH; i++) {
-			text += FILLER;
+			text.append(FILLER);
 		}
-		System.out.println(text);
+		System.out.println(text.toString());
 	}
-	
+
 	/**
 	 * Prints a title to the console.
+	 *
 	 * @param title The title to print.
 	 */
 	public static void printTitle(String title) {
-		int numberOfFillers = Integer.max((int) ((LINE_WIDTH - title.length() - 2) / 2), 0);
+		int numberOfFillers = Integer.max((LINE_WIDTH - title.length() - 2) / 2, 0);
 		String text = "";
 		for (int i = 0; i < numberOfFillers; i++) {
 			text += FILLER;
 		}
 		if (title.length() % 2 == 0) {
 			System.out.println(text + " " + title + " " + text);
-		}
-		else {
+		} else {
 			System.out.println(text + " " + title + " " + FILLER + text);
 		}
 	}
-	
+
 	/**
 	 * Prints a header to the console.
+	 *
 	 * @param title the title of the header.
 	 */
 	public static void printHeader(String title) {
@@ -62,10 +64,10 @@ public abstract class CommandLineUtilities {
 		printTitle(title);
 		printLine();
 	}
-	
-	
+
 	/**
 	 * Prints content to the console line by line.
+	 *
 	 * @param content The content to print.
 	 */
 	public static void printContent(ArrayList<String> content) {
@@ -73,21 +75,22 @@ public abstract class CommandLineUtilities {
 			System.out.println(line);
 		}
 	}
-	
+
 	/**
 	 * Prints options to the console line by line and numbered.
+	 *
 	 * @param options The options to print.
 	 */
 	public static void printOptions(ArrayList<String> options) {
 		for (int i = 0; i < options.size(); i++) {
-			System.out.println(String.valueOf(i+1) + " " + options.get(i));
+			System.out.println(String.valueOf(i + 1) + " " + options.get(i));
 		}
 	}
 
 	public static void printOption(int i, String prefix, String text) {
 		System.out.println(String.format("%s %s: %s", String.valueOf(i), prefix, text));
 	}
-	
+
 	public static void printTeams(ArrayList<Team> teams) {
 		for (int i = 0; i < teams.size(); i++) {
 			if (i != 0) {
@@ -96,29 +99,29 @@ public abstract class CommandLineUtilities {
 			CommandLineUtilities.printTeam(teams.get(i));
 		}
 	}
-	
+
 	private static void printTeam(Team team) {
 		System.out.println("TEAM NAME: " + team.getName());
 		CommandLineTable.printChampions(team.getChampions());
 	}
 
 	public static void printChampionOptions(String prefix, ArrayList<Champion> champions) {
-		
+
 		for (int i = 0; i < champions.size(); i++) {
-			printOption(i+1, prefix + " CHAMPION", champions.get(i).getName());
+			printOption(i + 1, prefix + " CHAMPION", champions.get(i).getName());
 		}
 	}
 
 	public static void printWeaponOptions(String prefix, ArrayList<Weapon> weapons) {
 		for (int i = 0; i < weapons.size(); i++) {
-			printOption(i+1, prefix + " WEAPON", weapons.get(i).getName());
+			printOption(i + 1, prefix + " WEAPON", weapons.get(i).getName());
 		}
 	}
-	
+
 	public static void printTeamOptions(ArrayList<Team> teams) {
 		for (int i = 0; i < teams.size(); i++) {
-			printOption(i+1, "FIGHT TEAM", teams.get(i).getName());
+			printOption(i + 1, "FIGHT TEAM", teams.get(i).getName());
 		}
 	}
-	
+
 }
