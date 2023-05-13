@@ -28,12 +28,12 @@ public class InfoPanel extends JPanel {
 		nameLabel.getValueLabel().setFont(Configuration.HEADER_FONT);
 		add(nameLabel);
 		
-		String moneyString = "Money: " + String.valueOf(gameManager.getPlayerTeam().getMoney());
+		String moneyString = "Money: " + String.valueOf(Math.round(gameManager.getPlayerTeam().getMoney() * 100.0) / 100.0);
 		StatLabel moneyLabel = new StatLabel("money", moneyString);
 		moneyLabel.getValueLabel().setFont(Configuration.HEADER_FONT);
 		add(moneyLabel);
 		
-		String scoreString = "Score: " + String.valueOf(gameManager.getPlayerTeam().getScore());
+		String scoreString = "Score: " + String.valueOf(Math.round(gameManager.getPlayerTeam().getScore() * 100.0) / 100.0);
 		StatLabel scoreLabel = new StatLabel("score", scoreString);
 		scoreLabel.getValueLabel().setFont(Configuration.HEADER_FONT);
 		add(scoreLabel);

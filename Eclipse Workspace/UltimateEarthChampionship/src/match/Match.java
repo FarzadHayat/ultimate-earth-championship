@@ -23,7 +23,7 @@ public abstract class Match {
 	protected Team team2;
 
 	/**
-	 * The amount of money the winningJ team earns, the losing team earns a fraction of this amount
+	 * The amount of money the winning team earns, the losing team earns a fraction of this amount
 	 */
 	protected float prizeMoney;
 	

@@ -447,10 +447,10 @@ public class LiveMatch extends Match implements ActionListener{
 			String hitString = "";
 			if (Fists.class.isInstance(attacker.getWeapon()))
 			{
-				hitString = attacker.getName() + " succesfully hits " + defender.getName() + " for " + (int) adjustedDamage + " damage!";
+				hitString = attacker.getName() + " succesfully hits " + defender.getName() + " for " + Math.ceil(adjustedDamage) + " damage!";
 			}
 			else {
-				hitString = attacker.getName() + " succesfully hits " + defender.getName() + " with a " + attacker.getWeapon().getName() + " for " + (int) adjustedDamage + " damage!";
+				hitString = attacker.getName() + " succesfully hits " + defender.getName() + " with a " + attacker.getWeapon().getName() + " for " + Math.ceil(adjustedDamage) + " damage!";
 			}
 			
 			matchView.showDialogue(hitString);

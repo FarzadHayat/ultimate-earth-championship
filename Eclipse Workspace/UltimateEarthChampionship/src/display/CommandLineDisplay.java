@@ -343,12 +343,16 @@ public class CommandLineDisplay implements DisplayStrategy {
 	public void displayMatchResults(MatchResult matchResult) {
 		String text = "";
 		if (matchResult.winningTeam == gameManager.getPlayerTeam()) {
-			text += "You have won the match! Money awarded: " + matchResult.winningTeamMoney
-					+ " Score awarded: " + matchResult.winningTeamScore;
+			double winningMoneyRounded = Math.round(matchResult.winningTeamMoney * 100.0) / 100.0;
+			double winningScoreRounded = Math.round(matchResult.winningTeamScore * 100.0) / 100.0;
+			text += "You have won the match! Money awarded: " + winningMoneyRounded
+					+ " Score awarded: " + winningScoreRounded;
 		}
 		else {
-			text += "You have lost the match! Money : " + matchResult.losingTeamMoney
-					+ " Score awarded: " + matchResult.losingTeamScore;
+			double losingMoneyRounded = Math.round(matchResult.losingTeamMoney * 100.0) / 100.0;
+			double losingScoreRounded = Math.round(matchResult.losingTeamScore * 100.0) / 100.0;
+			text += "You have lost the match! Money awarded: " + losingMoneyRounded
+					+ " Score awarded: " + losingScoreRounded;
 		}
 		System.out.println(text);
 	}

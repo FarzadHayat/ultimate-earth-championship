@@ -125,9 +125,9 @@ public class ChampionMatchCard extends JPanel{
 			
 			staminaBar.setVisible(true);
 			staminaBar.setMinimum(0);
-			int maxStamina = (int) champion.getMaxStamina();
+			int maxStamina = (int) Math.ceil(champion.getMaxStamina());
 			staminaBar.setMaximum(maxStamina);
-			int currentStamina = (int) champion.getStamina();
+			int currentStamina = (int) Math.ceil(champion.getStamina());
 			staminaBar.setValue(currentStamina);
 			staminaBar.setString(currentStamina + " / " + maxStamina);
 		}

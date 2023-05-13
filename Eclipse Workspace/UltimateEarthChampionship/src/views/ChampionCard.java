@@ -37,8 +37,8 @@ public class ChampionCard extends PurchasableCard {
 		statsPanel.setOpaque(false);
 		mainPanel.add(statsPanel, BorderLayout.EAST);
 		
-    	String staminaString = String.valueOf((int) champion.getStamina());
-    	String regenString = String.valueOf((int) champion.getRegen());
+    	String staminaString = String.valueOf(Math.ceil(champion.getStamina()));
+    	String regenString = String.valueOf(Math.ceil(champion.getRegen()));
     	String offenseString = String.valueOf(champion.getOffense());
     	String defenseString = String.valueOf(champion.getDefense());
     	
