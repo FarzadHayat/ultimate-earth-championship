@@ -25,7 +25,7 @@ public class TeamView extends JPanel {
 	
 	private JPanel mainPanel;
 
-	private ImageIcon icon;
+	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "team.jpg");
 	
 	/**
 	 * Create the panel.
@@ -33,10 +33,6 @@ public class TeamView extends JPanel {
 	public TeamView() {
 		setName("Club");
 		setLayout(new GridBagLayout());
-		
-		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "team.jpg");
-		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
-								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 		
 		mainPanel = new JPanel();
 		mainPanel.setOpaque(false);

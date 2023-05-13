@@ -81,10 +81,8 @@ public class CutsceneView extends JPanel {
 	{
 		CutsceneSlide slide = cutscene.nextSlide();
 		slideText = slide.getText();
-		slideImagePath = slide.getImage();
+		slideImagePath = slide.getImagePath();
 		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + slideImagePath);
-		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
-								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 		
 		if (cutscene.checkNextSlide() == null)
 		{

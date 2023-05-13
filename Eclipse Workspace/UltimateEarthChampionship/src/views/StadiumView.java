@@ -31,7 +31,7 @@ public class StadiumView extends JPanel {
 
 	private JPanel teamsPanel;
 
-	private ImageIcon icon;
+	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "stadium.jpg");
 
 	/**
 	 * Create the panel.
@@ -39,10 +39,6 @@ public class StadiumView extends JPanel {
 	public StadiumView() {
 		setName("Stadium");
 		setLayout(new BorderLayout());
-		
-		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "stadium.jpg");
-		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
-								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 		
 		add(new HeaderPanel("Select a team to start a match against", true), BorderLayout.NORTH);
 		addTeamsPanel();

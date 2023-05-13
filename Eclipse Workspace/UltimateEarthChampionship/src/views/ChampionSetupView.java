@@ -41,8 +41,6 @@ public class ChampionSetupView extends JPanel {
 	public ChampionSetupView() {
 		setLayout(new BorderLayout());
 		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "championsetup.jpg");
-		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
-								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 		
 		addBackButton();
 		addChampionsPanel();

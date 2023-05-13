@@ -16,7 +16,7 @@ public class CutsceneSlide {
 	private String text;
 	
 	/*
-	 * The image for the slide
+	 * The image path for the slide
 	 */
 	private String imagePath;
 	
@@ -33,7 +33,7 @@ public class CutsceneSlide {
 	 * Gets the image path
 	 * @return the image path of this cutscene slide
 	 */
-	public String getImage()
+	public String getImagePath()
 	{
 		return imagePath;
 	}

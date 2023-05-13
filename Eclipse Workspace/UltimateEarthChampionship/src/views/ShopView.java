@@ -23,7 +23,7 @@ public class ShopView extends JPanel {
 
 	private JPanel mainPanel;
 
-	private ImageIcon icon;
+	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "shop.jpg");
 	
 	/**
 	 * Create the panel.
@@ -31,10 +31,6 @@ public class ShopView extends JPanel {
 	public ShopView() {
 		setName("Market");
 		setLayout(new GridBagLayout());
-		
-		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "shop.jpg");
-		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
-								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 		
 		mainPanel = new JPanel();
 		mainPanel.setOpaque(false);

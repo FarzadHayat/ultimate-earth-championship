@@ -37,17 +37,13 @@ public class WeaponSetupView extends JPanel {
 	
 	private JPanel chosenPanel;
 
-	private ImageIcon icon;
+	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "weaponsetup.jpg");
 	
 	/**
 	 * Create the panel.
 	 */
 	public WeaponSetupView() {
 		setLayout(new BorderLayout());
-		
-		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "weaponsetup.jpg");
-		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
-								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 		
 		chosenPanel = new JPanel(new GridLayout(0, 2));
 		chosenPanel.setOpaque(false);

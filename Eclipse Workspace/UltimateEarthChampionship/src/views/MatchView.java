@@ -40,7 +40,7 @@ public class MatchView extends JPanel {
 	private JButton attackUpButton;
 	private JButton attackDownButton;
 
-	private ImageIcon icon;
+	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "match.jpg");
 	
 	/**
 	 * Create the panel.
@@ -50,10 +50,6 @@ public class MatchView extends JPanel {
 		match.setMatchView(this);
 		
 		setLayout(new BorderLayout(0, 0));
-		
-		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "match.jpg");
-		icon = new ImageIcon(icon.getImage().getScaledInstance(GraphicalDisplay.WIDTH,
-								GraphicalDisplay.WIDTH, Image.SCALE_SMOOTH));
 		
 		setupCenter();
 		
