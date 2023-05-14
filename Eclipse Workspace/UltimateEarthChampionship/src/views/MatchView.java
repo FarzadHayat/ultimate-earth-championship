@@ -22,6 +22,11 @@ import match.LiveMatch;
 import model.Champion;
 import model.Configuration;
 
+/**
+ * A panel to display the currently playing live match. This view interacts
+ * directly with the live match class to deliver interactive results using the
+ * player's input.
+ */
 public class MatchView extends JPanel {
 
 	private static final long serialVersionUID = -9204549187590810546L;
