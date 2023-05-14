@@ -19,14 +19,24 @@ import model.Champion;
 import model.Configuration;
 import model.Team;
 
+/**
+ * A panel to display the stadium. The stadium contains a list of AI teams the
+ * player can fight as well as a 'take a bye' option to skip the week.
+ */
 public class StadiumView extends JPanel {
 
 	private static final long serialVersionUID = 6012771276554788813L;
 
 	private GameManager gameManager = GameManager.getInstance();
 
+	/**
+	 * Panel to hold the teams
+	 */
 	private JPanel teamsPanel;
 
+	/**
+	 * Background image for the stadium
+	 */
 	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "stadium.jpg");
 
 	/**
@@ -41,6 +51,9 @@ public class StadiumView extends JPanel {
 		addBottomPanel();
 	}
 
+	/**
+	 * Create the teams panel and add the AI teams to it.
+	 */
 	private void addTeamsPanel() {
 		JPanel outerPanel = new JPanel(new GridBagLayout());
 		outerPanel.setOpaque(false);
@@ -55,7 +68,10 @@ public class StadiumView extends JPanel {
 	}
 
 	/**
-	 * Add the team as a panel to the teams panel
+	 * Add the team to the teams panel. The team panel shows the team's name, list
+	 * of champions, and a button to start a match.
+	 *
+	 * @param team the team to add to the teams panel
 	 */
 	public void addTeamToPanel(Team team) {
 		JPanel panel = new JPanel();
@@ -101,6 +117,10 @@ public class StadiumView extends JPanel {
 		teamsPanel.add(panel);
 	}
 
+	/**
+	 * Add the bottom panel. The bottom panel contains a button to 'take a bye'
+	 * option for the player team to skip fighting this week.
+	 */
 	public void addBottomPanel() {
 		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		bottomPanel.setOpaque(false);
@@ -117,6 +137,11 @@ public class StadiumView extends JPanel {
 		bottomPanel.add(byeButton);
 	}
 
+	/**
+	 * Paint the component then draw the background image onto the component.
+	 *
+	 * @param g the graphics object to draw onto
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

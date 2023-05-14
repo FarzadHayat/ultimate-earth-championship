@@ -10,7 +10,7 @@ public class Configuration {
 	/**
 	 * This class holds many base configuration values used in calculations across
 	 * the game This class also holds information regarding difficulty.
-	 * 
+	 *
 	 * Follows the singleton design pattern
 	 */
 
@@ -176,6 +176,11 @@ public class Configuration {
 	public static final int NUM_WEAPONS = 9;
 
 	/**
+	 * The number of columns of the match grid.
+	 */
+	public static final int NUM_MATCH_COLUMNS = 7;
+
+	/**
 	 * The starting money for each team.
 	 */
 	public final float STARTING_MONEY = 100f;
@@ -203,8 +208,8 @@ public class Configuration {
 	/**
 	 * List of possible names for enemy teams
 	 */
-	public final ArrayList<String> AI_TEAM_NAMES = new ArrayList<>(List.of("Team Butter", "Team Green",
-			"Team Duty", "Team Truffle", "Team Garfield", "Team Buxley", "Team Brisbane", "Team Eagle"));
+	public final ArrayList<String> AI_TEAM_NAMES = new ArrayList<>(List.of("Team Butter", "Team Green", "Team Duty",
+			"Team Truffle", "Team Garfield", "Team Buxley", "Team Brisbane", "Team Eagle"));
 
 	/**
 	 * The font family for the graphical game.

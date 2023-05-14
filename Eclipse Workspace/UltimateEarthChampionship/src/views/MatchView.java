@@ -26,22 +26,31 @@ public class MatchView extends JPanel {
 
 	private static final long serialVersionUID = -9204549187590810546L;
 
+	/**
+	 * Reference to the live match instance
+	 */
 	private LiveMatch match;
 
+	// Represents the champion who is next to play their turn.
 	private JPanel selectedChampionPanel;
-
 	private Champion selectedChampion;
 
+	// Action buttons for the currently selected champion
 	private JButton attackButton;
 	private JButton waitButton;
 	private JButton retreatButton;
 	private JButton attackUpButton;
 	private JButton attackDownButton;
 
+	/**
+	 * Background image for the match
+	 */
 	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "match.jpg");
 
 	/**
-	 * Create the panel.
+	 * Create the panel and start the match.
+	 *
+	 * @param match the live match to display
 	 */
 	public MatchView(LiveMatch match) {
 		this.match = match;
@@ -62,7 +71,8 @@ public class MatchView extends JPanel {
 	}
 
 	/**
-	 * Sets up the header
+	 * Sets up the header. The header contains important information about the
+	 * match.
 	 */
 	public void setupHeader() {
 		JPanel topPanel = new JPanel();
@@ -94,30 +104,29 @@ public class MatchView extends JPanel {
 	}
 
 	/**
-	 * Sets up the center panel
+	 * Sets up the center panel. The center panel contains the main grid that the
+	 * champions can move and attack on.
 	 */
 	public void setupCenter() {
 		JPanel centerPanel = new JPanel();
 		centerPanel.setOpaque(false);
-		centerPanel.setBackground(new Color(192, 192, 192));
 		add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
 		JPanel centerGrid = new JPanel();
 		centerGrid.setOpaque(false);
-		centerGrid.setBackground(new Color(192, 192, 192));
 		centerPanel.add(centerGrid);
-		centerGrid.setLayout(new GridLayout(4, 7, 0, 0));
+		centerGrid.setLayout(new GridLayout(Configuration.NUM_CHOSEN_CHAMPIONS, Configuration.NUM_MATCH_COLUMNS, 0, 0));
 
 		ArrayList<ArrayList<ChampionMatchCard>> cards = new ArrayList<>();
 
 		int row = 0;
-		while (row < 4) {
+		while (row < Configuration.NUM_CHOSEN_CHAMPIONS) {
 			ArrayList<ChampionMatchCard> cardsToAdd = new ArrayList<>();
 
 			int column = 0;
 
-			while (column < 7) {
+			while (column < Configuration.NUM_MATCH_COLUMNS) {
 				ChampionMatchCard matchCard = new ChampionMatchCard(centerGrid, row, column);
 
 				matchCard.updateCard();
@@ -136,7 +145,8 @@ public class MatchView extends JPanel {
 	}
 
 	/**
-	 * Sets up the side panel
+	 * Sets up the side panel. The side panels provide padding to align the center
+	 * panel.
 	 */
 	public void setupSides() {
 		JPanel leftPanel = new JPanel();
@@ -151,7 +161,8 @@ public class MatchView extends JPanel {
 	}
 
 	/**
-	 * Sets up the bottom panel
+	 * Sets up the bottom panel. The bottom panel contains a panel to display the
+	 * currently selected champion along with the action buttons.
 	 */
 	public void setupBottomPanel() {
 		JPanel bottomPanel = new JPanel();
@@ -232,7 +243,7 @@ public class MatchView extends JPanel {
 	}
 
 	/**
-	 * Selects a champion as the champion whose turn is currently undergoing
+	 * Selects a champion as the champion who is next to play their turn.
 	 *
 	 * @param champion Champion to be selected
 	 */
@@ -241,6 +252,11 @@ public class MatchView extends JPanel {
 		updateButtons();
 	}
 
+	/**
+	 * Updates the selected champion panel to display the given champion.
+	 *
+	 * @param champion the champion to update the panel to
+	 */
 	public void updateSelectedChampionPanel(Champion champion) {
 		selectedChampionPanel.removeAll();
 		ChampionCard championCard = new ChampionCard(champion);
@@ -252,8 +268,8 @@ public class MatchView extends JPanel {
 	}
 
 	/**
-	 * Enables and disables the buttons based upon whether the champion is allowed
-	 * to make a certain action
+	 * Enables and disables the action buttons depending on whether the champion is
+	 * allowed to perform a certain action.
 	 */
 	private void updateButtons() {
 		// Enable the move button
@@ -322,7 +338,7 @@ public class MatchView extends JPanel {
 	}
 
 	/**
-	 * Disables all buttons, useful for when the AI is taking a turn
+	 * Disables all action buttons, useful for when the AI is taking a turn
 	 */
 	public void disableAllButtons() {
 		attackButton.setEnabled(false);
@@ -341,6 +357,11 @@ public class MatchView extends JPanel {
 		JOptionPane.showMessageDialog(null, message);
 	}
 
+	/**
+	 * Paint the component then draw the background image onto the component.
+	 *
+	 * @param g the graphics object to draw onto
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
