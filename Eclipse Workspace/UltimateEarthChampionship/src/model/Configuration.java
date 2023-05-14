@@ -113,22 +113,22 @@ public class Configuration {
 	/**
 	 * Path to folder containing champion images
 	 */
-	public static final String CHAMPION_IMAGE_FOLDER_PATH = "src/images/champions/";
+	public static final String CHAMPION_IMAGE_FOLDER_PATH = "img/champions/";
 
 	/**
 	 * Path to folder containing weapon images
 	 */
-	public static final String WEAPON_IMAGE_FOLDER_PATH = "src/images/weapons/";
+	public static final String WEAPON_IMAGE_FOLDER_PATH = "img/weapons/";
 
 	/**
 	 * Path to folder containing icon images
 	 */
-	public static final String ICON_IMAGE_FOLDER_PATH = "src/images/icons/";
+	public static final String ICON_IMAGE_FOLDER_PATH = "img/icons/";
 
 	/**
 	 * Path to folder containing background images
 	 */
-	public static final String BACKGROUND_IMAGE_FOLDER_PATH = "src/images/backgrounds/";
+	public static final String BACKGROUND_IMAGE_FOLDER_PATH = "img/backgrounds/";
 
 	/**
 	 * Number of teams, including player team
