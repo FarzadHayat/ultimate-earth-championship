@@ -5,11 +5,13 @@ import display.GraphicalDisplay;
 import story.OpeningCutscene;
 
 /**
- * A subclass of GameManager that represents the graphical version of the game.
+ * A subclass of GameManager that represents the GUI version of the game.
  */
 public class GraphicalGameManager extends GameManager {
+
 	/**
-	 * Starts the game by initializing the GraphicalDisplay.
+	 * Starts the game by creating a new GraphicalDisplay and displaying the opening
+	 * cutscene.
 	 */
 	@Override
 	public void play() {
@@ -18,40 +20,62 @@ public class GraphicalGameManager extends GameManager {
 		displayStrategy.displayCutscene(getCutscene());
 	}
 
+	/**
+	 * Returns to the stadium from champion setup.
+	 */
 	public void backFromChampionSetup() {
 		setEnemyTeam(null);
 		playerTeam.unselectChampions();
 		displayStrategy.displayStadium();
 	}
 
+	/**
+	 * Returns to champion setup from weapon setup.
+	 */
 	public void backFromWeaponSetup() {
 		playerTeam.unselectWeapons();
 		playerTeam.unassignChosenWeapons();
 		displayStrategy.displayChampionSetup();
 	}
 
+	/**
+	 * Repaints the team view to update its components.
+	 */
 	public void repaintTeam() {
 		displayStrategy.displayTeam();
 	}
 
+	/**
+	 * Repaints the shop view to update its components.
+	 */
 	public void repaintShop() {
 		displayStrategy.displayShop();
 	}
 
+	/**
+	 * Repaints the champion setup view to update its components.
+	 */
 	public void repaintChampionSetup() {
 		displayStrategy.displayChampionSetup();
 	}
 
+	/**
+	 * Repaints the weapon setup view to update its components.
+	 */
 	public void repaintWeaponSetup() {
 		displayStrategy.displayWeaponSetup();
 	}
 
+	/**
+	 * Repaints the cutscene view to update its components.
+	 */
 	public void repaintCutscene() {
 		displayStrategy.displayCutscene(getCutscene());
 	}
 
 	/**
-	 * The main method that initializes and starts the game.
+	 * The main method that starts the game. Sets the display type and calls the
+	 * start method.
 	 *
 	 * @param args the command line arguments (not used)
 	 */
