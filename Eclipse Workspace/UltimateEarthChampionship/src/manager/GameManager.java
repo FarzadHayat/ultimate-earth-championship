@@ -20,7 +20,6 @@ import champions.GhengisKhan;
 import champions.HarryTruman;
 import champions.JoeRogan;
 import champions.JohnBrowning;
-import champions.JohnDoe;
 import champions.JohnFKennedy;
 import champions.JohnMaynardKeynes;
 import champions.JosefStalin;
@@ -162,7 +161,7 @@ public abstract class GameManager {
 				new QueenVictoria(), new RobertMuldoon(), new RudyardKipling(), new ShokoAsahara(),
 				new StephenHawking(), new SunTzu(), new TedKaczynski(), new TimBell(), new WilliamShakespeare(),
 				new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery(),
-				new JohnBrowning(), new JohnDoe(), new JohnFKennedy(), new JohnMaynardKeynes(), new FranzFerdinand(),
+				new JohnBrowning(), new JohnFKennedy(), new JohnMaynardKeynes(), new FranzFerdinand(),
 				new GeorgeWashington(), new GhengisKhan(), new HarryTruman(), new Confucius(), new DavidLange(),
 				new DouglasMacArthur(), new DwightEisenhower()));
 

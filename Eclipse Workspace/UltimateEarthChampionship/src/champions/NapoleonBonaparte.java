@@ -2,7 +2,13 @@ package champions;
 
 import model.Champion;
 
+/**
+ * Represents the Napoleon Bonaparte champion.
+ */
 public class NapoleonBonaparte extends Champion {
+
+	// Name
+	private static String name = "Napoleon Bonaparte";
 
 	// Stat Boosts:
 	private static int healthBoost = -1;
@@ -14,8 +20,10 @@ public class NapoleonBonaparte extends Champion {
 	private static float startingPrice = 50f;
 	private static float priceChangeWeekly = 1.1f;
 
+	/**
+	 * Creates a new Napoleon Bonaparte object with default attribute values.
+	 */
 	public NapoleonBonaparte() {
-		super("Napoleon Bonaparte", healthBoost, staminaBoost, offenseBoost, defenseBoost, startingPrice,
-				priceChangeWeekly);
+		super(name, healthBoost, staminaBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly);
 	}
 }

@@ -2,9 +2,15 @@ package champions;
 
 import model.Champion;
 
+/**
+ * Represents the Bernard Montgomery champion.
+ */
 public class BernardMontgomery extends Champion {
 
-	// Stat Boosts:
+	// Name
+	private static String name = "Bernard Montgomery";
+
+	// Stat Boosts
 	private static int healthBoost = 0;
 	private static int staminaBoost = -1;
 	private static int offenseBoost = 1;
@@ -14,8 +20,10 @@ public class BernardMontgomery extends Champion {
 	private static float startingPrice = 50f;
 	private static float priceChangeWeekly = 1.1f;
 
+	/**
+	 * Creates a new Bernard Montgomery object with default attribute values.
+	 */
 	public BernardMontgomery() {
-		super("Bernard Montgomery", healthBoost, staminaBoost, offenseBoost, defenseBoost, startingPrice,
-				priceChangeWeekly);
+		super(name, healthBoost, staminaBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly);
 	}
 }

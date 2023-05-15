@@ -3,7 +3,7 @@ package weapons;
 import model.Weapon;
 
 /**
- * Represents a Axe weapon.
+ * Represents an Axe weapon.
  */
 public class Axe extends Weapon {
 
