@@ -9,12 +9,8 @@ import manager.GameManager;
 import weapons.Fists;
 
 /**
- *
- * @author Oliver Coates
- *
- *         Champion Class, responsible for data and functionality related to
- *         each individual champion competing.
- *
+ * Champion Class, responsible for data and functionality related to each
+ * individual champion competing.
  */
 public abstract class Champion implements Purchasable, Cloneable {
 
@@ -60,6 +56,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 * The champions current XP
 	 */
 	private float currentXP;
+
 	/*
 	 * The XP required for the champion to progress to the next level
 	 */
@@ -71,12 +68,12 @@ public abstract class Champion implements Purchasable, Cloneable {
 	private float price;
 
 	/**
-	 * The amount that the price changes each week
+	 * The factor that the price multiplies by each week
 	 */
 	private float priceChangeWeekly;
 
 	/**
-	 * The weapon currently assigned to the champion, fists if null
+	 * The weapon currently assigned to the champion, fists by default
 	 */
 	private Weapon weapon;
 
@@ -86,7 +83,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 	private ImageIcon image;
 
 	/**
-	 * The lane that the champion is position in, used during LiveMatches
+	 * The lane that the champion is position in, used during Live Matches
 	 */
 	private int lane;
 
@@ -100,7 +97,6 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 */
 	private boolean flagCarrier;
 
-	// Constructor:
 	/**
 	 * Constructor for champion Class
 	 *
@@ -139,8 +135,6 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 		maxXP = config.XP_DEFAULT_MAX;
 	}
-
-	// GETTERS/SETTERS:
 
 	/**
 	 * Gets name of champion
@@ -277,39 +271,69 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 * Gives the champion a certain amount of XP, then checks if the champion has
 	 * leveled up
 	 *
-	 * @param amount XP to add
+	 * @param amount of XP to add
 	 */
 	public void giveXP(float amount) {
 		currentXP += amount;
 		checkForLevelUp();
 	}
 
+	/**
+	 * Set the lane of this champion on the board.
+	 *
+	 * @param lane the new lane to set
+	 */
 	public void setLane(int lane) {
 		this.lane = lane;
 	}
 
+	/**
+	 * Get the lane that this champion on the grid.
+	 *
+	 * @return the value of lane
+	 */
 	public int getLane() {
 		return lane;
 	}
 
+	/**
+	 * Set the position of this champion in their lane.
+	 *
+	 * @param position the new position to set
+	 */
 	public void setPosition(int position) {
 		this.position = position;
 	}
 
+	/**
+	 * Get the position of this champion in their lane.
+	 *
+	 * @return the position of this champion
+	 */
 	public int getPosition() {
 		return position;
 	}
 
+	/**
+	 * Return whether this champion is the flag carrier.
+	 *
+	 * @return true if this champion is the flag carrier
+	 */
 	public boolean isFlagCarrier() {
 		return flagCarrier;
 	}
 
+	/**
+	 * Set the value of flagCarrier
+	 *
+	 * @param flagCarrier the new value of flagCarrier
+	 */
 	public void setFlagCarrier(boolean flagCarrier) {
 		this.flagCarrier = flagCarrier;
 	}
 
 	/**
-	 * Checks to see if currentXP > maxXP, if so, the champion levels up
+	 * Checks to see if the champion has accumulated enough xp to level up
 	 */
 	private void checkForLevelUp() {
 		if (currentXP > maxXP) {
@@ -329,6 +353,11 @@ public abstract class Champion implements Purchasable, Cloneable {
 		manager.championLevelUp(this);
 	}
 
+	/**
+	 * Level up the given stat by the default level up increase set in config.
+	 *
+	 * @param stat the stat to level up
+	 */
 	public void applyLevelUp(LevelUpStat stat) {
 		switch (stat) {
 		case STAMINA:
@@ -351,28 +380,49 @@ public abstract class Champion implements Purchasable, Cloneable {
 		checkForLevelUp();
 	}
 
-	// TODO: Move the following functions to purchasable interface:
+	/**
+	 * Get the value of price.
+	 *
+	 * @return the value of price
+	 */
 	@Override
 	public float getPrice() {
 		return price;
 	}
 
-	public void changePrice(float newPrice) {
-		price = newPrice;
+	/**
+	 * Set the value of price.
+	 *
+	 * @param price the new value of price to set
+	 */
+	public void setPrice(float price) {
+		this.price = price;
 	}
 
+	/**
+	 * Get the value of priceChangeWeekly.
+	 *
+	 * @return the value of priceChangeWeekly
+	 */
 	public float getPriceChangeWeekly() {
 		return priceChangeWeekly;
 	}
 
+	/**
+	 * Set the value of priceChangeWeekly.
+	 *
+	 * @param newWeeklyPrice the new value of priceChangeWeekly to set
+	 */
 	public void setPriceChangeWeekly(float newWeeklyPrice) {
 		priceChangeWeekly = newWeeklyPrice;
 	}
 
+	/**
+	 * Multiply the price by the weekly price change factor.
+	 */
 	public void applyWeeklyPriceChange() {
 		price = price * priceChangeWeekly;
 	}
-	// ---------
 
 	/**
 	 * Returns the damage dealt by the champion in an attack
@@ -403,7 +453,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 	}
 
 	/**
-	 * Removes the champions weapon, replacing it with their fists
+	 * Removes the champions weapon, replacing it with the default weapon.
 	 */
 	public void removeWeapon() {
 		weapon = new Fists();
@@ -437,11 +487,22 @@ public abstract class Champion implements Purchasable, Cloneable {
 		return image;
 	}
 
+	/**
+	 * Buy the champion by adding it to the given team and deducting the champion
+	 * price.
+	 *
+	 * @param team the team that wants to buy the champion
+	 * @throws InsufficientFundsException if the team cannot afford this champion
+	 * @throws FullTeamException          if the team champion list is already full
+	 * @throws IllegalPurchaseException   if the team has already purchased a
+	 *                                    champion this week
+	 */
 	@Override
 	public void buy(Team team) throws InsufficientFundsException, FullTeamException, IllegalPurchaseException {
 		team.removeMoney(getPrice());
 		try {
 			if (team.isWeeklyChampionPurchased()) {
+				team.addMoney(getPrice());
 				throw new IllegalPurchaseException(team.getName() + " already purchased a champion this week!");
 			}
 			team.addChampion(this);
@@ -449,12 +510,15 @@ public abstract class Champion implements Purchasable, Cloneable {
 		} catch (FullTeamException e) {
 			team.addMoney(getPrice());
 			throw new FullTeamException(e.getMessage());
-		} catch (IllegalPurchaseException e) {
-			team.addMoney(getPrice());
-			throw new IllegalPurchaseException(e.getMessage());
 		}
 	}
 
+	/**
+	 * Sell the champion by removing it from the given team and refunding the
+	 * champion price.
+	 *
+	 * @param team the team that contains this champion
+	 */
 	@Override
 	public void sell(Team team) {
 		team.removeChampion(this);
@@ -462,7 +526,10 @@ public abstract class Champion implements Purchasable, Cloneable {
 	}
 
 	/**
-	 * Create a clone of the Champion with the same stats.
+	 * Create a clone of the Champion with the same stats and a cloned version of
+	 * the weapon.
+	 *
+	 * @return the clone of the champion
 	 */
 	@Override
 	public Champion clone() {
@@ -476,6 +543,11 @@ public abstract class Champion implements Purchasable, Cloneable {
 		}
 	}
 
+	/**
+	 * Returns a string representation of the champion to display its stats.
+	 *
+	 * @return the string representation of the champion
+	 */
 	@Override
 	public String toString() {
 		return String.format(
