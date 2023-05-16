@@ -6,6 +6,7 @@ import java.util.Scanner;
 import events.RandomEventInfo;
 import exception.InputException;
 import manager.GameManager;
+import match.DumbMatch;
 import match.Match;
 import match.MatchResult;
 import model.Champion;
@@ -335,6 +336,14 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	/**
+	 * Display the match in the terminal.
+	 */
+	@Override
+	public void displayMatch(Match match) {
+		displayMatchResults(((DumbMatch) match).getMatchResult());
+	}
+
+	/**
 	 * Displays the match results in the terminal.
 	 */
 	@Override
@@ -373,14 +382,6 @@ public class CommandLineDisplay implements DisplayStrategy {
 	@Override
 	public void displayGameResults() {
 		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * Display the match in the terminal.
-	 */
-	@Override
-	public void displayMatch(Match match) {
-		// TODO Match in command line interface
 	}
 
 }

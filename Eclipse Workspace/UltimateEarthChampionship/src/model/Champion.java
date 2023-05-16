@@ -104,8 +104,8 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 * @param staminaBoost      Stat which modifies the maximum stamina of the
 	 *                          champion
 	 * @param regenBoost        Stat which modifies the regen of the champion
-	 * @param offense           Modifies the offense stat of the champion
-	 * @param defense           Modifies the defense stat of the champion
+	 * @param offenseBoost      Modifies the offense stat of the champion
+	 * @param defenseBoost      Modifies the defense stat of the champion
 	 * @param price             The champions price
 	 * @param priceChangeWeekly The amount at which the champion's price changes
 	 *                          each week once purchased
@@ -446,7 +446,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 	/**
 	 * Set the champion weapon to the given weapon
 	 *
-	 * @return weapon the new weapon to set
+	 * @param weapon the new weapon to set
 	 */
 	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;

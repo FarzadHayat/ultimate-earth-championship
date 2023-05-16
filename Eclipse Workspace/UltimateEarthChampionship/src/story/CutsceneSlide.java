@@ -41,8 +41,8 @@ public class CutsceneSlide {
 	/**
 	 * Constructor class
 	 *
-	 * @param text     The text to be shown
-	 * @param imageURL The path to be shown
+	 * @param text      The text to be shown
+	 * @param imagePath The path to be shown
 	 */
 	public CutsceneSlide(String text, String imagePath) {
 		this.text = text;

@@ -82,7 +82,7 @@ public class ChampionMatchCard extends JPanel {
 	/**
 	 * Assigns a new champion to this card
 	 *
-	 * @param assignedChampion
+	 * @param assignedChampion the new champion to set for the card
 	 */
 	public void setChampion(Champion assignedChampion) {
 		champion = assignedChampion;
