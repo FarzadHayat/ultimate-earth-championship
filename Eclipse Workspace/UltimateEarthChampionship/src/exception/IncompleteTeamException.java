@@ -7,8 +7,8 @@ public class IncompleteTeamException extends Exception {
 	public IncompleteTeamException() {
 		super();
 	}
-	
+
 	public IncompleteTeamException(String message) {
 		super(message);
-	} 
+	}
 }

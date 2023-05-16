@@ -3,14 +3,10 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
@@ -20,172 +16,65 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import exception.FullTeamException;
 import exception.IllegalPurchaseException;
-import exception.IncompleteTeamException;
 import exception.InsufficientFundsException;
 import manager.GameManager;
 import manager.GraphicalGameManager;
-import model.Champion;
+import model.Configuration;
 import model.Purchasable;
-import model.Weapon;
 
-public class PurchasableCard extends JPanel {
+public abstract class PurchasableCard extends JPanel {
 
 	private static final long serialVersionUID = 5339330332731208144L;
-	
-	private static final int IMAGE_WIDTH = 100;
-	private static final int IMAGE_HEIGHT = IMAGE_WIDTH;
-	
-	private static final int WIDTH = IMAGE_WIDTH + 70;
-	private static final int HEIGHT = IMAGE_HEIGHT + 50;
-	
+
+	protected static final int IMAGE_WIDTH = 100;
+	protected static final int IMAGE_HEIGHT = IMAGE_WIDTH;
+
+	protected static final int WIDTH = IMAGE_WIDTH + 70;
+	protected static final int HEIGHT = IMAGE_HEIGHT + 50;
+
 	private Purchasable purchasable;
-	
-	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
-	
-	private JPanel mainPanel = new JPanel(new BorderLayout(0, 0));
-	private JPanel soldOverlay;
-	
-	/**
-	 * Enum to represent the card type.
-	 * MINIMAL: small form factor with just a name and image.
-	 * STANDARD: a minimal card with stat labels.
-	 * CAN_BUY: a standard card with a buy button.
-	 * CAN_SELL: a standard card with a sell button.
-	 * SELECTABLE: a standard card where clicking it adds/removes it in the roster.
-	 */
-	public enum CardType {
-		MINIMAL,
-		STANDARD,
-		CAN_BUY,
-		CAN_SELL,
-		SELECTABLE
+
+	protected GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
+
+	protected JPanel mainPanel = new JPanel(new BorderLayout(0, 0));
+	protected JPanel soldOverlay;
+
+	protected PurchasableCard() {
+		setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		setBackground(Color.lightGray);
+		unselected();
 	}
-		
+
 	/**
 	 * Create the panel.
+	 *
 	 * @param purchasable the purchasable to display
-	 * @param cardType the type of the card according to the CardType enum
 	 */
-	public PurchasableCard(Purchasable purchasable, CardType cardType) {
-		setBackground(Color.yellow);
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		if (purchasable == null) {
-			setBackground(Color.gray);
-			return;
-		}
-		if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable) ||
-				gameManager.getPlayerTeam().getChosenWeapons().contains(purchasable)) {
-			setBackground(Color.green);
-		}
+	protected PurchasableCard(Purchasable purchasable) {
+		this();
+		this.purchasable = purchasable;
 		mainPanel.setOpaque(false);
 		setLayout(new OverlayLayout(this));
-		add(mainPanel);		
-		this.purchasable = purchasable;
-		
+		add(mainPanel);
+
 		addName();
 		addImageIcon();
-		
-		switch (cardType) {
-		case MINIMAL: {
-			break;
-		}
-		case STANDARD: {
-			addStatsPanel();
-			break;
-		}
-		case CAN_BUY: {
-			addStatsPanel();
-			if (purchasable.getClass().getSuperclass() == Champion.class && gameManager.getPlayerTeam().getChampions().contains((Champion) purchasable) ||
-					purchasable.getClass().getSuperclass() == Weapon.class && gameManager.getPlayerTeam().getWeapons().contains((Weapon) purchasable)) {
-				addOverlay("SOLD!");
-			} else {
-				if (purchasable.getClass().getSuperclass() == Champion.class && gameManager.getPlayerTeam().isWeeklyChampionPurchased() ||
-						purchasable.getClass().getSuperclass() == Weapon.class && gameManager.getPlayerTeam().isWeeklyWeaponPurchased()) {
-					addOverlay("");
-				}
-				else {
-					addBuyButton();
-				}
-			}
-			break;
-		}
-		case CAN_SELL: {
-			addStatsPanel();
-			addSellButton();
-			break;
-		}
-		case SELECTABLE: {
-			addRosterToggle();
-			break;
-		}
-		}
-		
 	}
 
-	private void addRosterToggle() {
-		addMouseListener(new MouseListener() {
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (purchasable.getClass().getSuperclass() == Champion.class) {
-					if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable)) {
-						gameManager.getPlayerTeam().removeChosenChampion((Champion) purchasable);
-					} else {
-						try {
-							gameManager.getPlayerTeam().addChosenChampion((Champion) purchasable);
-						} catch (FullTeamException e1) {
-							JOptionPane.showMessageDialog(getParent(), e1.getMessage());
-						};
-					}
-					gameManager.repaintChampionSetup();
-				}
-				if (purchasable.getClass().getSuperclass() == Weapon.class) {
-					if (gameManager.getPlayerTeam().getChosenWeapons().contains(purchasable)) {
-						gameManager.getPlayerTeam().removeChosenWeapon((Weapon) purchasable);
-					} else {
-						try {
-							gameManager.getPlayerTeam().addChosenWeapon((Weapon) purchasable);
-						} catch (FullTeamException e1) {
-							JOptionPane.showMessageDialog(getParent(), e1.getMessage());
-						};
-					}
-					gameManager.repaintWeaponSetup();
-				}
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				if (gameManager.getPlayerTeam().getChosenChampions().contains(purchasable) ||
-						gameManager.getPlayerTeam().getChosenWeapons().contains(purchasable)) {
-					setBackground(Color.green);
-				} else {
-					setBackground(Color.yellow);
-				}
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				setBackground(Color.orange);
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {}
-		});
+	public void selected() {
+		setBorder(new LineBorder(Configuration.GREEN, 3));
 	}
 
-	private void addOverlay(String text) {
-		soldOverlay = new JPanel(new GridBagLayout());
-		soldOverlay.setBackground(new Color(0.7f, 0.7f, 0.7f, 0.7f));
-		JLabel soldLabel = new JLabel(text);
-		soldLabel.setFont(new Font("Arial", Font.BOLD, 24));
-		soldLabel.setForeground(Color.red);
-		soldOverlay.add(soldLabel);
-		add(soldOverlay, 0);
+	public void hovered() {
+		setBorder(new LineBorder(Configuration.ORANGE, 3));
+	}
+
+	public void unselected() {
+		setBorder(new LineBorder(Color.darkGray, 3));
 	}
 
 	/**
@@ -194,6 +83,7 @@ public class PurchasableCard extends JPanel {
 	private void addName() {
 		JLabel nameLabel = new JLabel(purchasable.getName());
 		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		nameLabel.setFont(Configuration.TEXT_FONT);
 		mainPanel.add(nameLabel, BorderLayout.NORTH);
 	}
 
@@ -204,53 +94,41 @@ public class PurchasableCard extends JPanel {
 		ImageIcon icon = purchasable.getImage();
 		ImageIcon resizedIcon;
 		if (icon != null) {
-			resizedIcon = new ImageIcon(icon.getImage().getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_SMOOTH));
-		}
-		else {
+			resizedIcon = new ImageIcon(
+					icon.getImage().getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_SMOOTH));
+		} else {
 			resizedIcon = new ImageIcon(new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_ARGB));
 		}
 		JLabel imageLabel = new JLabel(resizedIcon);
 		mainPanel.add(imageLabel, BorderLayout.WEST);
 	}
-	
-	/**
-	 * Add a panel displaying the purchasable stats to the center panel.
-	 */
-	public void addStatsPanel() {
-		JPanel statsPanel = new JPanel(new GridLayout(0, 1));
-		statsPanel.setOpaque(false);
-		mainPanel.add(statsPanel, BorderLayout.EAST);
-	    if (purchasable.getClass().getSuperclass() == Champion.class) {
-	    	Champion champion = (Champion) purchasable; 
-	    	statsPanel.add(new StatLabel("stamina", String.valueOf(champion.getStamina())));
-	    	statsPanel.add(new StatLabel("regen", String.valueOf(champion.getRegen())));
-	    	statsPanel.add(new StatLabel("offense", String.valueOf(champion.getOffense())));
-	    	statsPanel.add(new StatLabel("defense", String.valueOf(champion.getDefense())));
-	    }
-	    if (purchasable.getClass().getSuperclass() == Weapon.class) {
-	    	Weapon weapon = (Weapon) purchasable;
-	    	statsPanel.add(new StatLabel("offense", String.valueOf(weapon.getOffenseBoost())));
-	    	statsPanel.add(new StatLabel("damage", String.valueOf(weapon.getDamageMultiplier())));
-	    	statsPanel.add(new StatLabel("defense", String.valueOf(weapon.getDefenseBoost())));
-	    }
+
+	public void addOverlay(String text) {
+		soldOverlay = new JPanel(new GridBagLayout());
+		soldOverlay.setBackground(new Color(0.7f, 0.7f, 0.7f, 0.7f));
+		JLabel soldLabel = new JLabel(text);
+		soldLabel.setFont(Configuration.HEADER_FONT);
+		soldLabel.setForeground(Configuration.RED);
+		soldOverlay.add(soldLabel);
+		add(soldOverlay, 0);
 	}
 
 	/**
 	 * Add a buy button to the south of the card.
 	 */
 	public void addBuyButton() {
-	    JButton buyButton = new JButton("Buy for $" + purchasable.getPrice());
-	    buyButton.addActionListener(new ActionListener() {
-			
+		JButton buyButton = new JButton("Buy for $" + purchasable.getPrice());
+		buyButton.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					String message = String.format("Are you sure you want to buy %s for $%s?",
-							purchasable.getName(), purchasable.getPrice());
-					int answer = JOptionPane.showConfirmDialog(getParent(), message,
-							"Buy: " + purchasable.getName(), JOptionPane.YES_NO_OPTION);
+					String message = String.format("Are you sure you want to buy %s for $%s?", purchasable.getName(),
+							purchasable.getPrice());
+					int answer = JOptionPane.showConfirmDialog(getParent(), message, "Buy: " + purchasable.getName(),
+							JOptionPane.YES_NO_OPTION);
 					if (answer == JOptionPane.YES_OPTION) {
-						gameManager.getPlayerTeam().buy(purchasable);
+						purchasable.buy(gameManager.getPlayerTeam());
 						gameManager.repaintShop();
 					}
 				} catch (InsufficientFundsException | FullTeamException | IllegalPurchaseException e) {
@@ -258,33 +136,36 @@ public class PurchasableCard extends JPanel {
 				}
 			}
 		});
-	    mainPanel.add(buyButton, BorderLayout.SOUTH);
+		mainPanel.add(buyButton, BorderLayout.SOUTH);
 	}
 
 	/**
 	 * Add a sell button the purchasable to the south of the card.
 	 */
 	public void addSellButton() {
-	    JButton sellButton = new JButton("Sell for $" + purchasable.getPrice());
-	    sellButton.addActionListener(new ActionListener() {
-			
+		JButton sellButton = new JButton("Sell for $" + purchasable.getPrice());
+		sellButton.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					String message = String.format("Are you sure you want to sell %s for $%s?",
-							purchasable.getName(), purchasable.getPrice());
-					int answer = JOptionPane.showConfirmDialog(getParent(), message,
-							"Sell: " + purchasable.getName(), JOptionPane.YES_NO_OPTION);
-					if (answer == JOptionPane.YES_OPTION) {
-						gameManager.getPlayerTeam().sell(purchasable);
-						gameManager.repaintTeam();
-					}
-				} catch (IncompleteTeamException e) {
-					JOptionPane.showMessageDialog(getParent(), e.getMessage());
+				if (gameManager.getPlayerTeam().getChampions().size() <= Configuration.NUM_CHOSEN_CHAMPIONS) {
+					JOptionPane.showMessageDialog(getParent(),
+							"You will not have enough champions to start a match after this!",
+							"INCOMPLETE TEAM WARNING", JOptionPane.WARNING_MESSAGE);
+				}
+				String message = String.format("Are you sure you want to sell %s for $%s?", purchasable.getName(),
+						purchasable.getPrice());
+				int answer = JOptionPane.showConfirmDialog(getParent(), message, "Sell: " + purchasable.getName(),
+						JOptionPane.YES_NO_OPTION);
+				if (answer == JOptionPane.YES_OPTION) {
+					purchasable.sell(gameManager.getPlayerTeam());
+					gameManager.repaintTeam();
 				}
 			}
 		});
-	    mainPanel.add(sellButton, BorderLayout.SOUTH);
+		mainPanel.add(sellButton, BorderLayout.SOUTH);
 	}
+
+	public abstract void addStatsPanel();
 
 }

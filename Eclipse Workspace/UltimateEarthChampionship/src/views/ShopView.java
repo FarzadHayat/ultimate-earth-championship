@@ -1,32 +1,55 @@
 package views;
 
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.GridBagLayout;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import display.GraphicalDisplay;
 import manager.GameManager;
 import model.Champion;
+import model.Configuration;
 import model.Weapon;
-import views.PurchasableCard.CardType;
 
 public class ShopView extends JPanel {
 
 	private static final long serialVersionUID = 2101264902458190410L;
-	
+
 	private GameManager gameManager = GameManager.getInstance();
+
+	private JPanel mainPanel;
+
+	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "shop.jpg");
 
 	/**
 	 * Create the panel.
 	 */
 	public ShopView() {
-		setName("Shop");
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-		add(new HeaderPanel("Champions"));
+		setName("Market");
+		setLayout(new GridBagLayout());
+
+		mainPanel = new JPanel();
+		mainPanel.setOpaque(false);
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		add(mainPanel);
+
+		addChampionsHeader();
 		addAvailableChampionsPanel();
-		add(new HeaderPanel("Weapons"));
+		addWeaponsHeader();
 		addAvailableWeaponsPanel();
+	}
+
+	private void addChampionsHeader() {
+		mainPanel.add(new HeaderPanel("Shop champions", true));
+		mainPanel.add(new HeaderPanel("You can only buy one champion per week", false));
+	}
+
+	private void addWeaponsHeader() {
+		mainPanel.add(new HeaderPanel("Shop weapons", true));
+		mainPanel.add(new HeaderPanel("You can buy as many weapons as you want", false));
 	}
 
 	/**
@@ -34,10 +57,22 @@ public class ShopView extends JPanel {
 	 */
 	private void addAvailableChampionsPanel() {
 		JPanel championsPanel = new JPanel(new FlowLayout());
+		championsPanel.setOpaque(false);
 		for (Champion champion : gameManager.getShop().getAvailableChampions()) {
-			championsPanel.add(new PurchasableCard(champion, CardType.CAN_BUY));
+			PurchasableCard card = new ChampionCard(champion);
+			card.addStatsPanel();
+			championsPanel.add(card);
+			if (gameManager.getPlayerTeam().getChampions().contains(champion)) {
+				card.addOverlay("SOLD!");
+			} else {
+				if (gameManager.getPlayerTeam().isWeeklyChampionPurchased()) {
+					card.addOverlay("");
+				} else {
+					card.addBuyButton();
+				}
+			}
 		}
-		add(championsPanel);
+		mainPanel.add(championsPanel);
 	}
 
 	/**
@@ -45,10 +80,21 @@ public class ShopView extends JPanel {
 	 */
 	private void addAvailableWeaponsPanel() {
 		JPanel weaponsPanel = new JPanel(new FlowLayout());
+		weaponsPanel.setOpaque(false);
 		for (Weapon weapon : gameManager.getShop().getAvailableWeapons()) {
-			weaponsPanel.add(new PurchasableCard(weapon, CardType.CAN_BUY));
+			PurchasableCard card = new WeaponCard(weapon);
+			card.addStatsPanel();
+			card.addBuyButton();
+			weaponsPanel.add(card);
 		}
-		add(weaponsPanel);
+		mainPanel.add(weaponsPanel);
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		int yPos = (GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2;
+		g.drawImage(icon.getImage(), 0, yPos, null);
 	}
 
 }

@@ -29,7 +29,7 @@ class ShopTest {
 	private Shop shop;
 	private GameManager gameManager;
 	private Configuration config;
-	
+
 	@BeforeEach
 	void setup() {
 		gameManager = GameManager.getInstance();
@@ -37,12 +37,12 @@ class ShopTest {
 		config = Configuration.getInstance();
 		shop = new Shop();
 	}
-	
+
 	@Test
 	void testGenerateCatalogue() {
 		shop.generateCatalogue();
-		assertTrue(shop.getAvailableChampions().size() == config.NUM_TEAMS &&
-				shop.getAvailableWeapons().size() == config.NUM_TEAMS);
+		assertTrue(shop.getAvailableChampions().size() == config.NUM_TEAMS
+				&& shop.getAvailableWeapons().size() == config.NUM_TEAMS);
 	}
 
 	@Test
@@ -68,7 +68,7 @@ class ShopTest {
 	@Test
 	void testGetRandomChampion_oneArray() {
 		Champion champion1 = new JohnDoe();
-		Champion randomChampion = shop.getRandomChampion(new ArrayList<Champion>(List.of(champion1)));
+		Champion randomChampion = Shop.getRandomChampion(new ArrayList<>(List.of(champion1)));
 		assertEquals(champion1, randomChampion);
 	}
 
@@ -95,10 +95,10 @@ class ShopTest {
 	@Test
 	void testGetRandomWeapon_oneArray() {
 		Weapon weapon1 = new Shield();
-		Weapon randomWeapon = shop.getRandomWeapon(new ArrayList<Weapon>(List.of(weapon1)));
+		Weapon randomWeapon = shop.getRandomWeapon(new ArrayList<>(List.of(weapon1)));
 		assertEquals(weapon1, randomWeapon);
 	}
-	
+
 	@Test
 	void testGetRandomWeapon_fourArray() {
 		int numTests = 1000;
@@ -106,17 +106,17 @@ class ShopTest {
 		Weapon weapon2 = new Chainsaw();
 		Weapon weapon3 = new Pickaxe();
 		Weapon weapon4 = new Sledgehammer();
-		ArrayList<Weapon> weaponList = new ArrayList<Weapon>(List.of(weapon1, weapon2, weapon3, weapon4));
+		ArrayList<Weapon> weaponList = new ArrayList<>(List.of(weapon1, weapon2, weapon3, weapon4));
 		Map<Weapon, Integer> freq = new HashMap<>();
 		for (int i = 0; i < numTests; i++) {
 			Weapon randomWeapon = shop.getRandomWeapon(weaponList);
 			freq.put(randomWeapon, freq.getOrDefault(randomWeapon, 0) + 1);
 		}
-		ArrayList<Boolean> inRange = new ArrayList<Boolean>();
+		ArrayList<Boolean> inRange = new ArrayList<>();
 		for (Weapon weapon : weaponList) {
 			int repeats = freq.get(weapon);
-			inRange.add(repeats <= (numTests / weaponList.size() + numTests * 0.1) &&
-					repeats >= (numTests / weaponList.size() - numTests * 0.1));
+			inRange.add(repeats <= (numTests / weaponList.size() + numTests * 0.1)
+					&& repeats >= (numTests / weaponList.size() - numTests * 0.1));
 		}
 		for (boolean bool : inRange) {
 			assertTrue(bool);
@@ -128,9 +128,9 @@ class ShopTest {
 		Champion champion1 = new JohnDoe();
 		Champion champion2 = new JohnDoe();
 		Champion champion3 = new AdamSmith();
-		shop.setAvailableChampions(new ArrayList<Champion>(List.of(champion1, champion2, champion3)));
+		shop.setAvailableChampions(new ArrayList<>(List.of(champion1, champion2, champion3)));
 		shop.removeChampion(champion2);
-		assertEquals(new ArrayList<Champion>(List.of(champion1, champion3)), shop.getAvailableChampions());
+		assertEquals(new ArrayList<>(List.of(champion1, champion3)), shop.getAvailableChampions());
 	}
 
 	@Test
@@ -138,9 +138,9 @@ class ShopTest {
 		Weapon weapon1 = new Shield();
 		Weapon weapon2 = new Shield();
 		Weapon weapon3 = new Chainsaw();
-		shop.setAvailableWeapons(new ArrayList<Weapon>(List.of(weapon1, weapon2, weapon3)));
+		shop.setAvailableWeapons(new ArrayList<>(List.of(weapon1, weapon2, weapon3)));
 		shop.removeWeapon(weapon2);
-		assertEquals(new ArrayList<Weapon>(List.of(weapon1, weapon3)), shop.getAvailableWeapons());
+		assertEquals(new ArrayList<>(List.of(weapon1, weapon3)), shop.getAvailableWeapons());
 	}
 
 }
