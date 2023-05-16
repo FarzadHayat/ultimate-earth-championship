@@ -13,8 +13,8 @@ public class ChampionJoins extends RandomEvent {
 	/**
 	 * Percentage chance of this event happening every week
 	 */
-	private static int occurrenceChance = 15;
-
+	private static int occurrenceChance = 0; 
+	
 	public ChampionJoins() {
 		super(occurrenceChance);
 	}

@@ -252,6 +252,17 @@ public class Configuration {
 	 * that 1 second = 1000 Ms
 	 */
 	public final int AI_WAIT_TIME_MS = 450;
+	
+	/**
+	 * The percentage chance increase of a champion joining the team randomly per empty slot per week
+	 */
+	public final float CHANCE_OF_CHAMPION_JOIN_PER_EMPTY_SLOT = 4f;
+	
+	/**
+	 * Multiplied by the damage taken each week by a champion to find their % chance of quitting
+	 */
+	public final float CHANCE_OF_CHAMPION_LEAVE_DAMAGE_FACTOR = 0.1f;
+	
 
 	/**
 	 * The amount that stamina increases when a champion levels up
