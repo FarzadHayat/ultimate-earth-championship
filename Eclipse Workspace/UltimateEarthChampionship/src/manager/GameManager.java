@@ -87,9 +87,9 @@ import weapons.TennisRacket;
 /**
  * The GameManager class is an abstract class that defines the basic
  * functionality of a game manager. The GameManager is implemented as a
- * Singleton using the getInstance() method.
- * The game manager is given the responsibility of mediating the game logic
- * and acting as a controller between views and the model
+ * Singleton using the getInstance() method. The game manager is given the
+ * responsibility of mediating the game logic and acting as a controller between
+ * views and the model
  */
 public abstract class GameManager {
 	private static DisplayType displayType = DisplayType.CLI;
@@ -209,6 +209,7 @@ public abstract class GameManager {
 
 	/**
 	 * Gets the display type
+	 *
 	 * @return The display type as an enum
 	 */
 	public static DisplayType getDisplayType() {
@@ -217,6 +218,7 @@ public abstract class GameManager {
 
 	/**
 	 * Sets the display type
+	 *
 	 * @param displayType The display type to set
 	 */
 	public static void setDisplayType(DisplayType displayType) {
@@ -343,6 +345,7 @@ public abstract class GameManager {
 
 	/**
 	 * Gets the current match
+	 *
 	 * @return The current match
 	 */
 	public Match getMatch() {
@@ -351,6 +354,7 @@ public abstract class GameManager {
 
 	/**
 	 * Sets the current match
+	 *
 	 * @param match sets the current match
 	 */
 	public void setMatch(Match match) {
@@ -359,6 +363,7 @@ public abstract class GameManager {
 
 	/**
 	 * Returns the current cutscene
+	 *
 	 * @return The current cutscene
 	 */
 	public Cutscene getCutscene() {
@@ -367,6 +372,7 @@ public abstract class GameManager {
 
 	/**
 	 * Sets the current cutscene
+	 *
 	 * @param cutscene The cutscene to be set
 	 */
 	public void setCutscene(Cutscene cutscene) {
@@ -475,6 +481,7 @@ public abstract class GameManager {
 
 	/**
 	 * Called to start the match setup
+	 *
 	 * @param team The enemy team being fought
 	 */
 	public void startMatchSetup(Team team) {
@@ -483,14 +490,16 @@ public abstract class GameManager {
 	}
 
 	/**
-	 * Displays the weapon setup. Intended to be called once the champion setup for a match is complete
+	 * Displays the weapon setup. Intended to be called once the champion setup for
+	 * a match is complete
 	 */
 	public void finishedChampionSetup() {
 		displayStrategy.displayWeaponSetup();
 	}
 
 	/**
-	 *  Starts the live match. Intended to be called once the weapon setup for a match is complete
+	 * Starts the live match. Intended to be called once the weapon setup for a
+	 * match is complete
 	 */
 	public void finishedWeaponSetup() {
 		setMatch(new LiveMatch(getPlayerTeam(), getEnemyTeam()));
@@ -499,6 +508,7 @@ public abstract class GameManager {
 
 	/**
 	 * Shows the provided match results and finishes the week
+	 *
 	 * @param matchResult The match result to show
 	 */
 	public void finishedMatch(MatchResult matchResult) {
@@ -508,6 +518,7 @@ public abstract class GameManager {
 
 	/**
 	 * Forces AI teams to fight eachother in dumbmatches
+	 *
 	 * @param teams An arrayList of teams to fight
 	 */
 	private void fightTeams(ArrayList<Team> teams) {
@@ -523,8 +534,11 @@ public abstract class GameManager {
 	}
 
 	/**
-	 * Gets the AI to shop for new weapons and champions. Intended to be called at the end of each week
-	 * @param teams ArrayList of teams who should go shopping. This should not include the player team
+	 * Gets the AI to shop for new weapons and champions. Intended to be called at
+	 * the end of each week
+	 *
+	 * @param teams ArrayList of teams who should go shopping. This should not
+	 *              include the player team
 	 */
 	private void shopTeams(ArrayList<Team> teams) {
 		// Get all shop champions except the one(s) player has already bought
@@ -561,9 +575,8 @@ public abstract class GameManager {
 	}
 
 	/**
-	 * Gets the AI to shop,
-	 * Gets them to fight, Resets relevant data, 
-	 * displays the week results and then moves the game to the next week
+	 * Gets the AI to shop, Gets them to fight, Resets relevant data, displays the
+	 * week results and then moves the game to the next week
 	 */
 	public void finishedWeek() {
 		// Shop for all AI teams including the one that the player just fought
@@ -597,29 +610,28 @@ public abstract class GameManager {
 	/**
 	 * Displays the game results
 	 */
-	public void finishedGame() {		
+	public void finishedGame() {
 		displayStrategy.displayGameResults(getTeams());
 	}
-	
-	public void quitApplication()
-	{
+
+	/**
+	 * Call the display strategy to quit the game.
+	 */
+	public void quitApplication() {
 		displayStrategy.quit();
 	}
-	
-	
+
 	/**
 	 * Deletes the current instance of the gamemanager class and creates a new one
 	 * This is used in restarting the game
 	 */
-	public void forceCreateNewInstance()
-	{
+	public void forceCreateNewInstance() {
 		// Delete current gameManager instance
 		instance = null;
-		
+
 		// Create a new one
 		getInstance();
 	}
-
 
 	/**
 	 * Levels up a champion depending on whether the champion is on the players team

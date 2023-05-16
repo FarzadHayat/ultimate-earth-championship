@@ -16,6 +16,9 @@ import javax.swing.border.LineBorder;
 import model.Champion;
 import model.Configuration;
 
+/**
+ * A card to represent a champion that is currently on the grid in a live match.
+ */
 public class ChampionMatchCard extends JPanel {
 
 	private static final long serialVersionUID = 8796554745910845194L;
@@ -29,6 +32,11 @@ public class ChampionMatchCard extends JPanel {
 	private JPanel panel;
 	private JLabel imageLabel;
 
+	/**
+	 * Get the champion attached to the card.
+	 *
+	 * @return the champion object
+	 */
 	public Champion getChampion() {
 		return champion;
 	}

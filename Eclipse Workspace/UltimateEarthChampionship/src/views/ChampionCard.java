@@ -8,6 +8,10 @@ import javax.swing.JPanel;
 import model.Champion;
 import model.Configuration;
 
+/**
+ * A concrete implementation of the purchasable card for displaying a champion
+ * as a card.
+ */
 public class ChampionCard extends PurchasableCard {
 
 	private static final long serialVersionUID = -4313085838343164683L;

@@ -52,14 +52,15 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	 * @param defenseBoost      the amount of defense boost the weapon provides
 	 * @param price             the base price of the weapon
 	 * @param priceChangeWeekly the weekly price change of the weapon
+	 * @param isDefaultWeapon   true if this is the default weapon
 	 */
 	public Weapon(String name, float damageMultiplier, int offenseBoost, int defenseBoost, float price,
-			float priceChangeWeekly, boolean isDefault) {
+			float priceChangeWeekly, boolean isDefaultWeapon) {
 		setName(name);
 		setDamageMultiplier(damageMultiplier);
 		setOffenseBoost(offenseBoost);
 		setdefenseBoost(defenseBoost);
-		setDefaultWeapon(isDefault);
+		setDefaultWeapon(isDefaultWeapon);
 		setPrice(price * config.WEAPON_PRICE_MODIFIER);
 		setPriceChangeWeekly(priceChangeWeekly * config.WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER);
 

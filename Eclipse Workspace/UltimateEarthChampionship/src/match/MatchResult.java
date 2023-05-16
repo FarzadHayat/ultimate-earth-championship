@@ -2,6 +2,11 @@ package match;
 
 import model.Team;
 
+/**
+ * A data class that holds the results of a match that has just ended. This
+ * class can be used to extract the necessary information to display to the
+ * player at the end of a match.
+ */
 public class MatchResult {
 
 	/**
