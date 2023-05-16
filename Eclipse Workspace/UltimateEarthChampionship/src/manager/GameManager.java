@@ -470,9 +470,7 @@ public abstract class GameManager {
 	public void finishedSetup() {
 		teams.addAll(generateAITeams());
 		shop.generateCatalogue();
-		//displayStrategy.displayTeam();
-	
-		finishedGame();
+		displayStrategy.displayTeam();
 	}
 
 	/**
@@ -599,17 +597,7 @@ public abstract class GameManager {
 	/**
 	 * Displays the game results
 	 */
-	public void finishedGame() {
-		
-		// Debug
-		ArrayList<Team> teams = getTeams();
-		Random random = new Random();
-		for (Team team : teams)
-		{
-			team.addScore(random.nextInt(100));
-		}
-		// ----
-		
+	public void finishedGame() {		
 		displayStrategy.displayGameResults(getTeams());
 	}
 	
