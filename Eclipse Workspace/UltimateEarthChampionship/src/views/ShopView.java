@@ -61,13 +61,14 @@ public class ShopView extends JPanel {
 		for (Champion champion : gameManager.getShop().getAvailableChampions()) {
 			PurchasableCard card = new ChampionCard(champion);
 			card.addStatsPanel();
-			card.addBuyButton();
 			championsPanel.add(card);
 			if (gameManager.getPlayerTeam().getChampions().contains(champion)) {
 				card.addOverlay("SOLD!");
 			} else {
 				if (gameManager.getPlayerTeam().isWeeklyChampionPurchased()) {
 					card.addOverlay("");
+				} else {
+					card.addBuyButton();
 				}
 			}
 		}
