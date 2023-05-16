@@ -35,6 +35,9 @@ import model.Champion;
 import model.Configuration;
 import model.SetupManager;
 
+/**
+ * View which shows the setup view to the player
+ */
 public class SetupView extends JPanel {
 
 	private static final long serialVersionUID = 4605160332340664881L;
@@ -59,13 +62,11 @@ public class SetupView extends JPanel {
 	private JButton submitButton;
 	private JSpinner weekSelectionSpinner;
 	private JSlider difficultySlider;
-
 	private JLabel difficultyText;
-
 	private JPanel formPanel;
-
 	private JPanel championsPanel;
 
+	// Background image
 	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "setup.jpg");
 
 	/**
@@ -79,6 +80,9 @@ public class SetupView extends JPanel {
 		addSubmitPanel();
 	}
 
+	/**
+	 * Creates the form panel which name, difficulty and weeks all sit within
+	 */
 	private void addFormPanel() {
 		JPanel outerPanel = new JPanel(new GridBagLayout());
 		outerPanel.setOpaque(false);
@@ -95,10 +99,16 @@ public class SetupView extends JPanel {
 		addStartingChampionsHeader();
 	}
 
+	/**
+	 * Adds a header
+	 */
 	private void addHeaderPanel() {
 		formPanel.add(new HeaderPanel("Welcome to Ultimate Earth Championship!", true));
 	}
 
+	/**
+	 * Adds a name panel where the player can choose what to name their team
+	 */
 	private void addNamePanel() {
 		JPanel namePanel = new JPanel();
 		namePanel.setDoubleBuffered(false);
@@ -121,6 +131,9 @@ public class SetupView extends JPanel {
 		namePanel.add(teamNameField);
 	}
 
+	/**
+	 * Adds a week panel, where the player can choose how many weeks they need
+	 */
 	private void addWeeksPanel() {
 		JPanel weeksPanel = new JPanel();
 		weeksPanel.setLayout(new BoxLayout(weeksPanel, BoxLayout.X_AXIS));
@@ -142,6 +155,9 @@ public class SetupView extends JPanel {
 		weeksPanel.add(weekSelectionSpinner);
 	}
 
+	/**
+	 * Adds a difficulty panel, where the player can choose the difficulty on a slider
+	 */
 	private void addDifficultyPanel() {
 		JPanel difficultyPanel = new JPanel();
 		difficultyPanel.setLayout(new BoxLayout(difficultyPanel, BoxLayout.Y_AXIS));
@@ -189,10 +205,16 @@ public class SetupView extends JPanel {
 		bottomPanel.add(difficultyText);
 	}
 
+	/**
+	 * Adds a header above the champion selection form
+	 */
 	private void addStartingChampionsHeader() {
 		formPanel.add(new HeaderPanel("Choose four starting champions:", false));
 	}
 
+	/**
+	 * Adds a grid which shows the 8 champions available to choose from
+	 */
 	private void addStartingChampionsPanel() {
 		JPanel outerPanel = new JPanel();
 		outerPanel.setOpaque(false);
@@ -206,6 +228,10 @@ public class SetupView extends JPanel {
 		}
 	}
 
+	/**
+	 * Adds a champion to a panel
+	 * @param champion The champion to add to the panel
+	 */
 	private void addChampionToPanel(Champion champion) {
 		PurchasableCard card = new ChampionCard(champion);
 		card.addStatsPanel();
@@ -250,6 +276,9 @@ public class SetupView extends JPanel {
 		championsPanel.add(card);
 	}
 
+	/**
+	 * Adds the submit panel, which contains the button for the player to submit their entered information
+	 */
 	private void addSubmitPanel() {
 		JPanel panel = new JPanel(new FlowLayout());
 		panel.setOpaque(false);
@@ -295,7 +324,8 @@ public class SetupView extends JPanel {
 
 	/**
 	 * Updates the text on the difficulty text label to reflect the chosen
-	 * difficulty value
+	 * difficulty value. These are simply meant to be 'rules of thumb' to better
+	 * contextualise the difficulty setting chosen to hte player/
 	 */
 	private void updateDifficultyText() {
 		float difficulty = ((difficultySlider.getValue()) / 100f);
@@ -321,6 +351,9 @@ public class SetupView extends JPanel {
 
 	}
 
+	// Paints over the background image,
+	// This overrides the default JPanel behavior, refer to JPanel's documentation of this method
+	// for more info.
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

@@ -16,6 +16,11 @@ import events.ThiefEvent;
 import exception.GameFinishedException;
 import manager.GameManager;
 
+/**
+ * Class which represents the general environment of the game,
+ * This class keeps track of the current week, maximum week,
+ * and random events that may occur
+ */
 public class GameEnvironment {
 
 	/**
@@ -34,14 +39,26 @@ public class GameEnvironment {
 	 */
 	private ArrayList<RandomEvent> events;
 
+	/**
+	 * Gets the current week
+	 * @return The current week
+	 */
 	public int getCurrentWeek() {
 		return currentWeek;
 	}
 
+	/**
+	 * Gets the maximum number of weeks in the game
+	 * @return The max number of weeks
+	 */
 	public int getMaxWeeks() {
 		return maxWeek;
 	}
 
+	/**
+	 * Sets the max number of weeks
+	 * @param weekNum The new max number of weeks
+	 */
 	public void setMaxWeeks(int weekNum) {
 		maxWeek = weekNum;
 	}
@@ -134,6 +151,10 @@ public class GameEnvironment {
 		return (chance >= random);
 	}
 
+	/**
+	 * Advances to the next week, Will throw an exception if the game is over
+	 * @throws GameFinishedException Thrown if the game is over
+	 */
 	public void nextWeek() throws GameFinishedException {
 		if (currentWeek == maxWeek) {
 			throw new GameFinishedException();

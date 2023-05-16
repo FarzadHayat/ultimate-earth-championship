@@ -7,6 +7,10 @@ import model.Champion;
 import model.Configuration;
 import model.Team;
 
+/**
+ * Superclass for dumb and live matches,
+ * Keeps hold of relevant data relating to a match as well as some helper functions for combat
+ */
 public abstract class Match {
 
 	Configuration config = Configuration.getInstance();
@@ -33,14 +37,26 @@ public abstract class Match {
 	 */
 	protected int prizeScore;
 
+	/**
+	 * Gets the score
+	 * @return The score
+	 */
 	public int getScore() {
 		return prizeScore;
 	}
 
+	/**
+	 * Gets the 1st team in the match
+	 * @return The 1st team
+	 */
 	public Team getTeam1() {
 		return team1;
 	}
 
+	/**
+	 * Gets the 2nd team competing in this match
+	 * @return The 2nd team
+	 */
 	public Team getTeam2() {
 		return team2;
 	}
@@ -107,6 +123,13 @@ public abstract class Match {
 		return ThreadLocalRandom.current().nextInt(1, 20 + 1);
 	}
 
+	/**
+	 * Generates a MatchResult for the end of the match, Also applied
+	 * the effect of the match to the winner and loser
+	 * @param winner The winning team of the match
+	 * @param loser The losing team of the match
+	 * @return A MatchResult object detailing the outcome of the match to be displayed by the View
+	 */
 	protected MatchResult matchOver(Team winner, Team loser) {
 		// Apply match conditions:
 		winner.addMoney(prizeMoney);

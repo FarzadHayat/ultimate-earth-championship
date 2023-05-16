@@ -88,6 +88,8 @@ import weapons.TennisRacket;
  * The GameManager class is an abstract class that defines the basic
  * functionality of a game manager. The GameManager is implemented as a
  * Singleton using the getInstance() method.
+ * The game manager is given the responsibility of mediating the game logic
+ * and acting as a controller between views and the model
  */
 public abstract class GameManager {
 	private static DisplayType displayType = DisplayType.CLI;
@@ -205,10 +207,18 @@ public abstract class GameManager {
 		return instance;
 	}
 
+	/**
+	 * Gets the display type
+	 * @return The display type as an enum
+	 */
 	public static DisplayType getDisplayType() {
 		return displayType;
 	}
 
+	/**
+	 * Sets the display type
+	 * @param displayType The display type to set
+	 */
 	public static void setDisplayType(DisplayType displayType) {
 		GameManager.displayType = displayType;
 	}
@@ -331,18 +341,34 @@ public abstract class GameManager {
 		this.enemyTeam = enemyTeam;
 	}
 
+	/**
+	 * Gets the current match
+	 * @return The current match
+	 */
 	public Match getMatch() {
 		return match;
 	}
 
+	/**
+	 * Sets the current match
+	 * @param match sets the current match
+	 */
 	public void setMatch(Match match) {
 		this.match = match;
 	}
 
+	/**
+	 * Returns the current cutscene
+	 * @return The current cutscene
+	 */
 	public Cutscene getCutscene() {
 		return cutscene;
 	}
 
+	/**
+	 * Sets the current cutscene
+	 * @param cutscene The cutscene to be set
+	 */
 	public void setCutscene(Cutscene cutscene) {
 		this.cutscene = cutscene;
 	}
@@ -431,35 +457,59 @@ public abstract class GameManager {
 		return teams;
 	}
 
+	/**
+	 * Called upon finishing the display of the opening cutscene
+	 */
 	public void finishedCutscene() {
 		displayStrategy.displaySetup();
 	}
 
+	/**
+	 * Called upon finishing the game setup
+	 */
 	public void finishedSetup() {
 		teams.addAll(generateAITeams());
 		shop.generateCatalogue();
 		displayStrategy.displayTeam();
 	}
 
+	/**
+	 * Called to start the match setup
+	 * @param team The enemy team being fought
+	 */
 	public void startMatchSetup(Team team) {
 		enemyTeam = team;
 		displayStrategy.displayChampionSetup();
 	}
 
+	/**
+	 * Displays the weapon setup. Intended to be called once the champion setup for a match is complete
+	 */
 	public void finishedChampionSetup() {
 		displayStrategy.displayWeaponSetup();
 	}
 
+	/**
+	 *  Starts the live match. Intended to be called once the weapon setup for a match is complete
+	 */
 	public void finishedWeaponSetup() {
 		setMatch(new LiveMatch(getPlayerTeam(), getEnemyTeam()));
 		displayStrategy.displayMatch(getMatch());
 	}
 
+	/**
+	 * Shows the provided match results and finishes the week
+	 * @param matchResult The match result to show
+	 */
 	public void finishedMatch(MatchResult matchResult) {
 		displayStrategy.displayMatchResults(matchResult);
 		finishedWeek();
 	}
 
+	/**
+	 * Forces AI teams to fight eachother in dumbmatches
+	 * @param teams An arrayList of teams to fight
+	 */
 	private void fightTeams(ArrayList<Team> teams) {
 		if (teams.size() % 2 == 1 && Configuration.DEBUG) {
 			System.out.println("WARNING: Odd number of teams. One of the AI team will not be fighting this week!");
@@ -472,6 +522,10 @@ public abstract class GameManager {
 		}
 	}
 
+	/**
+	 * Gets the AI to shop for new weapons and champions. Intended to be called at the end of each week
+	 * @param teams ArrayList of teams who should go shopping. This should not include the player team
+	 */
 	private void shopTeams(ArrayList<Team> teams) {
 		// Get all shop champions except the one(s) player has already bought
 		ArrayList<Champion> championsLeft = new ArrayList<>(shop.getAvailableChampions());
@@ -506,6 +560,11 @@ public abstract class GameManager {
 		}
 	}
 
+	/**
+	 * Gets the AI to shop,
+	 * Gets them to fight, Resets relevant data, 
+	 * displays the week results and then moves the game to the next week
+	 */
 	public void finishedWeek() {
 		// Shop for all AI teams including the one that the player just fought
 		shopTeams(getAITeams());
@@ -535,6 +594,9 @@ public abstract class GameManager {
 		}
 	}
 
+	/**
+	 * Displays the game results
+	 */
 	public void finishedGame() {
 		displayStrategy.displayGameResults();
 	}
