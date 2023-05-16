@@ -2,7 +2,6 @@ package events;
 
 import java.util.Random;
 
-import exception.IncompleteTeamException;
 import model.Champion;
 import model.Team;
 
@@ -19,7 +18,7 @@ public class ChampionQuits extends RandomEvent {
 		super(occurrenceChance);
 		this.championQuitting = championQuitting;
 	}
-	
+
 	@Override
 	public RandomEventInfo runEvent(Team team) {
 		// Effect Logic:
@@ -39,10 +38,9 @@ public class ChampionQuits extends RandomEvent {
 		String effectString = championQuitting.getName() + " leaves, +50 money";
 		
 		// Return it
-		
+
 		RandomEventInfo out = new RandomEventInfo(name, description, effectString);
 		return out;
 	}
- 
-	
+
 }

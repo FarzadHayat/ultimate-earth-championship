@@ -7,8 +7,8 @@ public class GameFinishedException extends Exception {
 	public GameFinishedException() {
 		super();
 	}
-	
+
 	public GameFinishedException(String message) {
 		super(message);
-	} 
+	}
 }

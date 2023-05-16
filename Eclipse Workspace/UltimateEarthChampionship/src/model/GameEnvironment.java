@@ -16,71 +16,77 @@ import events.ThiefEvent;
 import exception.GameFinishedException;
 import manager.GameManager;
 
+/**
+ * Class which represents the general environment of the game,
+ * This class keeps track of the current week, maximum week,
+ * and random events that may occur
+ */
 public class GameEnvironment {
-	
-	private Configuration config = Configuration.getInstance();
-	
+
 	/**
 	 * The current week, starting from 1
 	 */
 	private int currentWeek;
-	
+
 	/**
-	 * The maximum number of weeks, current week is greater than maxWeek, the game is over
+	 * The maximum number of weeks, current week is greater than maxWeek, the game
+	 * is over
 	 */
 	private int maxWeek;
-	
-	/**
-	 * The difficulty of the game, should fall between the range of 0.1 and 2
-	 */
-	private float difficulty;
-	
+
 	/**
 	 * List of all random events in the game
 	 */
 	private ArrayList<RandomEvent> events;
-	
-	public int getCurrentWeek()
-	{
+
+	/**
+	 * Gets the current week
+	 * @return The current week
+	 */
+	public int getCurrentWeek() {
 		return currentWeek;
 	}
-	
-	public int getMaxWeeks()
-	{
+
+	/**
+	 * Gets the maximum number of weeks in the game
+	 * @return The max number of weeks
+	 */
+	public int getMaxWeeks() {
 		return maxWeek;
 	}
-	
-	public void setMaxWeeks(int weekNum)
-	{
+
+	/**
+	 * Sets the max number of weeks
+	 * @param weekNum The new max number of weeks
+	 */
+	public void setMaxWeeks(int weekNum) {
 		maxWeek = weekNum;
 	}
-	
+
 	/**
 	 * Finds the number of weeks remaining, will return a 0 on the last week
+	 *
 	 * @return The number of weeks remaining
 	 */
-	public int getWeeksRemaining()
-	{
+	public int getWeeksRemaining() {
 		return maxWeek - currentWeek;
 	}
-	
 
 	/**
 	 * Constructor class
 	 */
 	public GameEnvironment() {
-		currentWeek = 0;
+		currentWeek = 1;
 		maxWeek = 99;
-		events = new ArrayList<RandomEvent>();
+		events = new ArrayList<>();
 		getAllEvents();
 	}
-	
+
 	/**
 	 * Gets all the events in the game
 	 */
-	private void getAllEvents()
-	{
-		events = new ArrayList<RandomEvent>();
+	private void getAllEvents() {
+		events = new ArrayList<>();
 		// For now: Just manually add them :(
 		events.add(new DonationEvent());
 		events.add(new TVShowEvent());
@@ -95,33 +101,6 @@ public class GameEnvironment {
 		// ChampionQuits event is special, as its chance of occuring changes each week depending upon how much damage each champion has taken
 		//events.add(new ChampionQuits());
 	}
-	
-	/**
-	 * Sets the difficulty by float. Difficulty value must be 0.1 < difficulty < 2. Will directly modify the config singleton
-	 *  to apply the difficulty.
-	 * @param difficulty The difficulty of the game.
-	 */
-	public void setDifficulty(float difficulty) // Private because this should only be accessed in the constructor
-	{
-		this.difficulty = difficulty;
-		
-		// Check within range:
-		if (difficulty < 0.5f || difficulty > 2f)
-		{
-			System.out.println("WARNING: Difficulty setting outside of expected range, aborting.");
-			return;
-		}
-		
-		//TODO: Fuck with the config using this difficulty setting!
-	}
-	
-	/**
-	 * Returns the value of difficulty
-	 * @return difficulty the value of difficulty
-	 */
-	public float getDifficulty() {
-		return difficulty;
-	}
 
 	/**
 	 * Goes through each event and checks for its chance of occurring,
@@ -129,28 +108,22 @@ public class GameEnvironment {
 	 * it is added to the returned list which can then be passed onto the GUI.
 	 * @return A list of weekly events
 	 */
-	public ArrayList<RandomEventInfo> generateWeeklyEvents()
-	{
-		ArrayList<RandomEventInfo> weeklyEvents = new ArrayList<RandomEventInfo>();
-		
-		for(RandomEvent event : events)
-		{
-			if (chanceCheck(event.getChanceOfOccuring()))
-			{
+	public ArrayList<RandomEventInfo> generateWeeklyEvents() {
+		ArrayList<RandomEventInfo> weeklyEvents = new ArrayList<>();
+
+		for (RandomEvent event : events) {
+			if (chanceCheck(event.getChanceOfOccuring())) {
 				// Event occurs:
 				Team randomTeam = getRandomTeam();
 				RandomEventInfo newEvent = event.runEvent(randomTeam);
 				// We run the event to cause the logic to occur
-				
-				if (randomTeam.isPlayerTeam())
-				{
+
+				if (randomTeam.isPlayerTeam()) {
 					// If this event happens to the player team...
 					// Note it down
 					weeklyEvents.add(newEvent);
 				}
-			}
-			else 
-			{
+			} else {
 				// Event doesn't occur
 			}
 		}
@@ -215,20 +188,21 @@ public class GameEnvironment {
 		
 		return weeklyEvents;
 	}
-	
+
 	/**
-	 * Gets a random team 
+	 * Gets a random team
+	 *
 	 * @return a random team
 	 */
-	public Team getRandomTeam()
-	{
+	public Team getRandomTeam() {
 		Random random = new Random();
 		int teamInt = random.nextInt(GameManager.getInstance().getTeams().size());
 		return GameManager.getInstance().getTeams().get(teamInt);
 	}
-	
+
 	/**
 	 * Returns true or false depending on the provided percentage chance
+	 *
 	 * @param chance the percent chance of true being returned
 	 * @return True or False
 	 */
@@ -238,12 +212,15 @@ public class GameEnvironment {
 		
 		return (chance >= random);
 	}
-	
+
+	/**
+	 * Advances to the next week, Will throw an exception if the game is over
+	 * @throws GameFinishedException Thrown if the game is over
+	 */
 	public void nextWeek() throws GameFinishedException {
 		if (currentWeek == maxWeek) {
 			throw new GameFinishedException();
-		}
-		else {
+		} else {
 			currentWeek += 1;
 		}
 	}

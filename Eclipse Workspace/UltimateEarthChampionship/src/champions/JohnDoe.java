@@ -2,20 +2,30 @@ package champions;
 
 import model.Champion;
 
-public class JohnDoe extends Champion{
+/**
+ * Represents the John Doe champion.
+ */
+public class JohnDoe extends Champion {
 
-	// Stat Boosts:
+	// Name
+	private static String name = "John Doe";
+
+	// Stat Boosts
 	private static int healthBoost = 0;
 	private static int staminaBoost = 0;
 	private static int offenseBoost = 0;
 	private static int defenseBoost = 0;
-	
+
 	// Price
 	private static float startingPrice = 50f;
 	private static float priceChangeWeekly = 1.1f;
-	
+
+	/**
+	 * Creates a new John Doe object with default attribute values. This is a
+	 * testing champion so it should not be included when instantiating all
+	 * champions in the game manager.
+	 */
 	public JohnDoe() {
-		// THIS is a TESTING CHAMPION, not intended for gameplay
-		super("John Doe", healthBoost, staminaBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly);
+		super(name, healthBoost, staminaBoost, offenseBoost, defenseBoost, startingPrice, priceChangeWeekly);
 	}
 }

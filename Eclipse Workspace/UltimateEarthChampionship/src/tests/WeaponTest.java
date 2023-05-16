@@ -8,14 +8,13 @@ import model.Purchasable;
 import model.Weapon;
 import weapons.Shield;
 
-class WeaponTest
-{
+class WeaponTest {
 	@Test
 	void testGetPrice_asPurchasable() {
 		Purchasable purchasable = new Shield();
 		assertEquals(10, purchasable.getPrice());
 	}
-	
+
 	@Test
 	void testToString() {
 		Weapon shield = new Shield();
