@@ -6,13 +6,11 @@ import exception.FullTeamException;
 import exception.InsufficientFundsException;
 
 /**
- * Class Weapon
+ * Class Weapon contains all the general properties and functionality a weapon
+ * should have. A weapon is normally used in the context of being assigned to a
+ * champion.
  */
 public abstract class Weapon implements Purchasable, Cloneable {
-
-	/**
-	 * Fields
-	 */
 
 	private Configuration config = Configuration.getInstance();
 
@@ -25,6 +23,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	private float damageMultiplier;
 	private int offenseBoost;
 	private int defenseBoost;
+
 	/**
 	 * The current price of the weapon
 	 */
@@ -35,16 +34,14 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	private float priceChangeWeekly;
 
 	/**
-	 * Is this a default weapon?
+	 * True if this is the default weapon
 	 */
 	private boolean isDefaultWeapon;
 
-	// Image
-	private ImageIcon image;
-
 	/**
-	 * Constructors private int numChampions = 4;
+	 * The image icon for the weapon
 	 */
+	private ImageIcon image;
 
 	/**
 	 * Creates a new Weapon object with the specified attributes.
@@ -69,14 +66,6 @@ public abstract class Weapon implements Purchasable, Cloneable {
 		String path = Configuration.WEAPON_IMAGE_FOLDER_PATH + String.valueOf(getClass().getSimpleName()) + ".jpg";
 		setImage(new ImageIcon(path));
 	}
-
-	/**
-	 * Methods
-	 */
-
-	/**
-	 * Accessor methods
-	 */
 
 	/**
 	 * Set the value of name
@@ -227,9 +216,12 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	}
 
 	/**
-	 * Other methods
+	 * Buy the weapon by adding it to the given team and deducting the weapon price.
+	 *
+	 * @param team the team that wants to buy the weapon
+	 * @throws InsufficientFundsException if the team cannot afford this weapon
+	 * @throws FullTeamException          if the team weapon list is already full
 	 */
-
 	@Override
 	public void buy(Team team) throws InsufficientFundsException, FullTeamException {
 		team.removeMoney(getPrice());
@@ -241,6 +233,12 @@ public abstract class Weapon implements Purchasable, Cloneable {
 		}
 	}
 
+	/**
+	 * Sell the weapon by removing it from the given team and refunding the weapon
+	 * price.
+	 *
+	 * @param team the team that contains this weapon
+	 */
 	@Override
 	public void sell(Team team) {
 		team.removeWeapon(this);
@@ -261,6 +259,8 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Create a clone of the Weapon with the same stats.
+	 *
+	 * @return the clone of the weapon
 	 */
 	@Override
 	public Weapon clone() {
