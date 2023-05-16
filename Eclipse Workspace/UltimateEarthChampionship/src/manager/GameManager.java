@@ -452,7 +452,7 @@ public abstract class GameManager {
 
 	public void finishedWeaponSetup() {
 		setMatch(new LiveMatch(getPlayerTeam(), getEnemyTeam()));
-		displayStrategy.displayLiveMatch((LiveMatch) getMatch());
+		displayStrategy.displayMatch(getMatch());
 	}
 
 	public void finishedMatch(MatchResult matchResult) {

@@ -133,11 +133,11 @@ class ChampionTest {
 	}
 
 	@Test
-	void testChangePrice() {
+	void testSetPrice() {
 
 		Champion testChamp = new JohnDoe();
 
-		testChamp.changePrice(223f);
+		testChamp.setPrice(223f);
 
 		assertEquals(testChamp.getPrice(), 223f);
 	}

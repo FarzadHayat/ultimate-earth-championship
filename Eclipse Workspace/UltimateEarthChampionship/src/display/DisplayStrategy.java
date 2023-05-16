@@ -3,7 +3,7 @@ package display;
 import java.util.ArrayList;
 
 import events.RandomEventInfo;
-import match.LiveMatch;
+import match.Match;
 import match.MatchResult;
 import story.Cutscene;
 
@@ -22,7 +22,7 @@ public interface DisplayStrategy {
 
 	public void displayWeaponSetup();
 
-	public void displayLiveMatch(LiveMatch match);
+	public void displayMatch(Match match);
 
 	public void displayMatchResults(MatchResult matchResult);
 

@@ -6,7 +6,7 @@ import java.util.Scanner;
 import events.RandomEventInfo;
 import exception.InputException;
 import manager.GameManager;
-import match.LiveMatch;
+import match.Match;
 import match.MatchResult;
 import model.Champion;
 import model.Configuration;
@@ -17,8 +17,16 @@ import model.Weapon;
 import story.Cutscene;
 import story.CutsceneSlide;
 
+/**
+ * A concrete implementation of the DisplayStrategy interface for the CLI. The
+ * command line display uses the System.out to display the game and reads user
+ * input from System.in by providing options to selects from for the player.
+ */
 public class CommandLineDisplay implements DisplayStrategy {
 
+	/**
+	 * The scanner reads the user input.
+	 */
 	private Scanner scanner;
 
 	private Configuration config = Configuration.getInstance();
@@ -49,6 +57,12 @@ public class CommandLineDisplay implements DisplayStrategy {
 		scanner.close();
 	}
 
+	/**
+	 * Display the given cutscene in the terminal. The cutscene loops through the
+	 * slides in order until the end is reached.
+	 *
+	 * @param cutscene the cutscene to display
+	 */
 	@Override
 	public void displayCutscene(Cutscene cutscene) {
 		while (true) {
@@ -71,8 +85,8 @@ public class CommandLineDisplay implements DisplayStrategy {
 
 	/**
 	 * Displays all the text related to setting up the game, )* Requires the player
-	 * to input a team name, Weeks of championship, Choose their starting team,
-	 * Choose a difficulty
+	 * to input a team name, weeks of championship, their starting team, and a
+	 * difficulty.
 	 */
 	@Override
 	public void displaySetup() {
@@ -190,6 +204,9 @@ public class CommandLineDisplay implements DisplayStrategy {
 		gameManager.finishedSetup();
 	}
 
+	/**
+	 * Display the player team in the terminal.
+	 */
 	@Override
 	public void displayTeam() {
 		// TODO Auto-generated method stub
@@ -197,9 +214,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 	}
 
 	/**
-	 * Displays the shop to the console.
-	 *
-	 * @param shop The shop to display.
+	 * Display the shop in the terminal.
 	 */
 	@Override
 	public void displayShop() {
@@ -218,6 +233,9 @@ public class CommandLineDisplay implements DisplayStrategy {
 		System.out.println(promptForInput());
 	}
 
+	/**
+	 * Display the stadium in the terminal.
+	 */
 	@Override
 	public void displayStadium() {
 		ArrayList<Team> teams = gameManager.getAITeams();
@@ -232,6 +250,9 @@ public class CommandLineDisplay implements DisplayStrategy {
 		System.out.println(promptForInput());
 	}
 
+	/**
+	 * Display champion setup in the terminal.
+	 */
 	@Override
 	public void displayChampionSetup() {
 		ArrayList<Champion> chosenChampions = new ArrayList<>();
@@ -272,6 +293,10 @@ public class CommandLineDisplay implements DisplayStrategy {
 		gameManager.finishedChampionSetup();
 	}
 
+	/**
+	 * Display weapon setup in the terminal. Assumes the player team has already
+	 * selected champions.
+	 */
 	@Override
 	public void displayWeaponSetup() {
 		ArrayList<Weapon> chosenWeapons = new ArrayList<>();
@@ -309,6 +334,9 @@ public class CommandLineDisplay implements DisplayStrategy {
 		gameManager.finishedWeaponSetup();
 	}
 
+	/**
+	 * Displays the match results in the terminal.
+	 */
 	@Override
 	public void displayMatchResults(MatchResult matchResult) {
 		StringBuilder text = new StringBuilder();
@@ -326,6 +354,9 @@ public class CommandLineDisplay implements DisplayStrategy {
 		System.out.println(text.toString());
 	}
 
+	/**
+	 * Display the week results in the terminal.
+	 */
 	@Override
 	public void displayWeekResults(ArrayList<RandomEventInfo> randomEvents) {
 		for (RandomEventInfo randomEvent : randomEvents) {
@@ -336,16 +367,20 @@ public class CommandLineDisplay implements DisplayStrategy {
 		GameManager.getInstance().finishedWeek();
 	}
 
+	/**
+	 * Display the game results in the terminal.
+	 */
 	@Override
 	public void displayGameResults() {
 		// TODO Auto-generated method stub
-
 	}
 
+	/**
+	 * Display the match in the terminal.
+	 */
 	@Override
-	public void displayLiveMatch(LiveMatch match) {
-		System.out.println("TODO: Livematch in command line interface");
-
+	public void displayMatch(Match match) {
+		// TODO Match in command line interface
 	}
 
 }

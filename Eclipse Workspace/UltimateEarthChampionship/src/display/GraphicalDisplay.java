@@ -11,6 +11,7 @@ import javax.swing.WindowConstants;
 import events.RandomEventInfo;
 import manager.GameManager;
 import match.LiveMatch;
+import match.Match;
 import match.MatchResult;
 import story.Cutscene;
 import views.ChampionSetupView;
@@ -21,9 +22,8 @@ import views.TabbedView;
 import views.WeaponSetupView;
 
 /**
- * A concrete implementation of the DisplayStrategy interface for the GUI
- * display. The graphical display uses the Java Swing GUI toolkit to display the
- * game.
+ * A concrete implementation of the DisplayStrategy interface for the GUI. The
+ * graphical display uses the Java Swing GUI toolkit to display the game.
  */
 public class GraphicalDisplay implements DisplayStrategy {
 
@@ -94,7 +94,7 @@ public class GraphicalDisplay implements DisplayStrategy {
 	}
 
 	/**
-	 * Display the team view inside a tabbed view.
+	 * Display the player team view inside a tabbed view.
 	 */
 	@Override
 	public void displayTeam() {
@@ -150,8 +150,8 @@ public class GraphicalDisplay implements DisplayStrategy {
 	 * @param match the match to display
 	 */
 	@Override
-	public void displayLiveMatch(LiveMatch match) {
-		MatchView matchView = new MatchView(match);
+	public void displayMatch(Match match) {
+		MatchView matchView = new MatchView((LiveMatch) match);
 		displayView(matchView);
 
 	}
