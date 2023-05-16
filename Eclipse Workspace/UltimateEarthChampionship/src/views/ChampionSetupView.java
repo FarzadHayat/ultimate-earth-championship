@@ -27,7 +27,7 @@ import model.Champion;
 import model.Configuration;
 
 /**
- * View which allows the user to choose four champions to take part in the match 
+ * View which allows the user to choose four champions to take part in the match
  */
 public class ChampionSetupView extends JPanel {
 
@@ -73,8 +73,8 @@ public class ChampionSetupView extends JPanel {
 	}
 
 	/**
-	 * Draws the champion panel, which shows all the champions in the team and allows the 
-	 * player to choose them
+	 * Draws the champion panel, which shows all the champions in the team and
+	 * allows the player to choose them
 	 */
 	private void addChampionsPanel() {
 		JPanel outerPanel = new JPanel(new GridBagLayout());
@@ -95,8 +95,9 @@ public class ChampionSetupView extends JPanel {
 
 	/**
 	 * Adds a champion onto a panel
+	 *
 	 * @param champion The champion to be added
-	 * @param panel The panel to add the champion to
+	 * @param panel    The panel to add the champion to
 	 */
 	private void addChampionToPanel(Champion champion, JPanel panel) {
 		PurchasableCard card = new ChampionCard(champion);
@@ -146,7 +147,7 @@ public class ChampionSetupView extends JPanel {
 	}
 
 	/**
-	 * Adds a lane panel, which shows the four lanes 
+	 * Adds a lane panel, which shows the four lanes
 	 */
 	private void addLanesPanel() {
 		JPanel lanesPanel = new JPanel(new GridLayout(0, 1, 20, 20));
@@ -161,7 +162,8 @@ public class ChampionSetupView extends JPanel {
 	}
 
 	/**
-	 * Adds a panel which displays the four champions chosen for the four different panels
+	 * Adds a panel which displays the four champions chosen for the four different
+	 * panels
 	 */
 	private void addChosenChampionsPanel() {
 		JPanel chosenChampionsPanel = new JPanel(new GridLayout(0, 1, 20, 20));
@@ -183,7 +185,8 @@ public class ChampionSetupView extends JPanel {
 	}
 
 	/**
-	 * Adds a 'go to weapon setup' button which allows the player to advance to weapon setup
+	 * Adds a 'go to weapon setup' button which allows the player to advance to
+	 * weapon setup
 	 */
 	private void addNextButton() {
 		JPanel nextButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -207,9 +210,14 @@ public class ChampionSetupView extends JPanel {
 		add(nextButtonPanel, BorderLayout.SOUTH);
 	}
 
-	// Paints over the background image,
-	// This overrides the default JPanel behavior, refer to JPanel's documentation of this method
-	// for more info.
+	/**
+	 * Paint the component then draw the background image onto the component.<br>
+	 * <br>
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @param g the graphics object to draw onto
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

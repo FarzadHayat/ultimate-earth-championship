@@ -90,6 +90,14 @@ public class ShopView extends JPanel {
 		mainPanel.add(weaponsPanel);
 	}
 
+	/**
+	 * Paint the component then draw the background image onto the component.<br>
+	 * <br>
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @param g the graphics object to draw onto
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
