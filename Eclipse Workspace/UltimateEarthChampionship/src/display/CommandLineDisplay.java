@@ -7,6 +7,7 @@ import events.RandomEventInfo;
 import exception.InputException;
 import manager.GameManager;
 import match.DumbMatch;
+import match.LiveMatch;
 import match.Match;
 import match.MatchResult;
 import model.Champion;
@@ -382,12 +383,6 @@ public class CommandLineDisplay implements DisplayStrategy {
 	@Override
 	public void displayGameResults(ArrayList<Team> teams) {
 		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void displayLiveMatch(LiveMatch match) {
-		System.out.println("TODO: Livematch in command line interface");
-		
 	}
 
 	@Override
