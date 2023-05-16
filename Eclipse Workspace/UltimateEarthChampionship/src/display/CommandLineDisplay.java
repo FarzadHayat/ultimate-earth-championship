@@ -380,8 +380,19 @@ public class CommandLineDisplay implements DisplayStrategy {
 	 * Display the game results in the terminal.
 	 */
 	@Override
-	public void displayGameResults() {
+	public void displayGameResults(ArrayList<Team> teams) {
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	public void displayLiveMatch(LiveMatch match) {
+		System.out.println("TODO: Livematch in command line interface");
+		
+	}
+
+	@Override
+	public void quit() {
+		// TODO Auto-generated method stub
+	}
+	
 }

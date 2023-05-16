@@ -16,6 +16,8 @@ public class GraphicalGameManager extends GameManager {
 	@Override
 	public void play() {
 		displayStrategy = new GraphicalDisplay();
+		
+		// Play the starting cutscene
 		setCutscene(new OpeningCutscene());
 		displayStrategy.displayCutscene(getCutscene());
 	}

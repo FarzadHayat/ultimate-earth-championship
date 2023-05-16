@@ -470,7 +470,9 @@ public abstract class GameManager {
 	public void finishedSetup() {
 		teams.addAll(generateAITeams());
 		shop.generateCatalogue();
-		displayStrategy.displayTeam();
+		//displayStrategy.displayTeam();
+	
+		finishedGame();
 	}
 
 	/**
@@ -598,8 +600,38 @@ public abstract class GameManager {
 	 * Displays the game results
 	 */
 	public void finishedGame() {
-		displayStrategy.displayGameResults();
+		
+		// Debug
+		ArrayList<Team> teams = getTeams();
+		Random random = new Random();
+		for (Team team : teams)
+		{
+			team.addScore(random.nextInt(100));
+		}
+		// ----
+		
+		displayStrategy.displayGameResults(getTeams());
 	}
+	
+	public void quitApplication()
+	{
+		displayStrategy.quit();
+	}
+	
+	
+	/**
+	 * Deletes the current instance of the gamemanager class and creates a new one
+	 * This is used in restarting the game
+	 */
+	public void forceCreateNewInstance()
+	{
+		// Delete current gameManager instance
+		instance = null;
+		
+		// Create a new one
+		getInstance();
+	}
+
 
 	/**
 	 * Levels up a champion depending on whether the champion is on the players team

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import events.RandomEventInfo;
 import match.Match;
 import match.MatchResult;
+import model.Team;
 import story.Cutscene;
 
 public interface DisplayStrategy {
@@ -27,6 +28,6 @@ public interface DisplayStrategy {
 	public void displayMatchResults(MatchResult matchResult);
 
 	public void displayWeekResults(ArrayList<RandomEventInfo> randomEvents);
-
-	public void displayGameResults();
+	public void displayGameResults(ArrayList<Team> teams);
+	public void quit();
 }
