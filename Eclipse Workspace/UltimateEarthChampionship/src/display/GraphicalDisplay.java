@@ -214,7 +214,4 @@ public class GraphicalDisplay implements DisplayStrategy {
 		frame.dispose();
 	}
 
-
-	}
-
 }
