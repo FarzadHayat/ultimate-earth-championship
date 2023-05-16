@@ -261,7 +261,7 @@ public class Configuration {
 	/**
 	 * Multiplied by the damage taken each week by a champion to find their % chance of quitting
 	 */
-	public final float CHANCE_OF_CHAMPION_LEAVE_DAMAGE_FACTOR = 0.1f;
+	public final float CHANCE_OF_CHAMPION_LEAVE_DAMAGE_FACTOR = 4f;
 	
 
 	/**
@@ -303,7 +303,7 @@ public class Configuration {
 	}
 
 	public void setDifficulty(float newDifficulty) {
-		System.out.println("Setting difficulty to " + newDifficulty);
+		//System.out.println("Setting difficulty to " + newDifficulty);
 		difficulty = newDifficulty;
 
 		AI_DAMAGE_MULTIPLIER = difficulty;

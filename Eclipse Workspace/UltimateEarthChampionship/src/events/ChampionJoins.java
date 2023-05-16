@@ -39,7 +39,7 @@ public class ChampionJoins extends RandomEvent {
 		// Generate GUI Info:
 
 		String name = joiningChampion.getName() + " joins!";
-		String description = "Excited at the prospect of joining the team" + joiningChampion.getName()
+		String description = "Excited at the prospect of joining the team " + joiningChampion.getName()
 				+ " has decided to join our team.";
 		String effectString = joiningChampion.getName() + " joins the team";
 
