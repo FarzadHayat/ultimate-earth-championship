@@ -88,8 +88,12 @@ public class GameEnvironment {
 		events.add(new RampagingAnimalEvent());
 		events.add(new ThiefEvent());
 		events.add(new FreeWeaponEvent());
-		events.add(new ChampionJoins());
-		events.add(new ChampionQuits());
+		
+		// ChampionJoins is special, it's chance of occuring changes each week depending upon num of team slots
+		//events.add(new ChampionJoins());
+		
+		// ChampionQuits event is special, as its chance of occuring changes each week depending upon how much damage each champion has taken
+		//events.add(new ChampionQuits());
 	}
 	
 	/**
@@ -123,7 +127,7 @@ public class GameEnvironment {
 	 * Goes through each event and checks for its chance of occurring,
 	 * If so the event if run and if the event occurs on the player team,
 	 * it is added to the returned list which can then be passed onto the GUI.
-	 * @return
+	 * @return A list of weekly events
 	 */
 	public ArrayList<RandomEventInfo> generateWeeklyEvents()
 	{
@@ -151,6 +155,64 @@ public class GameEnvironment {
 			}
 		}
 		
+		// Champion joins event:
+		for (Team team : GameManager.getInstance().getTeams())
+		{
+			// For each team
+			int numEmptySlots = (9 - team.getChampions().size());
+			
+			float chanceOccuring = numEmptySlots * config.CHANCE_OF_CHAMPION_JOIN_PER_EMPTY_SLOT;
+			
+			if (chanceCheck(chanceOccuring))
+			{
+				// Run event
+				ChampionJoins championJoinsEvent = new ChampionJoins();
+				RandomEventInfo newEvent = championJoinsEvent.runEvent(team);
+				
+				// If team it occurred to is on player team, notify them
+				if (team.isPlayerTeam())
+				{
+					weeklyEvents.add(newEvent);
+				}
+			}
+		}
+		
+		// Champion leaves event:
+		for (Team team : GameManager.getInstance().getTeams())
+		{
+			// If the team has more than 5 champions
+			if (team.getChampions().size() > 5)
+			{
+				// For each champion in each team, find their chance of leaving
+				for (Champion champ : team.getChosenChampions())
+				{
+					// Just iterate over chosen champions, as they are the only ones who would have
+					// taken damage.
+					
+					float chanceOccuring = champ.getDamageTakenThisWeek() * config.CHANCE_OF_CHAMPION_LEAVE_DAMAGE_FACTOR;
+					if (chanceCheck(chanceOccuring))
+					{
+						// Run event
+						ChampionQuits championJoinsEvent = new ChampionQuits(champ);
+						RandomEventInfo newEvent = championJoinsEvent.runEvent(team);
+						
+						// If it is a player team, add to weekly events
+						if (team.isPlayerTeam())
+						{
+							weeklyEvents.add(newEvent);
+						}
+						
+						// A max of 1 champion leave event should happen each week to be fair to teams
+						break;
+					}
+				}
+			}
+			
+			
+			
+			
+		}
+		
 		return weeklyEvents;
 	}
 	
@@ -170,9 +232,9 @@ public class GameEnvironment {
 	 * @param chance the percent chance of true being returned
 	 * @return True or False
 	 */
-	private boolean chanceCheck(int chance)
+	private boolean chanceCheck(float chance)
 	{
-		int random = (int) (Math.random() * 100);
+		float random = (float) (Math.random() * 100);
 		
 		return (chance >= random);
 	}

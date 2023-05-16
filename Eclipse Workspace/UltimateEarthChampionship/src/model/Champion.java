@@ -97,6 +97,9 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 */
 	private boolean flagCarrier;
 	
+	// The amount of damage taken each week, set back to 0 upon week end
+	private float damageTakenThisWeek;
+	
 	// Constructor:
 	/**
 	 * Constructor for champion Class
@@ -124,6 +127,8 @@ public abstract class Champion implements Purchasable, Cloneable {
 		this.priceChangeWeekly = priceChangeWeekly * config.CHAMPION_PRICE_WEEKLY_CHANGE_MODIFIER;
 		
 		this.weapon = new Fists(); // Created champions should start with the fists weapon
+		
+		this.damageTakenThisWeek = 0f;
 		
 		try {
 			String path = Configuration.CHAMPION_IMAGE_FOLDER_PATH 
@@ -190,6 +195,11 @@ public abstract class Champion implements Purchasable, Cloneable {
 	public void addStamina(float staminaChange)
 	{
 		stamina += staminaChange;
+		
+		if (staminaChange < 0f)
+		{
+			damageTakenThisWeek -= staminaChange;
+		}
 		
 		if (stamina > maxStamina)
 		{
@@ -309,6 +319,10 @@ public abstract class Champion implements Purchasable, Cloneable {
 		this.flagCarrier = flagCarrier;
 	}
 	
+	public float getDamageTakenThisWeek()
+	{
+		return damageTakenThisWeek;
+	}
 	
 	
 	
