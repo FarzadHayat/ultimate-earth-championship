@@ -1,7 +1,5 @@
 package events;
 
-import java.util.Random;
-
 import model.Champion;
 import model.Team;
 
@@ -25,11 +23,7 @@ public class ChampionQuits extends RandomEvent {
 		
 		team.addMoney(50);
 		
-		try {
-			team.removeChampion(championQuitting);
-		} catch (IncompleteTeamException e) {
-			// In theory this will never occur
-		}
+		team.removeChampion(championQuitting);
 		
 		// Generate GUI Info:
 		
