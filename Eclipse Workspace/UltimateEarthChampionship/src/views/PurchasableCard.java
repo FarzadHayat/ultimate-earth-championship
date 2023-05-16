@@ -23,6 +23,7 @@ import exception.IllegalPurchaseException;
 import exception.InsufficientFundsException;
 import manager.GameManager;
 import manager.GraphicalGameManager;
+import model.Champion;
 import model.Configuration;
 import model.Purchasable;
 
@@ -148,7 +149,8 @@ public abstract class PurchasableCard extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (gameManager.getPlayerTeam().getChampions().size() <= Configuration.NUM_CHOSEN_CHAMPIONS) {
+				if (purchasable.getClass().getSuperclass() == Champion.class
+						&& gameManager.getPlayerTeam().getChampions().size() <= Configuration.NUM_CHOSEN_CHAMPIONS) {
 					JOptionPane.showMessageDialog(getParent(),
 							"You will not have enough champions to start a match after this!",
 							"INCOMPLETE TEAM WARNING", JOptionPane.WARNING_MESSAGE);
