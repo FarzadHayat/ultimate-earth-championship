@@ -56,18 +56,18 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	 * @param price             the base price of the weapon
 	 * @param priceChangeWeekly the weekly price change of the weapon
 	 */
-	public Weapon(String name, float damageBoost, int offenseBoost, int defenseBoost, float price,
+	public Weapon(String name, float damageMultiplier, int offenseBoost, int defenseBoost, float price,
 			float priceChangeWeekly, boolean isDefault) {
-		this.name = name;
-		this.damageMultiplier = damageBoost;
-		this.offenseBoost = offenseBoost;
-		this.defenseBoost = defenseBoost;
-		this.isDefaultWeapon = isDefault;
-		this.price = price * config.WEAPON_PRICE_MODIFIER;
-		this.priceChangeWeekly = priceChangeWeekly * config.WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER;
+		setName(name);
+		setDamageMultiplier(damageMultiplier);
+		setOffenseBoost(offenseBoost);
+		setdefenseBoost(defenseBoost);
+		setDefaultWeapon(isDefault);
+		setPrice(price * config.WEAPON_PRICE_MODIFIER);
+		setPriceChangeWeekly(priceChangeWeekly * config.WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER);
 
 		String path = Configuration.WEAPON_IMAGE_FOLDER_PATH + String.valueOf(getClass().getSimpleName()) + ".jpg";
-		image = new ImageIcon(path);
+		setImage(new ImageIcon(path));
 	}
 
 	/**
@@ -100,10 +100,10 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	/**
 	 * Set the value of damageMultiplier
 	 *
-	 * @param newDamageBoost the new value of damageMultiplier
+	 * @param newDamageMultiplier the new value of damageMultiplier
 	 */
-	public void setDamageMultiplier(int newDamageBoost) {
-		damageMultiplier = newDamageBoost;
+	public void setDamageMultiplier(float newDamageMultiplier) {
+		damageMultiplier = newDamageMultiplier;
 	}
 
 	/**
@@ -208,18 +208,27 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	}
 
 	/**
-	 * Other methods
-	 */
-
-	/**
 	 * returns true if this is the default weapon that all champions should equip on
 	 * creation.
 	 *
 	 * @return true if this is the default weapon for champions on creation
 	 */
-	public boolean isDefault() {
+	public boolean isDefaultWeapon() {
 		return isDefaultWeapon;
 	}
+
+	/**
+	 * Set whether this weapon is marked as the default weapon
+	 *
+	 * @param isDefaultWeapon true if setting this as the default weapon
+	 */
+	public void setDefaultWeapon(boolean isDefaultWeapon) {
+		this.isDefaultWeapon = isDefaultWeapon;
+	}
+
+	/**
+	 * Other methods
+	 */
 
 	@Override
 	public void buy(Team team) throws InsufficientFundsException, FullTeamException {
