@@ -27,14 +27,21 @@ import model.Champion;
 import model.Configuration;
 import model.Weapon;
 
+/**
+ * Class which handles the weapon setup view, which is where the player selects which
+ * of their weapons are given to each champion.
+ */
 public class WeaponSetupView extends JPanel {
 
 	private static final long serialVersionUID = -1352915737619575543L;
 
+	// The game manager
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 
+	// The panel which shows chosen weapons
 	private JPanel chosenPanel;
 
+	// The background image
 	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "weaponsetup.jpg");
 
 	/**
@@ -55,6 +62,9 @@ public class WeaponSetupView extends JPanel {
 		addNextButton();
 	}
 
+	/**
+	 * Adds a back button, so the player can return to the champion selection screen
+	 */
 	private void addBackButton() {
 		JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		backButtonPanel.setOpaque(false);
@@ -71,6 +81,9 @@ public class WeaponSetupView extends JPanel {
 		add(backButtonPanel, BorderLayout.NORTH);
 	}
 
+	/**
+	 * Adds a weapon panel, which displays all of the weapons in the players inventory
+	 */
 	private void addWeaponsPanel() {
 		JPanel outerPanel = new JPanel(new GridBagLayout());
 		outerPanel.setOpaque(false);
@@ -88,6 +101,11 @@ public class WeaponSetupView extends JPanel {
 		}
 	}
 
+	/**
+	 * Adds a weapon to a weaponPanel
+	 * @param weapon The weapon to be added
+	 * @param panel The panel to have the weapon set to
+	 */
 	private void addWeaponToPanel(Weapon weapon, JPanel panel) {
 		PurchasableCard card;
 		ArrayList<Weapon> chosenWeapons = gameManager.getPlayerTeam().getChosenWeapons();
@@ -138,6 +156,9 @@ public class WeaponSetupView extends JPanel {
 		panel.add(card);
 	}
 
+	/**
+	 * Adds a panel which displays the four lanes
+	 */
 	private void addLanesPanel() {
 		JPanel lanesPanel = new JPanel(new GridLayout(0, 1, 20, 20));
 		lanesPanel.setOpaque(false);
@@ -150,6 +171,9 @@ public class WeaponSetupView extends JPanel {
 		}
 	}
 
+	/**
+	 * Adds a panel which displays the four chosen champions
+	 */
 	private void addChosenChampionsPanel() {
 		JPanel chosenChampionsPanel = new JPanel(new GridLayout(0, 1, 20, 20));
 		chosenChampionsPanel.setOpaque(false);
@@ -169,6 +193,9 @@ public class WeaponSetupView extends JPanel {
 		}
 	}
 
+	/**
+	 * Adds a panel which shows the four chosen weapons set to each of the four champions
+	 */
 	private void addChosenWeaponsPanel() {
 		JPanel chosenWeaponsPanel = new JPanel(new GridLayout(0, 1, 20, 20));
 		chosenWeaponsPanel.setOpaque(false);
@@ -188,6 +215,9 @@ public class WeaponSetupView extends JPanel {
 		}
 	}
 
+	/**
+	 * Adds a button which allows the player to start the match.
+	 */
 	private void addNextButton() {
 		JPanel nextButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		nextButtonPanel.setOpaque(false);
@@ -204,6 +234,9 @@ public class WeaponSetupView extends JPanel {
 		add(nextButtonPanel, BorderLayout.SOUTH);
 	}
 
+	// Paints over the background image,
+	// This overrides the default JPanel behavior, refer to JPanel's documentation of this method
+	// for more info.
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

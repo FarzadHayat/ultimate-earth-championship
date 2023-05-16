@@ -26,12 +26,17 @@ import manager.GraphicalGameManager;
 import model.Champion;
 import model.Configuration;
 
+/**
+ * View which allows the user to choose four champions to take part in the match 
+ */
 public class ChampionSetupView extends JPanel {
 
 	private static final long serialVersionUID = -1352915737619575543L;
 
+	// The gamemanager
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 
+	// The background image
 	private ImageIcon icon;
 
 	/**
@@ -48,6 +53,9 @@ public class ChampionSetupView extends JPanel {
 		addNextButton();
 	}
 
+	/**
+	 * Adds a back button onto the panel
+	 */
 	private void addBackButton() {
 		JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		backButtonPanel.setOpaque(false);
@@ -64,6 +72,10 @@ public class ChampionSetupView extends JPanel {
 		add(backButtonPanel, BorderLayout.NORTH);
 	}
 
+	/**
+	 * Draws the champion panel, which shows all the champions in the team and allows the 
+	 * player to choose them
+	 */
 	private void addChampionsPanel() {
 		JPanel outerPanel = new JPanel(new GridBagLayout());
 		outerPanel.setOpaque(false);
@@ -81,6 +93,11 @@ public class ChampionSetupView extends JPanel {
 		}
 	}
 
+	/**
+	 * Adds a champion onto a panel
+	 * @param champion The champion to be added
+	 * @param panel The panel to add the champion to
+	 */
 	private void addChampionToPanel(Champion champion, JPanel panel) {
 		PurchasableCard card = new ChampionCard(champion);
 		ArrayList<Champion> chosenChampions = gameManager.getPlayerTeam().getChosenChampions();
@@ -128,6 +145,9 @@ public class ChampionSetupView extends JPanel {
 		panel.add(card);
 	}
 
+	/**
+	 * Adds a lane panel, which shows the four lanes 
+	 */
 	private void addLanesPanel() {
 		JPanel lanesPanel = new JPanel(new GridLayout(0, 1, 20, 20));
 		lanesPanel.setOpaque(false);
@@ -140,6 +160,9 @@ public class ChampionSetupView extends JPanel {
 		}
 	}
 
+	/**
+	 * Adds a panel which displays the four champions chosen for the four different panels
+	 */
 	private void addChosenChampionsPanel() {
 		JPanel chosenChampionsPanel = new JPanel(new GridLayout(0, 1, 20, 20));
 		chosenChampionsPanel.setOpaque(false);
@@ -159,6 +182,9 @@ public class ChampionSetupView extends JPanel {
 		}
 	}
 
+	/**
+	 * Adds a 'go to weapon setup' button which allows the player to advance to weapon setup
+	 */
 	private void addNextButton() {
 		JPanel nextButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		nextButtonPanel.setOpaque(false);
@@ -181,6 +207,9 @@ public class ChampionSetupView extends JPanel {
 		add(nextButtonPanel, BorderLayout.SOUTH);
 	}
 
+	// Paints over the background image,
+	// This overrides the default JPanel behavior, refer to JPanel's documentation of this method
+	// for more info.
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

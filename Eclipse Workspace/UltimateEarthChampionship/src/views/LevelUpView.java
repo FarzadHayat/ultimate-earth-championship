@@ -7,10 +7,21 @@ import manager.GameManager;
 import model.Champion;
 import model.LevelUpStat;
 
+/**
+ * Static class which handles showing the level up dialogue for a champion and
+ * communicating the chosen stat to level up to the game manager
+ * @author Oliver Coates
+ *
+ */
 public class LevelUpView extends JPanel {
 
 	private static final long serialVersionUID = -6049198470080468548L;
 
+	/**
+	 * Shows a level up dialogue box to the player, This should be called by the gameManager upon
+	 * a champion level up
+	 * @param champion The champion being leveled up
+	 */
 	public static void showLevelUpDialogue(Champion champion) {
 		String header = champion.getName() + " has leveled up!";
 

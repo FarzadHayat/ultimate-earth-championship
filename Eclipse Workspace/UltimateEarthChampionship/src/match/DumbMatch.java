@@ -7,12 +7,26 @@ import model.Champion;
 import model.Configuration;
 import model.Team;
 
+/**
+ * Class which represents a 'dumb' match, which is a match with no visuals occuring.
+ * Dumb matches are auto-resolved by the computer and simply return a result
+ */
 public class DumbMatch extends Match {
 
+	/**
+	 * Creates a dumb match between two teams
+	 * @param team1 The first team to fight
+	 * @param team2 The second team to fight
+	 */
 	public DumbMatch(Team team1, Team team2) {
 		super(team1, team2);
 	}
 
+	
+	/**
+	 * Runs the dumb match as a best of three fight between the two teams assigned to this match
+	 * @return The result of the match as a MatchResult object
+	 */
 	@Override
 	public MatchResult getMatchResult() {
 
@@ -57,6 +71,12 @@ public class DumbMatch extends Match {
 		return null;
 	}
 
+	/**
+	 * Gets two champions to fight eachother, returning the winning champion
+	 * @param champ1 The first champion fighting
+	 * @param champ2 The second champion fighting
+	 * @return The winning champion
+	 */
 	private Champion fight(Champion champ1, Champion champ2) {
 		boolean fighting = true;
 
