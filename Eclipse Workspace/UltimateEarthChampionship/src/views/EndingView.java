@@ -5,10 +5,13 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import display.GraphicalDisplay;
 import manager.GameManager;
+import model.Configuration;
 import model.Team;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JButton;
@@ -19,44 +22,57 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class EndingView extends JPanel {
 
 	private static final long serialVersionUID = 6638392272492099486L;
 	
+	// Teams to be displayed
 	private ArrayList<Team> teams;
 	
+	// Background image
+	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "story7.jpg");
+		
 	public EndingView(ArrayList<Team> teams) {
 		this.teams = orderTeams(teams);
 		
 		setLayout(new BorderLayout(0, 0));
 		
 		JLabel headerLabel = new JLabel("Game Over");
+		headerLabel.setForeground(Color.white);
 		headerLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(headerLabel, BorderLayout.NORTH);
 		
 		JPanel centerPanel = new JPanel();
+		centerPanel.setForeground(Color.white);
+		centerPanel.setOpaque(false);
 		add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel subheaderLabel = new JLabel("Tournament Results:");
+		subheaderLabel.setForeground(Color.white);
 		subheaderLabel.setVerticalAlignment(SwingConstants.TOP);
 		subheaderLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		centerPanel.add(subheaderLabel, BorderLayout.NORTH);
 		
 		JPanel teamGrid = new JPanel();
+		teamGrid.setOpaque(false);
 		centerPanel.add(teamGrid);
 		
 		drawResultsGrid(teamGrid);
 		teamGrid.setLayout(new BoxLayout(teamGrid, BoxLayout.Y_AXIS));
 		
 		JPanel bottomPanel = new JPanel();
+		bottomPanel.setOpaque(false);
 		FlowLayout flowLayout = (FlowLayout) bottomPanel.getLayout();
 		flowLayout.setHgap(0);
 		add(bottomPanel, BorderLayout.SOUTH);
 		
 		JPanel bottomGrid = new JPanel();
+		bottomGrid.setOpaque(false);
 		bottomPanel.add(bottomGrid);
 		GridBagLayout gbl_bottomGrid = new GridBagLayout();
 		gbl_bottomGrid.columnWidths = new int[] {250, 250, 250};
@@ -65,13 +81,14 @@ public class EndingView extends JPanel {
 		gbl_bottomGrid.rowWeights = new double[]{0.0, 0.0};
 		bottomGrid.setLayout(gbl_bottomGrid);
 		
-		JLabel lblThankYouFor = new JLabel("Thank you for playing Ultimate Earth Championship");
+		JLabel lblThanksForPlaying = new JLabel("Thank you for playing Ultimate Earth Championship");
+		lblThanksForPlaying.setForeground(Color.white);
 		GridBagConstraints gbc_lblThankYouFor = new GridBagConstraints();
 		gbc_lblThankYouFor.fill = GridBagConstraints.BOTH;
 		gbc_lblThankYouFor.insets = new Insets(0, 0, 5, 5);
 		gbc_lblThankYouFor.gridx = 1;
 		gbc_lblThankYouFor.gridy = 0;
-		bottomGrid.add(lblThankYouFor, gbc_lblThankYouFor);
+		bottomGrid.add(lblThanksForPlaying, gbc_lblThankYouFor);
 		
 		JButton newGameButton = new JButton("New Game");
 		newGameButton.addActionListener(new ActionListener() {
@@ -87,7 +104,8 @@ public class EndingView extends JPanel {
 		gbc_newGameButton.gridy = 1;
 		bottomGrid.add(newGameButton, gbc_newGameButton);
 		
-		JLabel creditsLabel = new JLabel("Made by Fazard and Oliver");
+		JLabel creditsLabel = new JLabel("Made by Farzad and Oliver");
+		creditsLabel.setForeground(Color.white);
 		GridBagConstraints gbc_creditsLabel = new GridBagConstraints();
 		gbc_creditsLabel.insets = new Insets(0, 0, 0, 5);
 		gbc_creditsLabel.gridx = 1;
@@ -114,10 +132,16 @@ public class EndingView extends JPanel {
 		for (Team team : teams)
 		{
 			JPanel teamPanel = new JPanel();
+			teamPanel.setOpaque(false);
 			teamGrid.add(teamPanel);
 			
 			JLabel teamName = new JLabel(
 					"#" + num + " " + team.getName() + " with " + team.getScore() + " score");
+			
+			teamName.setFont(Configuration.HEADER_FONT);
+			
+			teamName.setForeground(Color.white);
+			
 			teamPanel.add(teamName);
 		
 			num++;
@@ -162,5 +186,12 @@ public class EndingView extends JPanel {
 		}
 		
 		return sortedList;
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		int yPos = (GraphicalDisplay.HEIGHT - icon.getIconHeight()) / 2;
+		g.drawImage(icon.getImage(), 0, yPos, null);
 	}
 }
