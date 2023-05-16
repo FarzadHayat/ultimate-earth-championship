@@ -127,7 +127,10 @@ public class CutsceneView extends JPanel {
 	}
 
 	/**
-	 * Paint the component then draw the background image onto the component.
+	 * Paint the component then draw the background image onto the component.<br>
+	 * <br>
+	 *
+	 * {@inheritDoc}
 	 *
 	 * @param g the graphics object to draw onto
 	 */
