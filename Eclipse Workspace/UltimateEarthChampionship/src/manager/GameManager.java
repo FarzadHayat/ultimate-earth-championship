@@ -412,7 +412,6 @@ public abstract class GameManager {
 			int championNum = 0;
 			while (championNum < 4) {
 				// Get champion
-				@SuppressWarnings("static-access")
 				Champion newChamp = Shop.getRandomChampion(getAllChampions());
 
 				if (!setupChampionsInUse.contains(newChamp)) {

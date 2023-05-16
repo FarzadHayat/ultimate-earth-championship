@@ -10,7 +10,7 @@ import story.OpeningCutscene;
 public class GraphicalGameManager extends GameManager {
 
 	/**
-	 * Starts the game by creating a new GraphicalDisplay and displaying the opening
+	 * Start the game by creating a new GraphicalDisplay and displaying the opening
 	 * cutscene.
 	 */
 	@Override
@@ -74,8 +74,8 @@ public class GraphicalGameManager extends GameManager {
 	}
 
 	/**
-	 * The main method that starts the game. Sets the display type and calls the
-	 * start method.
+	 * The main method that starts the game. Set the display type to GUI and calls
+	 * the start method.
 	 *
 	 * @param args the command line arguments (not used)
 	 */
