@@ -576,4 +576,13 @@ public abstract class Champion implements Purchasable, Cloneable {
 				weapon);
 	}
 
+	/**
+	 * Rests the champion for this week
+	 */
+	public void rest()
+	{
+		setStamina(getMaxStamina());
+		damageTakenThisWeek = 0f;
+	}
+	
 }

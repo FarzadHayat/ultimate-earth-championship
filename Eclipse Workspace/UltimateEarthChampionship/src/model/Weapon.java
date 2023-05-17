@@ -273,4 +273,11 @@ public abstract class Weapon implements Purchasable, Cloneable {
 		}
 	}
 
+	/**
+	 * Applied the weekly price change to the price of this weapon
+	 */
+	public void applyWeeklyPriceChange() {
+		price = price * priceChangeWeekly;
+	}
+
 }

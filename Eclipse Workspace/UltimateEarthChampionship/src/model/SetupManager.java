@@ -24,7 +24,7 @@ public abstract class SetupManager {
 	public static String PromptForTeamName(String input) throws InputException {
 		String teamName = input;
 
-		Pattern allowedChars = Pattern.compile("[^A-Z^a-z^0-9]");
+		Pattern allowedChars = Pattern.compile("[^A-Z^a-z^0-9^' ']");
 
 		if (teamName.length() < config.MIN_TEAM_NAME_CHARS) {
 			throw new InputException("Team name is too small!");

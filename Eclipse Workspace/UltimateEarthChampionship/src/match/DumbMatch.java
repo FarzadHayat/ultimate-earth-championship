@@ -27,7 +27,6 @@ public class DumbMatch extends Match {
 	 * Runs the dumb match as a best of three fight between the two teams assigned to this match
 	 * @return The result of the match as a MatchResult object
 	 */
-	@Override
 	public MatchResult getMatchResult() {
 
 		ArrayList<Champion> team1Champs = team1.getChampions();
