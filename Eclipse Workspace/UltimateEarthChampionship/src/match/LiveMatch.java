@@ -13,10 +13,15 @@ import views.ChampionMatchCard;
 import views.MatchView;
 import weapons.Fists;
 
+/**
+ * Live match, represents a match shown on the UI to the player
+ */
 public class LiveMatch extends Match implements ActionListener {
 
+	// 2d array of cards which represent a champions position on the board
 	private ArrayList<ArrayList<ChampionMatchCard>> cards;
 
+	// The view
 	private MatchView matchView;
 
 	/**
@@ -29,11 +34,18 @@ public class LiveMatch extends Match implements ActionListener {
 	 */
 	private ArrayList<Champion> enemyChampions;
 
+	// If it is currently the player teams turn
 	private boolean playerTeamsTurn;
 
+	// The turn number, ranging from 0 - 3 based on which champion's turn it is
 	private int turn;
 
+	// The current champion selected for battle
 	private Champion currentChampion;
+	
+	// Boolean which keeps track of whether the game has finished, prevents
+	// nextTurn() from executing any logic.
+	private boolean gameOver;
 
 	/**
 	 * Gets a champion match card
@@ -56,10 +68,18 @@ public class LiveMatch extends Match implements ActionListener {
 		return cards.get(lane).get(position);
 	}
 
+	/**
+	 * Sets the card variable
+	 * @param cards The new cards variable
+	 */
 	public void setCards(ArrayList<ArrayList<ChampionMatchCard>> cards) {
 		this.cards = cards;
 	}
 
+	/**
+	 * Sets the match view
+	 * @param matchView The new matchView
+	 */
 	public void setMatchView(MatchView matchView) {
 		this.matchView = matchView;
 	}
@@ -74,6 +94,7 @@ public class LiveMatch extends Match implements ActionListener {
 		super(team1, team2);
 
 		turn = -1;
+		gameOver = false;
 	}
 
 	/**
@@ -139,14 +160,20 @@ public class LiveMatch extends Match implements ActionListener {
 	}
 
 	/**
-	 * Updates the current champion to be the next one in the turn order
+	 * Updates the current champion to be the next one in the turn order,
+	 * Also disables buttons on the matchView if need be and regenerates
+	 * the health of each champion
 	 */
 	public void nextTurn() {
 		// System.out.println("nextTurn() called");
+		if (gameOver)
+		{
+			return;
+		}
+		
 		turn++;
 
-		// If all player champions have had their turn, it is the enemy teams turn to
-		// move
+		// If all player champions have had their turn, it is the enemy teams turn
 		if (playerTeamsTurn) {
 			// Check if all player champions have had their turn
 			if (turn == playerChampions.size()) {
@@ -167,6 +194,10 @@ public class LiveMatch extends Match implements ActionListener {
 		}
 
 		if (playerTeamsTurn) {
+			// If there are no player champions left, stop
+			if (playerChampions.size() == 0){
+				return;
+			}
 			// Player's turn
 			currentChampion = playerChampions.get(turn);
 
@@ -193,11 +224,12 @@ public class LiveMatch extends Match implements ActionListener {
 
 	}
 
-	@Override
-	public MatchResult getMatchResult() {
-		// TODO Just for testing purposes. Need to be changed to return the correct
-		// winner and loser.
-		return matchOver(team1, team2);
+	/**
+	 * Generates a match result for the match.
+	 * @return a MatchResult object containing the match results
+	 */
+	public MatchResult getMatchResult(Team winner, Team loser) {
+		return matchOver(winner, loser);
 	}
 
 	/**
@@ -582,14 +614,19 @@ public class LiveMatch extends Match implements ActionListener {
 		if (champions.size() == 0) {
 			if (team == team1) {
 				// Enemy wins
-				matchView.showDialogue(
-						team1.getName() + " has had all their champions injured. " + team2.getName() + " wins!");
-				gameManager.finishedMatch(matchOver(team2, team1));
+				GameOver(
+					team1.getName() + " has had all their champions injured. " + team2.getName() + " wins!",
+					team2, 
+					team1);
+				
+				return;
 			} else {
 				// Player wins
-				matchView.showDialogue(
-						team2.getName() + " has had all their champions injured. " + team1.getName() + " wins!");
-				gameManager.finishedMatch(matchOver(team1, team2));
+				GameOver(
+					team2.getName() + " has had all their champions injured. " + team1.getName() + " wins!",
+					team1, 
+					team2);
+				return;
 			}
 		} else {
 			Random random = new Random();
@@ -609,23 +646,27 @@ public class LiveMatch extends Match implements ActionListener {
 	 */
 	private void CheckFlagHolderPosition(Champion champion) {
 		if (championIsOnPlayerTeam(champion)) {
-			if (champion.getPosition() == 5 || champion.getPosition() == 6) {
+			if (champion.getPosition() == 6) {
 				// Player victory!
-				matchView.showDialogue(
-						champion.getName() + " has moved the flag across the field! " + team1.getName() + " wins!");
-				gameManager.finishedMatch(matchOver(team1, team2));
+				GameOver(
+					champion.getName() + " has moved the flag across the field! " + team1.getName() + " wins!",
+					team1, 
+					team2);
 			}
-
+			
+			return;
 		}
 
 		if (!championIsOnPlayerTeam(champion)) {
-			if (champion.getPosition() == 1 || champion.getPosition() == 0) {
+			if (champion.getPosition() == 0) {
 				// Enemy victory!
-				matchView.showDialogue(
-						champion.getName() + " has moved the flag across the field! " + team2.getName() + " wins!");
-				gameManager.finishedMatch(matchOver(team2, team1));
+				GameOver(
+					champion.getName() + " has moved the flag across the field! " + team2.getName() + " wins!",
+					team2,
+					team1);
 			}
-
+			
+			return;
 		}
 	}
 
@@ -637,6 +678,19 @@ public class LiveMatch extends Match implements ActionListener {
 	private void ChampionHealthRegen(Champion champion) {
 		champion.addStamina(champion.getRegen());
 		getCard(champion).updateCard();
+	}
+	
+	private void GameOver(String messageToPlayer, Team winner, Team loser)
+	{
+		// Super final measure to prevent double gameovers
+		if (gameOver)
+		{
+			return;
+		}
+		
+		gameOver = true;
+		matchView.showDialogue(messageToPlayer);
+		gameManager.finishedMatch(matchOver(winner, loser));
 	}
 
 }

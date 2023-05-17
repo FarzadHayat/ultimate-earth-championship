@@ -23,6 +23,10 @@ import manager.GameManager;
  */
 public class GameEnvironment {
 
+	// Game manager
+	private GameManager gameManager = GameManager.getInstance();
+	
+	// Config
 	private Configuration config = Configuration.getInstance();
 	
 	/**
@@ -223,7 +227,60 @@ public class GameEnvironment {
 			throw new GameFinishedException();
 		} else {
 			currentWeek += 1;
+			trainChampionsNotInUse();
+			applyWeeklyPriceChange();
 		}
 	}
 
+	/**
+	 * Finds all champions not currently in a team and gives them an XP boost
+	 * defined in the config class
+	 */
+	public void trainChampionsNotInUse()
+	{
+		ArrayList<Champion> champsNotInUse = new ArrayList<Champion>(gameManager.getAllChampions());
+		
+		// For each team
+		for (Team team : gameManager.getTeams())
+		{
+			// For each champion in the team
+			for (Champion champ : team.getChampions())
+			{
+				// Remove it from the champsNotInUse arraylist
+				if (champsNotInUse.contains(champ))
+				{
+					champsNotInUse.remove(champ);
+				}
+			}
+		}
+		
+		// This leaves us with a list of champions not in anybody's team
+		
+		for (Champion champ : champsNotInUse)
+		{
+			champ.giveXP(config.UNUSED_CHAMPIONS_WEEKLY_XP_GAIN);
+		}
+		
+	}
+
+	/**
+	 * Applies weekly price change to all champions and weapons across the teams
+	 */
+	public void applyWeeklyPriceChange()
+	{
+		for (Team team : gameManager.getTeams())
+		{
+			// For each champion
+			for (Champion champ : team.getChampions())
+			{
+				champ.applyWeeklyPriceChange();
+			}
+			
+			// For each weapon
+			for (Weapon weapon : team.getWeapons())
+			{
+				weapon.applyWeeklyPriceChange();
+			}
+		}
+	}
 }

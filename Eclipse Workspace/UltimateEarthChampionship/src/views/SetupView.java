@@ -67,7 +67,8 @@ public class SetupView extends JPanel {
 	private JPanel championsPanel;
 
 	// Background image
-	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "setup.jpg");
+	private ImageIcon icon = new ImageIcon(
+			getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "setup.jpg"));
 
 	/**
 	 * Constructor, sets up this class

@@ -32,7 +32,8 @@ public class EndingView extends JPanel {
 	private ArrayList<Team> teams;
 
 	// Background image
-	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "story7.jpg");
+	private ImageIcon icon = new ImageIcon(
+			getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "story7.jpg"));
 
 	public EndingView(ArrayList<Team> teams) {
 		this.teams = orderTeams(teams);

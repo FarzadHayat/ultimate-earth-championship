@@ -108,7 +108,7 @@ public class CutsceneView extends JPanel {
 		CutsceneSlide slide = cutscene.nextSlide();
 		slideText = slide.getText();
 		slideImagePath = slide.getImagePath();
-		icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + slideImagePath);
+		icon = new ImageIcon(getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + slideImagePath));
 
 		if (cutscene.checkNextSlide() == null) {
 			continueButton.setText("Go to setup");
