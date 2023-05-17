@@ -69,7 +69,7 @@ public class StatLabel extends JPanel {
 	private void addImageLabel(String imageFileName) {
 		ImageIcon imageIcon = null;
 		String path = Configuration.ICON_IMAGE_FOLDER_PATH + imageFileName + ".png";
-		imageIcon = new ImageIcon(path);
+		imageIcon = new ImageIcon(getClass().getResource(path));
 		ImageIcon resizedIcon;
 		if (imageIcon != null) {
 			resizedIcon = new ImageIcon(

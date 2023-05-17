@@ -1,9 +1,5 @@
 package model;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import exception.FullTeamException;
@@ -138,19 +134,8 @@ public abstract class Champion implements Purchasable, Cloneable {
 
 		this.damageTakenThisWeek = 0f;
 
-		try {
-			String path = Configuration.CHAMPION_IMAGE_FOLDER_PATH + String.valueOf(getClass().getSimpleName())
-					+ ".png";
-			image = new ImageIcon(ImageIO.read(new File(path)));
-
-		} catch (IOException e) {
-			if (Configuration.DEBUG) {
-				System.out.println("Could not find image file for " + getClass().getSimpleName() + " object!");
-			}
-		}
-
 		String path = Configuration.CHAMPION_IMAGE_FOLDER_PATH + String.valueOf(getClass().getSimpleName()) + ".png";
-		image = new ImageIcon(path);
+		image = new ImageIcon(getClass().getResource(path));
 
 		level = 1;
 		currentXP = 0f;

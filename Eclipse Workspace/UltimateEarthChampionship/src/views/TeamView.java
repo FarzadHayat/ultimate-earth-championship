@@ -23,7 +23,8 @@ public class TeamView extends JPanel {
 
 	private JPanel mainPanel;
 
-	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "team.jpg");
+	private ImageIcon icon = new ImageIcon(
+			getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "team.jpg"));
 
 	/**
 	 * Create the panel.

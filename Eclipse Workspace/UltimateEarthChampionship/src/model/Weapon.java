@@ -64,7 +64,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 		setPriceChangeWeekly(priceChangeWeekly * config.WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER);
 
 		String path = Configuration.WEAPON_IMAGE_FOLDER_PATH + String.valueOf(getClass().getSimpleName()) + ".jpg";
-		setImage(new ImageIcon(path));
+		setImage(new ImageIcon(getClass().getResource(path)));
 	}
 
 	/**

@@ -113,22 +113,22 @@ public class Configuration {
 	/**
 	 * Path to folder containing champion images
 	 */
-	public static final String CHAMPION_IMAGE_FOLDER_PATH = "img/champions/";
+	public static final String CHAMPION_IMAGE_FOLDER_PATH = "/images/champions/";
 
 	/**
 	 * Path to folder containing weapon images
 	 */
-	public static final String WEAPON_IMAGE_FOLDER_PATH = "img/weapons/";
+	public static final String WEAPON_IMAGE_FOLDER_PATH = "/images/weapons/";
 
 	/**
 	 * Path to folder containing icon images
 	 */
-	public static final String ICON_IMAGE_FOLDER_PATH = "img/icons/";
+	public static final String ICON_IMAGE_FOLDER_PATH = "/images/icons/";
 
 	/**
 	 * Path to folder containing background images
 	 */
-	public static final String BACKGROUND_IMAGE_FOLDER_PATH = "img/backgrounds/";
+	public static final String BACKGROUND_IMAGE_FOLDER_PATH = "/images/backgrounds/";
 
 	/**
 	 * Number of teams, including player team
@@ -252,17 +252,18 @@ public class Configuration {
 	 * that 1 second = 1000 Ms
 	 */
 	public final int AI_WAIT_TIME_MS = 450;
-	
+
 	/**
-	 * The percentage chance increase of a champion joining the team randomly per empty slot per week
+	 * The percentage chance increase of a champion joining the team randomly per
+	 * empty slot per week
 	 */
 	public final float CHANCE_OF_CHAMPION_JOIN_PER_EMPTY_SLOT = 4f;
-	
+
 	/**
-	 * Multiplied by the damage taken each week by a champion to find their % chance of quitting
+	 * Multiplied by the damage taken each week by a champion to find their % chance
+	 * of quitting
 	 */
 	public final float CHANCE_OF_CHAMPION_LEAVE_DAMAGE_FACTOR = 0.1f;
-	
 
 	/**
 	 * The amount that stamina increases when a champion levels up

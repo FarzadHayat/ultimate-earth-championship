@@ -22,7 +22,8 @@ public class ShopView extends JPanel {
 
 	private JPanel mainPanel;
 
-	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "shop.jpg");
+	private ImageIcon icon = new ImageIcon(
+			getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "shop.jpg"));
 
 	/**
 	 * Create the panel.

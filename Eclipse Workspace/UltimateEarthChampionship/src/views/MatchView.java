@@ -50,7 +50,8 @@ public class MatchView extends JPanel {
 	/**
 	 * Background image for the match
 	 */
-	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "match.jpg");
+	private ImageIcon icon = new ImageIcon(
+			getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "match.jpg"));
 
 	/**
 	 * Create the panel and start the match.

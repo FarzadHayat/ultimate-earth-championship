@@ -37,7 +37,8 @@ public class StadiumView extends JPanel {
 	/**
 	 * Background image for the stadium
 	 */
-	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "stadium.jpg");
+	private ImageIcon icon = new ImageIcon(
+			getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "stadium.jpg"));
 
 	/**
 	 * Create the panel.

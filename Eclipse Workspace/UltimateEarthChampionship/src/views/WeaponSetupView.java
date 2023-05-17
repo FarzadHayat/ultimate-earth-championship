@@ -42,7 +42,8 @@ public class WeaponSetupView extends JPanel {
 	private JPanel chosenPanel;
 
 	// The background image
-	private ImageIcon icon = new ImageIcon(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "weaponsetup.jpg");
+	private ImageIcon icon = new ImageIcon(
+			getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "weaponsetup.jpg"));
 
 	/**
 	 * Create the panel.
