@@ -83,11 +83,9 @@ public class Team {
 
 		score = 0;
 
-		if (startingChampions.size() != Configuration.NUM_CHOSEN_CHAMPIONS) {
+		if (startingChampions.size() != Configuration.NUM_CHOSEN_CHAMPIONS && Configuration.DEBUG) {
 			System.out.println(
-					String.format("EXCEPTION: Starting champions size is not %s!", Configuration.NUM_CHOSEN_CHAMPIONS));
-			// TODO: Throw an exception
-			return;
+					String.format("WARNING: Starting champions size is not %s!", Configuration.NUM_CHOSEN_CHAMPIONS));
 		}
 		champions = startingChampions;
 
