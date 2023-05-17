@@ -229,6 +229,7 @@ public class GameEnvironment {
 		} else {
 			currentWeek += 1;
 			trainChampionsNotInUse();
+			applyWeeklyPriceChange();
 		}
 	}
 
@@ -261,5 +262,26 @@ public class GameEnvironment {
 			champ.giveXP(config.UNUSED_CHAMPIONS_WEEKLY_XP_GAIN);
 		}
 		
+	}
+
+	/**
+	 * Applies weekly price change to all champions and weapons across the teams
+	 */
+	public void applyWeeklyPriceChange()
+	{
+		for (Team team : gameManager.getTeams())
+		{
+			// For each champion
+			for (Champion champ : team.getChampions())
+			{
+				champ.applyWeeklyPriceChange();
+			}
+			
+			// For each weapon
+			for (Weapon weapon : team.getWeapons())
+			{
+				weapon.applyWeeklyPriceChange();
+			}
+		}
 	}
 }
