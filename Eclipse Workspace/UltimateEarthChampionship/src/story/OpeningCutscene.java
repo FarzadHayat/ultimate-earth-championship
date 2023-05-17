@@ -2,12 +2,23 @@ package story;
 
 import java.util.ArrayList;
 
+/**
+ * The cutscene for the game that is played when you first run the game.
+ */
 public class OpeningCutscene extends Cutscene {
 
+	/**
+	 * Create the cutscene and generate the content.
+	 */
 	public OpeningCutscene() {
 		super(generateContent());
 	}
 
+	/**
+	 * Return the contents of the cutscene as a list of cutscene slides.
+	 *
+	 * @return the list of cutscene slide objects
+	 */
 	private static ArrayList<CutsceneSlide> generateContent() {
 		ArrayList<CutsceneSlide> c = new ArrayList<>();
 

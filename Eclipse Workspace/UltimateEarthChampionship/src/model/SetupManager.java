@@ -6,9 +6,13 @@ import java.util.regex.Pattern;
 
 import exception.InputException;
 
+/**
+ * An abstract class that contains static methods for handling user input inside
+ * the setup stage of the game.
+ */
 public abstract class SetupManager {
 
-	static model.Configuration config = model.Configuration.getInstance();
+	static Configuration config = Configuration.getInstance();
 
 	/**
 	 * Takes in a possible team name and returns it if it is acceptable

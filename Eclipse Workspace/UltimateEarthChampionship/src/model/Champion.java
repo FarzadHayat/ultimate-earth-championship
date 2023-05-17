@@ -343,6 +343,11 @@ public abstract class Champion implements Purchasable, Cloneable {
 		this.flagCarrier = flagCarrier;
 	}
 
+	/**
+	 * Return the amount of damage taken this week
+	 *
+	 * @return the value of damageTakenThisWeek
+	 */
 	public float getDamageTakenThisWeek() {
 		return damageTakenThisWeek;
 	}

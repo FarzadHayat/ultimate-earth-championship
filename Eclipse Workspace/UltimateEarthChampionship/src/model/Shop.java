@@ -121,6 +121,7 @@ public class Shop {
 	/**
 	 * Return a randomly chosen champion from the given list.
 	 *
+	 * @param champions the list of champions to pick from
 	 * @return the randomly chosen champion
 	 */
 	public static Champion getRandomChampion(ArrayList<Champion> champions) {
@@ -166,6 +167,7 @@ public class Shop {
 	/**
 	 * Return a randomly chosen weapon from all weapons.
 	 *
+	 * @param weapons the list of weapons to pick from
 	 * @return the randomly chosen weapon
 	 */
 	public Weapon getRandomWeapon(ArrayList<Weapon> weapons) {

@@ -156,8 +156,8 @@ public abstract class CommandLineUtilities {
 	 * printed as the prefix followed by the weapon's name. The prefix is usually
 	 * set to either "BUY" or "SELL".
 	 *
-	 * @param prefix    the prefix to use
-	 * @param champions the list of weapons to print
+	 * @param prefix  the prefix to use
+	 * @param weapons the list of weapons to print
 	 */
 	public static void printWeaponOptions(String prefix, ArrayList<Weapon> weapons) {
 		for (int i = 0; i < weapons.size(); i++) {

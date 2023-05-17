@@ -8,8 +8,8 @@ import model.Configuration;
 import model.Team;
 
 /**
- * Superclass for dumb and live matches,
- * Keeps hold of relevant data relating to a match as well as some helper functions for combat
+ * Superclass for dumb and live matches, Keeps hold of relevant data relating to
+ * a match as well as some helper functions for combat
  */
 public abstract class Match {
 
@@ -39,6 +39,7 @@ public abstract class Match {
 
 	/**
 	 * Gets the score
+	 *
 	 * @return The score
 	 */
 	public int getScore() {
@@ -47,6 +48,7 @@ public abstract class Match {
 
 	/**
 	 * Gets the 1st team in the match
+	 *
 	 * @return The 1st team
 	 */
 	public Team getTeam1() {
@@ -55,6 +57,7 @@ public abstract class Match {
 
 	/**
 	 * Gets the 2nd team competing in this match
+	 *
 	 * @return The 2nd team
 	 */
 	public Team getTeam2() {
@@ -88,6 +91,11 @@ public abstract class Match {
 		prizeScore = config.PRIZE_SCORE_BASE + (currentWeek * config.PRIZE_SCORE_WEEKLY_MODIFIER);
 	}
 
+	/**
+	 * get the results for the match. Handled individually by the match subclasses.
+	 *
+	 * @return a MatchResult object containing the match results
+	 */
 	public abstract MatchResult getMatchResult();
 
 	/**
@@ -124,11 +132,13 @@ public abstract class Match {
 	}
 
 	/**
-	 * Generates a MatchResult for the end of the match, Also applied
-	 * the effect of the match to the winner and loser
+	 * Generates a MatchResult for the end of the match, Also applied the effect of
+	 * the match to the winner and loser
+	 *
 	 * @param winner The winning team of the match
-	 * @param loser The losing team of the match
-	 * @return A MatchResult object detailing the outcome of the match to be displayed by the View
+	 * @param loser  The losing team of the match
+	 * @return A MatchResult object detailing the outcome of the match to be
+	 *         displayed by the View
 	 */
 	protected MatchResult matchOver(Team winner, Team loser) {
 		// Apply match conditions:

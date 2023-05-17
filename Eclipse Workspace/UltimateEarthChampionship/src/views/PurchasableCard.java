@@ -27,6 +27,12 @@ import model.Champion;
 import model.Configuration;
 import model.Purchasable;
 
+/**
+ * An abstract class for displaying a purchasable in the form of a panel. The
+ * constructor creates a basic card with just the name and the image of the
+ * purchasable. The other methods allow you to customize the card by adding
+ * other features.
+ */
 public abstract class PurchasableCard extends JPanel {
 
 	private static final long serialVersionUID = 5339330332731208144L;
@@ -66,14 +72,23 @@ public abstract class PurchasableCard extends JPanel {
 		addImageIcon();
 	}
 
+	/**
+	 * Set the state of the card to become selected.
+	 */
 	public void selected() {
 		setBorder(new LineBorder(Configuration.GREEN, 3));
 	}
 
+	/**
+	 * Set the state of the card to become hovered.
+	 */
 	public void hovered() {
 		setBorder(new LineBorder(Configuration.ORANGE, 3));
 	}
 
+	/**
+	 * Set the state of the card to become unselected.
+	 */
 	public void unselected() {
 		setBorder(new LineBorder(Color.darkGray, 3));
 	}
@@ -104,6 +119,11 @@ public abstract class PurchasableCard extends JPanel {
 		mainPanel.add(imageLabel, BorderLayout.WEST);
 	}
 
+	/**
+	 * Add an overlay on top of the card containing the given text in a red color.
+	 *
+	 * @param text the text to display on the overlay
+	 */
 	public void addOverlay(String text) {
 		soldOverlay = new JPanel(new GridBagLayout());
 		soldOverlay.setBackground(new Color(0.7f, 0.7f, 0.7f, 0.7f));
@@ -168,6 +188,10 @@ public abstract class PurchasableCard extends JPanel {
 		mainPanel.add(sellButton, BorderLayout.SOUTH);
 	}
 
+	/**
+	 * Add a panel to display the purchasable stats. Implemented by the individual
+	 * subclasses.
+	 */
 	public abstract void addStatsPanel();
 
 }

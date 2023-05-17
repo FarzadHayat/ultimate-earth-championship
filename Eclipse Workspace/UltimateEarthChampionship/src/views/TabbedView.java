@@ -7,6 +7,10 @@ import javax.swing.SwingConstants;
 
 import model.Configuration;
 
+/**
+ * A panel that contains a tabbed pane for navigating between the game's team,
+ * shop, and stadium views.
+ */
 public class TabbedView extends JPanel {
 
 	private static final long serialVersionUID = 8081074315449639244L;
