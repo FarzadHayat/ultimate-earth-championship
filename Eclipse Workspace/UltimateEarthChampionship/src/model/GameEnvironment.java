@@ -160,15 +160,14 @@ public class GameEnvironment {
 		for (Team team : GameManager.getInstance().getTeams())
 		{
 			// If the team has more than 5 champions
-			if (team.getChampions().size() > 5)
+			if (team.getChampions().size() > 4)
 			{
 				// For each champion in each team, find their chance of leaving
-				for (Champion champ : team.getChosenChampions())
+				for (Champion champ : team.getChampions())
 				{
-					// Just iterate over chosen champions, as they are the only ones who would have
-					// taken damage.
 					
 					float chanceOccuring = champ.getDamageTakenThisWeek() * config.CHANCE_OF_CHAMPION_LEAVE_DAMAGE_FACTOR;
+
 					if (chanceCheck(chanceOccuring))
 					{
 						// Run event

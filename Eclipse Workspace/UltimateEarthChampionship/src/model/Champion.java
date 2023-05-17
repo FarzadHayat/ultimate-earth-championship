@@ -187,11 +187,12 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 */
 	public void addStamina(float staminaChange) {
 		stamina += staminaChange;
-
-		if (staminaChange < 0f) {
-			damageTakenThisWeek -= staminaChange;
+		
+		if (staminaChange < 0f)
+		{
+			damageTakenThisWeek += -staminaChange;
 		}
-
+				
 		if (stamina > maxStamina) {
 			stamina = maxStamina;
 		}
@@ -543,6 +544,16 @@ public abstract class Champion implements Purchasable, Cloneable {
 	public void sell(Team team) {
 		team.removeChampion(this);
 		team.addMoney(getPrice());
+	}
+	
+	/**
+	 * Rests the champion, restoring them back to full health,
+	 * Should be called at the end of each week
+	 */
+	public void rest()
+	{
+		setStamina(getMaxStamina());
+		damageTakenThisWeek = 0f;
 	}
 
 	/**

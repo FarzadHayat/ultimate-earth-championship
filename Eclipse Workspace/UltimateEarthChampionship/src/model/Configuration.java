@@ -309,7 +309,7 @@ public class Configuration {
 	}
 
 	public void setDifficulty(float newDifficulty) {
-		System.out.println("Setting difficulty to " + newDifficulty);
+		//System.out.println("Setting difficulty to " + newDifficulty);
 		difficulty = newDifficulty;
 
 		AI_DAMAGE_MULTIPLIER = difficulty;

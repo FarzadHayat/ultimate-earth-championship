@@ -82,6 +82,7 @@ public class EndingView extends JPanel {
 		bottomGrid.setLayout(gbl_bottomGrid);
 
 		JLabel lblThanksForPlaying = new JLabel("Thank you for playing Ultimate Earth Championship");
+		lblThanksForPlaying.setFont(Configuration.TEXT_FONT);
 		lblThanksForPlaying.setForeground(Color.white);
 		GridBagConstraints gbc_lblThankYouFor = new GridBagConstraints();
 		gbc_lblThankYouFor.fill = GridBagConstraints.BOTH;
@@ -107,6 +108,7 @@ public class EndingView extends JPanel {
 
 		JLabel creditsLabel = new JLabel("Made by Farzad and Oliver");
 		creditsLabel.setForeground(Color.white);
+		creditsLabel.setFont(Configuration.TEXT_FONT);
 		GridBagConstraints gbc_creditsLabel = new GridBagConstraints();
 		gbc_creditsLabel.insets = new Insets(0, 0, 0, 5);
 		gbc_creditsLabel.gridx = 1;
