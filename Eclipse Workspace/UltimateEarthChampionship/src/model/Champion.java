@@ -206,9 +206,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 		{
 			damageTakenThisWeek += -staminaChange;
 		}
-		
-		System.out.println(name + " has taken damage, current weekly damage total: " + damageTakenThisWeek);
-		
+				
 		if (stamina > maxStamina) {
 			stamina = maxStamina;
 		}

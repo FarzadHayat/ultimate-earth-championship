@@ -256,12 +256,12 @@ public class Configuration {
 	/**
 	 * The percentage chance increase of a champion joining the team randomly per empty slot per week
 	 */
-	public final float CHANCE_OF_CHAMPION_JOIN_PER_EMPTY_SLOT = 4f;
+	public final float CHANCE_OF_CHAMPION_JOIN_PER_EMPTY_SLOT = 5f;
 	
 	/**
 	 * Multiplied by the damage taken each week by a champion to find their % chance of quitting
 	 */
-	public final float CHANCE_OF_CHAMPION_LEAVE_DAMAGE_FACTOR = 4f;
+	public final float CHANCE_OF_CHAMPION_LEAVE_DAMAGE_FACTOR = 0.5f;
 	
 
 	/**
