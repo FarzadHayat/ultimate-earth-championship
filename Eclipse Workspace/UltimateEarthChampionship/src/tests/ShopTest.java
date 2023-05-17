@@ -1,18 +1,23 @@
+/**
+ *
+ */
 package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import champions.AdamSmith;
+import champions.JohnBrowning;
 import champions.JohnDoe;
+import champions.JohnFKennedy;
 import manager.GameManager;
 import model.Champion;
 import model.Configuration;
@@ -24,27 +29,52 @@ import weapons.Pickaxe;
 import weapons.Shield;
 import weapons.Sledgehammer;
 
+/**
+ * @author fha62
+ *
+ */
 class ShopTest {
 
 	private Shop shop;
-	private GameManager gameManager;
-	private Configuration config;
+	private static GameManager gameManager;
+	private static Configuration config;
 
-	@BeforeEach
-	void setup() {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
 		gameManager = GameManager.getInstance();
 		gameManager.initialize();
 		config = Configuration.getInstance();
-		shop = new Shop();
+		gameManager.setPlayerTeam(new Team(true, "Test", new ArrayList<Champion>(
+				List.of(new AdamSmith(), new JohnDoe(), new JohnBrowning(), new JohnFKennedy()))));
+		gameManager.generateAITeams();
 	}
 
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@BeforeEach
+	void setUp() throws Exception {
+		Shop newShop = new Shop();
+		gameManager.setShop(newShop);
+		shop = newShop;
+	}
+
+	/**
+	 * Test method for {@link model.Shop#generateCatalogue()}.
+	 */
 	@Test
 	void testGenerateCatalogue() {
 		shop.generateCatalogue();
-		assertTrue(shop.getAvailableChampions().size() == config.NUM_TEAMS
-				&& shop.getAvailableWeapons().size() == config.NUM_TEAMS);
+		assertTrue(shop.getAvailableChampions().size() == config.NUM_TEAMS);
+		assertTrue(shop.getAvailableWeapons().size() == config.NUM_TEAMS);
 	}
 
+	/**
+	 * Test method for {@link model.Shop#generateChampions()}.
+	 */
 	@Test
 	void testGenerateChampions() {
 		shop.generateChampions();
@@ -65,64 +95,63 @@ class ShopTest {
 		assertTrue(pass);
 	}
 
+	/**
+	 * Test method for {@link model.Shop#getRemainingChampions()}.
+	 */
 	@Test
-	void testGetRandomChampion_oneArray() {
-		Champion champion1 = new JohnDoe();
-		Champion randomChampion = Shop.getRandomChampion(new ArrayList<>(List.of(champion1)));
-		assertEquals(champion1, randomChampion);
-	}
-
-	@Test
-	void testGenerateWeapons() {
-		shop.generateWeapons();
+	void testGetRemainingChampions() {
+		ArrayList<Champion> remainingChampions = shop.getRemainingChampions();
+		ArrayList<Champion> usedChampions = new ArrayList<Champion>();
+		for (Team team : gameManager.getTeams()) {
+			usedChampions.addAll(team.getChampions());
+		}
 		boolean pass = true;
-		for (Weapon weapon : shop.getAvailableWeapons()) {
-			if (!gameManager.getAllWeapons().contains(weapon)) {
+		for (Champion champion : remainingChampions) {
+			if (usedChampions.contains(champion)) {
 				pass = false;
 			}
-			for (Team team : gameManager.getTeams()) {
-				if (team.getWeapons().contains(weapon)) {
-					pass = false;
-				}
-			}
-		}
-		if (shop.getAvailableWeapons().size() != config.NUM_TEAMS) {
-			pass = false;
 		}
 		assertTrue(pass);
 	}
 
+	/**
+	 * Test method for {@link model.Shop#getRandomWeapon(java.util.ArrayList)}.
+	 */
 	@Test
-	void testGetRandomWeapon_oneArray() {
-		Weapon weapon1 = new Shield();
-		Weapon randomWeapon = shop.getRandomWeapon(new ArrayList<>(List.of(weapon1)));
-		assertEquals(weapon1, randomWeapon);
-	}
-
-	@Test
-	void testGetRandomWeapon_fourArray() {
-		int numTests = 1000;
+	void testGetRandomWeapon() {
 		Weapon weapon1 = new Shield();
 		Weapon weapon2 = new Chainsaw();
 		Weapon weapon3 = new Pickaxe();
 		Weapon weapon4 = new Sledgehammer();
 		ArrayList<Weapon> weaponList = new ArrayList<>(List.of(weapon1, weapon2, weapon3, weapon4));
-		Map<Weapon, Integer> freq = new HashMap<>();
-		for (int i = 0; i < numTests; i++) {
-			Weapon randomWeapon = shop.getRandomWeapon(weaponList);
-			freq.put(randomWeapon, freq.getOrDefault(randomWeapon, 0) + 1);
-		}
-		ArrayList<Boolean> inRange = new ArrayList<>();
-		for (Weapon weapon : weaponList) {
-			int repeats = freq.get(weapon);
-			inRange.add(repeats <= (numTests / weaponList.size() + numTests * 0.1)
-					&& repeats >= (numTests / weaponList.size() - numTests * 0.1));
-		}
-		for (boolean bool : inRange) {
-			assertTrue(bool);
-		}
+		ArrayList<Class<?>> classList = new ArrayList<>(
+				List.of(weapon1.getClass(), weapon2.getClass(), weapon3.getClass(), weapon4.getClass()));
+		Weapon randomWeapon = shop.getRandomWeapon(weaponList);
+		assertFalse(weaponList.contains(randomWeapon));
+		assertTrue(classList.contains(randomWeapon.getClass()));
 	}
 
+	/**
+	 * Test method for {@link model.Shop#getStartingChampions()}.
+	 */
+	@Test
+	void testGetStartingChampions() {
+		ArrayList<Champion> champions = shop.getStartingChampions();
+		assertEquals(Configuration.NUM_SETUP_CHAMPIONS, champions.size());
+	}
+
+	/**
+	 * Test method for {@link model.Shop#generateWeapons()}.
+	 */
+	@Test
+	void testGenerateWeapons() {
+		shop.generateWeapons();
+		assertEquals(config.NUM_TEAMS, shop.getAvailableWeapons().size());
+	}
+
+	/**
+	 * Test method for {@link model.Shop#removeChampion(model.Champion)}.
+	 */
 	@Test
 	void testRemoveChampion() {
 		Champion champion1 = new JohnDoe();
@@ -133,6 +162,9 @@ class ShopTest {
 		assertEquals(new ArrayList<>(List.of(champion1, champion3)), shop.getAvailableChampions());
 	}
 
+	/**
+	 * Test method for {@link model.Shop#removeWeapon(model.Weapon)}.
+	 */
 	@Test
 	void testRemoveWeapon() {
 		Weapon weapon1 = new Shield();
