@@ -3,6 +3,9 @@ package events;
 import model.Champion;
 import model.Team;
 
+/**
+ * Represents a random event in which a member of the team is exhausted by a rampaging animal
+ */
 public class RampagingAnimalEvent extends RandomEvent {
 
 	/**
@@ -10,10 +13,17 @@ public class RampagingAnimalEvent extends RandomEvent {
 	 */
 	private static int occurrenceChance = 60;
 
+	/**
+	 * Constructor
+	 */
 	public RampagingAnimalEvent() {
 		super(occurrenceChance);
 	}
 
+	/**
+	 * Runs the event,
+	 * @return A random event info containing what has occurred.
+	 */
 	@Override
 	public RandomEventInfo runEvent(Team team) {
 		// Effect Logic:
@@ -21,7 +31,7 @@ public class RampagingAnimalEvent extends RandomEvent {
 		Champion champ = team.randomChampion();
 		String c = champ.getName();
 
-		champ.addMaxStamina(-15);
+		champ.addMaxStamina(-10);
 		champ.setStamina(champ.getMaxStamina());
 
 		// Generate GUI Info:
@@ -29,7 +39,7 @@ public class RampagingAnimalEvent extends RandomEvent {
 		String name = "A rampage through the dojo";
 		String description = "A rampaging purple catbull from the planet Vargoth broke into the team's dojo and chased "
 				+ c + ". " + "Luckily nobody was hurt, but " + c + " was left severely exerted";
-		String effectString = c + ": -15 max Stamina";
+		String effectString = c + ": -10 max Stamina";
 
 		// Return it
 

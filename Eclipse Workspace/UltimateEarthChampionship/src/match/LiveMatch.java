@@ -680,6 +680,12 @@ public class LiveMatch extends Match implements ActionListener {
 		getCard(champion).updateCard();
 	}
 	
+	/**
+	 * Ends the game, preventing a next turn from occurring and displays a message to the player.
+	 * @param messageToPlayer The dialogue message to be shown to the player
+	 * @param winner The winning team
+	 * @param loser The losing team
+	 */
 	private void GameOver(String messageToPlayer, Team winner, Team loser)
 	{
 		// Super final measure to prevent double gameovers

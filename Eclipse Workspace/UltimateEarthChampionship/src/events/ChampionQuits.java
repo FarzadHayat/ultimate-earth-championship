@@ -3,6 +3,9 @@ package events;
 import model.Champion;
 import model.Team;
 
+/**
+ * Represents a random event in which a random champion quits the team
+ */
 public class ChampionQuits extends RandomEvent {
 
 	/**
@@ -12,11 +15,18 @@ public class ChampionQuits extends RandomEvent {
 	
 	private Champion championQuitting;
 	
+	/**
+	 * Constructor
+	 */
 	public ChampionQuits(Champion championQuitting) {
 		super(occurrenceChance);
 		this.championQuitting = championQuitting;
 	}
 
+	/**
+	 * Runs the event,
+	 * @return A random event info containing what has occurred.
+	 */
 	@Override
 	public RandomEventInfo runEvent(Team team) {
 		// Effect Logic:

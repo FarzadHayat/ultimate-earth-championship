@@ -11,6 +11,9 @@ import weapons.Katana;
 import weapons.Spear;
 import weapons.Sword;
 
+/**
+ * Represents a random event in which the team receives a free weapon
+ */
 public class FreeWeaponEvent extends RandomEvent {
 
 	/**
@@ -18,10 +21,17 @@ public class FreeWeaponEvent extends RandomEvent {
 	 */
 	private static int occurrenceChance = 50;
 
+	/**
+	 * Constructor
+	 */
 	public FreeWeaponEvent() {
 		super(occurrenceChance);
 	}
 
+	/**
+	 * Runs the event,
+	 * @return A random event info containing what has occurred.
+	 */
 	@Override
 	public RandomEventInfo runEvent(Team team) {
 		// Effect Logic:

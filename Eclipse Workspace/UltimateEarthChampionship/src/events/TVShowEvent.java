@@ -2,6 +2,10 @@ package events;
 
 import model.Team;
 
+/**
+ * Represents a random event in which the team receives donations from appearing
+ * on an alien tv show
+ */
 public class TVShowEvent extends RandomEvent {
 
 	/**
@@ -9,10 +13,17 @@ public class TVShowEvent extends RandomEvent {
 	 */
 	private static int occurrenceChance = 80;
 
+	/**
+	 * Constructor
+	 */
 	public TVShowEvent() {
 		super(occurrenceChance);
 	}
 
+	/**
+	 * Runs the event,
+	 * @return A random event info containing what has occurred.
+	 */
 	@Override
 	public RandomEventInfo runEvent(Team team) {
 		// Effect Logic:

@@ -2,6 +2,9 @@ package events;
 
 import model.Team;
 
+/**
+ * Represents a random event in which the team is stolen from
+ */
 public class ThiefEvent extends RandomEvent {
 
 	/**
@@ -9,10 +12,17 @@ public class ThiefEvent extends RandomEvent {
 	 */
 	private static int occurrenceChance = 70;
 
+	/**
+	 * Constructor
+	 */
 	public ThiefEvent() {
 		super(occurrenceChance);
 	}
-
+	
+	/**
+	 * Runs the event,
+	 * @return A random event info containing what has occurred.
+	 */
 	@Override
 	public RandomEventInfo runEvent(Team team) {
 		// Effect Logic:

@@ -2,6 +2,10 @@ package events;
 
 import model.Team;
 
+/**
+ * Random event superclass, This class represents a randomly occurring event which
+ * could happen during a week's end.
+ */
 public abstract class RandomEvent {
 
 	/**
@@ -10,10 +14,18 @@ public abstract class RandomEvent {
 	 */
 	private int chanceOfOccuring;
 
+	/**
+	 * Returns the chance of this event occurring (as a percentage)
+	 * @return The chance of occurring (as a percentage)
+	 */
 	public int getChanceOfOccuring() {
 		return chanceOfOccuring;
 	}
 
+	/**
+	 * Constructor
+	 * @param chance The chance of this event happening naturally each week
+	 */
 	public RandomEvent(int chance) {
 		chanceOfOccuring = chance;
 	}

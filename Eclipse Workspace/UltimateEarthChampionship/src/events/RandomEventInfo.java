@@ -6,8 +6,6 @@ package events;
  * GUI It is done like this so that random events can be easily stored in a list
  * and presented to the user once at a time by the GUI.
  *
- * @author Oliver Coates
- *
  */
 public class RandomEventInfo {
 

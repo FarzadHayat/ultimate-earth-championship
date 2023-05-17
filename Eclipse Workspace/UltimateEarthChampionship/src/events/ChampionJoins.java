@@ -8,6 +8,9 @@ import model.Champion;
 import model.Shop;
 import model.Team;
 
+/**
+ * Represents a random event in which a random champion joins the team
+ */
 public class ChampionJoins extends RandomEvent {
 
 	/**
@@ -15,10 +18,17 @@ public class ChampionJoins extends RandomEvent {
 	 */
 	private static int occurrenceChance = 0; 
 	
+	/**
+	 * Constructor
+	 */
 	public ChampionJoins() {
 		super(occurrenceChance);
 	}
 
+	/**
+	 * Runs the event,
+	 * @return A random event info containing what has occurred.
+	 */
 	@Override
 	public RandomEventInfo runEvent(Team team) {
 		// Effect Logic:

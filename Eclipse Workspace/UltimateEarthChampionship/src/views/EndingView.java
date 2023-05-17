@@ -24,6 +24,10 @@ import manager.GameManager;
 import model.Configuration;
 import model.Team;
 
+/**
+ * The ending view, which shows the screen which shows the ranks of the four teams in the tournament
+ * and allows the player to start a new game or quit
+ */
 public class EndingView extends JPanel {
 
 	private static final long serialVersionUID = 6638392272492099486L;
@@ -35,6 +39,10 @@ public class EndingView extends JPanel {
 	private ImageIcon icon = new ImageIcon(
 			getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "story7.jpg"));
 
+	/**
+	 * Constructor, draws the screen. This will handle ordering the teams by score.
+	 * @param teams The list of four teams to be ordered and then shown
+	 */
 	public EndingView(ArrayList<Team> teams) {
 		this.teams = orderTeams(teams);
 
@@ -129,6 +137,10 @@ public class EndingView extends JPanel {
 
 	}
 
+	/**
+	 * Fills a grid to hold the four teams, ordered from highest to lowest scoring
+	 * @param teamGrid The teamgrid Jpanel to populate with teams
+	 */
 	public void drawResultsGrid(JPanel teamGrid) {
 		int num = 1;
 		for (Team team : teams) {

@@ -3,6 +3,9 @@ package events;
 import model.Champion;
 import model.Team;
 
+/**
+ * Represents a random event in which a member of the team receives radiation poisoning
+ */
 public class RadiationPoisoningEvent extends RandomEvent {
 
 	/**
@@ -10,10 +13,17 @@ public class RadiationPoisoningEvent extends RandomEvent {
 	 */
 	private static int occurrenceChance = 40;
 
+	/**
+	 * Constructor
+	 */
 	public RadiationPoisoningEvent() {
 		super(occurrenceChance);
 	}
 
+	/**
+	 * Runs the event,
+	 * @return A random event info containing what has occurred.
+	 */
 	@Override
 	public RandomEventInfo runEvent(Team team) {
 		// Effect Logic:
@@ -38,7 +48,7 @@ public class RadiationPoisoningEvent extends RandomEvent {
 		String description = "While perusing the alien legation, " + c
 				+ " decided to try some glowing roasted nurgoth. While " + c + " has "
 				+ "spent the last hour vomiting up radioactive blood, they appear to have become significantly stronger.";
-		String effectString = c + ": -25 Stamina, +3 Offense, + 2 Defense";
+		String effectString = c + ": -25 Stamina, +3 Offense, +2 Defense";
 
 		// Return it
 
