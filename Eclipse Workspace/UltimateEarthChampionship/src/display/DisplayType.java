@@ -5,5 +5,12 @@ package display;
  * in a graphical user interface (GUI) or a command line interface (CLI).
  */
 public enum DisplayType {
-	GUI, CLI
+	/**
+	 * The graphical user interface
+	 */
+	GUI,
+	/**
+	 * The command line interface
+	 */
+	CLI
 }

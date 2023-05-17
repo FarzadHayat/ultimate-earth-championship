@@ -14,6 +14,10 @@ import model.Champion;
 import model.Configuration;
 import model.Weapon;
 
+/**
+ * A panel that display the shop. The shop contains a subpanel for the available
+ * champions and a subpanel for the available weapons.
+ */
 public class ShopView extends JPanel {
 
 	private static final long serialVersionUID = 2101264902458190410L;
@@ -42,11 +46,17 @@ public class ShopView extends JPanel {
 		addAvailableWeaponsPanel();
 	}
 
+	/**
+	 * Add the header for the champions subpanel.
+	 */
 	private void addChampionsHeader() {
 		mainPanel.add(new HeaderPanel("Shop champions", true));
 		mainPanel.add(new HeaderPanel("You can only buy one champion per week", false));
 	}
 
+	/**
+	 * Add the header for weapons subpanel.
+	 */
 	private void addWeaponsHeader() {
 		mainPanel.add(new HeaderPanel("Shop weapons", true));
 		mainPanel.add(new HeaderPanel("You can buy as many weapons as you want", false));
@@ -90,6 +100,14 @@ public class ShopView extends JPanel {
 		mainPanel.add(weaponsPanel);
 	}
 
+	/**
+	 * Paint the component then draw the background image onto the component.<br>
+	 * <br>
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @param g the graphics object to draw onto
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

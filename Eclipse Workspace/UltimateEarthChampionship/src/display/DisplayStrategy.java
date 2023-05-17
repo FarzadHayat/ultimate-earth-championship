@@ -8,6 +8,10 @@ import match.MatchResult;
 import model.Team;
 import story.Cutscene;
 
+/**
+ * The strategy design pattern for creating a contract between the GUI and CLI
+ * display to display the same views for the game.
+ */
 public interface DisplayStrategy {
 	public void displayCutscene(Cutscene cutscene);
 
@@ -28,6 +32,8 @@ public interface DisplayStrategy {
 	public void displayMatchResults(MatchResult matchResult);
 
 	public void displayWeekResults(ArrayList<RandomEventInfo> randomEvents);
+
 	public void displayGameResults(ArrayList<Team> teams);
+
 	public void quit();
 }

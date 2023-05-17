@@ -6,13 +6,11 @@ import exception.FullTeamException;
 import exception.InsufficientFundsException;
 
 /**
- * Class Weapon
+ * Class Weapon contains all the general properties and functionality a weapon
+ * should have. A weapon is normally used in the context of being assigned to a
+ * champion.
  */
 public abstract class Weapon implements Purchasable, Cloneable {
-
-	/**
-	 * Fields
-	 */
 
 	private Configuration config = Configuration.getInstance();
 
@@ -25,6 +23,7 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	private float damageMultiplier;
 	private int offenseBoost;
 	private int defenseBoost;
+
 	/**
 	 * The current price of the weapon
 	 */
@@ -35,16 +34,14 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	private float priceChangeWeekly;
 
 	/**
-	 * Is this a default weapon?
+	 * True if this is the default weapon
 	 */
 	private boolean isDefaultWeapon;
 
-	// Image
-	private ImageIcon image;
-
 	/**
-	 * Constructors private int numChampions = 4;
+	 * The image icon for the weapon
 	 */
+	private ImageIcon image;
 
 	/**
 	 * Creates a new Weapon object with the specified attributes.
@@ -55,28 +52,21 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	 * @param defenseBoost      the amount of defense boost the weapon provides
 	 * @param price             the base price of the weapon
 	 * @param priceChangeWeekly the weekly price change of the weapon
+	 * @param isDefaultWeapon   true if this is the default weapon
 	 */
-	public Weapon(String name, float damageBoost, int offenseBoost, int defenseBoost, float price,
-			float priceChangeWeekly, boolean isDefault) {
-		this.name = name;
-		this.damageMultiplier = damageBoost;
-		this.offenseBoost = offenseBoost;
-		this.defenseBoost = defenseBoost;
-		this.isDefaultWeapon = isDefault;
-		this.price = price * config.WEAPON_PRICE_MODIFIER;
-		this.priceChangeWeekly = priceChangeWeekly * config.WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER;
+	public Weapon(String name, float damageMultiplier, int offenseBoost, int defenseBoost, float price,
+			float priceChangeWeekly, boolean isDefaultWeapon) {
+		setName(name);
+		setDamageMultiplier(damageMultiplier);
+		setOffenseBoost(offenseBoost);
+		setdefenseBoost(defenseBoost);
+		setDefaultWeapon(isDefaultWeapon);
+		setPrice(price * config.WEAPON_PRICE_MODIFIER);
+		setPriceChangeWeekly(priceChangeWeekly * config.WEAPON_PRICE_WEEKLY_CHANGE_MODIFIER);
 
 		String path = Configuration.WEAPON_IMAGE_FOLDER_PATH + String.valueOf(getClass().getSimpleName()) + ".jpg";
-		image = new ImageIcon(path);
+		setImage(new ImageIcon(path));
 	}
-
-	/**
-	 * Methods
-	 */
-
-	/**
-	 * Accessor methods
-	 */
 
 	/**
 	 * Set the value of name
@@ -100,10 +90,10 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	/**
 	 * Set the value of damageMultiplier
 	 *
-	 * @param newDamageBoost the new value of damageMultiplier
+	 * @param newDamageMultiplier the new value of damageMultiplier
 	 */
-	public void setDamageMultiplier(int newDamageBoost) {
-		damageMultiplier = newDamageBoost;
+	public void setDamageMultiplier(float newDamageMultiplier) {
+		damageMultiplier = newDamageMultiplier;
 	}
 
 	/**
@@ -208,19 +198,31 @@ public abstract class Weapon implements Purchasable, Cloneable {
 	}
 
 	/**
-	 * Other methods
-	 */
-
-	/**
 	 * returns true if this is the default weapon that all champions should equip on
 	 * creation.
 	 *
 	 * @return true if this is the default weapon for champions on creation
 	 */
-	public boolean isDefault() {
+	public boolean isDefaultWeapon() {
 		return isDefaultWeapon;
 	}
 
+	/**
+	 * Set whether this weapon is marked as the default weapon
+	 *
+	 * @param isDefaultWeapon true if setting this as the default weapon
+	 */
+	public void setDefaultWeapon(boolean isDefaultWeapon) {
+		this.isDefaultWeapon = isDefaultWeapon;
+	}
+
+	/**
+	 * Buy the weapon by adding it to the given team and deducting the weapon price.
+	 *
+	 * @param team the team that wants to buy the weapon
+	 * @throws InsufficientFundsException if the team cannot afford this weapon
+	 * @throws FullTeamException          if the team weapon list is already full
+	 */
 	@Override
 	public void buy(Team team) throws InsufficientFundsException, FullTeamException {
 		team.removeMoney(getPrice());
@@ -232,6 +234,12 @@ public abstract class Weapon implements Purchasable, Cloneable {
 		}
 	}
 
+	/**
+	 * Sell the weapon by removing it from the given team and refunding the weapon
+	 * price.
+	 *
+	 * @param team the team that contains this weapon
+	 */
 	@Override
 	public void sell(Team team) {
 		team.removeWeapon(this);
@@ -252,6 +260,8 @@ public abstract class Weapon implements Purchasable, Cloneable {
 
 	/**
 	 * Create a clone of the Weapon with the same stats.
+	 *
+	 * @return the clone of the weapon
 	 */
 	@Override
 	public Weapon clone() {

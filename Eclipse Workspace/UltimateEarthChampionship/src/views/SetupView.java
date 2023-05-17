@@ -156,7 +156,8 @@ public class SetupView extends JPanel {
 	}
 
 	/**
-	 * Adds a difficulty panel, where the player can choose the difficulty on a slider
+	 * Adds a difficulty panel, where the player can choose the difficulty on a
+	 * slider
 	 */
 	private void addDifficultyPanel() {
 		JPanel difficultyPanel = new JPanel();
@@ -230,6 +231,7 @@ public class SetupView extends JPanel {
 
 	/**
 	 * Adds a champion to a panel
+	 *
 	 * @param champion The champion to add to the panel
 	 */
 	private void addChampionToPanel(Champion champion) {
@@ -277,7 +279,8 @@ public class SetupView extends JPanel {
 	}
 
 	/**
-	 * Adds the submit panel, which contains the button for the player to submit their entered information
+	 * Adds the submit panel, which contains the button for the player to submit
+	 * their entered information
 	 */
 	private void addSubmitPanel() {
 		JPanel panel = new JPanel(new FlowLayout());
@@ -351,9 +354,14 @@ public class SetupView extends JPanel {
 
 	}
 
-	// Paints over the background image,
-	// This overrides the default JPanel behavior, refer to JPanel's documentation of this method
-	// for more info.
+	/**
+	 * Paint the component then draw the background image onto the component.<br>
+	 * <br>
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @param g the graphics object to draw onto
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

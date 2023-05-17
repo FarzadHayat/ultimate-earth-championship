@@ -2,6 +2,10 @@ package story;
 
 import java.util.ArrayList;
 
+/**
+ * The cutscene objects contains a list of cutscene slides for iterating through
+ * to simulate a story line for the game.
+ */
 public abstract class Cutscene {
 
 	/**

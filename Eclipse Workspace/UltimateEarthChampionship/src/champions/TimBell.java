@@ -8,7 +8,7 @@ import model.Champion;
 public class TimBell extends Champion {
 
 	// Name
-	public static String name = "Tim Bell";
+	private static String name = "Tim Bell";
 
 	// Stat Boosts
 	private static int healthBoost = 0;

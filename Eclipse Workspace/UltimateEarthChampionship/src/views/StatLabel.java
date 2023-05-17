@@ -10,6 +10,11 @@ import javax.swing.JPanel;
 
 import model.Configuration;
 
+/**
+ * A stat label is a panel that shows a certain stat in a pre-formatted way. The
+ * stat label can either take just a value for the label or an image file name
+ * along with the value.
+ */
 public class StatLabel extends JPanel {
 
 	private static final long serialVersionUID = 7715315720355045403L;
@@ -20,7 +25,9 @@ public class StatLabel extends JPanel {
 	private JLabel valueLabel;
 
 	/**
-	 * Create the panel.
+	 * Create the panel with a value.
+	 *
+	 * @param value of value to display on the stat label.
 	 */
 	public StatLabel(String value) {
 		setLayout(new GridBagLayout());
@@ -30,7 +37,11 @@ public class StatLabel extends JPanel {
 	}
 
 	/**
-	 * Create the panel.
+	 * Create the panel with an image and value. The image should be located inside
+	 * the folder path set by Configuration.ICON_IMAGE_FOLDER_PATH
+	 *
+	 * @param imageFileName the name of the image file to load
+	 * @param value         of value to display on the stat label.
 	 */
 	public StatLabel(String imageFileName, String value) {
 		setLayout(new GridBagLayout());
@@ -40,10 +51,20 @@ public class StatLabel extends JPanel {
 		addValueLabel(value);
 	}
 
+	/**
+	 * Returns the label that holds the value of the stat label
+	 *
+	 * @return the valueLabel
+	 */
 	public JLabel getValueLabel() {
 		return valueLabel;
 	}
 
+	/**
+	 * Set the label that should hold the value of the stat label
+	 *
+	 * @param valueLabel the valueLabel to set
+	 */
 	public void setValueLabel(JLabel valueLabel) {
 		this.valueLabel = valueLabel;
 	}
