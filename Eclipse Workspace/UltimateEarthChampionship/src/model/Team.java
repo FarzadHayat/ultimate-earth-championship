@@ -455,7 +455,7 @@ public class Team {
 	public void rest() {
 		setWeeklyChampionPurchased(false);
 		for (Champion champion : champions) {
-			champion.setStamina(champion.getMaxStamina());
+			champion.rest();
 		}
 	}
 

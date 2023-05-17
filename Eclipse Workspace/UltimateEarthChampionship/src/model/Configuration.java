@@ -293,7 +293,12 @@ public class Configuration {
 	 * Flat additive modifier to AI aggression factor
 	 */
 	public int AI_AGRESSION_BOOST;
-
+	
+	/**
+	 *  The amount of free XP given to champions not in a team each week
+	 */
+	public final float UNUSED_CHAMPIONS_WEEKLY_XP_GAIN = 175f;
+	
 	public static final Color RED = new Color(237, 51, 59);
 	public static final Color ORANGE = new Color(255, 120, 0);
 	public static final Color GREEN = new Color(38, 162, 105);

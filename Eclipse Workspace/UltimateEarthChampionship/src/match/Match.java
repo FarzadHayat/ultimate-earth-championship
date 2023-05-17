@@ -92,13 +92,6 @@ public abstract class Match {
 	}
 
 	/**
-	 * get the results for the match. Handled individually by the match subclasses.
-	 *
-	 * @return a MatchResult object containing the match results
-	 */
-	public abstract MatchResult getMatchResult();
-
-	/**
 	 * Simulates combat between who champions
 	 *
 	 * @param attacker The champion attacking
