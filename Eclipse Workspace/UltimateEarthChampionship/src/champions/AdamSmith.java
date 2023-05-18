@@ -8,17 +8,17 @@ import model.Champion;
 public class AdamSmith extends Champion {
 
 	// Name
-	public static final String name = "Adam Smith";
+	private static final String name = "Adam Smith";
 
 	// Stat Boosts
-	public static final int healthBoost = -1;
-	public static final int staminaBoost = 1;
-	public static final int offenseBoost = 1;
-	public static final int defenseBoost = 0;
+	private static final int healthBoost = -1;
+	private static final int staminaBoost = 1;
+	private static final int offenseBoost = 1;
+	private static final int defenseBoost = 0;
 
 	// Price
-	public static final float startingPrice = 50f;
-	public static final float priceChangeWeekly = 1.1f;
+	private static final float startingPrice = 50f;
+	private static final float priceChangeWeekly = 1.1f;
 
 	/**
 	 * Creates a new Adam Smith object with default attribute values.

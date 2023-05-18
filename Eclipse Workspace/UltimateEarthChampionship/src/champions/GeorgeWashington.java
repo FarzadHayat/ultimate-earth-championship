@@ -8,17 +8,17 @@ import model.Champion;
 public class GeorgeWashington extends Champion {
 
 	// Name
-	public static final String name = "George Washington";
+	private static final String name = "George Washington";
 
 	// Stat Boosts
-	public static final int healthBoost = 1;
-	public static final int staminaBoost = -2;
-	public static final int offenseBoost = 1;
-	public static final int defenseBoost = 1;
+	private static final int healthBoost = 1;
+	private static final int staminaBoost = -2;
+	private static final int offenseBoost = 1;
+	private static final int defenseBoost = 1;
 
 	// Price
-	public static final float startingPrice = 50f;
-	public static final float priceChangeWeekly = 1.1f;
+	private static final float startingPrice = 50f;
+	private static final float priceChangeWeekly = 1.1f;
 
 	/**
 	 * Creates a new George Washington object with default attribute values.

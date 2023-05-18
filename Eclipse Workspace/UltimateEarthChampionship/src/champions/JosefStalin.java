@@ -8,17 +8,17 @@ import model.Champion;
 public class JosefStalin extends Champion {
 
 	// Name
-	public static final String name = "Josef Stalin";
+	private static final String name = "Josef Stalin";
 
 	// Stat Boosts
-	public static final int healthBoost = 0;
-	public static final int staminaBoost = -3;
-	public static final int offenseBoost = 2;
-	public static final int defenseBoost = 2;
+	private static final int healthBoost = 0;
+	private static final int staminaBoost = -3;
+	private static final int offenseBoost = 2;
+	private static final int defenseBoost = 2;
 
 	// Price
-	public static final float startingPrice = 50f;
-	public static final float priceChangeWeekly = 1.1f;
+	private static final float startingPrice = 50f;
+	private static final float priceChangeWeekly = 1.1f;
 
 	/**
 	 * Creates a new Josef Stalin object with default attribute values.

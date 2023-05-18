@@ -8,17 +8,17 @@ import model.Champion;
 public class RobertMuldoon extends Champion {
 
 	// Name
-	public static final String name = "Robert Muldoon";
+	private static final String name = "Robert Muldoon";
 
 	// Stat Boosts
-	public static final int healthBoost = 0;
-	public static final int staminaBoost = 1;
-	public static final int offenseBoost = 0;
-	public static final int defenseBoost = 0;
+	private static final int healthBoost = 0;
+	private static final int staminaBoost = 1;
+	private static final int offenseBoost = 0;
+	private static final int defenseBoost = 0;
 
 	// Price
-	public static final float startingPrice = 50f;
-	public static final float priceChangeWeekly = 1.1f;
+	private static final float startingPrice = 50f;
+	private static final float priceChangeWeekly = 1.1f;
 
 	/**
 	 * Creates a new Robert Muldoon object with default attribute values.
