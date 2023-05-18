@@ -46,9 +46,9 @@ class ShopTest {
 		gameManager = GameManager.getInstance();
 		gameManager.initialize();
 		config = Configuration.getInstance();
-		gameManager.setPlayerTeam(new Team(true, "Test", new ArrayList<Champion>(
-				List.of(new AdamSmith(), new JohnDoe(), new JohnBrowning(), new JohnFKennedy()))));
-		gameManager.generateAITeams();
+		gameManager.setupPlayerTeam("Test", 5, new ArrayList<Champion>(
+				List.of(new AdamSmith(), new JohnDoe(), new JohnBrowning(), new JohnFKennedy())), 1.0F);
+		gameManager.getTeams().addAll(gameManager.generateAITeams());
 	}
 
 	/**
