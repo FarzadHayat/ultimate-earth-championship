@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import model.Champion;
@@ -202,7 +203,7 @@ public class LiveMatch extends Match implements ActionListener {
 			currentChampion = playerChampions.get(turn);
 
 			// Regen health
-			ChampionHealthRegen(currentChampion);
+			championHealthRegen(currentChampion);
 
 			matchView.updateSelectedChampionPanel(currentChampion);
 
@@ -215,7 +216,7 @@ public class LiveMatch extends Match implements ActionListener {
 			currentChampion = enemyChampions.get(turn);
 
 			// Regen health
-			ChampionHealthRegen(currentChampion);
+			championHealthRegen(currentChampion);
 
 			matchView.updateSelectedChampionPanel(currentChampion);
 
@@ -382,7 +383,7 @@ public class LiveMatch extends Match implements ActionListener {
 
 		// Check after movement if the champion has properly moved
 		if (champion.isFlagCarrier()) {
-			CheckFlagHolderPosition(champion);
+			checkFlagHolderPosition(champion);
 		}
 	}
 
@@ -413,7 +414,7 @@ public class LiveMatch extends Match implements ActionListener {
 		nextCard.updateCard();
 
 		if (champion.isFlagCarrier()) {
-			CheckFlagHolderPosition(champion);
+			checkFlagHolderPosition(champion);
 		}
 	}
 
@@ -616,7 +617,7 @@ public class LiveMatch extends Match implements ActionListener {
 		if (champions.size() == 0) {
 			if (team == team1) {
 				// Enemy wins
-				GameOver(
+				gameOver(
 					team1.getName() + " has had all their champions injured. " + team2.getName() + " wins!",
 					team2, 
 					team1);
@@ -624,7 +625,7 @@ public class LiveMatch extends Match implements ActionListener {
 				return;
 			} else {
 				// Player wins
-				GameOver(
+				gameOver(
 					team2.getName() + " has had all their champions injured. " + team1.getName() + " wins!",
 					team1, 
 					team2);
@@ -646,11 +647,11 @@ public class LiveMatch extends Match implements ActionListener {
 	 *
 	 * @param champion The champion to be checked
 	 */
-	private void CheckFlagHolderPosition(Champion champion) {
+	private void checkFlagHolderPosition(Champion champion) {
 		if (championIsOnPlayerTeam(champion)) {
 			if (champion.getPosition() == 6) {
 				// Player victory!
-				GameOver(
+				gameOver(
 					champion.getName() + " has moved the flag across the field! " + team1.getName() + " wins!",
 					team1, 
 					team2);
@@ -662,7 +663,7 @@ public class LiveMatch extends Match implements ActionListener {
 		if (!championIsOnPlayerTeam(champion)) {
 			if (champion.getPosition() == 0) {
 				// Enemy victory!
-				GameOver(
+				gameOver(
 					champion.getName() + " has moved the flag across the field! " + team2.getName() + " wins!",
 					team2,
 					team1);
@@ -677,7 +678,7 @@ public class LiveMatch extends Match implements ActionListener {
 	 *
 	 * @param champion The champion to regenerate
 	 */
-	private void ChampionHealthRegen(Champion champion) {
+	private void championHealthRegen(Champion champion) {
 		champion.addStamina(champion.getRegen());
 		getCard(champion).updateCard();
 	}
@@ -688,7 +689,7 @@ public class LiveMatch extends Match implements ActionListener {
 	 * @param winner The winning team
 	 * @param loser The losing team
 	 */
-	private void GameOver(String messageToPlayer, Team winner, Team loser)
+	private void gameOver(String messageToPlayer, Team winner, Team loser)
 	{
 		// Super final measure to prevent double gameovers
 		if (gameOver)
@@ -701,4 +702,21 @@ public class LiveMatch extends Match implements ActionListener {
 		gameManager.finishedMatch(matchOver(winner, loser));
 	}
 
+	/**
+	 * Asks if the player would like to surrender
+	 */
+	public void playerSurrenderConfirm()
+	{
+		 int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to surrender?", "Surrender?",
+	               JOptionPane.YES_NO_OPTION,
+	               JOptionPane.QUESTION_MESSAGE);
+	            if(result == JOptionPane.YES_OPTION)
+	            {
+	               gameOver( team1.getName() + " has surrendered. " + team2.getName() + " wins", team2, team1);
+	            }
+	            else {
+	               // Nothing happens
+	            }
+	}
+	
 }

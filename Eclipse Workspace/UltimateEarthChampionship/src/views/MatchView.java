@@ -21,6 +21,9 @@ import display.GraphicalDisplay;
 import match.LiveMatch;
 import model.Champion;
 import model.Configuration;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 /**
  * A panel to display the currently playing live match. This view interacts
@@ -105,29 +108,64 @@ public class MatchView extends JPanel {
 		JPanel topPanel = new JPanel();
 		topPanel.setOpaque(false);
 		add(topPanel, BorderLayout.NORTH);
-
+		
+		// Top grid panel
 		JPanel topGridPanel = new JPanel();
 		topGridPanel.setOpaque(false);
 		topPanel.add(topGridPanel);
-		topGridPanel.setLayout(new GridLayout(0, 1, 0, 0));
+		GridBagLayout gbl_topGridPanel = new GridBagLayout();
+		gbl_topGridPanel.columnWidths = new int[] {250, 600, 250};
+		gbl_topGridPanel.rowHeights = new int[] {0};
+		gbl_topGridPanel.columnWeights = new double[]{0.0, 1.0};
+		gbl_topGridPanel.rowWeights = new double[]{1.0};
+		topGridPanel.setLayout(gbl_topGridPanel);
+		
+		JLabel emptyLabel = new JLabel("");
+		GridBagConstraints gbc_emptyLabel = new GridBagConstraints();
+		gbc_emptyLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_emptyLabel.gridx = 0;
+		gbc_emptyLabel.gridy = 0;
+		topGridPanel.add(emptyLabel, gbc_emptyLabel);
+
+		JPanel topTextGridPanel = new JPanel();
+		GridBagConstraints gbc_topTextGridPanel = new GridBagConstraints();
+		gbc_topTextGridPanel.insets = new Insets(0, 0, 5, 5);
+		gbc_topTextGridPanel.gridx = 1;
+		gbc_topTextGridPanel.gridy = 0;
+		topGridPanel.add(topTextGridPanel, gbc_topTextGridPanel);
+		topTextGridPanel.setOpaque(false);
+		topTextGridPanel.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JLabel headerText = new JLabel(match.getTeam1().getName() + " vs " + match.getTeam2().getName());
 		headerText.setHorizontalAlignment(SwingConstants.CENTER);
 		headerText.setFont(Configuration.HEADER_FONT);
 		headerText.setForeground(Color.white);
-		topGridPanel.add(headerText);
+		topTextGridPanel.add(headerText);
 
 		JLabel subheader1 = new JLabel("Win by moving your flag bearer to the enemy side");
 		subheader1.setHorizontalAlignment(SwingConstants.CENTER);
 		subheader1.setFont(Configuration.HEADER_FONT);
 		subheader1.setForeground(Color.white);
-		topGridPanel.add(subheader1);
+		topTextGridPanel.add(subheader1);
 
 		JLabel subheader2 = new JLabel("Match Worth: " + match.getScore() + " score");
 		subheader2.setHorizontalAlignment(SwingConstants.CENTER);
 		subheader2.setFont(Configuration.HEADER_FONT);
 		subheader2.setForeground(Color.white);
-		topGridPanel.add(subheader2);
+		topTextGridPanel.add(subheader2);
+		
+		JButton surrenderButton = new JButton("Surrender");
+		surrenderButton.setOpaque(false);
+		surrenderButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				match.playerSurrenderConfirm();
+			}
+		});
+		GridBagConstraints gbc_surrenderButton = new GridBagConstraints();
+		gbc_surrenderButton.insets = new Insets(0, 0, 5, 0);
+		gbc_surrenderButton.gridx = 2;
+		gbc_surrenderButton.gridy = 0;
+		topGridPanel.add(surrenderButton, gbc_surrenderButton);
 	}
 
 	/**
