@@ -6,13 +6,14 @@ import model.Champion;
 import model.Weapon;
 
 /**
- * Static class which offers various functionality for printing different tables
- * featuring the stats of champions and weapons
+ * An abstract class which offers various functionality for printing different
+ * tables featuring the stats of champions and weapons.
  */
-public class CommandLineTable {
+public abstract class CommandLineTable {
 
 	/**
 	 * Prints a table of champions from a given arraylist of champions
+	 *
 	 * @param champions The champions to be printed
 	 */
 	public static void printChampions(ArrayList<Champion> champions) {
@@ -25,6 +26,7 @@ public class CommandLineTable {
 
 	/**
 	 * Prints a table of weapons from a given arraylist of weapons
+	 *
 	 * @param weapons Weapons to be printed
 	 */
 	public static void printWeapons(ArrayList<Weapon> weapons) {
@@ -69,6 +71,7 @@ public class CommandLineTable {
 
 	/**
 	 * Prints a champion as a row in a champion table
+	 *
 	 * @param champion The champion to be printed
 	 */
 	private static void printChampionEntry(Champion champion) {
@@ -79,6 +82,7 @@ public class CommandLineTable {
 
 	/**
 	 * Prints a weapon as a row in a weapon table
+	 *
 	 * @param weapon The weapon to be printed
 	 */
 	private static void printWeaponEntry(Weapon weapon) {

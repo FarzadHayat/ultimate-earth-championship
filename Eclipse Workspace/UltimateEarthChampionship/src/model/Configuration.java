@@ -26,6 +26,7 @@ public class Configuration {
 
 	/**
 	 * Gets the instance of configuration
+	 *
 	 * @return The instance of configuration class
 	 */
 	public static Configuration getInstance() {
@@ -331,10 +332,14 @@ public class Configuration {
 	 */
 	public static final Color GREEN = new Color(38, 162, 105);
 
+	/**
+	 * Amount of xp given to a champion being trained upon a bye
+	 */
 	public final float CHAMPION_TRAINING_XP_GIVEN = 350f;
-	
+
 	/**
 	 * Gets the game's difficulty
+	 *
 	 * @return The games difficulty
 	 */
 	public float getDifficulty() {
@@ -343,6 +348,7 @@ public class Configuration {
 
 	/**
 	 * Sets the games difficulty
+	 *
 	 * @param newDifficulty The difficulty to be set to
 	 */
 	public void setDifficulty(float newDifficulty) {

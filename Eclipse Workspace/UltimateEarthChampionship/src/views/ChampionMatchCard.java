@@ -56,6 +56,9 @@ public class ChampionMatchCard extends JPanel {
 	 */
 	private JLabel imageLabel;
 
+	/**
+	 * The center panel
+	 */
 	private JPanel centerPanel;
 
 	/**
@@ -172,8 +175,7 @@ public class ChampionMatchCard extends JPanel {
 			staminaBar.setValue(currentStamina);
 			staminaBar.setString(currentStamina + " / " + maxStamina);
 
-			if (gameManager.getPlayerTeam() != null && gameManager.getEnemyTeam() != null)
-			{
+			if (gameManager.getPlayerTeam() != null && gameManager.getEnemyTeam() != null) {
 				if (gameManager.getPlayerTeam().getChosenChampions().contains(champion)) {
 					centerPanel.setBorder(new LineBorder(Color.blue, 2));
 				}
@@ -181,7 +183,7 @@ public class ChampionMatchCard extends JPanel {
 					centerPanel.setBorder(new LineBorder(Color.red, 2));
 				}
 			}
-			
+
 		}
 	}
 
