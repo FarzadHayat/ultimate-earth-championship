@@ -611,6 +611,14 @@ public abstract class GameManager {
 			finishedGame();
 		}
 	}
+	
+	/**
+	 * Takes a bye and then calls finishedWeek()
+	 */
+	public void takeBye()
+	{
+		finishedWeek();
+	}
 
 	/**
 	 * Displays the game results
@@ -712,6 +720,15 @@ public abstract class GameManager {
 	 */
 	public void addTeam(Team team) {
 		teams.add(team);
+	}
+	
+	/**
+	 * Trains a champion by giving them an XP boost
+	 * @param championToTrain the Champion to train
+	 */
+	public void trainChampion(Champion championToTrain)
+	{
+		championToTrain.giveXP(config.CHAMPION_TRAINING_XP_GIVEN);
 	}
 
 }

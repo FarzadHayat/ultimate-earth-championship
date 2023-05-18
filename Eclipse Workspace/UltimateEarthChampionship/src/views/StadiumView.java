@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import display.GraphicalDisplay;
 import manager.GameManager;
+import manager.GraphicalGameManager;
 import model.Champion;
 import model.Configuration;
 import model.Team;
@@ -134,13 +135,15 @@ public class StadiumView extends JPanel {
 		byeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gameManager.finishedWeek();
+				((GraphicalGameManager) gameManager).takeBye();
 			}
 
 		});
 		bottomPanel.add(byeButton);
 	}
 
+	
+	
 	/**
 	 * Paint the component then draw the background image onto the component.<br>
 	 * <br>

@@ -1,7 +1,12 @@
 package manager;
 
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import display.DisplayType;
 import display.GraphicalDisplay;
+import model.Champion;
 import story.OpeningCutscene;
 
 /**
@@ -75,6 +80,34 @@ public class GraphicalGameManager extends GameManager {
 		displayStrategy.displayCutscene(getCutscene());
 	}
 
+	/**
+	 * Takes a bye and then calls finishedWeek()
+	 */
+	@Override
+	public void takeBye()
+	{
+		// Create dialogue box
+		ArrayList<Champion> playerChampions = super.getPlayerTeam().getChampions();
+		
+		ArrayList<Object> tempList = new ArrayList<Object>();
+		
+		for (Champion champ : playerChampions)
+		{
+			tempList.add(champ.getName());
+		}
+		
+		Object[] options = tempList.toArray();
+		
+		int result = JOptionPane.showOptionDialog(null, "Choose a champion to train:", "Weekly training", JOptionPane.DEFAULT_OPTION,
+				JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+		
+		Champion champToTrain = playerChampions.get(result);
+				
+		super.trainChampion(champToTrain);
+		
+		super.takeBye();
+	}
+	
 	/**
 	 * The main method that starts the game. Set the display type to GUI and calls
 	 * the start method.

@@ -331,6 +331,8 @@ public class Configuration {
 	 */
 	public static final Color GREEN = new Color(38, 162, 105);
 
+	public final float CHAMPION_TRAINING_XP_GIVEN = 350f;
+	
 	/**
 	 * Gets the game's difficulty
 	 * @return The games difficulty
