@@ -5,9 +5,9 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import champions.AdamSmith;
+import champions.AugustoPinochet;
+import champions.AugustusCaesar;
+import champions.BernardMontgomery;
 import champions.Confucius;
 import champions.JohnBrowning;
 import champions.JohnDoe;
@@ -27,6 +30,9 @@ import exception.InsufficientFundsException;
 import manager.GameManager;
 import model.Champion;
 import model.Team;
+import model.Weapon;
+import weapons.Fists;
+import weapons.Shield;
 
 /**
  * Unit test for the Team class.
@@ -43,8 +49,10 @@ class TeamTest {
 	static void setUpBeforeClass() throws Exception {
 		gameManager = GameManager.getInstance();
 		gameManager.initialize();
-		gameManager.setupPlayerTeam("Test", 5, new ArrayList<Champion>(
-				List.of(new AdamSmith(), new JohnDoe(), new JohnBrowning(), new JohnFKennedy())), 1.0F);
+		gameManager.setupPlayerTeam("Test", 5,
+				new ArrayList<Champion>(
+						List.of(new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery())),
+				1.0F);
 		gameManager.getTeams().addAll(gameManager.generateAITeams());
 	}
 
@@ -55,7 +63,10 @@ class TeamTest {
 	void setUp() throws Exception {
 		team = new Team(false, "Test", new ArrayList<Champion>(
 				List.of(new JohnBrowning(), new JohnDoe(), new JohnFKennedy(), new JohnMaynardKeynes())));
-
+		team.addWeapon(new Shield());
+		team.addWeapon(new Shield());
+		team.addWeapon(new Shield());
+		team.addWeapon(new Shield());
 	}
 
 	/**
@@ -149,11 +160,38 @@ class TeamTest {
 	}
 
 	/**
+	 * Test method for {@link model.Team#addChampion(model.Champion)}.
+	 */
+	@Test
+	void testAddChampion_fullTeam() {
+		try {
+			for (int i = 0; i < 5; i++) {
+				team.addChampion(new Confucius());
+			}
+		} catch (FullTeamException e) {
+			e.printStackTrace();
+		}
+		Champion champion = new Confucius();
+
+		FullTeamException thrown = assertThrows(FullTeamException.class, () -> team.addChampion(champion),
+				"Expected team.addChampion(champion) to throw, but it didn't.");
+		assertTrue(thrown.getMessage().contentEquals("Reached team max champions limit!"));
+		assertFalse(team.getChampions().contains(champion));
+	}
+
+	/**
 	 * Test method for {@link model.Team#removeChampion(model.Champion)}.
 	 */
 	@Test
 	void testRemoveChampion() {
-		fail("Not yet implemented");
+		Champion champion = new Confucius();
+		try {
+			team.addChampion(champion);
+		} catch (FullTeamException e) {
+			e.printStackTrace();
+		}
+		team.removeChampion(champion);
+		assertFalse(team.getChampions().contains(champion));
 	}
 
 	/**
@@ -161,7 +199,8 @@ class TeamTest {
 	 */
 	@Test
 	void testRandomChampion() {
-		fail("Not yet implemented");
+		Champion champion = team.randomChampion();
+		assertTrue(team.getChampions().contains(champion));
 	}
 
 	/**
@@ -169,7 +208,26 @@ class TeamTest {
 	 */
 	@Test
 	void testAddChosenChampion() {
-		fail("Not yet implemented");
+		Champion champion = new Confucius();
+		try {
+			team.addChosenChampion(champion);
+		} catch (FullTeamException e) {
+			e.printStackTrace();
+		}
+		assertTrue(team.getChosenChampions().contains(champion));
+	}
+
+	/**
+	 * Test method for {@link model.Team#addChosenChampion(model.Champion)}.
+	 */
+	@Test
+	void testAddChosenChampion_fullTeam() {
+		team.randomlySelectChampions();
+		Champion champion = new Confucius();
+		FullTeamException thrown = assertThrows(FullTeamException.class, () -> team.addChosenChampion(champion),
+				"Expected team.addChosenChampion(champion) to throw, but it didn't.");
+		assertTrue(thrown.getMessage().contentEquals("Reached team max chosen champions limit!"));
+		assertFalse(team.getChosenChampions().contains(champion));
 	}
 
 	/**
@@ -177,7 +235,14 @@ class TeamTest {
 	 */
 	@Test
 	void testRemoveChosenChampion() {
-		fail("Not yet implemented");
+		Champion champion = new Confucius();
+		try {
+			team.addChosenChampion(champion);
+		} catch (FullTeamException e) {
+			e.printStackTrace();
+		}
+		team.removeChosenChampion(champion);
+		assertFalse(team.getChosenChampions().contains(champion));
 	}
 
 	/**
@@ -185,7 +250,26 @@ class TeamTest {
 	 */
 	@Test
 	void testAddChosenWeapon() {
-		fail("Not yet implemented");
+		Weapon weapon = new Shield();
+		try {
+			team.addChosenWeapon(weapon);
+		} catch (FullTeamException e) {
+			e.printStackTrace();
+		}
+		assertTrue(team.getChosenWeapons().contains(weapon));
+	}
+
+	/**
+	 * Test method for {@link model.Team#addChosenWeapon(model.Weapon)}.
+	 */
+	@Test
+	void testAddChosenWeapon_fullTeam() {
+		team.randomlySelectWeapons();
+		Weapon weapon = new Shield();
+		FullTeamException thrown = assertThrows(FullTeamException.class, () -> team.addChosenWeapon(weapon),
+				"Expected team.addChosenWeapon(weapon) to throw, but it didn't.");
+		assertTrue(thrown.getMessage().contentEquals("Reached team max chosen weapons limit!"));
+		assertFalse(team.getChosenWeapons().contains(weapon));
 	}
 
 	/**
@@ -193,7 +277,14 @@ class TeamTest {
 	 */
 	@Test
 	void testRemoveChosenWeapon() {
-		fail("Not yet implemented");
+		Weapon weapon = new Shield();
+		try {
+			team.addChosenWeapon(weapon);
+		} catch (FullTeamException e) {
+			e.printStackTrace();
+		}
+		team.removeChosenWeapon(weapon);
+		assertFalse(team.getChosenWeapons().contains(weapon));
 	}
 
 	/**
@@ -201,7 +292,19 @@ class TeamTest {
 	 */
 	@Test
 	void testAddWeapon() {
-		fail("Not yet implemented");
+		try {
+			for (int i = 0; i < 5; i++) {
+				team.addWeapon(new Shield());
+			}
+		} catch (FullTeamException e) {
+			e.printStackTrace();
+		}
+		Weapon weapon = new Shield();
+
+		FullTeamException thrown = assertThrows(FullTeamException.class, () -> team.addWeapon(weapon),
+				"Expected team.addWeapon(weapon) to throw, but it didn't.");
+		assertTrue(thrown.getMessage().contentEquals("Reached team max weapon limit!"));
+		assertFalse(team.getWeapons().contains(weapon));
 	}
 
 	/**
@@ -209,7 +312,14 @@ class TeamTest {
 	 */
 	@Test
 	void testRemoveWeapon() {
-		fail("Not yet implemented");
+		Weapon weapon = new Shield();
+		try {
+			team.addWeapon(weapon);
+		} catch (FullTeamException e) {
+			e.printStackTrace();
+		}
+		team.removeWeapon(weapon);
+		assertFalse(team.getWeapons().contains(weapon));
 	}
 
 	/**
@@ -217,7 +327,37 @@ class TeamTest {
 	 */
 	@Test
 	void testRandomlySelectPurchasables() {
-		fail("Not yet implemented");
+		assertEquals(0, team.getChosenChampions().size());
+		assertEquals(0, team.getChosenWeapons().size());
+		for (Champion champion : team.getChampions()) {
+			assertEquals(Fists.class, champion.getWeapon().getClass());
+		}
+		team.randomlySelectPurchasables();
+		assertEquals(4, team.getChosenChampions().size());
+		assertEquals(4, team.getChosenWeapons().size());
+		for (Champion champion : team.getChosenChampions()) {
+			assertNotEquals(Fists.class, champion.getWeapon().getClass());
+		}
+	}
+
+	/**
+	 * Test method for {@link model.Team#randomlySelectChampions()}.
+	 */
+	@Test
+	void testRandomlySelectChampions() {
+		assertEquals(0, team.getChosenChampions().size());
+		team.randomlySelectChampions();
+		assertEquals(4, team.getChosenChampions().size());
+	}
+
+	/**
+	 * Test method for {@link model.Team#randomlySelectWeapons()}.
+	 */
+	@Test
+	void testRandomlySelectWeapons() {
+		assertEquals(0, team.getChosenWeapons().size());
+		team.randomlySelectWeapons();
+		assertEquals(4, team.getChosenWeapons().size());
 	}
 
 	/**
@@ -225,7 +365,15 @@ class TeamTest {
 	 */
 	@Test
 	void testAssignChosenWeapons() {
-		fail("Not yet implemented");
+		team.randomlySelectChampions();
+		team.randomlySelectWeapons();
+		for (Champion champion : team.getChampions()) {
+			assertEquals(Fists.class, champion.getWeapon().getClass());
+		}
+		team.assignChosenWeapons();
+		for (Champion champion : team.getChosenChampions()) {
+			assertNotEquals(Fists.class, champion.getWeapon().getClass());
+		}
 	}
 
 	/**
@@ -233,7 +381,12 @@ class TeamTest {
 	 */
 	@Test
 	void testUnselectPurchasables() {
-		fail("Not yet implemented");
+		team.randomlySelectPurchasables();
+		assertEquals(4, team.getChosenChampions().size());
+		assertEquals(4, team.getChosenWeapons().size());
+		team.unselectPurchasables();
+		assertEquals(0, team.getChosenChampions().size());
+		assertEquals(0, team.getChosenWeapons().size());
 	}
 
 	/**
@@ -241,7 +394,10 @@ class TeamTest {
 	 */
 	@Test
 	void testUnselectChampions() {
-		fail("Not yet implemented");
+		team.randomlySelectPurchasables();
+		assertEquals(4, team.getChosenChampions().size());
+		team.unselectChampions();
+		assertEquals(0, team.getChosenChampions().size());
 	}
 
 	/**
@@ -249,7 +405,10 @@ class TeamTest {
 	 */
 	@Test
 	void testUnselectWeapons() {
-		fail("Not yet implemented");
+		team.randomlySelectPurchasables();
+		assertEquals(4, team.getChosenWeapons().size());
+		team.unselectWeapons();
+		assertEquals(0, team.getChosenWeapons().size());
 	}
 
 	/**
@@ -257,7 +416,14 @@ class TeamTest {
 	 */
 	@Test
 	void testUnassignChosenWeapons() {
-		fail("Not yet implemented");
+		team.randomlySelectPurchasables();
+		for (Champion champion : team.getChosenChampions()) {
+			assertNotEquals(Fists.class, champion.getWeapon().getClass());
+		}
+		team.unassignChosenWeapons();
+		for (Champion champion : team.getChampions()) {
+			assertEquals(Fists.class, champion.getWeapon().getClass());
+		}
 	}
 
 	/**
@@ -265,7 +431,15 @@ class TeamTest {
 	 */
 	@Test
 	void testRest() {
-		fail("Not yet implemented");
+		team.setWeeklyChampionPurchased(true);
+		for (Champion champion : team.getChampions()) {
+			champion.setStamina(0f);
+		}
+		team.rest();
+		assertFalse(team.isWeeklyChampionPurchased());
+		for (Champion champion : team.getChampions()) {
+			assertEquals(champion.getMaxStamina(), champion.getStamina());
+		}
 	}
 
 }
