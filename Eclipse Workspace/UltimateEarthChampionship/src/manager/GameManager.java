@@ -388,7 +388,7 @@ public abstract class GameManager {
 		ArrayList<Team> AITeams = new ArrayList<>();
 		AITeams.remove(playerTeam);
 		for (Team team : teams) {
-			if (!team.isPlayerTeam()) {
+			if (!team.isPlayer()) {
 				AITeams.add(team);
 			}
 		}

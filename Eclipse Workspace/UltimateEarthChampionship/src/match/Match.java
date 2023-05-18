@@ -75,11 +75,11 @@ public abstract class Match {
 
 		this.team2 = team2;
 
-		if (!team1.isPlayerTeam()) {
+		if (!team1.isPlayer()) {
 			team1.randomlySelectPurchasables();
 		}
 
-		if (!team2.isPlayerTeam()) {
+		if (!team2.isPlayer()) {
 			team2.randomlySelectPurchasables();
 		}
 

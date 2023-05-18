@@ -54,7 +54,7 @@ class GameManagerTest {
 	 * @throws java.lang.Exception
 	 */
 	@AfterAll
-	static void cleanUpAfterClass() throws Exception {
+	static void tearDownAfterClass() throws Exception {
 		gameManager.forceCreateNewInstance();
 		gameManager = GameManager.getInstance();
 	}

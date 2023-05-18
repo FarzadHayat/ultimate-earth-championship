@@ -138,7 +138,7 @@ public class GameEnvironment {
 				RandomEventInfo newEvent = event.runEvent(randomTeam);
 				// We run the event to cause the logic to occur
 
-				if (randomTeam.isPlayerTeam()) {
+				if (randomTeam.isPlayer()) {
 					// If this event happens to the player team...
 					// Note it down
 					weeklyEvents.add(newEvent);
@@ -161,7 +161,7 @@ public class GameEnvironment {
 				RandomEventInfo newEvent = championJoinsEvent.runEvent(team);
 
 				// If team it occurred to is on player team, notify them
-				if (team.isPlayerTeam()) {
+				if (team.isPlayer()) {
 					weeklyEvents.add(newEvent);
 				}
 			}
@@ -183,7 +183,7 @@ public class GameEnvironment {
 						RandomEventInfo newEvent = championJoinsEvent.runEvent(team);
 
 						// If it is a player team, add to weekly events
-						if (team.isPlayerTeam()) {
+						if (team.isPlayer()) {
 							weeklyEvents.add(newEvent);
 						}
 
