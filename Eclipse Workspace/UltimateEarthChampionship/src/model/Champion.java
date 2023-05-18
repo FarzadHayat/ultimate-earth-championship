@@ -480,14 +480,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 		weapon = new Fists();
 	}
 
-	/**
-	 * Gives the champion a new weapon
-	 *
-	 * @param newWeapon The weapon given to this champion
-	 */
-	public void addWeapon(Weapon newWeapon) {
-		weapon = newWeapon;
-	}
+
 
 	/**
 	 * Set the value of image
