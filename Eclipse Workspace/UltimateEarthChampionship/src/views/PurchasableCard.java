@@ -150,14 +150,14 @@ public abstract class PurchasableCard extends JPanel {
 	 * Add a buy button to the south of the card.
 	 */
 	public void addBuyButton() {
-		JButton buyButton = new JButton("Buy for $" + purchasable.getPrice());
+		JButton buyButton = new JButton("Buy for $" + (int) purchasable.getPrice());
 		buyButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					String message = String.format("Are you sure you want to buy %s for $%s?", purchasable.getName(),
-							purchasable.getPrice());
+							(int) purchasable.getPrice());
 					int answer = JOptionPane.showConfirmDialog(getParent(), message, "Buy: " + purchasable.getName(),
 							JOptionPane.YES_NO_OPTION);
 					if (answer == JOptionPane.YES_OPTION) {

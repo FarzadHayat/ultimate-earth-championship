@@ -172,12 +172,16 @@ public class ChampionMatchCard extends JPanel {
 			staminaBar.setValue(currentStamina);
 			staminaBar.setString(currentStamina + " / " + maxStamina);
 
-			if (gameManager.getPlayerTeam().getChosenChampions().contains(champion)) {
-				centerPanel.setBorder(new LineBorder(Color.blue, 2));
+			if (gameManager.getPlayerTeam() != null && gameManager.getEnemyTeam() != null)
+			{
+				if (gameManager.getPlayerTeam().getChosenChampions().contains(champion)) {
+					centerPanel.setBorder(new LineBorder(Color.blue, 2));
+				}
+				if (gameManager.getEnemyTeam().getChosenChampions().contains(champion)) {
+					centerPanel.setBorder(new LineBorder(Color.red, 2));
+				}
 			}
-			if (gameManager.getEnemyTeam().getChosenChampions().contains(champion)) {
-				centerPanel.setBorder(new LineBorder(Color.red, 2));
-			}
+			
 		}
 	}
 
