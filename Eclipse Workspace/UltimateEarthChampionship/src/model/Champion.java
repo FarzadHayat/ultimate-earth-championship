@@ -187,12 +187,11 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 */
 	public void addStamina(float staminaChange) {
 		stamina += staminaChange;
-		
-		if (staminaChange < 0f)
-		{
+
+		if (staminaChange < 0f) {
 			damageTakenThisWeek += -staminaChange;
 		}
-				
+
 		if (stamina > maxStamina) {
 			stamina = maxStamina;
 		}
@@ -286,7 +285,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 * @param amount of XP to add
 	 */
 	public void giveXP(float amount) {
-		currentXP += amount;
+		currentXP = currentXP + amount;
 		checkForLevelUp();
 	}
 
@@ -367,7 +366,7 @@ public abstract class Champion implements Purchasable, Cloneable {
 	 */
 	private void levelUp() {
 		level++;
-		currentXP -= maxXP;
+		currentXP = currentXP - maxXP;
 
 		maxXP = maxXP * config.XP_INCREMENT_MODIFIER;
 
@@ -545,13 +544,12 @@ public abstract class Champion implements Purchasable, Cloneable {
 		team.removeChampion(this);
 		team.addMoney(getPrice());
 	}
-	
+
 	/**
-	 * Rests the champion, restoring them back to full health,
-	 * Should be called at the end of each week
+	 * Rests the champion, restoring them back to full health, Should be called at
+	 * the end of each week
 	 */
-	public void rest()
-	{
+	public void rest() {
 		setStamina(getMaxStamina());
 		damageTakenThisWeek = 0f;
 	}
@@ -587,6 +585,4 @@ public abstract class Champion implements Purchasable, Cloneable {
 				weapon);
 	}
 
-
-	
 }

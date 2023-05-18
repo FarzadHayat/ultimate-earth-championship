@@ -136,7 +136,7 @@ public class Shop {
 	 *
 	 * @return
 	 */
-	public ArrayList<Champion> getStartingChampions() {
+	public ArrayList<Champion> getSetupChampions() {
 		ArrayList<Champion> champs = new ArrayList<>();
 
 		while (champs.size() < Configuration.NUM_SETUP_CHAMPIONS) {

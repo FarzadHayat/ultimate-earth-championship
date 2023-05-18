@@ -39,9 +39,11 @@ class AIGenerationTest {
 
 			manager.setPlayerTeam(new Team(true, "playerTeam", playerChampions));
 
-			ArrayList<Team> AITeams = manager.generateAITeams();
+			manager.generateAITeams();
 
 			ArrayList<Champion> uniqueChampions = new ArrayList<>();
+
+			ArrayList<Team> AITeams = new ArrayList<Team>(manager.getAITeams());
 
 			for (Team team : AITeams) {
 				for (Champion champion : team.getChampions()) {

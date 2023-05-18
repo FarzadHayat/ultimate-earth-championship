@@ -26,8 +26,7 @@ import weapons.Fists;
 import weapons.Shield;
 
 /**
- * @author fha62
- *
+ * Unit test for the Weapon class.
  */
 class WeaponTest {
 

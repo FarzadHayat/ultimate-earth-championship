@@ -166,6 +166,11 @@ public class Configuration {
 	public static final int NUM_SETUP_CHAMPIONS = 8;
 
 	/**
+	 * Number of champion a team should start with in the first week.
+	 */
+	public static final int NUM_STARTING_CHAMPIONS = 4;
+
+	/**
 	 * Number of champions a team can hold.
 	 */
 	public static final int NUM_CHAMPIONS = 9;
@@ -179,6 +184,11 @@ public class Configuration {
 	 * Number of weapons a team can hold.
 	 */
 	public static final int NUM_WEAPONS = 9;
+
+	/**
+	 * Number of weapons a team can select for a match.
+	 */
+	public static final int NUM_CHOSEN_WEAPONS = NUM_CHOSEN_CHAMPIONS;
 
 	/**
 	 * The number of columns of the match grid.

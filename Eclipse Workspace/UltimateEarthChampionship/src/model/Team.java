@@ -83,9 +83,9 @@ public class Team {
 
 		score = 0;
 
-		if (startingChampions.size() != Configuration.NUM_CHOSEN_CHAMPIONS) {
-			System.out.println(
-					String.format("EXCEPTION: Starting champions size is not %s!", Configuration.NUM_CHOSEN_CHAMPIONS));
+		if (startingChampions.size() != Configuration.NUM_STARTING_CHAMPIONS) {
+			System.out.println(String.format("EXCEPTION: Starting champions size is not %s!",
+					Configuration.NUM_STARTING_CHAMPIONS));
 			// TODO: Throw an exception
 			return;
 		}
@@ -301,7 +301,7 @@ public class Team {
 	 * @throws FullTeamException if the chosen weapons is already full
 	 */
 	public void addChosenWeapon(Weapon weapon) throws FullTeamException {
-		if (chosenWeapons.size() >= Configuration.NUM_CHOSEN_CHAMPIONS) {
+		if (chosenWeapons.size() >= Configuration.NUM_CHOSEN_WEAPONS) {
 			throw new FullTeamException("Reached team max chosen weapons limit!");
 		}
 
@@ -393,7 +393,7 @@ public class Team {
 	 * the team size limit.
 	 */
 	private void randomlySelectWeapons() {
-		int numWeaponsAvailable = Integer.min(weapons.size(), Configuration.NUM_CHOSEN_CHAMPIONS);
+		int numWeaponsAvailable = Integer.min(weapons.size(), Configuration.NUM_CHOSEN_WEAPONS);
 		ArrayList<Weapon> weaponsLeft = new ArrayList<>(weapons);
 		while (chosenWeapons.size() < numWeaponsAvailable) {
 			Random random = new Random();

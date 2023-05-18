@@ -30,8 +30,7 @@ import weapons.Shield;
 import weapons.Sledgehammer;
 
 /**
- * @author fha62
- *
+ * Unit test for the Shop class.
  */
 class ShopTest {
 
@@ -136,7 +135,7 @@ class ShopTest {
 	 */
 	@Test
 	void testGetStartingChampions() {
-		ArrayList<Champion> champions = shop.getStartingChampions();
+		ArrayList<Champion> champions = shop.getSetupChampions();
 		assertEquals(Configuration.NUM_SETUP_CHAMPIONS, champions.size());
 	}
 

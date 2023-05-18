@@ -8,17 +8,17 @@ import model.Champion;
 public class MargaretThatcher extends Champion {
 
 	// Name
-	private static String name = "Margaret Thatcher";
+	public static final String name = "Margaret Thatcher";
 
 	// Stat Boosts
-	private static int healthBoost = 0;
-	private static int staminaBoost = -1;
-	private static int offenseBoost = 1;
-	private static int defenseBoost = 1;
+	public static final int healthBoost = 0;
+	public static final int staminaBoost = -1;
+	public static final int offenseBoost = 1;
+	public static final int defenseBoost = 1;
 
 	// Price
-	private static float startingPrice = 50f;
-	private static float priceChangeWeekly = 1.1f;
+	public static final float startingPrice = 50f;
+	public static final float priceChangeWeekly = 1.1f;
 
 	/**
 	 * Creates a new Margaret Thatcher object with default attribute values.

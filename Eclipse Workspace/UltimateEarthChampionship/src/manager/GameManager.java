@@ -309,6 +309,9 @@ public abstract class GameManager {
 	 */
 	public void setPlayerTeam(Team playerTeam) {
 		this.playerTeam = playerTeam;
+		if (!teams.contains(playerTeam)) {
+			teams.add(playerTeam);
+		}
 	}
 
 	/**
@@ -415,17 +418,14 @@ public abstract class GameManager {
 
 	/**
 	 * Generates all the AI teams
-	 *
-	 * @return A list of 3 AI teams
 	 */
-	public ArrayList<Team> generateAITeams() {
-		ArrayList<Team> teams = new ArrayList<>();
-
+	public void generateAITeams() {
 		// List of champions in use by the AI
 		// We use this to make sure that duplicate champions are not chosen for the
 		// teams
 		ArrayList<Champion> setupChampionsInUse = new ArrayList<>();
-		// Add the player champions to list to ensure they are not chosen by then AI.
+		// Add the player champions to list to ensure they are not chosen by another AI
+		// team.
 		setupChampionsInUse.addAll(playerTeam.getChampions());
 
 		ArrayList<String> possibleTeamNames = new ArrayList<>(config.AI_TEAM_NAMES);
@@ -433,7 +433,7 @@ public abstract class GameManager {
 		Random rand = new Random();
 
 		int teamNum = 0;
-		while (teamNum < 3) {
+		while (teamNum < config.NUM_TEAMS - teams.size()) {
 			// get team name
 			String name = possibleTeamNames.get(rand.nextInt(possibleTeamNames.size()));
 			possibleTeamNames.remove(name);
@@ -442,7 +442,7 @@ public abstract class GameManager {
 			ArrayList<Champion> champions = new ArrayList<>();
 
 			int championNum = 0;
-			while (championNum < 4) {
+			while (championNum < Configuration.NUM_STARTING_CHAMPIONS) {
 				// Get champion
 				Champion newChamp = Shop.getRandomChampion(getAllChampions());
 
@@ -459,8 +459,6 @@ public abstract class GameManager {
 			teamNum++;
 
 		}
-
-		return teams;
 	}
 
 	/**
@@ -474,7 +472,7 @@ public abstract class GameManager {
 	 * Called upon finishing the game setup
 	 */
 	public void finishedSetup() {
-		teams.addAll(generateAITeams());
+		generateAITeams();
 		shop.generateCatalogue();
 		displayStrategy.displayTeam();
 	}
@@ -698,6 +696,15 @@ public abstract class GameManager {
 		}
 
 		return out;
+	}
+
+	/**
+	 * Add the given team to the list of teams in the game.
+	 *
+	 * @param team the team to add
+	 */
+	public void addTeam(Team team) {
+		teams.add(team);
 	}
 
 }
