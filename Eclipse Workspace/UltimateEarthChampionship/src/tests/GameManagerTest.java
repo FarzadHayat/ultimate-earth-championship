@@ -65,7 +65,7 @@ class GameManagerTest {
 	@Test
 	void testInitialize() {
 		gameManager.initialize();
-		assertEquals(40, gameManager.getAllChampions().size());
+		assertEquals(41, gameManager.getAllChampions().size());
 		assertEquals(20, gameManager.getAllWeapons().size());
 		assertNotEquals(null, gameManager.getGameEnvironment());
 		assertNotEquals(null, gameManager.getShop());
