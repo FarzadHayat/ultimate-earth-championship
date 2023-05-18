@@ -28,6 +28,7 @@ import champions.MarcusAurelius;
 import champions.MargaretThatcher;
 import champions.MarieCurie;
 import champions.MatthiasGalster;
+import champions.MiguelMorales;
 import champions.MikolosHorthy;
 import champions.NapoleonBonaparte;
 import champions.NeilArmstrong;
@@ -165,7 +166,7 @@ public abstract class GameManager {
 				new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery(),
 				new JohnBrowning(), new JohnFKennedy(), new JohnMaynardKeynes(), new FranzFerdinand(),
 				new GeorgeWashington(), new GhengisKhan(), new HarryTruman(), new Confucius(), new DavidLange(),
-				new DouglasMacArthur(), new DwightEisenhower())));
+				new DouglasMacArthur(), new DwightEisenhower(), new MiguelMorales())));
 
 		// All weapons
 		setAllWeapons(new ArrayList<>(List.of(new Axe(), new BaseballBat(), new Chainsaw(), new Dagger(),
