@@ -430,7 +430,7 @@ public class Team {
 	 * Randomly selects champions from the team's champions. Assumes the team has
 	 * enough champions to start a match.
 	 */
-	private void randomlySelectChampions() {
+	public void randomlySelectChampions() {
 		ArrayList<Champion> championsLeft = new ArrayList<>(champions);
 		while (chosenChampions.size() < Configuration.NUM_CHOSEN_CHAMPIONS) {
 			Random random = new Random();
@@ -444,7 +444,7 @@ public class Team {
 	 * Randomly selects as many weapons as possible from the team's weapons up to
 	 * the team size limit.
 	 */
-	private void randomlySelectWeapons() {
+	public void randomlySelectWeapons() {
 		int numWeaponsAvailable = Integer.min(weapons.size(), Configuration.NUM_CHOSEN_WEAPONS);
 		ArrayList<Weapon> weaponsLeft = new ArrayList<>(weapons);
 		while (chosenWeapons.size() < numWeaponsAvailable) {
