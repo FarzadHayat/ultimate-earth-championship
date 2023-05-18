@@ -13,6 +13,7 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import manager.GameManager;
 import model.Champion;
 import model.Configuration;
 
@@ -22,6 +23,11 @@ import model.Configuration;
 public class ChampionMatchCard extends JPanel {
 
 	private static final long serialVersionUID = 8796554745910845194L;
+
+	/**
+	 * The game manager instance
+	 */
+	private GameManager gameManager = GameManager.getInstance();
 
 	/**
 	 * Champion shown in this match card
@@ -50,6 +56,8 @@ public class ChampionMatchCard extends JPanel {
 	 */
 	private JLabel imageLabel;
 
+	private JPanel centerPanel;
+
 	/**
 	 * Get the champion attached to the card.
 	 *
@@ -68,8 +76,7 @@ public class ChampionMatchCard extends JPanel {
 	 */
 	public ChampionMatchCard(JPanel centerGrid, int row, int column) {
 
-		if (centerGrid == null)
-		{
+		if (centerGrid == null) {
 			// For testing purposes
 			return;
 		}
@@ -78,8 +85,8 @@ public class ChampionMatchCard extends JPanel {
 		centerGrid.add(mainPanel);
 		mainPanel.setLayout(new CardLayout(10, 10));
 
-		JPanel centerPanel = new JPanel();
-		centerPanel.setBorder(new LineBorder(new Color(61, 56, 70)));
+		centerPanel = new JPanel();
+		centerPanel.setBorder(new LineBorder(new Color(61, 56, 70), 2));
 		centerPanel.setOpaque(false);
 		mainPanel.add(centerPanel, "name_205877267141400");
 		centerPanel.setLayout(new BorderLayout(0, 0));
@@ -126,18 +133,19 @@ public class ChampionMatchCard extends JPanel {
 	 */
 	public void updateCard() {
 
-		if (nameLabel == null)
-		{
+		if (nameLabel == null) {
 			// For testing purposes
 			return;
 		}
-		
+
 		if (champion == null || champion.getStamina() <= 0) {
 			// No champion assigned to this...
 			nameLabel.setText("");
 
 			imageLabel.setIcon(null);
 			staminaBar.setVisible(false);
+
+			centerPanel.setBorder(new LineBorder(new Color(61, 56, 70), 2));
 
 		} else {
 			// Champion is assigned, show data
@@ -163,6 +171,13 @@ public class ChampionMatchCard extends JPanel {
 			int currentStamina = (int) Math.ceil(champion.getStamina());
 			staminaBar.setValue(currentStamina);
 			staminaBar.setString(currentStamina + " / " + maxStamina);
+
+			if (gameManager.getPlayerTeam().getChosenChampions().contains(champion)) {
+				centerPanel.setBorder(new LineBorder(Color.blue, 2));
+			}
+			if (gameManager.getEnemyTeam().getChosenChampions().contains(champion)) {
+				centerPanel.setBorder(new LineBorder(Color.red, 2));
+			}
 		}
 	}
 
