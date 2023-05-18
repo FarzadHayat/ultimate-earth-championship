@@ -14,6 +14,9 @@ import model.Champion;
 import model.Team;
 import champions.*;
 
+/**
+ *  Tests the random events in the game
+ */
 class RandomEventTest {
 
 	public Team testTeam;
