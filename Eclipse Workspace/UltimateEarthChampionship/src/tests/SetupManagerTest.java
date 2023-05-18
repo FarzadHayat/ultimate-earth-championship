@@ -16,16 +16,29 @@ import champions.ShokoAsahara;
 import exception.InputException;
 import model.Champion;
 import model.SetupManager;
+import model.Weapon;
+import weapons.Axe;
+import weapons.Katana;
+import weapons.Mace;
+import weapons.Sword;
 
+/**
+ * Tests the setup manager
+ * Ensures that incorrect inputs are not allowed
+ */
 class SetupManagerTest {
 
+	/**
+	 * Tests that the PromptForTeamName function works as intended.
+	 * Testing attempts a variety of inputs.
+	 */
 	@Test
 	void testPromptForTeamName() {
 
 		ArrayList<String> inputsToTest = new ArrayList<>();
 
 		inputsToTest.add(""); // Too small
-		inputsToTest.add("abc"); // Too small edge
+		inputsToTest.add("ab"); // Too small edge
 
 		inputsToTest.add("aaaaabbbbbcccccd"); // Too big edge
 		inputsToTest.add("aaaaabbbbbcccccdasdasdasdasda"); // Too big
@@ -42,12 +55,16 @@ class SetupManagerTest {
 
 		// Do a regular input
 		try {
-			assertEquals("BlueTeam", SetupManager.PromptForTeamName("BlueTeam"));
+			assertEquals("Blue Team", SetupManager.PromptForTeamName("Blue Team"));
 		} catch (InputException e) {
 			fail(e.getMessage());
 		}
 	}
 
+	/**
+	 * Tests that the PromptForNumWeeks function is working properly
+	 * and only allowing legal inputs
+	 */
 	@Test
 	void testPromptForNumWeeks() {
 
@@ -76,6 +93,9 @@ class SetupManagerTest {
 		}
 	}
 
+	/**
+	 * Tests the ChooseChampionFrom function and ensures it is working
+	 */
 	@Test
 	void testChooseChampionFrom() {
 		ArrayList<Champion> testChampions = new ArrayList<>();
@@ -103,6 +123,9 @@ class SetupManagerTest {
 		}
 	}
 
+	/**
+	 * Tests the PromptForDifficulty function and ensures it works as intended
+	 */
 	@Test
 	void testPromptForDifficulty() {
 		ArrayList<String> inputsToTest = new ArrayList<>();
@@ -130,6 +153,9 @@ class SetupManagerTest {
 		}
 	}
 
+	/**
+	 * Tests the PromptForTeamChampions function and ensures it works as intended
+	 */
 	@Test
 	void testPromptForTeamChampions() {
 		ArrayList<Champion> champions = new ArrayList<>();
@@ -161,4 +187,34 @@ class SetupManagerTest {
 		}
 	}
 
+	/**
+	 * Tests the chooseWeaponFrom function and ensures it works as intended
+	 */
+	@Test
+	void testChooseWeaponFrom()
+	{
+		ArrayList<Weapon> testWeapons = new ArrayList<Weapon>();
+
+		testWeapons.add(new Katana());
+		testWeapons.add(new Sword());
+		testWeapons.add(new Mace());
+		testWeapons.add(new Axe());
+
+		// Unexpected input
+		assertThrows(InputException.class, () -> {
+			SetupManager.ChooseWeaponFrom(testWeapons, "adasdadas");
+		});
+
+		// Too high
+		assertThrows(InputException.class, () -> {
+			SetupManager.ChooseWeaponFrom(testWeapons, "12");
+		});
+
+		// Correct input
+		try {
+			assertEquals(SetupManager.ChooseWeaponFrom(testWeapons, "1").getClass(), Katana.class);
+		} catch (InputException e) {
+			fail(e.getMessage());
+		}
+	}
 }
