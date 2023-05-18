@@ -8,17 +8,17 @@ import model.Champion;
 public class KingGeorge extends Champion {
 
 	// Name
-	private static String name = "King George V";
+	public static final String name = "King George V";
 
 	// Stat Boosts
-	private static int healthBoost = -1;
-	private static int staminaBoost = -1;
-	private static int offenseBoost = 0;
-	private static int defenseBoost = 3;
+	public static final int healthBoost = -1;
+	public static final int staminaBoost = -1;
+	public static final int offenseBoost = 0;
+	public static final int defenseBoost = 3;
 
 	// Price
-	private static float startingPrice = 50f;
-	private static float priceChangeWeekly = 1.1f;
+	public static final float startingPrice = 50f;
+	public static final float priceChangeWeekly = 1.1f;
 
 	/**
 	 * Creates a new King George V object with default attribute values.

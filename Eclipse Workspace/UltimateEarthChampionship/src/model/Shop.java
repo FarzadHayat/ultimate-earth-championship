@@ -136,10 +136,10 @@ public class Shop {
 	 *
 	 * @return
 	 */
-	public ArrayList<Champion> getStartingChampions() {
+	public ArrayList<Champion> getSetupChampions() {
 		ArrayList<Champion> champs = new ArrayList<>();
 
-		while (champs.size() < 8) {
+		while (champs.size() < Configuration.NUM_SETUP_CHAMPIONS) {
 			Champion candidate = getRandomChampion(gameManager.getAllChampions());
 
 			// Ensure the chosen candidate is unique
@@ -193,6 +193,5 @@ public class Shop {
 	public void removeWeapon(Weapon weapon) {
 		availableWeapons.remove(weapon);
 	}
-	
-	
+
 }

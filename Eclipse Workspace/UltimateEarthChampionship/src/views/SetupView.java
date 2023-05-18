@@ -224,7 +224,7 @@ public class SetupView extends JPanel {
 		championsPanel = new JPanel(new GridLayout(2, 4, 50, 50));
 		championsPanel.setOpaque(false);
 		outerPanel.add(championsPanel);
-		championsToChooseFrom = gameManager.getShop().getStartingChampions();
+		championsToChooseFrom = gameManager.getShop().getSetupChampions();
 		for (Champion champion : championsToChooseFrom) {
 			addChampionToPanel(champion);
 		}
@@ -248,7 +248,7 @@ public class SetupView extends JPanel {
 				if (chosenChampions.contains(champion)) {
 					chosenChampions.remove(champion);
 				} else {
-					if (chosenChampions.size() < Configuration.NUM_CHOSEN_CHAMPIONS) {
+					if (chosenChampions.size() < Configuration.NUM_STARTING_CHAMPIONS) {
 						chosenChampions.add(champion);
 					}
 				}

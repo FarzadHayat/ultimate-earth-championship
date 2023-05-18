@@ -7,7 +7,6 @@ import events.RandomEventInfo;
 import exception.InputException;
 import manager.GameManager;
 import match.DumbMatch;
-import match.LiveMatch;
 import match.Match;
 import match.MatchResult;
 import model.Champion;
@@ -130,7 +129,7 @@ public class CommandLineDisplay implements DisplayStrategy {
 		System.out.println(gameWeeks + " weeks have been chosen");
 
 		// Get champions that they can choose from:
-		ArrayList<Champion> availChampions = gameManager.getShop().getStartingChampions();
+		ArrayList<Champion> availChampions = gameManager.getShop().getSetupChampions();
 
 		// Prompt for starting champions
 		while (chosenChampions.size() < 4) {
@@ -389,5 +388,5 @@ public class CommandLineDisplay implements DisplayStrategy {
 	public void quit() {
 		// TODO Auto-generated method stub
 	}
-	
+
 }

@@ -26,8 +26,7 @@ import weapons.Fists;
 import weapons.Shield;
 
 /**
- * @author fha62
- *
+ * Unit test for the Weapon class.
  */
 class WeaponTest {
 
@@ -102,7 +101,7 @@ class WeaponTest {
 				"Expected weapon.buy(team) to throw, but it didn't.");
 		assertTrue(thrown.getMessage().contentEquals("Reached team max weapon limit!"));
 		assertTrue(team.getWeapons().size() == Configuration.NUM_WEAPONS);
-		assertEquals(100.0F, team.getMoney());
+		assertEquals(100.0f, team.getMoney());
 	}
 
 	/**

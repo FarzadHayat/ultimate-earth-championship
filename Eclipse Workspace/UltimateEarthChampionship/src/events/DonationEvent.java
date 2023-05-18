@@ -21,6 +21,7 @@ public class DonationEvent extends RandomEvent {
 
 	/**
 	 * Runs the event,
+	 *
 	 * @return A random event info containing what has occurred.
 	 */
 	@Override

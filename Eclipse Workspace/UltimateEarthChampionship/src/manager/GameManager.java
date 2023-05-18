@@ -156,7 +156,7 @@ public abstract class GameManager {
 	 */
 	public void initialize() {
 		// All champions
-		allChampions = new ArrayList<>(List.of(new CharlesDarwin(), new ElvisPresley(), new JoeRogan(),
+		setAllChampions(new ArrayList<>(List.of(new CharlesDarwin(), new ElvisPresley(), new JoeRogan(),
 				new JosefStalin(), new KingGeorge(), new MarcusAurelius(), new MargaretThatcher(), new MarieCurie(),
 				new SimonHoermann(), new MatthiasGalster(), new MikolosHorthy(), new NapoleonBonaparte(),
 				new NeilArmstrong(), new NikitaKrustchev(), new PhilGarland(), new PhilippePetain(),
@@ -165,19 +165,19 @@ public abstract class GameManager {
 				new AdamSmith(), new AugustoPinochet(), new AugustusCaesar(), new BernardMontgomery(),
 				new JohnBrowning(), new JohnFKennedy(), new JohnMaynardKeynes(), new FranzFerdinand(),
 				new GeorgeWashington(), new GhengisKhan(), new HarryTruman(), new Confucius(), new DavidLange(),
-				new DouglasMacArthur(), new DwightEisenhower()));
+				new DouglasMacArthur(), new DwightEisenhower())));
 
 		// All weapons
-		allWeapons = new ArrayList<>(List.of(new Axe(), new BaseballBat(), new Chainsaw(), new Dagger(),
+		setAllWeapons(new ArrayList<>(List.of(new Axe(), new BaseballBat(), new Chainsaw(), new Dagger(),
 				new FryingPan(), new GolfClub(), new Katana(), new Mace(), new Machete(), new Nunchucks(),
 				new Pickaxe(), new Pitchfork(), new Scythe(), new Shield(), new Shovel(), new Shuriken(),
-				new Sledgehammer(), new Spear(), new Sword(), new TennisRacket()));
+				new Sledgehammer(), new Spear(), new Sword(), new TennisRacket())));
 
 		// Game environment
-		gameEnvironment = new GameEnvironment();
+		setGameEnvironment(new GameEnvironment());
 
 		// Shop
-		shop = new Shop();
+		setShop(new Shop());
 	}
 
 	/**
@@ -388,7 +388,7 @@ public abstract class GameManager {
 		ArrayList<Team> AITeams = new ArrayList<>();
 		AITeams.remove(playerTeam);
 		for (Team team : teams) {
-			if (!team.isPlayerTeam()) {
+			if (!team.isPlayer()) {
 				AITeams.add(team);
 			}
 		}
@@ -416,16 +416,17 @@ public abstract class GameManager {
 	/**
 	 * Generates all the AI teams
 	 *
-	 * @return A list of 3 AI teams
+	 * @return the list of teams
 	 */
 	public ArrayList<Team> generateAITeams() {
-		ArrayList<Team> teams = new ArrayList<>();
+		ArrayList<Team> teams = new ArrayList<Team>();
 
 		// List of champions in use by the AI
 		// We use this to make sure that duplicate champions are not chosen for the
 		// teams
 		ArrayList<Champion> setupChampionsInUse = new ArrayList<>();
-		// Add the player champions to list to ensure they are not chosen by then AI.
+		// Add the player champions to list to ensure they are not chosen by another AI
+		// team.
 		setupChampionsInUse.addAll(playerTeam.getChampions());
 
 		ArrayList<String> possibleTeamNames = new ArrayList<>(config.AI_TEAM_NAMES);
@@ -433,7 +434,7 @@ public abstract class GameManager {
 		Random rand = new Random();
 
 		int teamNum = 0;
-		while (teamNum < 3) {
+		while (teamNum < config.NUM_TEAMS - 1) {
 			// get team name
 			String name = possibleTeamNames.get(rand.nextInt(possibleTeamNames.size()));
 			possibleTeamNames.remove(name);
@@ -442,7 +443,7 @@ public abstract class GameManager {
 			ArrayList<Champion> champions = new ArrayList<>();
 
 			int championNum = 0;
-			while (championNum < 4) {
+			while (championNum < Configuration.NUM_STARTING_CHAMPIONS) {
 				// Get champion
 				Champion newChamp = Shop.getRandomChampion(getAllChampions());
 
@@ -521,16 +522,19 @@ public abstract class GameManager {
 	 *
 	 * @param teams An arrayList of teams to fight
 	 */
-	private void fightTeams(ArrayList<Team> teams) {
+	public ArrayList<MatchResult> fightTeams(ArrayList<Team> givenTeams) {
+		ArrayList<Team> teams = new ArrayList<>(givenTeams);
 		if (teams.size() % 2 == 1 && Configuration.DEBUG) {
 			System.out.println("WARNING: Odd number of teams. One of the AI team will not be fighting this week!");
 		}
+		ArrayList<MatchResult> allResults = new ArrayList<>();
 		while (teams.size() > 1) {
 			Random random = new Random();
 			Team team1 = teams.remove(random.nextInt(teams.size()));
 			Team team2 = teams.remove(random.nextInt(teams.size()));
-			new DumbMatch(team1, team2).getMatchResult();
+			allResults.add(new DumbMatch(team1, team2).getMatchResult());
 		}
+		return allResults;
 	}
 
 	/**
@@ -540,7 +544,7 @@ public abstract class GameManager {
 	 * @param teams ArrayList of teams who should go shopping. This should not
 	 *              include the player team
 	 */
-	private void shopTeams(ArrayList<Team> teams) {
+	public void shopTeams(ArrayList<Team> teams) {
 		// Get all shop champions except the one(s) player has already bought
 		ArrayList<Champion> championsLeft = new ArrayList<>(shop.getAvailableChampions());
 		for (Champion champion : playerTeam.getChampions()) {
@@ -698,6 +702,15 @@ public abstract class GameManager {
 		}
 
 		return out;
+	}
+
+	/**
+	 * Add the given team to the list of teams in the game.
+	 *
+	 * @param team the team to add
+	 */
+	public void addTeam(Team team) {
+		teams.add(team);
 	}
 
 }

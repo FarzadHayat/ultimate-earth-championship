@@ -76,24 +76,24 @@ public class Team {
 	 * @param startingChampions list of the four starting champions
 	 */
 	public Team(boolean isPlayer, String name, ArrayList<Champion> startingChampions) {
-		this.isPlayer = isPlayer;
-		this.name = name;
+		setIsPlayer(isPlayer);
+		setName(name);
 
-		this.money = config.STARTING_MONEY;
+		setMoney(config.STARTING_MONEY);
 
-		score = 0;
+		setScore(0);
 
-		if (startingChampions.size() != Configuration.NUM_CHOSEN_CHAMPIONS && Configuration.DEBUG) {
-			System.out.println(
-					String.format("WARNING: Starting champions size is not %s!", Configuration.NUM_CHOSEN_CHAMPIONS));
+		if (startingChampions.size() < Configuration.NUM_STARTING_CHAMPIONS && Configuration.DEBUG) {
+			System.out.println(String.format("WARNING: Starting champions size is less than %s!",
+					Configuration.NUM_STARTING_CHAMPIONS));
 		}
-		champions = startingChampions;
+		setChampions(startingChampions);
 
 		Random random = new Random();
 		int aggression = random.nextInt(config.AGRESSION_RANDOM_UPPER_BOUND - config.AGRESSION_RANDOM_LOWER_BOUND)
 				+ config.AGRESSION_RANDOM_LOWER_BOUND;
 
-		this.aggression = aggression + config.AI_AGRESSION_BOOST;
+		this.setAggression(aggression + config.AI_AGRESSION_BOOST);
 	}
 
 	/**
@@ -119,8 +119,17 @@ public class Team {
 	 *
 	 * @return true if this is the player team
 	 */
-	public boolean isPlayerTeam() {
+	public boolean isPlayer() {
 		return isPlayer;
+	}
+
+	/**
+	 * Set the value of isPlayer.
+	 *
+	 * @param isPlayer the isPlayer to set
+	 */
+	public void setIsPlayer(boolean isPlayer) {
+		this.isPlayer = isPlayer;
 	}
 
 	/**
@@ -133,12 +142,21 @@ public class Team {
 	}
 
 	/**
+	 * Set the value of money.
+	 *
+	 * @param money the money to set
+	 */
+	public void setMoney(float money) {
+		this.money = money;
+	}
+
+	/**
 	 * Adds amount to total money
 	 *
 	 * @param amount the amount of money to add
 	 */
 	public void addMoney(float amount) {
-		money += amount;
+		setMoney(money + amount);
 	}
 
 	/**
@@ -151,7 +169,7 @@ public class Team {
 		if (money < amount) {
 			throw new InsufficientFundsException("You do not have enough money to perform this action!");
 		}
-		money -= amount;
+		setMoney(money - amount);
 	}
 
 	/**
@@ -174,12 +192,21 @@ public class Team {
 	}
 
 	/**
+	 * Set the value of score.
+	 *
+	 * @param score the score to set
+	 */
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	/**
 	 * Adds this amount to score
 	 *
 	 * @param amount the amount to be added to the score
 	 */
 	public void addScore(int amount) {
-		score += amount;
+		setScore(score + amount);
 	}
 
 	/**
@@ -189,6 +216,15 @@ public class Team {
 	 */
 	public ArrayList<Champion> getChampions() {
 		return champions;
+	}
+
+	/**
+	 * Set the list of champions to the given list
+	 *
+	 * @param champions the champions to set
+	 */
+	public void setChampions(ArrayList<Champion> champions) {
+		this.champions = champions;
 	}
 
 	/**
@@ -259,6 +295,15 @@ public class Team {
 	}
 
 	/**
+	 * Set the value of aggression.
+	 *
+	 * @param aggression the aggression to set
+	 */
+	public void setAggression(int aggression) {
+		this.aggression = aggression;
+	}
+
+	/**
 	 * Gets a random champion from the team.
 	 *
 	 * @return the random champion
@@ -299,7 +344,7 @@ public class Team {
 	 * @throws FullTeamException if the chosen weapons is already full
 	 */
 	public void addChosenWeapon(Weapon weapon) throws FullTeamException {
-		if (chosenWeapons.size() >= Configuration.NUM_CHOSEN_CHAMPIONS) {
+		if (chosenWeapons.size() >= Configuration.NUM_CHOSEN_WEAPONS) {
 			throw new FullTeamException("Reached team max chosen weapons limit!");
 		}
 
@@ -322,6 +367,15 @@ public class Team {
 	 */
 	public ArrayList<Weapon> getWeapons() {
 		return weapons;
+	}
+
+	/**
+	 * Set the list of weapons to the given list.
+	 *
+	 * @param weapons the weapons to set
+	 */
+	public void setWeapons(ArrayList<Weapon> weapons) {
+		this.weapons = weapons;
 	}
 
 	/**
@@ -391,7 +445,7 @@ public class Team {
 	 * the team size limit.
 	 */
 	private void randomlySelectWeapons() {
-		int numWeaponsAvailable = Integer.min(weapons.size(), Configuration.NUM_CHOSEN_CHAMPIONS);
+		int numWeaponsAvailable = Integer.min(weapons.size(), Configuration.NUM_CHOSEN_WEAPONS);
 		ArrayList<Weapon> weaponsLeft = new ArrayList<>(weapons);
 		while (chosenWeapons.size() < numWeaponsAvailable) {
 			Random random = new Random();

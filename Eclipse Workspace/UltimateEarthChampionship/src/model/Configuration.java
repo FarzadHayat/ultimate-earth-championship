@@ -161,6 +161,16 @@ public class Configuration {
 	public final int PRIZE_SCORE_WEEKLY_MODIFIER = 5;
 
 	/**
+	 * Number of champions the player can pick from in the setup stage.
+	 */
+	public static final int NUM_SETUP_CHAMPIONS = 8;
+
+	/**
+	 * Number of champion a team should start with in the first week.
+	 */
+	public static final int NUM_STARTING_CHAMPIONS = 4;
+
+	/**
 	 * Number of champions a team can hold.
 	 */
 	public static final int NUM_CHAMPIONS = 9;
@@ -174,6 +184,11 @@ public class Configuration {
 	 * Number of weapons a team can hold.
 	 */
 	public static final int NUM_WEAPONS = 9;
+
+	/**
+	 * Number of weapons a team can select for a match.
+	 */
+	public static final int NUM_CHOSEN_WEAPONS = NUM_CHOSEN_CHAMPIONS;
 
 	/**
 	 * The number of columns of the match grid.
@@ -294,12 +309,12 @@ public class Configuration {
 	 * Flat additive modifier to AI aggression factor
 	 */
 	public int AI_AGRESSION_BOOST;
-	
+
 	/**
-	 *  The amount of free XP given to champions not in a team each week
+	 * The amount of free XP given to champions not in a team each week
 	 */
 	public final float UNUSED_CHAMPIONS_WEEKLY_XP_GAIN = 175f;
-	
+
 	public static final Color RED = new Color(237, 51, 59);
 	public static final Color ORANGE = new Color(255, 120, 0);
 	public static final Color GREEN = new Color(38, 162, 105);
@@ -309,7 +324,7 @@ public class Configuration {
 	}
 
 	public void setDifficulty(float newDifficulty) {
-		//System.out.println("Setting difficulty to " + newDifficulty);
+		// System.out.println("Setting difficulty to " + newDifficulty);
 		difficulty = newDifficulty;
 
 		AI_DAMAGE_MULTIPLIER = difficulty;
