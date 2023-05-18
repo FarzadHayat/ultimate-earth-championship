@@ -50,6 +50,11 @@ public class ChampionMatchCard extends JPanel {
 	 */
 	public ChampionMatchCard(JPanel centerGrid, int row, int column) {
 
+		if (centerGrid == null)
+		{
+			// For testing purposes
+			return;
+		}
 		mainPanel = new JPanel();
 		mainPanel.setOpaque(false);
 		centerGrid.add(mainPanel);
@@ -103,6 +108,12 @@ public class ChampionMatchCard extends JPanel {
 	 */
 	public void updateCard() {
 
+		if (nameLabel == null)
+		{
+			// For testing purposes
+			return;
+		}
+		
 		if (champion == null || champion.getStamina() <= 0) {
 			// No champion assigned to this...
 			nameLabel.setText("");

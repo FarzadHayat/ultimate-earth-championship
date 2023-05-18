@@ -126,7 +126,7 @@ public class LiveMatch extends Match implements ActionListener {
 
 			cards.get(lane).get(2).setChampion(champion);
 			playerChampions.add(champion);
-
+			
 			lane++;
 		}
 
@@ -318,10 +318,10 @@ public class LiveMatch extends Match implements ActionListener {
 	}
 
 	/**
-	 * Modifies a champion card to display the data from a champion at the champions
+	 * Updates a champion card to display the data from a champion at the champions
 	 * position
 	 *
-	 * @param champ The champion whose card needs to be edited
+	 * @param champ The champion whose card needs to be updated
 	 */
 	public void setChampionCard(Champion champ) {
 		getCard(champ.getLane(), champ.getPosition()).setChampion(champ);
