@@ -1,21 +1,22 @@
 # Ultimate Earth Championship
 
 ### SENG201 project made in 2023-S1 by:
-- Farzad Hayatbakhsh - fha62
-- Oliver Coates - oco36
+- Farzad Hayatbakhsh - fha62 - 15424500
+- Oliver Coates - oco36 - 54134289
 
 ### Folder Index
- - **UltimateEarthChampionship** - Contains Eclipse project source code including unit tests
- - **doc** - Contains compiled Javadoc documentation for the project
- - **uml** - Contains UML use case and class diagrams in both PDF and JPG format
+ - **UltimateEarthChampionship/** - Contains Eclipse project source code including unit tests
+ - **doc/** - Contains compiled Javadoc documentation for the project
+ - **uml/** - Contains UML use case and class diagrams in both PNG format
  - **Report.pdf** - Project report
  - **README.md** - The file you are reading right now. Contains instructions on how to open and run the project.
- - **fha62_oco36_UltimateEarthChampionship.jar** - Runnable jar file
+ - **fha62_oco36_SportsTournament.jar** - Runnable jar file
 
 ### Run the java application
 1. Ensure JRE 17 (Java Runtime Environment) is installed on your machine.
-2. Open the zip folder in a terminal window
-3. Run ```java -jar fha62_oco36_UltimateEarthChampionship.jar```.
+2. Extract the zip file.
+3. Open the extracted folder in a terminal window.
+4. Run ```java -jar fha62_oco36_SportsTournament.jar```.
 
 ### Import source code inside Eclipse
 1. Extract the zip file.
@@ -29,6 +30,9 @@
 1. Navigate to the manager package: src -> manager.
 2. Right click on GraphicalGameManager.java and select on Run As -> Java Application.
 
+### Run unit tests coverage
+1. Right click on the tests package and select on Coverage As -> JUnit Test.
+
 ### Additional Links
  - [Git Repository](https://eng-git.canterbury.ac.nz/oco36/ultimate-earth-championship)
 
@@ -41,4 +45,3 @@
     - ['Fantasy Icon Pack' on itch.io](https://ravenmore.itch.io/fantasy-icon-pack)
  - ChatGPT:
     - Used to answer questions that the developer had.
-    - Used to generate some boilerplate code such as getters/setters.
