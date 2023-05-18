@@ -134,7 +134,7 @@ public class Shop {
 	 * Returns a list of 8 unique champions for the player to choose from to form
 	 * their team at startup
 	 *
-	 * @return
+	 * @return a list of 8 unique champions for the player to choose from
 	 */
 	public ArrayList<Champion> getSetupChampions() {
 		ArrayList<Champion> champs = new ArrayList<>();

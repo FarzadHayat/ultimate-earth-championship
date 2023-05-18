@@ -23,13 +23,31 @@ public class ChampionMatchCard extends JPanel {
 
 	private static final long serialVersionUID = 8796554745910845194L;
 
+	/**
+	 * Champion shown in this match card
+	 */
 	private Champion champion;
 
+	/**
+	 * The main panel
+	 */
 	private JPanel mainPanel;
 
+	/**
+	 * The name label
+	 */
 	private JLabel nameLabel;
+	/**
+	 * The stamina bar
+	 */
 	private JProgressBar staminaBar;
+	/**
+	 * The center panel
+	 */
 	private JPanel panel;
+	/**
+	 * The image label
+	 */
 	private JLabel imageLabel;
 
 	/**

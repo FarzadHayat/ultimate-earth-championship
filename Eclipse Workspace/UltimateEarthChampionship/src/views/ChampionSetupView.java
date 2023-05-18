@@ -33,10 +33,14 @@ public class ChampionSetupView extends JPanel {
 
 	private static final long serialVersionUID = -1352915737619575543L;
 
-	// The gamemanager
+	/**
+	 *  The gamemanager
+	 */
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 
-	// The background image
+	/**
+	 *  The background image
+	 */
 	private ImageIcon icon;
 
 	/**

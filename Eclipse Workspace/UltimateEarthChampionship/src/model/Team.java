@@ -72,8 +72,9 @@ public class Team {
 	/**
 	 * Constructor of team. Initialises the starting values of the team.
 	 *
-	 * @param isPlayer          is this team a player
-	 * @param startingChampions list of the four starting champions
+	 * @param isPlayer           is this team a player
+	 * @param name 				 The teams name
+	 * @param startingChampions  list of the four starting champions
 	 */
 	public Team(boolean isPlayer, String name, ArrayList<Champion> startingChampions) {
 		setIsPlayer(isPlayer);
@@ -380,6 +381,7 @@ public class Team {
 
 	/**
 	 * Adds the given weapon to the weapon inventory.
+	 * @param weapon The weapon to add
 	 *
 	 * @throws FullTeamException if the weapon inventory is already full
 	 */

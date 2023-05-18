@@ -36,15 +36,36 @@ public class MatchView extends JPanel {
 	 */
 	private LiveMatch match;
 
-	// Represents the champion who is next to play their turn.
-	private JPanel selectedChampionPanel;
+	/**
+	 * The champion who is next to play their turn.
+	 */
 	private Champion selectedChampion;
-
-	// Action buttons for the currently selected champion
+	/**
+	 * Panels for the selected champion
+	 */
+	private JPanel selectedChampionPanel;
+	
+	// Action button for the currently selected champion
+	
+	/**
+	 * Attack button
+	 */
 	private JButton attackButton;
+	/**
+	 * Wait button
+	 */
 	private JButton waitButton;
+	/**
+	 * Retreat button
+	 */
 	private JButton retreatButton;
+	/**
+	 * Attack up button
+	 */
 	private JButton attackUpButton;
+	/**
+	 * Attack down button
+	 */
 	private JButton attackDownButton;
 
 	/**

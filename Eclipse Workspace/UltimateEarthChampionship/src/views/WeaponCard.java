@@ -7,10 +7,16 @@ import javax.swing.JPanel;
 
 import model.Weapon;
 
+/**
+ * Card which displays weapon statistics
+ */
 public class WeaponCard extends PurchasableCard {
 
 	private static final long serialVersionUID = -4313085838343164683L;
 
+	/**
+	 * The weapon assigned to this card
+	 */
 	Weapon weapon;
 
 	protected WeaponCard() {

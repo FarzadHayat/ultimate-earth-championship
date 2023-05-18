@@ -9,11 +9,22 @@ import display.GraphicalDisplay;
 import manager.GameManager;
 import model.Configuration;
 
+/**
+ * Panel for the info panel which runs along the top of the screen and 
+ * displays the team name, money, score, week and difficulty
+ *
+ */
 public class InfoPanel extends JPanel {
 
 	private static final long serialVersionUID = -8835384563469205994L;
-
+	
+	/**
+	 * The game manager
+	 */
 	private GameManager gameManager = GameManager.getInstance();
+	/**
+	 * The configuration class
+	 */
 	private Configuration config = Configuration.getInstance();
 
 	/**

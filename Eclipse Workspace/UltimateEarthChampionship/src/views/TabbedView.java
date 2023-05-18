@@ -15,12 +15,24 @@ public class TabbedView extends JPanel {
 
 	private static final long serialVersionUID = 8081074315449639244L;
 
+	/**
+	 * The tabbed pane
+	 */
 	private JTabbedPane tabbedPane;
 
+	/**
+	 * The team view
+	 */
 	private TeamView teamView;
 
+	/**
+	 * The show view
+	 */
 	private ShopView shopView;
 
+	/**
+	 * The stadium view
+	 */
 	private StadiumView stadiumView;
 
 	/**
@@ -46,14 +58,23 @@ public class TabbedView extends JPanel {
 		tabbedPane.addTab(stadiumView.getName(), null, stadiumView, "Select a match and fight");
 	}
 
+	/**
+	 * Shows the team view
+	 */
 	public void showTeamView() {
 		tabbedPane.setSelectedComponent(teamView);
 	}
 
+	/**
+	 * Shows the shop view
+	 */
 	public void showShopView() {
 		tabbedPane.setSelectedComponent(shopView);
 	}
 
+	/**
+	 * Shows the stadium view
+	 */
 	public void showStadiumView() {
 		tabbedPane.setSelectedComponent(stadiumView);
 	}

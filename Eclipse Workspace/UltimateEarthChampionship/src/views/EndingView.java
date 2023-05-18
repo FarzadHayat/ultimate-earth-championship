@@ -32,10 +32,14 @@ public class EndingView extends JPanel {
 
 	private static final long serialVersionUID = 6638392272492099486L;
 
-	// Teams to be displayed
+	/**
+	 *  Teams to be displayed
+	 */
 	private ArrayList<Team> teams;
 
-	// Background image
+	/**
+	 *  Background image
+	 */
 	private ImageIcon icon = new ImageIcon(
 			getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "story7.jpg"));
 

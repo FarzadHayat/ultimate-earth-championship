@@ -28,6 +28,10 @@ import story.CutsceneSlide;
 public class CutsceneView extends JPanel {
 
 	private static final long serialVersionUID = -3705567359135004719L;
+	
+	/**
+	 * The game manager
+	 */
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 
 	/**
@@ -35,11 +39,19 @@ public class CutsceneView extends JPanel {
 	 */
 	private Cutscene cutscene;
 
-//	The current cutscene slide text and image path
+	/**
+	 * 	The current cutscene slide text and image path
+	 */
 	private String slideText;
+	
+	/**
+	 * The image path for the current slide image
+	 */
 	private String slideImagePath;
 
-//	Text pane for the current cutscene text
+	/**
+	 * 	Text pane for the current cutscene text
+	 */
 	private JTextPane mainText;
 
 	/**

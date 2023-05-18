@@ -5,14 +5,13 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class holds many base configuration values used in calculations across
+ * the game This class also holds information regarding difficulty.
+ *
+ * Follows the singleton design pattern
+ */
 public class Configuration {
-
-	/**
-	 * This class holds many base configuration values used in calculations across
-	 * the game This class also holds information regarding difficulty.
-	 *
-	 * Follows the singleton design pattern
-	 */
 
 	private static Configuration instance;
 
@@ -25,6 +24,10 @@ public class Configuration {
 		instance = new Configuration();
 	}
 
+	/**
+	 * Gets the instance of configuration
+	 * @return The instance of configuration class
+	 */
 	public static Configuration getInstance() {
 		return instance;
 	}
@@ -315,14 +318,31 @@ public class Configuration {
 	 */
 	public final float UNUSED_CHAMPIONS_WEEKLY_XP_GAIN = 175f;
 
+	/**
+	 * Basic red color
+	 */
 	public static final Color RED = new Color(237, 51, 59);
+	/**
+	 * Basic Orange color
+	 */
 	public static final Color ORANGE = new Color(255, 120, 0);
+	/**
+	 * Basic green color
+	 */
 	public static final Color GREEN = new Color(38, 162, 105);
 
+	/**
+	 * Gets the game's difficulty
+	 * @return The games difficulty
+	 */
 	public float getDifficulty() {
 		return difficulty;
 	}
 
+	/**
+	 * Sets the games difficulty
+	 * @param newDifficulty The difficulty to be set to
+	 */
 	public void setDifficulty(float newDifficulty) {
 		// System.out.println("Setting difficulty to " + newDifficulty);
 		difficulty = newDifficulty;

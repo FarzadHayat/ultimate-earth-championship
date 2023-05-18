@@ -35,13 +35,19 @@ public class WeaponSetupView extends JPanel {
 
 	private static final long serialVersionUID = -1352915737619575543L;
 
-	// The game manager
+	/**
+	 *  The game manager
+	 */
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 
-	// The panel which shows chosen weapons
+	/**
+	 *  The panel which shows chosen weapons
+	 */
 	private JPanel chosenPanel;
 
-	// The background image
+	/** 
+	 * The background image
+	 */
 	private ImageIcon icon = new ImageIcon(
 			getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "weaponsetup.jpg"));
 

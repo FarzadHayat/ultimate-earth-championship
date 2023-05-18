@@ -15,14 +15,27 @@ import model.Champion;
 import model.Configuration;
 import model.Weapon;
 
+/**
+ * View which displays information regarding the team,
+ * Referred to in project specifications as the 'club'
+ */
 public class TeamView extends JPanel {
 
 	private static final long serialVersionUID = -8010724197066539267L;
 
+	/**
+	 * Game manager instance
+	 */
 	private GameManager gameManager = GameManager.getInstance();
 
+	/**
+	 * Main panel instance
+	 */
 	private JPanel mainPanel;
 
+	/**
+	 * The image icon for the background
+	 */
 	private ImageIcon icon = new ImageIcon(
 			getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "team.jpg"));
 

@@ -22,10 +22,19 @@ public class ShopView extends JPanel {
 
 	private static final long serialVersionUID = 2101264902458190410L;
 
+	/**
+	 * The game manager instance
+	 */
 	private GameManager gameManager = GameManager.getInstance();
 
+	/**
+	 * The main panel
+	 */
 	private JPanel mainPanel;
 
+	/**
+	 * The image icon for the background image
+	 */
 	private ImageIcon icon = new ImageIcon(
 			getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "shop.jpg"));
 

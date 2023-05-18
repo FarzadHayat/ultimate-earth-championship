@@ -520,7 +520,8 @@ public abstract class GameManager {
 	/**
 	 * Forces AI teams to fight eachother in dumbmatches
 	 *
-	 * @param teams An arrayList of teams to fight
+	 * @param givenTeams An arrayList of teams to fight
+	 * @return the results between all fighting teams
 	 */
 	public ArrayList<MatchResult> fightTeams(ArrayList<Team> givenTeams) {
 		ArrayList<Team> teams = new ArrayList<>(givenTeams);

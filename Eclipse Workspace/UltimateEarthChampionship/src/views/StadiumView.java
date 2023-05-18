@@ -26,7 +26,10 @@ import model.Team;
 public class StadiumView extends JPanel {
 
 	private static final long serialVersionUID = 6012771276554788813L;
-
+	
+	/**
+	 * Game manager instance
+	 */
 	private GameManager gameManager = GameManager.getInstance();
 
 	/**

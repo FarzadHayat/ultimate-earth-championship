@@ -16,6 +16,9 @@ public class ChampionCard extends PurchasableCard {
 
 	private static final long serialVersionUID = -4313085838343164683L;
 
+	/**
+	 * The champion shown on this card
+	 */
 	Champion champion;
 
 	protected ChampionCard() {

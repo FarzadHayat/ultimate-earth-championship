@@ -43,11 +43,23 @@ public abstract class PurchasableCard extends JPanel {
 	protected static final int WIDTH = IMAGE_WIDTH + 70;
 	protected static final int HEIGHT = IMAGE_HEIGHT + 50;
 
+	/**
+	 * The purchasable shown by this card
+	 */
 	private Purchasable purchasable;
 
+	/**
+	 * The game manager
+	 */
 	protected GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 
+	/**
+	 * The main panel
+	 */
 	protected JPanel mainPanel = new JPanel(new BorderLayout(0, 0));
+	/**
+	 * The sold overlay to be displayed after purchase
+	 */
 	protected JPanel soldOverlay;
 
 	protected PurchasableCard() {

@@ -19,9 +19,18 @@ public class StatLabel extends JPanel {
 
 	private static final long serialVersionUID = 7715315720355045403L;
 
+	/**
+	 * Image width
+	 */
 	private final int IMAGE_WIDTH = 30;
+	/**
+	 * Image height
+	 */
 	private final int IMAGE_HEIGHT = IMAGE_WIDTH;
 
+	/**
+	 * The value label
+	 */
 	private JLabel valueLabel;
 
 	/**

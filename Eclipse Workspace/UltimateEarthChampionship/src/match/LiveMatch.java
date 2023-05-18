@@ -226,6 +226,8 @@ public class LiveMatch extends Match implements ActionListener {
 
 	/**
 	 * Generates a match result for the match.
+	 * @param winner the winning team
+	 * @param loser the losing team
 	 * @return a MatchResult object containing the match results
 	 */
 	public MatchResult getMatchResult(Team winner, Team loser) {

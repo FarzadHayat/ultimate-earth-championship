@@ -42,8 +42,14 @@ public class SetupView extends JPanel {
 
 	private static final long serialVersionUID = 4605160332340664881L;
 
+	/**
+	 * Config instance
+	 */
 	private Configuration config = Configuration.getInstance();
 
+	/**
+	 * Game manager instance
+	 */
 	private GraphicalGameManager gameManager = (GraphicalGameManager) GameManager.getInstance();
 
 	/**
@@ -52,21 +58,64 @@ public class SetupView extends JPanel {
 	private ArrayList<Champion> championsToChooseFrom;
 
 	// Data Requested
+	
+	/**
+	 * The team name
+	 */
 	private String teamName;
+	/**
+	 * The number of game weeks
+	 */
 	private int gameWeeks;
+	/**
+	 * The champions selected for the player team
+	 */
 	private ArrayList<Champion> chosenChampions = new ArrayList<>();
+	/**
+	 * The difficulty
+	 */
 	private float difficulty;
 
 	// Swing components
+	
+	/**
+	 * Field for the team name
+	 */
 	private JTextField teamNameField;
+	
+	/**
+	 * The Submit button
+	 */
 	private JButton submitButton;
+	
+	/**
+	 * The week selection spinner
+	 */
 	private JSpinner weekSelectionSpinner;
+	
+	/**
+	 * The difficulty slider
+	 */
 	private JSlider difficultySlider;
+	
+	/**
+	 * The difficulty text
+	 */
 	private JLabel difficultyText;
+	
+	/**
+	 * The form panel
+	 */
 	private JPanel formPanel;
+	
+	/**
+	 * The champions panel
+	 */
 	private JPanel championsPanel;
 
-	// Background image
+	/**
+	 *  Background image
+	 */
 	private ImageIcon icon = new ImageIcon(
 			getClass().getResource(Configuration.BACKGROUND_IMAGE_FOLDER_PATH + "setup.jpg"));
 

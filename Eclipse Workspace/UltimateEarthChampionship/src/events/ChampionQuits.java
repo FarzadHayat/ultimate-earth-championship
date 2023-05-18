@@ -17,6 +17,7 @@ public class ChampionQuits extends RandomEvent {
 	
 	/**
 	 * Constructor
+	 * @param championQuitting the Champion who quits
 	 */
 	public ChampionQuits(Champion championQuitting) {
 		super(occurrenceChance);
@@ -25,6 +26,7 @@ public class ChampionQuits extends RandomEvent {
 
 	/**
 	 * Runs the event,
+	 * @param team the team which this event affects
 	 * @return A random event info containing what has occurred.
 	 */
 	@Override
