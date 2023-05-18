@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import display.GraphicalDisplay;
+import manager.GameManager;
 import match.LiveMatch;
 import model.Champion;
 import model.Configuration;
@@ -30,7 +31,12 @@ import model.Configuration;
 public class MatchView extends JPanel {
 
 	private static final long serialVersionUID = -9204549187590810546L;
-
+	
+	/**
+	 * The game manager instance
+	 */
+	private GameManager gameManager = GameManager.getInstance();
+	
 	/**
 	 * Reference to the live match instance
 	 */
