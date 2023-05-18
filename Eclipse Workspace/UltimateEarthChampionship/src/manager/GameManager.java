@@ -433,7 +433,7 @@ public abstract class GameManager {
 		Random rand = new Random();
 
 		int teamNum = 0;
-		while (teamNum < config.NUM_TEAMS - teams.size()) {
+		while (teamNum < config.NUM_TEAMS - 1) {
 			// get team name
 			String name = possibleTeamNames.get(rand.nextInt(possibleTeamNames.size()));
 			possibleTeamNames.remove(name);
