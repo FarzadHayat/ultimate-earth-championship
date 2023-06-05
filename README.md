@@ -33,9 +33,6 @@
 ### Run unit tests coverage
 1. Right click on the tests package and select on Coverage As -> JUnit Test.
 
-### Additional Links
- - [Git Repository](https://eng-git.canterbury.ac.nz/oco36/ultimate-earth-championship)
-
 ### Credits:
  - Champion images created using:
     - [ImgCreator.AI](https://imgcreator.zmo.ai/)
